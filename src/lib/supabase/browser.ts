@@ -2,9 +2,14 @@
 
 import { createBrowserClient } from '@supabase/ssr'
 import { getSupabaseConfig } from './config'
+import { createMissingSupabaseClient } from './missing-client'
 
 export function createClient() {
-  const { url, anonKey } = getSupabaseConfig()
+  const config = getSupabaseConfig()
 
-  return createBrowserClient(url, anonKey)
+  if (!config) {
+    return createMissingSupabaseClient()
+  }
+
+  return createBrowserClient(config.url, config.anonKey)
 }

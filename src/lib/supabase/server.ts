@@ -1,12 +1,18 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { getSupabaseConfig } from './config'
+import { createMissingSupabaseClient } from './missing-client'
 
 export async function createClient() {
-  const { url, anonKey } = getSupabaseConfig()
+  const config = getSupabaseConfig()
+
+  if (!config) {
+    return createMissingSupabaseClient()
+  }
+
   const cookieStore = await cookies()
 
-  return createServerClient(url, anonKey, {
+  return createServerClient(config.url, config.anonKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll()

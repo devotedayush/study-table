@@ -1,6 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { DEMO_AUTH_COOKIE, getDemoCredentials } from '@/lib/demo-auth'
+import { getSupabaseConfig } from '@/lib/supabase/config'
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next({
@@ -9,26 +10,25 @@ export async function middleware(request: NextRequest) {
     },
   })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
+  const supabaseConfig = getSupabaseConfig()
+  const supabase = supabaseConfig
+    ? createServerClient(supabaseConfig.url, supabaseConfig.anonKey, {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll()
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              response.cookies.set(name, value, options)
+            })
+          },
         },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            response.cookies.set(name, value, options)
-          })
-        },
-      },
-    },
-  )
+      })
+    : null
 
   const {
     data: { session },
-  } = await supabase.auth.getSession()
+  } = supabase ? await supabase.auth.getSession() : { data: { session: null } }
   const demoCredentials = getDemoCredentials()
   const hasDemoSession = Boolean(demoCredentials && request.cookies.get(DEMO_AUTH_COOKIE)?.value === '1')
   const isAuthenticated = Boolean(session || hasDemoSession)
@@ -60,7 +60,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  if (session && (pathname === '/signup' || pathname === '/onboarding')) {
+  if (session && supabase && (pathname === '/signup' || pathname === '/onboarding')) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('onboarding_completed')

@@ -2,16 +2,22 @@ export function getSupabaseConfig() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  if (!url) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_URL is missing.')
-  }
-
-  if (!anonKey) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is missing.')
+  if (!url || !anonKey) {
+    return null
   }
 
   return {
     url,
     anonKey,
   }
+}
+
+export function requireSupabaseConfig() {
+  const config = getSupabaseConfig()
+
+  if (!config) {
+    throw new Error('Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.')
+  }
+
+  return config
 }
