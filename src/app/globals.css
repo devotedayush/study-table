@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+}
+
+@layer base {
+  :root {
+    --background: 330 100% 99%;
+    --foreground: 231 28% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 231 28% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 231 28% 18%;
+
+    --primary: 336 88% 66%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 335 100% 97%;
+    --secondary-foreground: 231 28% 18%;
+
+    --muted: 336 40% 96%;
+    --muted-foreground: 231 14% 47%;
+
+    --accent: 336 88% 66%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 333 45% 90%;
+    --input: 333 45% 90%;
+    --ring: 336 88% 66%;
+
+    --radius: 1.1rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased tracking-wide;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(248, 168, 193, 0.3), transparent 22%),
+      radial-gradient(circle at 84% 12%, rgba(255, 225, 236, 0.9), transparent 16%),
+      radial-gradient(circle at 88% 86%, rgba(226, 236, 255, 0.42), transparent 18%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 247, 250, 0.98));
+    background-attachment: fixed;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(244, 114, 182, 0.18);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}
+
+.soft-panel {
+  @apply bg-white/88 backdrop-blur-xl border border-pink-100 shadow-[0_18px_50px_-30px_rgba(244,114,182,0.26)];
+}
+
+.soft-panel,
+.glass-panel {
+  box-shadow: 0 18px 50px -30px rgba(244, 114, 182, 0.26);
+}
+
+.glass-panel {
+  @apply bg-white/82 backdrop-blur-xl border border-pink-100;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px -14px rgba(244, 114, 182, 0.2);
+  border-color: rgba(244, 114, 182, 0.22);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-rose-500 to-rose-400;
+}
+
+@layer components {
+  .app-select {
+    @apply min-h-12 w-full appearance-none rounded-lg border border-pink-100 bg-white px-4 py-3 pr-11 text-sm font-medium text-slate-900 shadow-sm outline-none transition-colors;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23ec4899' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-position: right 0.9rem center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+  }
+
+  .app-select:hover {
+    @apply border-pink-200 bg-pink-50/40;
+  }
+
+  .app-select:focus {
+    @apply border-pink-300 bg-white ring-4 ring-pink-100;
+  }
+
+  .app-select:disabled {
+    @apply cursor-not-allowed bg-slate-50 text-slate-400;
+  }
+}
