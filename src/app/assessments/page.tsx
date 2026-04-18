@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { BrainCircuit, CheckCircle2, FileCheck2, LoaderCircle, RotateCcw, Target } from 'lucide-react'
+import { BrainCircuit, CheckCircle2, Compass, FileCheck2, Flame, LoaderCircle, RotateCcw, Target, WandSparkles } from 'lucide-react'
 import { assessmentScopeLabels, buildTargetFromIds, mapAssessmentSet, type AssessmentScope, type AssessmentSet } from '@/lib/assessment-bank'
 import { cfaLevel1Syllabus } from '@/lib/cfa-data'
 import {
@@ -17,6 +17,7 @@ import {
 } from '@/lib/question-attempts'
 import { useStudyWorkspace } from '@/lib/study-engine'
 import { createClient } from '@/lib/supabase/browser'
+import { PracticeHubTabs } from '@/components/section-tabs'
 
 type QuizQuestion = {
   prompt: string
@@ -50,6 +51,10 @@ export default function AssessmentsPage() {
   const [submitted, setSubmitted] = useState(false)
   const [questionAttempts, setQuestionAttempts] = useState<QuestionAttempt[]>(() => loadQuestionAttempts())
   const [reviewCount, setReviewCount] = useState(0)
+  const [questionCount, setQuestionCount] = useState(4)
+  const [steer, setSteer] = useState('')
+  const [isRegeneratingAll, setIsRegeneratingAll] = useState(false)
+  const [steeredTitle, setSteeredTitle] = useState<string | null>(null)
 
   const selectedSubtopic = useMemo(
     () => workspace.enrichedSubtopics.find((item) => item.id === selectedSubtopicId) ?? workspace.enrichedSubtopics[0],
@@ -72,6 +77,48 @@ export default function AssessmentsPage() {
 
   const answeredCount = answers.filter((answer) => answer >= 0).length
   const canSubmit = quiz.length > 0 && answeredCount === quiz.length && !submitted
+
+  const wrongAnswerBank = useMemo(
+    () => questionAttempts.filter((attempt) => !attempt.answeredCorrectly),
+    [questionAttempts],
+  )
+
+  const weakTarget = useMemo(() => workspace.riskZones[0] ?? null, [workspace.riskZones])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const raw = window.sessionStorage.getItem('cfa-steered-quiz')
+    if (!raw) {
+      return
+    }
+
+    window.sessionStorage.removeItem('cfa-steered-quiz')
+
+    try {
+      const payload = JSON.parse(raw) as {
+        questions?: QuizQuestion[]
+        source?: string
+        title?: string
+      }
+      if (!payload.questions || payload.questions.length === 0) {
+        return
+      }
+
+      setQuiz(payload.questions)
+      setAnswers(new Array(payload.questions.length).fill(-1))
+      setActiveSetId(null)
+      setActiveSource(payload.source ?? 'steered')
+      setSubmitted(false)
+      setReviewCount(0)
+      setSteer('')
+      setSteeredTitle(payload.title ?? null)
+    } catch {
+      // ignore malformed payload
+    }
+  }, [])
 
   useEffect(() => {
     let active = true
@@ -143,6 +190,8 @@ export default function AssessmentsPage() {
           scope,
           targetId: attemptTargetId,
           reviewQuestions,
+          count: questionCount,
+          feedback: steer.trim() || undefined,
         }),
       })
 
@@ -152,6 +201,118 @@ export default function AssessmentsPage() {
       setActiveSetId(data.setId ?? null)
       setActiveSource(data.source ?? 'generated')
       setAnswers(new Array(questions.length).fill(-1))
+      setSteeredTitle(null)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  async function regenerateAll() {
+    if (!steer.trim() || quiz.length === 0) {
+      return
+    }
+
+    setIsRegeneratingAll(true)
+
+    try {
+      const attemptTargetId = scope === 'topic_quiz' ? selectedSubtopicId : scope === 'chapter_quiz' ? chapterTargetId : 'full_mock'
+      const target = buildTargetFromIds(scope, attemptTargetId)
+      const avoidPrompts = quiz.map((q) => q.prompt)
+
+      const response = await fetch('/api/assessments/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: target.topicTitle ?? target.subjectTitle ?? 'CFA Level I',
+          subtopic: target.subtopicTitle ?? target.topicTitle ?? 'Full curriculum',
+          mode: scope,
+          scope,
+          targetId: attemptTargetId,
+          count: quiz.length,
+          feedback: steer.trim(),
+          avoidPrompts,
+          persist: !submitted,
+        }),
+      })
+
+      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string }
+      const questions = data.questions ?? []
+      if (questions.length === 0) {
+        return
+      }
+
+      setQuiz(questions)
+      setAnswers(new Array(questions.length).fill(-1))
+      setActiveSetId(data.setId ?? null)
+      setActiveSource(data.source ?? 'steered')
+      setSubmitted(false)
+      setReviewCount(0)
+    } finally {
+      setIsRegeneratingAll(false)
+    }
+  }
+
+  function startMistakeQuiz() {
+    if (wrongAnswerBank.length === 0) {
+      return
+    }
+    const seen = new Set<string>()
+    const questions: QuizQuestion[] = []
+    for (const attempt of wrongAnswerBank) {
+      const key = attempt.prompt.trim().toLowerCase().replace(/\s+/g, ' ')
+      if (seen.has(key)) continue
+      seen.add(key)
+      questions.push({
+        prompt: attempt.prompt,
+        options: attempt.options,
+        correctIndex: attempt.correctIndex,
+        rationale: attempt.rationale,
+      })
+      if (questions.length >= questionCount) break
+    }
+
+    setQuiz(questions)
+    setActiveSetId(null)
+    setActiveSource('mistake_bank')
+    setAnswers(new Array(questions.length).fill(-1))
+    setSubmitted(false)
+    setReviewCount(questions.length)
+    setSteeredTitle(null)
+  }
+
+  async function generateWeakTopicsQuiz() {
+    if (!weakTarget) {
+      return
+    }
+
+    setIsLoading(true)
+    setSubmitted(false)
+    setScope('topic_quiz')
+    setSelectedSubtopicId(weakTarget.id)
+
+    try {
+      const response = await fetch('/api/assessments/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: weakTarget.topic.title,
+          subtopic: weakTarget.title,
+          mode: 'topic_quiz',
+          scope: 'topic_quiz',
+          targetId: weakTarget.id,
+          reviewQuestions: getReviewQuestionsForSubtopic(questionAttempts, weakTarget.id, 2),
+          count: questionCount,
+        }),
+      })
+
+      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string }
+      const questions = data.questions ?? []
+      setQuiz(questions)
+      setActiveSetId(data.setId ?? null)
+      setActiveSource(data.source ?? 'generated')
+      setAnswers(new Array(questions.length).fill(-1))
+      setReviewCount(0)
+      setSteeredTitle(null)
     } finally {
       setIsLoading(false)
     }
@@ -269,35 +430,78 @@ export default function AssessmentsPage() {
       : null
 
   return (
-    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="space-y-8">
-      <div>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Test Yourself</h1>
-        <p className="mt-2 text-lg text-slate-600">
-          Pick one study item, answer a few questions, then get one clear summary of how you did and what to do next.
-        </p>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Quizzes taken</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{workspace.assessments.length}</p>
+    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="space-y-6">
+      <PracticeHubTabs />
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Test Yourself</h1>
+          <p className="mt-2 text-lg text-slate-600">
+            Pick a scope, choose how many questions, then get one clear summary at the end.
+          </p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Average quiz score</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{averageScore}%</p>
-        </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Topics needing review</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{workspace.flaggedCount}</p>
+        <div className="rounded-[1.5rem] border border-pink-100 bg-white/80 px-5 py-4 text-right">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Average score</p>
+          <p className="mt-1 text-3xl font-semibold text-slate-900">{averageScore}%</p>
         </div>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
-        <div className="soft-panel rounded-[2rem] p-6">
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-            <BrainCircuit className="text-pink-500" size={18} />
-            Quiz setup
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="soft-panel rounded-[1.75rem] p-5">
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <CheckCircle2 className="text-pink-500" size={16} />
+            One-stop summary
           </h2>
+          {currentResult ? (
+            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-pink-100 bg-white p-3">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Latest</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">{currentResult.correct}/{currentResult.total}</p>
+                <p className="text-xs text-slate-500">{Math.round((currentResult.correct / currentResult.total) * 100)}% score</p>
+              </div>
+              <div className="rounded-2xl border border-pink-100 bg-white p-3 sm:col-span-2">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">What this means</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600">{latestForTopic?.explanationSummary ?? '—'}</p>
+                <p className="mt-2 text-[11px] font-semibold text-pink-600">Next: {latestForTopic?.recommendedAction ?? 'Take a quiz first.'}</p>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-3 rounded-2xl border border-dashed border-pink-200 bg-white/70 p-3 text-xs text-slate-500">
+              Finish a quiz and the score, plain-English summary, and next step will land here.
+            </p>
+          )}
+        </div>
+
+        <div className="soft-panel rounded-[1.75rem] p-5">
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <Target className="text-pink-500" size={16} />
+            Current topic snapshot
+          </h2>
+          <div className="mt-3 grid gap-2 text-xs text-slate-600 sm:grid-cols-3">
+            <div className="rounded-2xl border border-pink-100 bg-white p-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Target</p>
+              <p className="mt-1 text-sm font-semibold text-slate-900">{activeTarget.title}</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">{assessmentScopeLabels[scope]}</p>
+            </div>
+            <div className="rounded-2xl border border-pink-100 bg-white p-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Study feeling</p>
+              <p className="mt-1 text-xs leading-5 text-slate-600">
+                {readinessOptions.find((option) => option.value === String(selectedSubtopic?.progress?.selfConfidence ?? 3))?.label ?? 'Somewhat ready'}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-pink-100 bg-white p-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Mistake bank</p>
+              <p className="mt-1 text-sm font-semibold text-slate-900">{wrongAnswerBank.length}</p>
+              <p className="text-[11px] text-slate-500">wrong answers saved</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="soft-panel rounded-[2rem] p-6">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
+          <BrainCircuit className="text-pink-500" size={18} />
+          Quiz setup
+        </h2>
 
           <div className="grid gap-4 md:grid-cols-2">
             <label className="block">
@@ -369,17 +573,70 @@ export default function AssessmentsPage() {
                 ))}
               </select>
             </label>
+
+            <label className="block">
+              <span className="mb-2 block text-sm font-medium text-slate-700">How many questions?</span>
+              <input
+                type="number"
+                min={1}
+                max={20}
+                value={questionCount}
+                onChange={(event) => setQuestionCount(Math.min(20, Math.max(1, Number(event.target.value) || 1)))}
+                className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+              />
+            </label>
           </div>
 
-          <button
-            type="button"
-            onClick={generateQuiz}
-            disabled={isLoading}
-            className="mt-4 inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-200 transition-transform hover:-translate-y-0.5 disabled:opacity-70"
-          >
-            {isLoading ? <LoaderCircle size={16} className="animate-spin" /> : <FileCheck2 size={16} />}
-            {isLoading ? 'Building quiz...' : 'Start quiz'}
-          </button>
+          <div className="mt-4 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/60 p-4">
+            <label className="flex items-center gap-2 text-xs font-semibold text-emerald-700">
+              <Compass size={14} />
+              Steer this quiz (optional)
+            </label>
+            <textarea
+              value={steer}
+              onChange={(event) => setSteer(event.target.value)}
+              rows={2}
+              placeholder="E.g. focus on duration traps, skip numeric compounding, make questions harder than last time."
+              className="mt-2 w-full rounded-2xl border border-emerald-100 bg-white px-3 py-2 text-xs text-slate-900 outline-none"
+            />
+            <p className="mt-1.5 text-[11px] text-emerald-700/80">
+              Before you start, this tells the generator what kind of questions you want. After you finish, use it to regenerate the whole quiz with your feedback.
+            </p>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={generateQuiz}
+              disabled={isLoading}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-200 transition-transform hover:-translate-y-0.5 disabled:opacity-70"
+            >
+              {isLoading ? <LoaderCircle size={16} className="animate-spin" /> : <FileCheck2 size={16} />}
+              {isLoading ? 'Building quiz...' : 'Start quiz'}
+            </button>
+
+            <button
+              type="button"
+              onClick={startMistakeQuiz}
+              disabled={wrongAnswerBank.length === 0 || isLoading}
+              title={wrongAnswerBank.length === 0 ? 'No wrong answers saved yet.' : `${wrongAnswerBank.length} wrong answers saved`}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-600 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <RotateCcw size={16} />
+              Retest my mistakes ({wrongAnswerBank.length})
+            </button>
+
+            <button
+              type="button"
+              onClick={generateWeakTopicsQuiz}
+              disabled={!weakTarget || isLoading}
+              title={weakTarget ? `Weakest: ${weakTarget.title}` : 'No weak topics yet — finish more quizzes first.'}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-700 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <Flame size={16} />
+              Quiz my weak spot{weakTarget ? `: ${weakTarget.title}` : ''}
+            </button>
+          </div>
 
           <div className="mt-4 rounded-[1.5rem] border border-pink-100 bg-white/85 p-4">
             <div className="grid gap-3 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -412,7 +669,8 @@ export default function AssessmentsPage() {
               {quiz.length > 0 ? (
             <div className="mt-6 space-y-4">
               <div className="rounded-[1.5rem] border border-pink-100 bg-pink-50/60 px-4 py-3 text-sm text-slate-600">
-                Answer all {quiz.length} questions, then submit once. {activeSetId ? 'This paper is stored in the backend.' : 'This quiz will be stored once generated.'} {reviewCount > 0 ? `${reviewCount} missed ${reviewCount === 1 ? 'question is' : 'questions are'} back in this quiz.` : 'Missed questions will come back in later quizzes.'}
+                {steeredTitle ? `Steered quiz from your note: ${steeredTitle}. ` : ''}
+                Answer all {quiz.length} questions, then submit once. {activeSetId ? 'This paper is stored in the backend.' : 'This quiz is only saved once generated normally.'} {reviewCount > 0 ? `${reviewCount} missed ${reviewCount === 1 ? 'question is' : 'questions are'} back in this quiz.` : 'Missed questions will come back in later quizzes.'}
               </div>
 
               {quiz.map((question, questionIndex) => {
@@ -420,7 +678,7 @@ export default function AssessmentsPage() {
                 const answeredCorrectly = submitted && selectedAnswer === question.correctIndex
 
                 return (
-                  <div key={questionIndex} className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+                  <div key={questionIndex} className="rounded-[1.5rem] border border-pink-100 bg-white p-5">
                     <p className="font-medium text-slate-900">
                       {questionIndex + 1}. {question.prompt}
                     </p>
@@ -466,6 +724,7 @@ export default function AssessmentsPage() {
                         <p className="mt-1">{question.rationale}</p>
                       </div>
                     ) : null}
+
                   </div>
                 )
               })}
@@ -480,6 +739,16 @@ export default function AssessmentsPage() {
                   <Target size={16} />
                   {canSubmit ? 'Submit answers' : `Answer all questions first (${answeredCount}/${quiz.length})`}
                 </button>
+                <button
+                  type="button"
+                  onClick={regenerateAll}
+                  disabled={!steer.trim() || isRegeneratingAll || quiz.length === 0}
+                  title={steer.trim() ? 'Rebuild all questions using your steer text.' : 'Add a steer note above first.'}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isRegeneratingAll ? <LoaderCircle size={16} className="animate-spin" /> : <WandSparkles size={16} />}
+                  {isRegeneratingAll ? 'Rebuilding…' : submitted ? 'Regenerate with feedback' : 'Apply steer · rebuild all'}
+                </button>
                 {submitted ? (
                   <button
                     type="button"
@@ -487,6 +756,8 @@ export default function AssessmentsPage() {
                       setQuiz([])
                       setAnswers([])
                       setSubmitted(false)
+                      setSteer('')
+                      setSteeredTitle(null)
                     }}
                     className="inline-flex items-center justify-center gap-2 rounded-2xl border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition-transform hover:-translate-y-0.5"
                   >
@@ -497,75 +768,6 @@ export default function AssessmentsPage() {
               </div>
             </div>
           ) : null}
-        </div>
-
-        <div className="space-y-6">
-          <div className="soft-panel rounded-[2rem] p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <CheckCircle2 className="text-pink-500" size={18} />
-              One-stop summary
-            </h2>
-
-            {currentResult ? (
-              <div className="space-y-4">
-                <div className="rounded-[1.5rem] border border-pink-100 bg-white p-5">
-                  <p className="text-sm text-slate-500">Latest result</p>
-                  <p className="mt-2 text-3xl font-semibold text-slate-900">
-                    {currentResult.correct}/{currentResult.total} right
-                  </p>
-                  <p className="mt-1 text-sm text-slate-600">{Math.round((currentResult.correct / currentResult.total) * 100)}% score</p>
-                </div>
-
-                <div className="rounded-[1.5rem] border border-pink-100 bg-white p-5">
-                  <p className="text-sm text-slate-500">What this means</p>
-                  <p className="mt-2 text-base leading-7 text-slate-700">
-                    {latestForTopic?.explanationSummary ?? 'Finish a quiz to see a plain-English summary here.'}
-                  </p>
-                </div>
-
-                <div className="rounded-[1.5rem] border border-pink-100 bg-white p-5">
-                  <p className="text-sm text-slate-500">Next step</p>
-                  <p className="mt-2 text-base leading-7 text-slate-700">
-                    {latestForTopic?.recommendedAction ?? 'Take a quiz to get a next-step recommendation.'}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <div className="rounded-[1.5rem] border border-dashed border-pink-200 bg-white/70 p-6 text-sm text-slate-600">
-                Start a quiz and this panel will give one clear summary instead of a long history feed.
-              </div>
-            )}
-          </div>
-
-          <div className="soft-panel rounded-[2rem] p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Target className="text-pink-500" size={18} />
-              Current topic snapshot
-            </h2>
-            <div className="space-y-3">
-              <div className="rounded-2xl border border-pink-100 bg-white px-4 py-4">
-                <p className="font-medium text-slate-900">{activeTarget.title}</p>
-                <p className="mt-1 text-xs text-slate-500">
-                  {assessmentScopeLabels[scope]} · {scope === 'chapter_quiz' ? selectedChapter?.subject.title : selectedSubtopic?.subject.title}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-pink-100 bg-white px-4 py-4">
-                <p className="font-medium text-slate-900">Study feeling</p>
-                <p className="mt-1 text-xs text-slate-500">
-                  You currently marked this topic as {readinessOptions.find((option) => option.value === String(selectedSubtopic?.progress?.selfConfidence ?? 3))?.label.toLowerCase() ?? 'somewhat ready'}.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-pink-100 bg-white px-4 py-4">
-                <p className="font-medium text-slate-900">Revision status</p>
-                <p className="mt-1 text-xs text-slate-500">
-                  {selectedSubtopic?.progress?.revisionDueAt ? 'This topic has a revision date scheduled.' : 'No revision date is scheduled yet for this topic.'}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </motion.div>
   )

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { BookOpenCheck, Bookmark, ChevronDown, ChevronLeft, ChevronRight, Filter, Plus, RefreshCcw, Search, Sparkles } from 'lucide-react'
+import { BookOpenCheck, Bookmark, ChevronDown, ChevronLeft, ChevronRight, Filter, Focus, Plus, RefreshCcw, Search, Sparkles, X } from 'lucide-react'
 import {
   createCustomFlashcard,
   createEmptyCustomFlashcardDraft,
@@ -25,6 +25,7 @@ import {
 } from '@/lib/study-sync'
 import { cn } from '@/lib/utils'
 import { flashcardSubjects, formulaFlashcards, type Flashcard } from '@/lib/flashcards-data'
+import { MathText } from '@/components/katex-formula'
 
 function confidenceLabel(value: number | null) {
   if (value === null) {
@@ -69,6 +70,32 @@ export default function FlashcardsPage() {
   const [formMessage, setFormMessage] = useState<string | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
+  const [focus, setFocus] = useState<{ ids: string[]; label: string } | null>(null)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+    const raw = window.sessionStorage.getItem('cfa-flashcard-focus')
+    if (!raw) {
+      return
+    }
+    window.sessionStorage.removeItem('cfa-flashcard-focus')
+    try {
+      const payload = JSON.parse(raw) as { ids?: string[]; label?: string }
+      if (payload.ids && payload.ids.length > 0) {
+        setFocus({ ids: payload.ids, label: payload.label ?? 'Focused deck' })
+        setQuery('')
+        setSubject('All subjects')
+        setShowOnlyWeak(false)
+        setShowOnlyBookmarked(false)
+        setCurrentIndex(0)
+        setFlipped(false)
+      }
+    } catch {
+      // ignore
+    }
+  }, [])
 
   useEffect(() => {
     let active = true
@@ -129,6 +156,12 @@ export default function FlashcardsPage() {
   const availableSubjects = useMemo(() => Array.from(new Set([...flashcardSubjects, ...customCards.map((card) => card.subject)])), [customCards])
 
   const filteredCards = useMemo(() => {
+    if (focus) {
+      const focusSet = new Set(focus.ids)
+      const inFocus = deckCards.filter((card) => focusSet.has(card.id))
+      return inFocus.sort((a, b) => focus.ids.indexOf(a.id) - focus.ids.indexOf(b.id))
+    }
+
     const normalizedQuery = query.trim().toLowerCase()
 
     return deckCards.filter((card) => {
@@ -144,7 +177,7 @@ export default function FlashcardsPage() {
       const matchesBookmarked = !showOnlyBookmarked || progress.bookmarked
       return matchesQuery && matchesSubject && matchesWeak && matchesBookmarked
     })
-  }, [deckCards, progressMap, query, showOnlyBookmarked, showOnlyWeak, subject])
+  }, [deckCards, focus, progressMap, query, showOnlyBookmarked, showOnlyWeak, subject])
 
   useEffect(() => {
     setCurrentIndex(0)
@@ -237,29 +270,30 @@ export default function FlashcardsPage() {
             A formula deck built around CFA Level I problem types. It syncs confidence and bookmarks to Supabase when you are signed in, and still works locally when you are not.
           </p>
         </div>
-        <div className="rounded-[1.5rem] border border-pink-100 bg-white/85 px-5 py-4 text-sm text-slate-600">
-          {deckCards.length} cards, including {customCards.length} custom
+        <div className="rounded-[1.5rem] border border-pink-100 bg-white/85 px-5 py-4 text-right">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Mastered</p>
+          <p className="mt-1 text-3xl font-semibold text-slate-900">{knownCount}<span className="text-base text-slate-400">/{deckCards.length}</span></p>
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Cards mastered</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{knownCount}</p>
+      {focus ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-[1.5rem] border border-emerald-200 bg-emerald-50/80 px-5 py-3">
+          <div className="flex items-center gap-2 text-sm text-emerald-800">
+            <Focus size={16} />
+            <span>
+              Focused on <span className="font-semibold">{focus.label}</span> · {focus.ids.length} card{focus.ids.length === 1 ? '' : 's'}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setFocus(null)}
+            className="inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-white px-3 py-1 text-xs font-semibold text-emerald-700"
+          >
+            <X size={12} />
+            Clear focus
+          </button>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Need work</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{weakCount}</p>
-        </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Bookmarked</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{bookmarkedCount}</p>
-        </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Current deck</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{filteredCards.length}</p>
-        </div>
-      </div>
+      ) : null}
 
       <div className="soft-panel rounded-[2rem] p-6">
         <div className="grid gap-4 xl:grid-cols-[1.4fr_0.7fr_0.7fr_auto_auto]">
@@ -504,18 +538,18 @@ export default function FlashcardsPage() {
 
                 {!flipped ? (
                   <div className="mt-6 min-h-[200px]">
-                    <p className="text-2xl font-semibold leading-10 text-slate-900">{currentCard.prompt}</p>
+                    <MathText text={currentCard.prompt} className="text-2xl font-semibold leading-10 text-slate-900" />
                     <p className="mt-6 text-sm text-slate-500">Tap to flip and reveal the formula, hook, and what to remember.</p>
                   </div>
                 ) : (
                   <div className="mt-6 min-h-[200px] space-y-4">
                     <div>
                       <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Formula / answer</p>
-                      <p className="mt-2 text-xl font-semibold leading-9 text-slate-900">{currentCard.answer}</p>
+                      <MathText text={currentCard.answer} className="mt-2 text-xl font-semibold leading-9 text-slate-900" />
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Memory hook</p>
-                      <p className="mt-2 text-base leading-7 text-slate-600">{currentCard.memoryHook}</p>
+                      <MathText text={currentCard.memoryHook} className="mt-2 text-base leading-7 text-slate-600" />
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {currentCard.tags.map((tag) => (

@@ -73,27 +73,48 @@ function fallbackQuestions(topic: string, subtopic: string, reviewQuestions: Que
   ]).slice(0, 4)
 }
 
-async function generateWithOpenAI(topic: string, subtopic: string, mode: string, reviewQuestions: Question[], scope: AssessmentScope) {
+function defaultCountForScope(scope: AssessmentScope) {
+  return scope === 'full_mock' ? 12 : scope === 'chapter_quiz' ? 8 : 4
+}
+
+async function generateWithOpenAI(
+  topic: string,
+  subtopic: string,
+  mode: string,
+  reviewQuestions: Question[],
+  scope: AssessmentScope,
+  count: number,
+  feedback?: string,
+  avoidPrompts?: string[],
+) {
   const apiKey = process.env.OPENAI_API_KEY
 
   if (!apiKey) {
-    return fallbackQuestions(topic, subtopic, reviewQuestions)
+    return fallbackQuestions(topic, subtopic, reviewQuestions).slice(0, count)
   }
 
   const prompt = [
-    `Generate exactly ${scope === 'full_mock' ? 12 : scope === 'chapter_quiz' ? 8 : 4} CFA Level I multiple-choice questions in JSON only.`,
+    `Generate exactly ${count} CFA Level I multiple-choice questions in JSON only.`,
     `Topic: ${topic}`,
     `Subtopic: ${subtopic}`,
     `Mode: ${mode}. Scope: ${scope}.`,
     reviewQuestions.length > 0
       ? `The student previously missed these questions. Include them or very close variants first so the weak area is tested again: ${JSON.stringify(reviewQuestions)}`
       : '',
+    feedback
+      ? `The student gave this feedback on a previous question and wants a better one: "${feedback}". Address the feedback directly in the replacement.`
+      : '',
+    avoidPrompts && avoidPrompts.length > 0
+      ? `Do not repeat or closely paraphrase any of these prompts: ${JSON.stringify(avoidPrompts)}`
+      : '',
     `Return an object with key "questions".`,
     `Each question must have: prompt, options, correctIndex, rationale.`,
     `Use 3 options per question.`,
     `correctIndex must be 0, 1, or 2.`,
     `Keep questions exam-oriented and concise.`,
-  ].join('\n')
+  ]
+    .filter(Boolean)
+    .join('\n')
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -118,7 +139,7 @@ async function generateWithOpenAI(topic: string, subtopic: string, mode: string,
   })
 
   if (!response.ok) {
-    return fallbackQuestions(topic, subtopic, reviewQuestions)
+    return fallbackQuestions(topic, subtopic, reviewQuestions).slice(0, count)
   }
 
   const data = (await response.json()) as {
@@ -127,19 +148,18 @@ async function generateWithOpenAI(topic: string, subtopic: string, mode: string,
   const content = data.choices?.[0]?.message?.content
 
   if (!content) {
-    return fallbackQuestions(topic, subtopic, reviewQuestions)
+    return fallbackQuestions(topic, subtopic, reviewQuestions).slice(0, count)
   }
 
   try {
     const parsed = JSON.parse(content) as { questions?: Question[] }
     if (!parsed.questions || parsed.questions.length === 0) {
-      return fallbackQuestions(topic, subtopic, reviewQuestions)
+      return fallbackQuestions(topic, subtopic, reviewQuestions).slice(0, count)
     }
 
-    const limit = scope === 'full_mock' ? 12 : scope === 'chapter_quiz' ? 8 : 4
-    return dedupeQuestions([...reviewQuestions, ...parsed.questions.filter(validQuestion)]).slice(0, limit)
+    return dedupeQuestions([...reviewQuestions, ...parsed.questions.filter(validQuestion)]).slice(0, count)
   } catch {
-    return fallbackQuestions(topic, subtopic, reviewQuestions)
+    return fallbackQuestions(topic, subtopic, reviewQuestions).slice(0, count)
   }
 }
 
@@ -204,6 +224,10 @@ export async function POST(request: Request) {
     scope?: AssessmentScope
     targetId?: string
     reviewQuestions?: Question[]
+    count?: number
+    feedback?: string
+    avoidPrompts?: string[]
+    persist?: boolean
   }
 
   if (!body.topic || !body.subtopic) {
@@ -221,7 +245,23 @@ export async function POST(request: Request) {
 
   const scope = body.scope ?? 'topic_quiz'
   const reviewQuestions = normalizeReviewQuestions(body.reviewQuestions)
-  const questions = await generateWithOpenAI(body.topic, body.subtopic, body.mode ?? scope, reviewQuestions, scope)
+  const rawCount = Number.isFinite(body.count) ? Math.floor(body.count as number) : defaultCountForScope(scope)
+  const count = Math.min(20, Math.max(1, rawCount))
+  const questions = await generateWithOpenAI(
+    body.topic,
+    body.subtopic,
+    body.mode ?? scope,
+    reviewQuestions,
+    scope,
+    count,
+    body.feedback,
+    body.avoidPrompts,
+  )
+
+  if (body.persist === false) {
+    return NextResponse.json({ questions, setId: null, source: 'generated', scope })
+  }
+
   const setId = await saveGeneratedSet({
     userId: user.id,
     scope,

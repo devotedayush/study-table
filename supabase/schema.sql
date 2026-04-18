@@ -184,3 +184,28 @@ CREATE TABLE IF NOT EXISTS flashcard_progress (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   PRIMARY KEY (user_id, card_id)
 );
+
+CREATE TABLE IF NOT EXISTS revision_note_progress (
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  note_id TEXT NOT NULL,
+  reviewed BOOLEAN NOT NULL DEFAULT FALSE,
+  bookmarked BOOLEAN NOT NULL DEFAULT FALSE,
+  last_reviewed_at TIMESTAMPTZ,
+  review_count INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (user_id, note_id)
+);
+
+CREATE TABLE IF NOT EXISTS calculator_drill_progress (
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  drill_id TEXT NOT NULL,
+  attempted_count INT NOT NULL DEFAULT 0,
+  correct_count INT NOT NULL DEFAULT 0,
+  last_answer TEXT NOT NULL DEFAULT '',
+  last_attempted_at TIMESTAMPTZ,
+  status TEXT NOT NULL DEFAULT 'unattempted',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (user_id, drill_id)
+);

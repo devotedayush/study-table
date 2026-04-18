@@ -2,6 +2,7 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { CustomFlashcard } from '@/lib/custom-flashcards'
+import type { CalculatorDrillProgress, RevisionNoteProgress } from '@/lib/revision-progress'
 import type { NoteRecord, MockRecord } from '@/lib/study-workspace'
 
 export type SyncedProgressEntry = {
@@ -474,6 +475,106 @@ export function mergeFlashcardProgress(
   }
 
   return merged
+}
+
+export async function fetchRemoteRevisionNoteProgress(supabase: SupabaseClient, userId: string) {
+  const { data, error } = await supabase
+    .from('revision_note_progress')
+    .select('note_id, reviewed, bookmarked, last_reviewed_at, review_count, updated_at')
+    .eq('user_id', userId)
+
+  if (error) {
+    throw error
+  }
+
+  return Object.fromEntries(
+    (data ?? []).map((row) => [
+      row.note_id,
+      {
+        reviewed: row.reviewed ?? false,
+        bookmarked: row.bookmarked ?? false,
+        lastReviewedAt: row.last_reviewed_at ?? null,
+        reviewCount: row.review_count ?? 0,
+        updatedAt: row.updated_at ?? null,
+      } satisfies RevisionNoteProgress,
+    ]),
+  ) as Record<string, RevisionNoteProgress>
+}
+
+export async function upsertRemoteRevisionNoteProgress(
+  supabase: SupabaseClient,
+  userId: string,
+  progressMap: Record<string, RevisionNoteProgress>,
+) {
+  const rows = Object.entries(progressMap).map(([noteId, progress]) => ({
+    user_id: userId,
+    note_id: noteId,
+    reviewed: progress.reviewed,
+    bookmarked: progress.bookmarked,
+    last_reviewed_at: progress.lastReviewedAt,
+    review_count: progress.reviewCount,
+    updated_at: progress.updatedAt ?? new Date().toISOString(),
+  }))
+
+  if (rows.length === 0) {
+    return
+  }
+
+  const { error } = await supabase.from('revision_note_progress').upsert(rows, { onConflict: 'user_id,note_id' })
+  if (error) {
+    throw error
+  }
+}
+
+export async function fetchRemoteCalculatorDrillProgress(supabase: SupabaseClient, userId: string) {
+  const { data, error } = await supabase
+    .from('calculator_drill_progress')
+    .select('drill_id, attempted_count, correct_count, last_answer, last_attempted_at, status, updated_at')
+    .eq('user_id', userId)
+
+  if (error) {
+    throw error
+  }
+
+  return Object.fromEntries(
+    (data ?? []).map((row) => [
+      row.drill_id,
+      {
+        attemptedCount: row.attempted_count ?? 0,
+        correctCount: row.correct_count ?? 0,
+        lastAnswer: row.last_answer ?? '',
+        lastAttemptedAt: row.last_attempted_at ?? null,
+        status: row.status ?? 'unattempted',
+        updatedAt: row.updated_at ?? null,
+      } satisfies CalculatorDrillProgress,
+    ]),
+  ) as Record<string, CalculatorDrillProgress>
+}
+
+export async function upsertRemoteCalculatorDrillProgress(
+  supabase: SupabaseClient,
+  userId: string,
+  progressMap: Record<string, CalculatorDrillProgress>,
+) {
+  const rows = Object.entries(progressMap).map(([drillId, progress]) => ({
+    user_id: userId,
+    drill_id: drillId,
+    attempted_count: progress.attemptedCount,
+    correct_count: progress.correctCount,
+    last_answer: progress.lastAnswer,
+    last_attempted_at: progress.lastAttemptedAt,
+    status: progress.status,
+    updated_at: progress.updatedAt ?? new Date().toISOString(),
+  }))
+
+  if (rows.length === 0) {
+    return
+  }
+
+  const { error } = await supabase.from('calculator_drill_progress').upsert(rows, { onConflict: 'user_id,drill_id' })
+  if (error) {
+    throw error
+  }
 }
 
 export async function fetchRemoteCustomFlashcards(supabase: SupabaseClient, userId: string) {

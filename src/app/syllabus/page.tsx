@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { AlertTriangle, ChevronDown, ChevronRight, Clock3, Filter, Layers, NotebookPen, Save, Search, Star, X } from 'lucide-react'
+import { AlertTriangle, CalendarCheck2, CheckCircle2, ChevronDown, ChevronRight, Clock3, Filter, Layers, NotebookPen, Save, Search, Sparkles, Star, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { formatQuizScore, formatRevisionLabel, useStudyWorkspace } from '@/lib/study-engine'
+import { formatMastery, formatQuizScore, formatRevisionLabel, useStudyWorkspace } from '@/lib/study-engine'
 import { type ProgressStatus } from '@/lib/cfa-data'
 
 const statusOptions: { value: ProgressStatus; label: string }[] = [
@@ -220,35 +220,162 @@ export default function SyllabusPage() {
     .sort((a, b) => b.dueNowCount - a.dueNowCount || b.flaggedCount - a.flaggedCount || b.weightValue - a.weightValue)
     .slice(0, 3)
 
+  const dueNow = workspace.revisionQueue.filter((item) => item.overdueDays >= 0)
+  const upcoming = workspace.revisionQueue.filter((item) => item.overdueDays < 0).slice(0, 4)
+  const topRecommendation = workspace.topRecommendation
   return (
     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="space-y-8">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Syllabus Explorer</h1>
+          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Study dashboard</h1>
           <p className="mt-2 text-lg text-slate-600">
-            Search, filter, and update your progress across all {workspace.totalSubtopics} modules.
+            Your revision queue and the full syllabus map, side by side. Clear due items up top, then dig into any module below.
           </p>
         </div>
-        <div className="rounded-[1.5rem] border border-pink-100 bg-white/80 px-5 py-4 text-sm text-slate-600">
-          {workspace.completedCount}/{workspace.totalSubtopics} completed · {workspace.flaggedCount} flagged · {workspace.revisedCount} revised
+        <div className="rounded-[1.5rem] border border-pink-100 bg-white/80 px-5 py-4 text-right">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Readiness</p>
+          <p className="mt-1 text-3xl font-semibold text-slate-900">{workspace.readiness}%</p>
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Coverage</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{workspace.overallCoverage}%</p>
-          <p className="mt-1 text-xs text-slate-500">{workspace.completedCount} of {workspace.totalSubtopics} check-offs complete</p>
+      <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+        <div className="soft-panel rounded-[2rem] p-6">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
+              <Sparkles className="text-pink-500" size={18} />
+              Next best revision
+            </h2>
+            <span className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-medium text-pink-500">
+              {dueNow.length} due · {upcoming.length} upcoming
+            </span>
+          </div>
+          <div className="mt-5 rounded-[1.5rem] border border-pink-100 bg-pink-50/70 p-5">
+            {topRecommendation ? (
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-pink-400">Start here</p>
+                  <h3 className="mt-2 text-xl font-semibold text-slate-900">{topRecommendation.title}</h3>
+                  <p className="mt-1 text-sm text-slate-600">
+                    {topRecommendation.subject.title} · {topRecommendation.topic.title} · {formatMastery(topRecommendation.mastery)}/5 mastery
+                  </p>
+                  <p className="mt-2 text-sm text-slate-500">{topRecommendation.overdueDays >= 0 ? formatRevisionLabel(topRecommendation.progress?.revisionDueAt ?? null) : 'Pull this into the front of your next block.'}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    workspace.saveProgress({
+                      subtopicId: topRecommendation.id,
+                      status: topRecommendation.mastery >= 4 ? 'mastered' : 'revised',
+                      minutesSpent: (topRecommendation.progress?.minutesSpent ?? 0) + Math.round(topRecommendation.timeEstimateMinutes * 0.6),
+                      selfConfidence: topRecommendation.progress?.selfConfidence ?? 3,
+                      notes: topRecommendation.progress?.notes ?? '',
+                    })
+                  }
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-200"
+                >
+                  <CheckCircle2 size={15} />
+                  Mark revised
+                </button>
+              </div>
+            ) : (
+              <p className="text-sm text-slate-600">No revisions are due. Keep ticking off modules below and this will populate automatically.</p>
+            )}
+          </div>
+
+          {dueNow.length > 0 ? (
+            <div className="mt-5">
+              <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                <CalendarCheck2 className="text-pink-500" size={15} />
+                Due and overdue ({dueNow.length})
+              </h3>
+              <div className="mt-3 space-y-2">
+                {dueNow.slice(0, 5).map((item) => (
+                  <div key={item.id} className="flex flex-col gap-2 rounded-2xl border border-pink-100 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium text-slate-900">{item.title}</p>
+                      <p className="mt-0.5 text-xs text-slate-500">{item.subject.title} · {formatRevisionLabel(item.progress?.revisionDueAt ?? null)}</p>
+                    </div>
+                    <div className="flex shrink-0 gap-2">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          workspace.saveProgress({
+                            subtopicId: item.id,
+                            status: item.mastery >= 4 ? 'mastered' : 'revised',
+                            minutesSpent: (item.progress?.minutesSpent ?? 0) + Math.round(item.timeEstimateMinutes * 0.6),
+                            selfConfidence: item.progress?.selfConfidence ?? 3,
+                            notes: item.progress?.notes ?? '',
+                          })
+                        }
+                        className="rounded-full border border-pink-100 bg-pink-50 px-3 py-1.5 text-xs font-semibold text-pink-600 hover:bg-pink-100"
+                      >
+                        Revised
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => workspace.snoozeRevision(item.id, 2)}
+                        className="rounded-full border border-pink-100 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-pink-50/60"
+                      >
+                        Snooze 2d
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                {dueNow.length > 5 ? (
+                  <p className="pl-1 text-xs text-slate-500">+{dueNow.length - 5} more surfaced inside the topics below.</p>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Modules left</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{workspace.officialModuleTotal - Math.round((workspace.overallCoverage / 100) * workspace.officialModuleTotal)}</p>
-          <p className="mt-1 text-xs text-slate-500">{workspace.officialModuleTotal} official modules total</p>
+
+        <div className="space-y-6">
+          <div className="soft-panel rounded-[2rem] p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
+              <Clock3 className="text-pink-500" size={18} />
+              Coming up
+            </h2>
+            <div className="space-y-2">
+              {upcoming.length === 0 ? (
+                <p className="text-sm text-slate-500">Nothing scheduled yet — finish a few modules first.</p>
+              ) : null}
+              {upcoming.map((item) => (
+                <div key={item.id} className="rounded-2xl border border-pink-100 bg-white px-4 py-3">
+                  <p className="text-sm font-medium text-slate-900">{item.title}</p>
+                  <p className="mt-0.5 text-xs text-slate-500">{item.subject.title} · {formatRevisionLabel(item.progress?.revisionDueAt ?? null)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="soft-panel rounded-[2rem] p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
+              <Sparkles className="text-pink-500" size={18} />
+              Subject pressure
+            </h2>
+            <div className="space-y-2">
+              {topSubjects.map((subject) => (
+                <div key={subject.id} className="flex items-center justify-between gap-3 rounded-2xl border border-pink-100 bg-white px-4 py-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-slate-900">{subject.title}</p>
+                    <p className="mt-0.5 text-xs text-slate-500">{subject.dueNowCount} due · {subject.estimatedRemainingModules} modules left</p>
+                  </div>
+                  <span className="rounded-full border border-pink-100 bg-pink-50 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-pink-500">
+                    {subject.coverage}%
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
-          <p className="text-sm text-slate-500">Study left</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{Math.round(workspace.estimatedRemainingMinutes / 60)}h</p>
-          <p className="mt-1 text-xs text-slate-500">{workspace.estimatedRemainingMinutes} minutes remaining at the current pace</p>
+      </div>
+
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Full syllabus map</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Search, filter, and update progress across all {workspace.totalSubtopics} modules.
+          </p>
         </div>
       </div>
 
