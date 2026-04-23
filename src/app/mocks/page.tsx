@@ -254,8 +254,8 @@ export default function MocksPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Mocks</h1>
-          <p className="mt-2 max-w-2xl text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Mocks</h1>
+          <p className="mt-2 max-w-2xl text-base text-slate-600 sm:text-lg">
             Log full-length attempts, compare section performance, and keep the history synced across devices when you are signed in.
           </p>
         </div>
@@ -270,22 +270,22 @@ export default function MocksPage() {
         </button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
-        <div className="soft-panel rounded-[1.75rem] p-5">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Logged mocks</p>
           <p className="mt-2 text-3xl font-semibold text-slate-900">{metrics.total}</p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Average score</p>
           <p className={cn('mt-2 text-3xl font-semibold', scoreColor(metrics.averageScore))}>
             {metrics.total > 0 ? `${metrics.averageScore}%` : '0%'}
           </p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Average time</p>
           <p className="mt-2 text-3xl font-semibold text-slate-900">{metrics.averageTime || '0'}m</p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Weakest section</p>
           <p className="mt-2 text-2xl font-semibold text-slate-900">
             {metrics.weakestSection?.label ?? 'None'}
@@ -295,7 +295,7 @@ export default function MocksPage() {
 
       <div className="grid gap-6 xl:grid-cols-[1.02fr_0.98fr]">
         <div className="space-y-6">
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-4">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
                 <GraduationCap className="text-pink-500" size={18} />
@@ -391,7 +391,7 @@ export default function MocksPage() {
             </form>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-4">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
                 <CalendarClock className="text-pink-500" size={18} />
@@ -467,7 +467,7 @@ export default function MocksPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <TrendingUp className="text-pink-500" size={18} />
               Score trend
@@ -487,7 +487,7 @@ export default function MocksPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <Clock3 className="text-pink-500" size={18} />
               Section averages

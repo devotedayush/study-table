@@ -109,9 +109,9 @@ export function BabyMaanWidget() {
   }
 
   return (
-    <div className="fixed bottom-5 right-4 z-50 sm:right-6">
+    <div className="fixed bottom-3 left-3 right-3 z-50 sm:bottom-5 sm:right-6 sm:left-auto">
       {open ? (
-        <div className="mb-3 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-lg border border-pink-100 bg-white shadow-[0_24px_70px_-28px_rgba(244,114,182,0.55)]">
+        <div className="mb-3 w-full max-w-[24rem] overflow-hidden rounded-lg border border-pink-100 bg-white shadow-[0_24px_70px_-28px_rgba(244,114,182,0.55)] max-h-[calc(100dvh-8rem)]">
           <div className="flex items-center justify-between gap-3 border-b border-pink-100 bg-pink-50/80 px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pink-500 text-white">
@@ -142,7 +142,7 @@ export function BabyMaanWidget() {
             </div>
           </div>
 
-          <div className="max-h-80 space-y-3 overflow-y-auto px-4 py-4">
+          <div className="max-h-[calc(100dvh-18rem)] space-y-3 overflow-y-auto px-4 py-4">
             {messages.map((message) => {
               const label = previewLabel(message.preview)
 
@@ -202,11 +202,11 @@ export function BabyMaanWidget() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="ml-auto flex h-14 items-center gap-3 rounded-lg border border-pink-200 bg-pink-500 px-4 text-sm font-semibold text-white shadow-[0_18px_45px_-20px_rgba(236,72,153,0.8)] transition-transform hover:-translate-y-0.5"
+        className="ml-auto flex h-12 sm:h-14 items-center gap-2 sm:gap-3 rounded-lg border border-pink-200 bg-pink-500 px-3 sm:px-4 text-sm font-semibold text-white shadow-[0_18px_45px_-20px_rgba(236,72,153,0.8)] transition-transform hover:-translate-y-0.5"
         aria-expanded={open}
       >
         <MessageCircleHeart size={18} />
-        Baby Maan
+        <span className="hidden sm:inline">Baby Maan</span>
       </button>
     </div>
   )

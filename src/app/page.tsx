@@ -9,18 +9,18 @@ import type { Profile } from '@/lib/study-context'
 
 function LandingPage() {
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center px-4">
+    <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-start px-4 py-6 sm:items-center sm:py-8">
       <section className="grid w-full gap-6 lg:grid-cols-[1.04fr_0.96fr]">
-        <div className="soft-panel rounded-[2.2rem] p-6 sm:p-8 lg:p-10">
+        <div className="soft-panel rounded-[2rem] p-5 sm:rounded-[2.2rem] sm:p-8 lg:p-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-pink-500 shadow-sm">
             <Sparkles size={14} />
             Private workspace
           </span>
           <div className="mt-6 space-y-4">
-            <h1 className="max-w-2xl text-5xl font-semibold tracking-tight text-slate-900 sm:text-6xl">
+            <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               CFA prep, kept calm and clear.
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
               Sign in if you already have an account. Create one if this is your first time. After that, everything opens in one study workspace.
             </p>
           </div>
@@ -36,24 +36,24 @@ function LandingPage() {
             </Link>
           </div>
 
-          <div className="mt-6 rounded-[1.5rem] border border-pink-100 bg-white p-4 text-sm text-slate-600">
+          <div className="mt-6 rounded-[1.5rem] border border-pink-100 bg-white p-4 text-sm leading-6 text-slate-600">
             One private login. One syllabus tracker. One calm place to study.
           </div>
         </div>
 
-        <div className="soft-panel rounded-[2.2rem] p-6 sm:p-8">
-          <div className="rounded-[1.75rem] border border-[#d9eef5] bg-white p-5">
-            <div className="flex items-center justify-between gap-4">
+        <div className="soft-panel rounded-[2rem] p-5 sm:rounded-[2.2rem] sm:p-8">
+          <div className="rounded-[1.75rem] border border-[#d9eef5] bg-white p-4 sm:p-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">Workspace preview</p>
-                <h2 className="mt-2 text-2xl font-semibold text-slate-900">A softer study cockpit</h2>
+                <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-2xl">A softer study cockpit</h2>
               </div>
               <span className="rounded-full border border-pink-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-pink-500">
                 white + pink
               </span>
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { label: 'Coverage', value: 'Track by topic' },
                 { label: 'Confidence', value: 'Mark what feels shaky' },

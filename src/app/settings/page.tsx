@@ -224,8 +224,8 @@ export default function SettingsPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Settings</h1>
-          <p className="mt-2 max-w-2xl text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Settings</h1>
+          <p className="mt-2 max-w-2xl text-base text-slate-600 sm:text-lg">
             Update your exam date and study rhythm. The preview on the right updates immediately so you can see the impact.
           </p>
           <div className="mt-3">
@@ -233,7 +233,7 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
             onClick={resetPreferences}
@@ -262,27 +262,27 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
-        <div className="soft-panel rounded-[1.75rem] p-5">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Days left</p>
           <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.daysRemaining ?? '—'}</p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Urgency</p>
           <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.urgency}</p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Weekly target</p>
           <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.targetHours}h</p>
         </div>
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <p className="text-sm text-slate-500">Daily load</p>
           <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.dailyLoad} blocks</p>
         </div>
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <div className="soft-panel rounded-[2rem] p-6">
+        <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
           <div className="mb-6 flex items-center gap-3">
             <UserCog className="text-pink-500" size={20} />
             <div>
@@ -365,7 +365,7 @@ export default function SettingsPage() {
                 <span className="block text-sm font-medium text-slate-700">Preferred rest days</span>
                 <span className="text-xs text-slate-500">Tap to toggle</span>
               </div>
-              <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
                 {restDayOptions.map((day) => {
                   const selected = preferences.preferredRestDays.includes(day.value)
                   return (
@@ -394,7 +394,7 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <CalendarDays className="text-pink-500" size={18} />
               Study preview
@@ -425,7 +425,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <SlidersHorizontal className="text-pink-500" size={18} />
               What this controls
@@ -437,7 +437,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <Shield className="text-pink-500" size={18} />
               Sync status

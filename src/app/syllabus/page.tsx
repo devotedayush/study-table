@@ -227,8 +227,8 @@ export default function SyllabusPage() {
     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="space-y-8">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Study dashboard</h1>
-          <p className="mt-2 text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Study dashboard</h1>
+          <p className="mt-2 max-w-2xl text-base text-slate-600 sm:text-lg">
             Your revision queue and the full syllabus map, side by side. Clear due items up top, then dig into any module below.
           </p>
         </div>
@@ -239,7 +239,7 @@ export default function SyllabusPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-        <div className="soft-panel rounded-[2rem] p-6">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
               <Sparkles className="text-pink-500" size={18} />
@@ -330,7 +330,7 @@ export default function SyllabusPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <Clock3 className="text-pink-500" size={18} />
               Coming up
@@ -348,7 +348,7 @@ export default function SyllabusPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
               <Sparkles className="text-pink-500" size={18} />
               Subject pressure
@@ -380,7 +380,7 @@ export default function SyllabusPage() {
       </div>
 
       {/* Search and filter bar */}
-      <div className="soft-panel rounded-[2rem] p-5">
+      <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-5">
         <div className="flex items-center gap-2 mb-4 text-sm font-medium text-slate-700">
           <Filter size={16} className="text-pink-500" />
           Find modules
@@ -439,7 +439,7 @@ export default function SyllabusPage() {
 
       {!isFiltering ? (
         <>
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">Official curriculum map</h2>
@@ -502,7 +502,7 @@ export default function SyllabusPage() {
 
       <div className="space-y-6">
         {filteredSubjects.length === 0 ? (
-          <div className="soft-panel rounded-[2rem] p-8 text-center">
+          <div className="soft-panel rounded-[1.75rem] p-5 text-center sm:rounded-[2rem] sm:p-8">
             <p className="text-slate-500">No modules match your filters. Try broadening your search.</p>
           </div>
         ) : null}

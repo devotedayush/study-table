@@ -213,19 +213,19 @@ export default function CalculatorDrillsPage() {
       <PracticeHubTabs />
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Calculator Drills</h1>
-          <p className="mt-2 max-w-3xl text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Calculator Drills</h1>
+          <p className="mt-2 max-w-3xl text-base text-slate-600 sm:text-lg">
             BA II Plus practice sums for CFA Level I timing, signs, worksheets, and formula shortcuts.
           </p>
         </div>
-        <div className="rounded-lg border border-pink-100 bg-white px-5 py-4 text-right">
+        <div className="rounded-lg border border-pink-100 bg-white px-4 py-4 text-right sm:px-5">
           <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Accuracy</p>
           <p className="mt-1 text-3xl font-semibold text-slate-900">{overallAccuracy}%</p>
         </div>
       </div>
 
-      <div className="soft-panel rounded-lg p-5">
-        <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr_0.8fr_0.55fr_auto_auto]">
+      <div className="soft-panel rounded-lg p-4 sm:p-5">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-[1.2fr_0.8fr_0.8fr_0.55fr_auto_auto]">
           <label className="block">
             <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
               <Search size={15} className="text-pink-500" />
@@ -304,7 +304,7 @@ export default function CalculatorDrillsPage() {
           const result = lastResult[drill.id] ?? null
 
           return (
-            <article key={drill.id} className="soft-panel rounded-lg p-5">
+            <article key={drill.id} className="soft-panel rounded-lg p-4 sm:p-5">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
@@ -328,7 +328,7 @@ export default function CalculatorDrillsPage() {
                 </div>
               </div>
 
-              <div className="mt-5 grid gap-3 lg:grid-cols-[1fr_auto_auto]">
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto]">
                 <label className="block">
                   <span className="mb-2 block text-sm font-medium text-slate-700">Your answer</span>
                   <input

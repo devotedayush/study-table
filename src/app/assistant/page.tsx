@@ -139,8 +139,8 @@ export default function AssistantPage() {
               <Sparkles size={14} />
               Baby Maan
             </div>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-900">Update the app by chatting</h1>
-            <p className="mt-3 text-lg leading-8 text-slate-600">
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Update the app by chatting</h1>
+            <p className="mt-3 text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
               Keep this simple. Tell Baby Maan what you studied, what felt unclear, ask for a flashcard, share your mock result, or change a setting. If it understands the update, it writes it into your synced study data.
             </p>
           </div>

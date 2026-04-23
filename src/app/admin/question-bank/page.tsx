@@ -52,18 +52,18 @@ export default function AdminQuestionBankPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="space-y-6">
-      <section className="soft-panel rounded-[2rem] p-6">
+      <section className="soft-panel rounded-[2rem] p-4 sm:p-6">
         <div className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-pink-500">
           <ShieldCheck size={14} />
           Admin
         </div>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-900">Question bank upload</h1>
-        <p className="mt-2 max-w-3xl text-lg leading-8 text-slate-600">
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Question bank upload</h1>
+        <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
           Paste a markdown question set. Baby Maan&apos;s parser will extract questions, options, answers, and rationales, then publish the set for users.
         </p>
       </section>
 
-      <form onSubmit={handleSubmit} className="soft-panel rounded-[2rem] p-6">
+      <form onSubmit={handleSubmit} className="soft-panel rounded-[2rem] p-4 sm:p-6">
         <div className="grid gap-4 lg:grid-cols-3">
           <label className="block">
             <span className="mb-2 block text-sm font-medium text-slate-700">Title</span>

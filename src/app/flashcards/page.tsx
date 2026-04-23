@@ -265,7 +265,7 @@ export default function FlashcardsPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Formula Flashcards</h1>
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Formula Flashcards</h1>
           <p className="mt-2 max-w-3xl text-lg text-slate-600">
             A formula deck built around CFA Level I problem types. It syncs confidence and bookmarks to Supabase when you are signed in, and still works locally when you are not.
           </p>
@@ -295,7 +295,7 @@ export default function FlashcardsPage() {
         </div>
       ) : null}
 
-      <div className="soft-panel rounded-[2rem] p-6">
+      <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
         <div className="grid gap-4 xl:grid-cols-[1.4fr_0.7fr_0.7fr_auto_auto]">
           <label className="block">
             <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
@@ -364,7 +364,7 @@ export default function FlashcardsPage() {
         </div>
       </div>
 
-      <div className="soft-panel rounded-[2rem] p-6">
+      <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
@@ -492,7 +492,7 @@ export default function FlashcardsPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <div className="soft-panel rounded-[2rem] p-6">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
           {currentCard ? (
             <>
               <div className="mb-5 flex items-start justify-between gap-4">
@@ -530,7 +530,7 @@ export default function FlashcardsPage() {
               <button
                 type="button"
                 onClick={() => setFlipped((value) => !value)}
-                className="group block w-full rounded-[2rem] border border-pink-100 bg-white p-6 text-left shadow-[0_18px_50px_-35px_rgba(244,114,182,0.25)]"
+                className="group block w-full rounded-[1.75rem] border border-pink-100 bg-white p-4 text-left shadow-[0_18px_50px_-35px_rgba(244,114,182,0.25)] sm:rounded-[2rem] sm:p-6"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-pink-400">
                   {flipped ? 'Answer side' : 'Prompt side'}
@@ -613,7 +613,7 @@ export default function FlashcardsPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
               <Sparkles className="text-pink-500" size={18} />
               Review guidance
@@ -625,7 +625,7 @@ export default function FlashcardsPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
               <BookOpenCheck className="text-pink-500" size={18} />
               Weak card queue
@@ -662,7 +662,7 @@ export default function FlashcardsPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[2rem] p-6">
+          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <div className="flex items-center justify-between">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
                 <RefreshCcw className="text-pink-500" size={18} />

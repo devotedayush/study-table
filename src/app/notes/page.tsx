@@ -422,8 +422,8 @@ export default function NotesPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Notebook</h1>
-          <p className="mt-2 max-w-2xl text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Notebook</h1>
+          <p className="mt-2 max-w-2xl text-base text-slate-600 sm:text-lg">
             Your notes and due reviews up top. Formula library below — tap a card to save it, quiz on it, or turn it into flashcards.
           </p>
         </div>
@@ -439,7 +439,7 @@ export default function NotesPage() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <div className="soft-panel rounded-[2rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-5">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
               <PenTool className="text-pink-500" size={15} />
@@ -515,7 +515,7 @@ export default function NotesPage() {
           </div>
         </div>
 
-        <div className="soft-panel rounded-[2rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-5">
           <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900">
             <CalendarClock className="text-pink-500" size={15} />
             Review queue
@@ -546,7 +546,7 @@ export default function NotesPage() {
         </div>
       </div>
 
-      <div className="soft-panel rounded-[2rem] p-6">
+      <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
@@ -698,7 +698,7 @@ export default function NotesPage() {
               exit={{ opacity: 0, y: 16, scale: 0.98 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
               onClick={(event) => event.stopPropagation()}
-              className="w-full max-w-2xl rounded-[2rem] border border-pink-100 bg-white p-6 shadow-[0_30px_80px_-30px_rgba(244,114,182,0.6)]"
+              className="w-full max-w-2xl rounded-[1.75rem] border border-pink-100 bg-white p-4 shadow-[0_30px_80px_-30px_rgba(244,114,182,0.6)] sm:rounded-[2rem] sm:p-6"
             >
               <div className="mb-4 flex items-center justify-between gap-4">
                 <div>

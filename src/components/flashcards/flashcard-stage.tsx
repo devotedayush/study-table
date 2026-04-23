@@ -50,7 +50,7 @@ export function FlashcardStage({
   onNext,
 }: FlashcardStageProps) {
   return (
-    <div className="soft-panel rounded-[2rem] p-5 sm:p-6">
+    <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-pink-100 bg-pink-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-pink-500">
@@ -77,7 +77,7 @@ export function FlashcardStage({
       </div>
 
       <div
-        className="group relative min-h-[420px] cursor-pointer rounded-[2rem] border border-pink-100 bg-white p-4 shadow-[0_24px_70px_-45px_rgba(244,114,182,0.55)]"
+        className="group relative min-h-[360px] cursor-pointer rounded-[2rem] border border-pink-100 bg-white p-4 shadow-[0_24px_70px_-45px_rgba(244,114,182,0.55)] sm:min-h-[420px]"
         style={{ perspective: '1800px' }}
         onClick={onFlip}
       >
@@ -88,7 +88,7 @@ export function FlashcardStage({
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div
-            className="absolute inset-0 flex flex-col justify-between rounded-[1.5rem] border border-pink-100 bg-white p-6"
+            className="absolute inset-0 flex flex-col justify-between rounded-[1.5rem] border border-pink-100 bg-white p-4 sm:p-6"
             style={{ backfaceVisibility: 'hidden' }}
           >
             <div>
@@ -98,11 +98,11 @@ export function FlashcardStage({
                   Tap to flip
                 </div>
               </div>
-              <h3 className="max-w-2xl text-3xl font-semibold leading-tight text-slate-900">{card.front}</h3>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{card.hint}</p>
+              <h3 className="max-w-2xl text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">{card.front}</h3>
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">{card.hint}</p>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-[1fr_1fr]">
+            <div className="grid gap-3 sm:grid-cols-2">
               <button
                 type="button"
                 onClick={(event) => {
@@ -129,7 +129,7 @@ export function FlashcardStage({
           </div>
 
           <div
-            className="absolute inset-0 flex flex-col justify-between rounded-[1.5rem] border border-pink-100 bg-white p-6"
+            className="absolute inset-0 flex flex-col justify-between rounded-[1.5rem] border border-pink-100 bg-white p-4 sm:p-6"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <div>
@@ -139,9 +139,9 @@ export function FlashcardStage({
                   {progress.bookmarked ? <Bookmark size={16} fill="currentColor" /> : <Bookmark size={16} />}
                 </div>
               </div>
-              <p className="max-w-3xl whitespace-pre-wrap text-lg leading-8 text-slate-800">{card.back}</p>
+              <p className="max-w-3xl whitespace-pre-wrap text-base leading-7 text-slate-800 sm:text-lg sm:leading-8">{card.back}</p>
 
-              <div className="mt-6 grid gap-3 md:grid-cols-3">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="rounded-2xl border border-pink-100 bg-white px-4 py-3">
                   <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Tags</p>
                   <p className="mt-2 text-sm text-slate-600">{card.tags.join(' · ')}</p>
@@ -178,7 +178,7 @@ export function FlashcardStage({
                 />
               </div>
 
-              <div className="grid gap-3 md:grid-cols-4">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
                   onClick={(event) => {

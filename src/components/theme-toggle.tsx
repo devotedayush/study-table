@@ -29,14 +29,14 @@ export function ThemeToggle({ className }: { className?: string }) {
         <Palette size={14} className="text-primary/70" />
         <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-primary/70">Theme</p>
       </div>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {themes.map((t) => (
           <button
             key={t.name}
             onClick={() => setTheme(t.name)}
             title={t.label}
             className={cn(
-              'group relative flex h-10 items-center justify-center rounded-xl border transition-all duration-200',
+              'group relative flex h-11 items-center justify-center rounded-xl border transition-all duration-200',
               theme === t.name
                 ? 'border-primary bg-primary/10 shadow-sm ring-2 ring-primary/20'
                 : 'border-border bg-card/70 hover:border-primary/50 hover:bg-card/90'

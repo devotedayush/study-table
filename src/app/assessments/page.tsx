@@ -434,19 +434,19 @@ export default function AssessmentsPage() {
       <PracticeHubTabs />
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Test Yourself</h1>
-          <p className="mt-2 text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Test Yourself</h1>
+          <p className="mt-2 text-base text-slate-600 sm:text-lg">
             Pick a scope, choose how many questions, then get one clear summary at the end.
           </p>
         </div>
-        <div className="rounded-[1.5rem] border border-pink-100 bg-white/80 px-5 py-4 text-right">
+        <div className="rounded-[1.5rem] border border-pink-100 bg-white/80 px-4 py-4 text-right sm:px-5">
           <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Average score</p>
           <p className="mt-1 text-3xl font-semibold text-slate-900">{averageScore}%</p>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
             <CheckCircle2 className="text-pink-500" size={16} />
             One-stop summary
@@ -471,7 +471,7 @@ export default function AssessmentsPage() {
           )}
         </div>
 
-        <div className="soft-panel rounded-[1.75rem] p-5">
+        <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
           <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
             <Target className="text-pink-500" size={16} />
             Current topic snapshot
@@ -497,7 +497,7 @@ export default function AssessmentsPage() {
         </div>
       </div>
 
-      <div className="soft-panel rounded-[2rem] p-6">
+      <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
           <BrainCircuit className="text-pink-500" size={18} />
           Quiz setup

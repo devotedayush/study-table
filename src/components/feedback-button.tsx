@@ -56,9 +56,9 @@ export function FeedbackButton() {
   }
 
   return (
-    <div className="fixed bottom-5 left-4 z-50 sm:left-6">
+    <div className="fixed bottom-3 left-3 right-3 z-50 sm:bottom-5 sm:left-6 sm:right-auto">
       {open ? (
-        <div className="mb-3 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-lg border border-amber-200 bg-white shadow-[0_24px_70px_-28px_rgba(251,191,36,0.55)]">
+        <div className="mb-3 w-full max-w-[24rem] overflow-hidden rounded-lg border border-amber-200 bg-white shadow-[0_24px_70px_-28px_rgba(251,191,36,0.55)] max-h-[calc(100dvh-8rem)]">
           <div className="flex items-center justify-between gap-3 border-b border-amber-100 bg-amber-50/80 px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-white">
@@ -79,7 +79,7 @@ export function FeedbackButton() {
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="px-4 py-4 space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-3 px-4 py-4">
             <textarea
               value={message}
               onChange={(event) => setMessage(event.target.value)}
@@ -121,7 +121,7 @@ export function FeedbackButton() {
         aria-expanded={open}
       >
         <MessageSquarePlus size={16} />
-        Feedback
+        <span className="hidden sm:inline">Feedback</span>
       </button>
     </div>
   )

@@ -90,7 +90,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-center gap-8 px-4 lg:grid-cols-[1fr_0.95fr]">
+    <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl items-start gap-8 px-4 py-6 sm:items-center sm:py-8 lg:grid-cols-[1fr_0.95fr]">
       <motion.section
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
@@ -102,10 +102,10 @@ export default function LoginPage() {
           Sign in
         </span>
         <div className="space-y-4">
-          <h1 className="max-w-xl text-5xl font-semibold tracking-tight text-slate-900 sm:text-6xl">
+          <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Sign in and go straight to the dashboard.
           </h1>
-          <p className="max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
             Use your username and password. If you do not have an account yet, create one first.
           </p>
         </div>
@@ -122,13 +122,13 @@ export default function LoginPage() {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.08 }}
-        className="soft-panel rounded-[2rem] p-6 shadow-[0_30px_80px_-35px_rgba(244,114,182,0.35)]"
+        className="soft-panel rounded-[1.75rem] p-4 shadow-[0_30px_80px_-35px_rgba(244,114,182,0.35)] sm:rounded-[2rem] sm:p-6"
       >
-        <div className="rounded-[1.6rem] border border-pink-100 bg-white p-6">
+        <div className="rounded-[1.6rem] border border-pink-100 bg-white p-5 sm:p-6">
           <div className="mb-6">
             <p className="text-sm font-medium text-pink-500">Returning user</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">Sign in</h2>
-          <p className="mt-2 text-sm text-slate-500">Enter your username or email and password.</p>
+            <p className="mt-2 text-sm text-slate-500">Enter your username or email and password.</p>
           </div>
 
           <form className="space-y-4" onSubmit={handleSubmit}>

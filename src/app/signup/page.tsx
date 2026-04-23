@@ -160,7 +160,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl gap-8 px-4 lg:grid-cols-[0.95fr_1.05fr]">
+    <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-5xl gap-8 px-4 py-6 sm:py-8 lg:grid-cols-[0.95fr_1.05fr]">
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
@@ -171,10 +171,10 @@ export default function SignupPage() {
           <Sparkles size={14} />
           Create account
         </span>
-        <h1 className="max-w-xl text-5xl font-semibold tracking-tight text-slate-900 sm:text-6xl">
+        <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
           Set up the private workspace in one pass.
         </h1>
-        <p className="max-w-2xl text-lg leading-8 text-slate-600">
+        <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
           Pick a username, add your email and password, and set the exam date. That is enough to open the dashboard.
         </p>
 
@@ -206,9 +206,9 @@ export default function SignupPage() {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.08 }}
-        className="soft-panel rounded-[2rem] p-6 shadow-[0_30px_80px_-35px_rgba(244,114,182,0.35)]"
+        className="soft-panel rounded-[1.75rem] p-4 shadow-[0_30px_80px_-35px_rgba(244,114,182,0.35)] sm:rounded-[2rem] sm:p-6"
       >
-        <div className="rounded-[1.6rem] border border-pink-100 bg-white p-6">
+        <div className="rounded-[1.6rem] border border-pink-100 bg-white p-5 sm:p-6">
           <div className="mb-6">
             <p className="text-sm font-medium text-pink-500">{hasSession ? 'Finish setup' : 'Signup'}</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">{hasSession ? 'Complete your profile' : 'Create account'}</h2>
