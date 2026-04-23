@@ -52,6 +52,11 @@ export type BabyMaanAction =
       preferredPacing?: 'gentle' | 'balanced' | 'aggressive'
       preferredRestDays?: string[]
     }
+  | {
+      type: 'submit_feedback'
+      message: string
+      area?: string
+    }
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
@@ -147,7 +152,8 @@ export function buildBabyMaanSystemPrompt() {
     '- study_mocks: user_id, taken_at, total_score, time_taken_minutes, felt_difficulty, notes, section_scores.',
     '- profiles: exam_date, target_study_hours, preferred_session_minutes, preferred_pacing, preferred_rest_days.',
     'Convert the user message into strict JSON only.',
-    'You may choose one action type: none, fetch_progress, update_progress, add_note, create_flashcard, log_mock, update_settings.',
+    'You may choose one action type: none, fetch_progress, update_progress, add_note, create_flashcard, log_mock, update_settings, submit_feedback.',
+    'If the user is giving feedback about the app — bugs, feature requests, content gaps, things to improve — use submit_feedback with message containing their full feedback and optional area (a short page/feature label). Do NOT treat app feedback as a study note.',
     'If the user asks what is done, how far along they are, how much is complete, or asks for current confidence on a syllabus area, use fetch_progress.',
     'If the user gives a study update like "I studied ethics for 45 min and still feel weak", use update_progress.',
     'If the user says they completed, finished, or are done with a CFA area, use update_progress with status completed_once and completionPercentage 100.',

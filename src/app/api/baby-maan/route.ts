@@ -557,6 +557,37 @@ export async function POST(request: Request) {
     })
   }
 
+  if (action.type === 'submit_feedback') {
+    const text = action.message?.trim()
+    if (!text) {
+      return NextResponse.json({
+        reply: "I need the feedback text to log it.",
+        applied: false,
+        preview: null,
+      })
+    }
+
+    const { error } = await supabase.from('user_feedback').insert({
+      user_id: user.id,
+      message: text,
+      area: action.area?.trim().slice(0, 120) || null,
+      source: 'baby_maan',
+    })
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({
+      reply: parsed.reply || 'Logged your feedback — thank you!',
+      applied: true,
+      preview: {
+        type: 'feedback',
+        receiptTitle: 'Feedback sent',
+        receiptSummary: action.area ? `Filed against ${action.area}.` : 'Saved for the team.',
+      },
+    })
+  }
+
   if (action.type === 'update_settings') {
     const updates = {
       exam_date: action.examDate ?? undefined,

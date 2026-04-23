@@ -37,6 +37,10 @@ function previewLabel(preview: Record<string, unknown> | null | undefined) {
     return typeof preview.receiptTitle === 'string' ? preview.receiptTitle : 'Study settings updated'
   }
 
+  if (preview.type === 'feedback') {
+    return typeof preview.receiptTitle === 'string' ? preview.receiptTitle : 'Feedback sent'
+  }
+
   if (preview.type === 'progress_snapshot') {
     return `${preview.completionPercentage ?? 0}% done right now`
   }

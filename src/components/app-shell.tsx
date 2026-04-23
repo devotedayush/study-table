@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { LayoutDashboard, BookText, PenTool, Settings, LogOut, ShieldCheck, Layers3, Sparkles, ChevronRight, FileUp } from 'lucide-react'
 import { BabyMaanWidget } from '@/components/baby-maan-widget'
+import { FeedbackButton } from '@/components/feedback-button'
 import { SyncBadge } from '@/components/sync-badge'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { createClient } from '@/lib/supabase/browser'
@@ -203,6 +204,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </main>
       </div>
       {pathname.startsWith('/assistant') ? null : <BabyMaanWidget />}
+      <FeedbackButton />
     </div>
   )
 }
