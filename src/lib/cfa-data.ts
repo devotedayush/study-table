@@ -232,6 +232,7 @@ export const cfaLevel1Syllabus: SyllabusSubject[] = [
       { id: 'instruments', title: 'Forward Commitment and Contingent Claim Features and Instruments', emphasis: 'concept', priorityWeight: 1.1 },
       { id: 'benefits-risks', title: 'Derivative Benefits, Risks, and Issuer and Investor Uses', emphasis: 'application', priorityWeight: 0.95 },
       { id: 'cost-of-carry', title: 'Arbitrage, Replication, and the Cost of Carry in Pricing Derivatives', emphasis: 'formula', priorityWeight: 1.25 },
+      { id: 'forwards', title: 'Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities', emphasis: 'formula', priorityWeight: 1.2 },
       { id: 'futures', title: 'Pricing and Valuation of Futures Contracts', emphasis: 'formula', priorityWeight: 1.2 },
       { id: 'swaps', title: 'Pricing and Valuation of Interest Rates and Other Swaps', emphasis: 'formula', priorityWeight: 1.2 },
       { id: 'options', title: 'Pricing and Valuation of Options', emphasis: 'formula', priorityWeight: 1.3 },
@@ -271,4 +272,3 @@ export const cfaLevel1Syllabus: SyllabusSubject[] = [
 export const allSubtopics = cfaLevel1Syllabus.flatMap((subject) =>
   subject.topics.flatMap((topic) => topic.subtopics.map((subtopic) => ({ ...subtopic, topic, subject }))),
 )
-
