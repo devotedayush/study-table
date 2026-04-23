@@ -67,6 +67,9 @@
     --ring: 336 88% 66%;
 
     --radius: 1.1rem;
+    --surface: 0 0% 100%;
+    --surface-muted: 336 40% 97%;
+    --surface-border: 333 45% 90%;
 
     --bg-gradient: 
       radial-gradient(circle at 12% 18%, rgba(248, 168, 193, 0.3), transparent 22%),
@@ -105,6 +108,9 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    --surface: 0 0% 100%;
+    --surface-muted: 210 40% 96.1%;
+    --surface-border: 214.3 31.8% 91.4%;
 
     --bg-gradient: linear-gradient(180deg, #f8fafc, #f1f5f9);
   }
@@ -139,42 +145,54 @@
     --ring: 240 5.9% 10%;
 
     --radius: 0.3rem;
+    --surface: 0 0% 100%;
+    --surface-muted: 240 4.8% 95.9%;
+    --surface-border: 240 5.9% 90%;
 
     --bg-gradient: none;
   }
 
   [data-theme='black'] {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 240 12% 4.4%;
+    --foreground: 0 0% 96%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 240 10% 7%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 10% 7%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 240 12% 4.4%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 7% 12%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 240 7% 12%;
+    --muted-foreground: 240 5% 68%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 240 7% 12%;
+    --accent-foreground: 0 0% 96%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 65% 35%;
+    --destructive-foreground: 0 0% 96%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 0 0% 82%;
 
-    --radius: 0.5rem;
+    --radius: 0.7rem;
+    --surface: 240 10% 8%;
+    --surface-muted: 240 8% 12%;
+    --surface-border: 240 6% 18%;
 
-    --bg-gradient: none;
+    --bg-gradient:
+      radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.10), transparent 22%),
+      radial-gradient(circle at 84% 14%, rgba(244, 114, 182, 0.10), transparent 18%),
+      radial-gradient(circle at 70% 86%, rgba(255, 255, 255, 0.04), transparent 24%),
+      linear-gradient(180deg, rgba(8, 9, 13, 1), rgba(15, 17, 23, 1));
+
+    color-scheme: dark;
   }
 }
 
@@ -222,7 +240,10 @@
 }
 
 .soft-panel {
-  @apply bg-white/88 backdrop-blur-xl border border-pink-100 shadow-[0_18px_50px_-30px_rgba(244,114,182,0.26)];
+  background-color: hsl(var(--surface) / 0.88);
+  border: 1px solid hsl(var(--surface-border));
+  backdrop-filter: blur(24px);
+  box-shadow: 0 18px 50px -30px rgba(244, 114, 182, 0.26);
 }
 
 .soft-panel,
@@ -231,7 +252,9 @@
 }
 
 .glass-panel {
-  @apply bg-white/82 backdrop-blur-xl border border-pink-100;
+  background-color: hsl(var(--surface) / 0.82);
+  border: 1px solid hsl(var(--surface-border));
+  backdrop-filter: blur(24px);
 }
 
 .glass-card:hover {
@@ -246,7 +269,10 @@
 
 @layer components {
   .app-select {
-    @apply min-h-12 w-full appearance-none rounded-lg border border-pink-100 bg-white px-4 py-3 pr-11 text-sm font-medium text-slate-900 shadow-sm outline-none transition-colors;
+    @apply min-h-12 w-full appearance-none rounded-lg border px-4 py-3 pr-11 text-sm font-medium shadow-sm outline-none transition-colors;
+    border-color: hsl(var(--surface-border));
+    background-color: hsl(var(--surface));
+    color: hsl(var(--foreground));
     background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23ec4899' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-position: right 0.9rem center;
     background-repeat: no-repeat;
@@ -254,14 +280,17 @@
   }
 
   .app-select:hover {
-    @apply border-pink-200 bg-pink-50/40;
+    border-color: hsl(var(--ring) / 0.34);
   }
 
   .app-select:focus {
-    @apply border-pink-300 bg-white ring-4 ring-pink-100;
+    border-color: hsl(var(--ring) / 0.55);
+    box-shadow: 0 0 0 4px hsl(var(--ring) / 0.14);
   }
 
   .app-select:disabled {
-    @apply cursor-not-allowed bg-slate-50 text-slate-400;
+    @apply cursor-not-allowed;
+    background-color: hsl(var(--surface-muted));
+    color: hsl(var(--muted-foreground));
   }
 }

@@ -9,7 +9,7 @@ const themes = [
   { name: 'pink', label: 'Pink', color: 'bg-pink-500' },
   { name: 'neutral', label: 'Neutral', color: 'bg-slate-500' },
   { name: 'white', label: 'White', color: 'bg-white border-slate-200' },
-  { name: 'black', label: 'Black', color: 'bg-black' },
+  { name: 'black', label: 'Black', color: 'bg-gradient-to-b from-slate-900 to-black border-slate-500' },
 ]
 
 export function ThemeToggle({ className }: { className?: string }) {
@@ -39,7 +39,7 @@ export function ThemeToggle({ className }: { className?: string }) {
               'group relative flex h-10 items-center justify-center rounded-xl border transition-all duration-200',
               theme === t.name
                 ? 'border-primary bg-primary/10 shadow-sm ring-2 ring-primary/20'
-                : 'border-border bg-white/50 hover:border-primary/50 hover:bg-white'
+                : 'border-border bg-card/70 hover:border-primary/50 hover:bg-card/90'
             )}
           >
             <div
