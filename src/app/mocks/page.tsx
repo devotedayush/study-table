@@ -91,19 +91,19 @@ function SectionScoresPanel({
   const hasScores = draft.sectionScores.some((s) => s.score > 0)
 
   return (
-    <div className="rounded-2xl border border-pink-100 bg-pink-50/40">
+    <div className="rounded-2xl border border-border bg-secondary/40">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-slate-700"
+        className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-foreground"
       >
         <span className="flex items-center gap-2">
           {open ? <ChevronDown size={16} className="text-pink-400" /> : <ChevronRight size={16} className="text-pink-400" />}
           Section breakdown
-          <span className="text-xs font-normal text-slate-400">(optional)</span>
+          <span className="text-xs font-normal text-muted-foreground">(optional)</span>
         </span>
         {!open && hasScores ? (
-          <span className="rounded-full border border-pink-200 bg-pink-50 px-2 py-0.5 text-[10px] text-pink-500">
+          <span className="rounded-full border border-border bg-secondary px-2 py-0.5 text-[10px] text-primary">
             {draft.sectionScores.filter((s) => s.score > 0).length} sections filled
           </span>
         ) : null}
@@ -112,7 +112,7 @@ function SectionScoresPanel({
         <div className="grid gap-3 px-4 pb-4 md:grid-cols-2">
           {draft.sectionScores.map((section, index) => (
             <label key={section.label} className="block">
-              <span className="mb-1 block text-xs font-medium text-slate-600">{section.label}</span>
+              <span className="mb-1 block text-xs font-medium text-muted-foreground">{section.label}</span>
               <input
                 type="number"
                 min="0"
@@ -123,7 +123,7 @@ function SectionScoresPanel({
                   nextSections[index] = { ...nextSections[index], score: Number(event.target.value) }
                   setDraft({ ...draft, sectionScores: nextSections })
                 }}
-                className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                 placeholder="Section score"
               />
             </label>
@@ -254,8 +254,8 @@ export default function MocksPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Mocks</h1>
-          <p className="mt-2 max-w-2xl text-base text-slate-600 sm:text-lg">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Mocks</h1>
+          <p className="mt-2 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Log full-length attempts, compare section performance, and keep the history synced across devices when you are signed in.
           </p>
         </div>
@@ -263,7 +263,7 @@ export default function MocksPage() {
         <button
           type="button"
           onClick={resetDraft}
-          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-200 transition-transform hover:-translate-y-0.5"
+          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5"
         >
           <Plus size={16} />
           New mock
@@ -272,22 +272,22 @@ export default function MocksPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Logged mocks</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{metrics.total}</p>
+          <p className="text-sm text-muted-foreground">Logged mocks</p>
+          <p className="mt-2 text-3xl font-semibold text-foreground">{metrics.total}</p>
         </div>
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Average score</p>
+          <p className="text-sm text-muted-foreground">Average score</p>
           <p className={cn('mt-2 text-3xl font-semibold', scoreColor(metrics.averageScore))}>
             {metrics.total > 0 ? `${metrics.averageScore}%` : '0%'}
           </p>
         </div>
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Average time</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{metrics.averageTime || '0'}m</p>
+          <p className="text-sm text-muted-foreground">Average time</p>
+          <p className="mt-2 text-3xl font-semibold text-foreground">{metrics.averageTime || '0'}m</p>
         </div>
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Weakest section</p>
-          <p className="mt-2 text-2xl font-semibold text-slate-900">
+          <p className="text-sm text-muted-foreground">Weakest section</p>
+          <p className="mt-2 text-2xl font-semibold text-foreground">
             {metrics.weakestSection?.label ?? 'None'}
           </p>
         </div>
@@ -297,11 +297,11 @@ export default function MocksPage() {
         <div className="space-y-6">
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-4">
-              <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-                <GraduationCap className="text-pink-500" size={18} />
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                <GraduationCap className="text-primary" size={18} />
                 Mock logger
               </h2>
-              <span className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-500">
+              <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-primary">
                 {editingId ? 'Editing attempt' : 'Add attempt'}
               </span>
             </div>
@@ -309,34 +309,34 @@ export default function MocksPage() {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid gap-4 md:grid-cols-3">
                 <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-slate-700">Mock date</span>
+                  <span className="mb-2 block text-sm font-medium text-foreground">Mock date</span>
                   <input
                     type="date"
                     value={draft.takenAt}
                     onChange={(event) => setDraft({ ...draft, takenAt: event.target.value })}
-                    className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                    className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-slate-700">Total score</span>
+                  <span className="mb-2 block text-sm font-medium text-foreground">Total score</span>
                   <input
                     type="number"
                     min="0"
                     max="100"
                     value={draft.totalScore}
                     onChange={(event) => setDraft({ ...draft, totalScore: event.target.value })}
-                    className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                    className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                     placeholder="72"
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-slate-700">Time taken (min)</span>
+                  <span className="mb-2 block text-sm font-medium text-foreground">Time taken (min)</span>
                   <input
                     type="number"
                     min="1"
                     value={draft.timeTakenMinutes}
                     onChange={(event) => setDraft({ ...draft, timeTakenMinutes: event.target.value })}
-                    className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                    className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                   />
                 </label>
               </div>
@@ -345,7 +345,7 @@ export default function MocksPage() {
                 {(['calm', 'steady', 'rushed'] as const).map((tone) => (
                   <label
                     key={tone}
-                    className="flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-pink-100 bg-pink-50/60 px-4 py-3 text-sm font-medium text-slate-700"
+                    className="flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-border bg-secondary/60 px-4 py-3 text-sm font-medium text-foreground"
                   >
                     <input
                       type="radio"
@@ -362,12 +362,12 @@ export default function MocksPage() {
               <SectionScoresPanel draft={draft} setDraft={setDraft} />
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Notes</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Notes</span>
                 <textarea
                   rows={4}
                   value={draft.notes}
                   onChange={(event) => setDraft({ ...draft, notes: event.target.value })}
-                  className="w-full rounded-3xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                  className="w-full rounded-3xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                   placeholder="What felt weak, rushed, or surprising?"
                 />
               </label>
@@ -375,7 +375,7 @@ export default function MocksPage() {
               <div className="flex flex-wrap gap-3">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-200 transition-transform hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5"
                 >
                   <BadgeCheck size={16} />
                   Save mock
@@ -383,7 +383,7 @@ export default function MocksPage() {
                 <button
                   type="button"
                   onClick={resetDraft}
-                  className="rounded-2xl border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700"
+                  className="rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground"
                 >
                   Clear
                 </button>
@@ -393,18 +393,18 @@ export default function MocksPage() {
 
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-4">
-              <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-                <CalendarClock className="text-pink-500" size={18} />
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                <CalendarClock className="text-primary" size={18} />
                 Logged attempts
               </h2>
-              <span className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-500">
+              <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-primary">
                 {ready ? `${attempts.length} saved` : 'Loading...'}
               </span>
             </div>
 
             <div className="space-y-3">
               {ready && attempts.length === 0 ? (
-                <div className="rounded-[1.5rem] border border-dashed border-pink-200 bg-white/70 p-6 text-sm text-slate-600">
+                <div className="rounded-[1.5rem] border border-dashed border-border bg-card/70 p-6 text-sm text-muted-foreground">
                   Save your first mock to unlock score trends, section gaps, and pacing insights.
                 </div>
               ) : null}
@@ -413,23 +413,23 @@ export default function MocksPage() {
                 <article
                   key={attempt.id}
                   className={cn(
-                    'rounded-[1.5rem] border bg-white p-5 transition-colors',
-                    editingId === attempt.id ? 'border-pink-300 shadow-[0_14px_30px_-18px_rgba(244,114,182,0.45)]' : 'border-pink-100 hover:border-pink-200',
+                    'rounded-[1.5rem] border bg-card p-5 transition-colors',
+                    editingId === attempt.id ? 'border-ring shadow-[0_14px_30px_-18px_rgba(244,114,182,0.45)]' : 'border-border hover:border-border',
                   )}
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <div className="flex items-center gap-2">
-                        <Target size={14} className="text-pink-500" />
-                        <p className="text-lg font-semibold text-slate-900">{attempt.totalScore}%</p>
-                        <span className="rounded-full border border-pink-100 bg-pink-50 px-2 py-1 text-[10px] uppercase tracking-[0.25em] text-pink-500">
+                        <Target size={14} className="text-primary" />
+                        <p className="text-lg font-semibold text-foreground">{attempt.totalScore}%</p>
+                        <span className="rounded-full border border-border bg-secondary px-2 py-1 text-[10px] uppercase tracking-[0.25em] text-primary">
                           {deriveSessionTone(attempt.totalScore)}
                         </span>
                       </div>
-                      <p className="mt-1 text-sm text-slate-500">
+                      <p className="mt-1 text-sm text-muted-foreground">
                         {attempt.takenAt} · {attempt.timeTakenMinutes} minutes · {attempt.feltDifficulty}
                       </p>
-                      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
                         {attempt.notes || 'No session notes were added.'}
                       </p>
                     </div>
@@ -438,7 +438,7 @@ export default function MocksPage() {
                       <button
                         type="button"
                         onClick={() => handleEdit(attempt)}
-                        className="rounded-full border border-pink-100 bg-white px-3 py-2 text-xs font-semibold text-slate-700"
+                        className="rounded-full border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground"
                       >
                         Edit
                       </button>
@@ -455,8 +455,8 @@ export default function MocksPage() {
 
                   <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-3">
                     {attempt.sectionScores.map((section) => (
-                      <div key={section.label} className="rounded-2xl border border-pink-100 bg-pink-50/50 px-3 py-2 text-sm text-slate-700">
-                        <span className="font-medium text-slate-900">{section.label}:</span> {section.score}%
+                      <div key={section.label} className="rounded-2xl border border-border bg-secondary/50 px-3 py-2 text-sm text-foreground">
+                        <span className="font-medium text-foreground">{section.label}:</span> {section.score}%
                       </div>
                     ))}
                   </div>
@@ -468,8 +468,8 @@ export default function MocksPage() {
 
         <div className="space-y-6">
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <TrendingUp className="text-pink-500" size={18} />
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <TrendingUp className="text-primary" size={18} />
               Score trend
             </h2>
             <div className="h-[220px] w-full">
@@ -488,8 +488,8 @@ export default function MocksPage() {
           </div>
 
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Clock3 className="text-pink-500" size={18} />
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Clock3 className="text-primary" size={18} />
               Section averages
             </h2>
             <div className="h-[220px] w-full">
@@ -508,12 +508,12 @@ export default function MocksPage() {
           </div>
 
           <div className="soft-panel rounded-[2rem] p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Sparkles className="text-pink-500" size={18} />
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Sparkles className="text-primary" size={18} />
               What next
             </h2>
-            <p className="text-sm leading-6 text-slate-600">{mockFocusHint(metrics)}</p>
-            <div className="mt-4 rounded-[1.5rem] border border-pink-100 bg-white p-4 text-sm text-slate-600">
+            <p className="text-sm leading-6 text-muted-foreground">{mockFocusHint(metrics)}</p>
+            <div className="mt-4 rounded-[1.5rem] border border-border bg-card p-4 text-sm text-muted-foreground">
               Keep the review short: one error review block, one formula block, one timing block.
             </div>
           </div>

@@ -22,7 +22,7 @@ function TabStrip({ tabs, label }: { tabs: Tab[]; label: string }) {
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="px-2 md:px-3">
           <p className="text-[0.65rem] uppercase tracking-[0.28em] text-pink-400">{label}</p>
-          <p className="mt-0.5 text-sm text-slate-600">{active?.blurb ?? tabs[0].blurb}</p>
+          <p className="mt-0.5 text-sm text-muted-foreground">{active?.blurb ?? tabs[0].blurb}</p>
         </div>
         <div className="flex gap-2 overflow-x-auto">
           {tabs.map((tab) => {
@@ -36,11 +36,11 @@ function TabStrip({ tabs, label }: { tabs: Tab[]; label: string }) {
                 className={cn(
                   'flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors',
                   isActive
-                    ? 'border-pink-200 bg-pink-50 text-slate-900 shadow-[0_10px_24px_-18px_rgba(244,114,182,0.55)]'
-                    : 'border-pink-100 bg-white text-slate-600 hover:border-pink-200 hover:bg-pink-50/70 hover:text-slate-900',
+                    ? 'border-border bg-secondary text-foreground shadow-[0_10px_24px_-18px_rgba(244,114,182,0.55)]'
+                    : 'border-border bg-card text-muted-foreground hover:border-border hover:bg-secondary/70 hover:text-foreground',
                 )}
               >
-                <Icon size={14} className={isActive ? 'text-pink-500' : 'text-pink-400'} />
+                <Icon size={14} className={isActive ? 'text-primary' : 'text-pink-400'} />
                 {tab.name}
               </Link>
             )

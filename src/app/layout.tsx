@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${bodyFont.variable} ${displayFont.variable} antialiased text-foreground min-h-screen bg-background font-sans transition-colors duration-300`}>
+      <body className={`${bodyFont.variable} ${displayFont.variable} antialiased text-foreground min-h-screen bg-background font-sans transition-colors duration-300 overflow-x-hidden`}>
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="pink"

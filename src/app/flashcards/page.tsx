@@ -45,14 +45,14 @@ function confidenceLabel(value: number | null) {
 
 function subjectTone(subject: string) {
   const tones: Record<string, string> = {
-    'Fixed Income': 'bg-slate-900 text-white',
-    'Financial Statement Analysis': 'bg-pink-100 text-pink-700',
+    'Fixed Income': 'bg-slate-900 text-primary-foreground',
+    'Financial Statement Analysis': 'bg-secondary text-primary',
     'Quantitative Methods': 'bg-rose-100 text-rose-700',
-    'Equity Investments': 'bg-amber-100 text-amber-700',
+    'Equity Investments': 'bg-amber-100 text-foreground',
     'Derivatives': 'bg-fuchsia-100 text-fuchsia-700',
   }
 
-  return tones[subject] ?? 'bg-white text-slate-700'
+  return tones[subject] ?? 'bg-card text-foreground'
 }
 
 export default function FlashcardsPage() {
@@ -265,14 +265,14 @@ export default function FlashcardsPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Formula Flashcards</h1>
-          <p className="mt-2 max-w-3xl text-lg text-slate-600">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Formula Flashcards</h1>
+          <p className="mt-2 max-w-3xl text-lg text-muted-foreground">
             A formula deck built around CFA Level I problem types. It syncs confidence and bookmarks to Supabase when you are signed in, and still works locally when you are not.
           </p>
         </div>
-        <div className="rounded-[1.5rem] border border-pink-100 bg-white/85 px-5 py-4 text-right">
+        <div className="rounded-[1.5rem] border border-border bg-card/85 px-5 py-4 text-right">
           <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Mastered</p>
-          <p className="mt-1 text-3xl font-semibold text-slate-900">{knownCount}<span className="text-base text-slate-400">/{deckCards.length}</span></p>
+          <p className="mt-1 text-3xl font-semibold text-foreground">{knownCount}<span className="text-base text-muted-foreground">/{deckCards.length}</span></p>
         </div>
       </div>
 
@@ -287,7 +287,7 @@ export default function FlashcardsPage() {
           <button
             type="button"
             onClick={() => setFocus(null)}
-            className="inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-white px-3 py-1 text-xs font-semibold text-emerald-700"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-foreground"
           >
             <X size={12} />
             Clear focus
@@ -298,21 +298,21 @@ export default function FlashcardsPage() {
       <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
         <div className="grid gap-4 xl:grid-cols-[1.4fr_0.7fr_0.7fr_auto_auto]">
           <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-              <Search size={15} className="text-pink-500" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
+              <Search size={15} className="text-primary" />
               Search cards
             </span>
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search formula, concept, or module"
-              className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+              className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
             />
           </label>
 
           <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-              <Filter size={15} className="text-pink-500" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
+              <Filter size={15} className="text-primary" />
               Subject
             </span>
             <select
@@ -329,7 +329,7 @@ export default function FlashcardsPage() {
             </select>
           </label>
 
-          <label className="flex items-center gap-3 rounded-2xl border border-pink-100 bg-white px-4 py-3 text-sm font-medium text-slate-700">
+          <label className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
             <input
               type="checkbox"
               checked={showOnlyWeak}
@@ -339,7 +339,7 @@ export default function FlashcardsPage() {
             Weak only
           </label>
 
-          <label className="flex items-center gap-3 rounded-2xl border border-pink-100 bg-white px-4 py-3 text-sm font-medium text-slate-700">
+          <label className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
             <input
               type="checkbox"
               checked={showOnlyBookmarked}
@@ -357,7 +357,7 @@ export default function FlashcardsPage() {
               setShowOnlyWeak(false)
               setShowOnlyBookmarked(false)
             }}
-            className="rounded-2xl border border-pink-200 bg-pink-50 px-4 py-3 text-sm font-semibold text-pink-600"
+            className="rounded-2xl border border-border bg-secondary px-4 py-3 text-sm font-semibold text-primary"
           >
             Reset
           </button>
@@ -367,23 +367,23 @@ export default function FlashcardsPage() {
       <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Plus className="text-pink-500" size={18} />
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Plus className="text-primary" size={18} />
               Add flashcard
             </h2>
-            <p className="mt-1 text-sm text-slate-600">Create a card for any formula, trap, or concept you want to drill.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Create a card for any formula, trap, or concept you want to drill.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             {remoteUserId ? (
-              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">Sync on</span>
+              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-foreground">Sync on</span>
             ) : (
-              <span className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-600">Local only</span>
+              <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-primary">Local only</span>
             )}
             <button
               type="button"
               onClick={() => setShowAddForm((value) => !value)}
               aria-expanded={showAddForm}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-pink-600 shadow-sm transition-colors hover:bg-pink-50"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-semibold text-primary shadow-sm transition-colors hover:bg-secondary"
             >
               {showAddForm ? 'Hide form' : 'Add flashcard'}
               <ChevronDown size={16} className={cn('transition-transform', showAddForm ? 'rotate-180' : '')} />
@@ -395,7 +395,7 @@ export default function FlashcardsPage() {
           <>
             <div className="mt-5 grid gap-4 lg:grid-cols-3">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Subject</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Subject</span>
                 <select
                   value={draft.subject}
                   onChange={(event) => setDraft((current) => ({ ...current, subject: event.target.value }))}
@@ -410,75 +410,75 @@ export default function FlashcardsPage() {
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Module</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Module</span>
                 <input
                   value={draft.module}
                   onChange={(event) => setDraft((current) => ({ ...current, module: event.target.value }))}
                   placeholder="Time Value of Money"
-                  className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                  className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
                 />
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Title</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Title</span>
                 <input
                   value={draft.title}
                   onChange={(event) => setDraft((current) => ({ ...current, title: event.target.value }))}
                   placeholder="Bond duration trap"
-                  className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                  className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
                 />
               </label>
             </div>
 
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Prompt</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Prompt</span>
                 <textarea
                   value={draft.prompt}
                   onChange={(event) => setDraft((current) => ({ ...current, prompt: event.target.value }))}
                   placeholder="What should I remember?"
                   rows={4}
-                  className="w-full resize-none rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                  className="w-full resize-none rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
                 />
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Answer</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Answer</span>
                 <textarea
                   value={draft.answer}
                   onChange={(event) => setDraft((current) => ({ ...current, answer: event.target.value }))}
                   placeholder="The formula, rule, or explanation"
                   rows={4}
-                  className="w-full resize-none rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                  className="w-full resize-none rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
                 />
               </label>
             </div>
 
             <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_0.8fr_auto] lg:items-end">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Memory hook</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Memory hook</span>
                 <input
                   value={draft.memoryHook}
                   onChange={(event) => setDraft((current) => ({ ...current, memoryHook: event.target.value }))}
                   placeholder="Short cue that makes it stick"
-                  className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                  className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
                 />
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Tags</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Tags</span>
                 <input
                   value={draft.tags}
                   onChange={(event) => setDraft((current) => ({ ...current, tags: event.target.value }))}
                   placeholder="duration, fixed-income"
-                  className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                  className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-colors focus:border-ring focus:ring-4 focus:ring-ring/50"
                 />
               </label>
 
               <button
                 type="button"
                 onClick={addCustomCard}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-transform hover:-translate-y-0.5"
               >
                 <Plus size={16} />
                 Add card
@@ -488,7 +488,7 @@ export default function FlashcardsPage() {
         ) : null}
 
         {formError ? <p className="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">{formError}</p> : null}
-        {formMessage ? <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{formMessage}</p> : null}
+        {formMessage ? <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-foreground">{formMessage}</p> : null}
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
@@ -501,12 +501,12 @@ export default function FlashcardsPage() {
                     <span className={cn('rounded-full px-3 py-1 text-xs font-semibold', subjectTone(currentCard.subject))}>
                       {currentCard.subject}
                     </span>
-                    <span className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-500">
+                    <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-primary">
                       {currentCard.module}
                     </span>
                   </div>
-                  <h2 className="mt-4 text-2xl font-semibold text-slate-900">{currentCard.title}</h2>
-                  <p className="mt-2 text-sm text-slate-500">
+                  <h2 className="mt-4 text-2xl font-semibold text-foreground">{currentCard.title}</h2>
+                  <p className="mt-2 text-sm text-muted-foreground">
                     Card {currentIndex + 1} of {filteredCards.length}
                   </p>
                 </div>
@@ -520,7 +520,7 @@ export default function FlashcardsPage() {
                   }
                   className={cn(
                     'rounded-full border px-3 py-3 transition-colors',
-                    currentProgress?.bookmarked ? 'border-pink-200 bg-pink-50 text-pink-600' : 'border-pink-100 bg-white text-slate-500',
+                    currentProgress?.bookmarked ? 'border-border bg-secondary text-primary' : 'border-border bg-card text-muted-foreground',
                   )}
                 >
                   <Bookmark size={18} className={currentProgress?.bookmarked ? 'fill-current' : ''} />
@@ -530,7 +530,7 @@ export default function FlashcardsPage() {
               <button
                 type="button"
                 onClick={() => setFlipped((value) => !value)}
-                className="group block w-full rounded-[1.75rem] border border-pink-100 bg-white p-4 text-left shadow-[0_18px_50px_-35px_rgba(244,114,182,0.25)] sm:rounded-[2rem] sm:p-6"
+                className="group block w-full rounded-[1.75rem] border border-border bg-card p-4 text-left shadow-[0_18px_50px_-35px_rgba(244,114,182,0.25)] sm:rounded-[2rem] sm:p-6"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-pink-400">
                   {flipped ? 'Answer side' : 'Prompt side'}
@@ -538,22 +538,22 @@ export default function FlashcardsPage() {
 
                 {!flipped ? (
                   <div className="mt-6 min-h-[200px]">
-                    <MathText text={currentCard.prompt} className="text-2xl font-semibold leading-10 text-slate-900" />
-                    <p className="mt-6 text-sm text-slate-500">Tap to flip and reveal the formula, hook, and what to remember.</p>
+                    <MathText text={currentCard.prompt} className="text-2xl font-semibold leading-10 text-foreground" />
+                    <p className="mt-6 text-sm text-muted-foreground">Tap to flip and reveal the formula, hook, and what to remember.</p>
                   </div>
                 ) : (
                   <div className="mt-6 min-h-[200px] space-y-4">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Formula / answer</p>
-                      <MathText text={currentCard.answer} className="mt-2 text-xl font-semibold leading-9 text-slate-900" />
+                      <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Formula / answer</p>
+                      <MathText text={currentCard.answer} className="mt-2 text-xl font-semibold leading-9 text-foreground" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Memory hook</p>
-                      <MathText text={currentCard.memoryHook} className="mt-2 text-base leading-7 text-slate-600" />
+                      <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Memory hook</p>
+                      <MathText text={currentCard.memoryHook} className="mt-2 text-base leading-7 text-muted-foreground" />
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {currentCard.tags.map((tag) => (
-                        <span key={tag} className="rounded-full border border-pink-100 bg-pink-50/80 px-3 py-1 text-xs font-medium text-pink-600">
+                        <span key={tag} className="rounded-full border border-border bg-secondary/80 px-3 py-1 text-xs font-medium text-primary">
                           {tag}
                         </span>
                       ))}
@@ -563,15 +563,15 @@ export default function FlashcardsPage() {
               </button>
 
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-                <div className="text-sm text-slate-500">
-                  Confidence: <span className="font-semibold text-slate-900">{confidenceLabel(currentProgress?.confidence ?? null)}</span>
+                <div className="text-sm text-muted-foreground">
+                  Confidence: <span className="font-semibold text-foreground">{confidenceLabel(currentProgress?.confidence ?? null)}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
                     onClick={() => setCurrentIndex((value) => Math.max(0, value - 1))}
                     disabled={currentIndex === 0}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-pink-100 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <ChevronLeft size={16} />
                     Prev
@@ -580,7 +580,7 @@ export default function FlashcardsPage() {
                     type="button"
                     onClick={() => setCurrentIndex((value) => Math.min(filteredCards.length - 1, value + 1))}
                     disabled={currentIndex >= filteredCards.length - 1}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-pink-100 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Next
                     <ChevronRight size={16} />
@@ -591,7 +591,7 @@ export default function FlashcardsPage() {
               <div className="mt-5 grid gap-3 md:grid-cols-3">
                 {[
                   { label: 'Again', value: 2, tone: 'border-rose-200 bg-rose-50 text-rose-600' },
-                  { label: 'Good', value: 4, tone: 'border-pink-200 bg-pink-50 text-pink-600' },
+                  { label: 'Good', value: 4, tone: 'border-border bg-secondary text-primary' },
                   { label: 'Easy', value: 5, tone: 'border-emerald-200 bg-emerald-50 text-emerald-600' },
                 ].map((action) => (
                   <button
@@ -606,7 +606,7 @@ export default function FlashcardsPage() {
               </div>
             </>
           ) : (
-            <div className="rounded-[1.5rem] border border-dashed border-pink-200 bg-white/70 p-8 text-sm text-slate-600">
+            <div className="rounded-[1.5rem] border border-dashed border-border bg-card/70 p-8 text-sm text-muted-foreground">
               No cards match the current filters. Clear one of the filters and the deck will repopulate.
             </div>
           )}
@@ -614,11 +614,11 @@ export default function FlashcardsPage() {
 
         <div className="space-y-6">
           <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Sparkles className="text-pink-500" size={18} />
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Sparkles className="text-primary" size={18} />
               Review guidance
             </h2>
-            <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+            <div className="mt-4 space-y-3 text-sm leading-7 text-muted-foreground">
               <p>Use this deck before quizzes if formulas are leaking from memory, especially quant, FSA, fixed income, and derivatives.</p>
               <p>Mark cards as easy only when you can recall both the formula and when to use it under exam pressure.</p>
               <p>Bookmark cards that repeatedly trip you up so the deck doubles as a pre-mock rescue list.</p>
@@ -626,8 +626,8 @@ export default function FlashcardsPage() {
           </div>
 
           <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <BookOpenCheck className="text-pink-500" size={18} />
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <BookOpenCheck className="text-primary" size={18} />
               Weak card queue
             </h2>
             <div className="mt-4 space-y-3">
@@ -650,10 +650,10 @@ export default function FlashcardsPage() {
                           setFlipped(false)
                         }
                       }}
-                      className="block w-full rounded-2xl border border-pink-100 bg-white px-4 py-4 text-left"
+                      className="block w-full rounded-2xl border border-border bg-card px-4 py-4 text-left"
                     >
-                      <p className="font-medium text-slate-900">{card.title}</p>
-                      <p className="mt-1 text-xs text-slate-500">
+                      <p className="font-medium text-foreground">{card.title}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
                         {card.subject} · {confidenceLabel(progress.confidence)}
                       </p>
                     </button>
@@ -664,8 +664,8 @@ export default function FlashcardsPage() {
 
           <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <div className="flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-                <RefreshCcw className="text-pink-500" size={18} />
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                <RefreshCcw className="text-primary" size={18} />
                 Reset local deck
               </h2>
               <button
@@ -677,12 +677,12 @@ export default function FlashcardsPage() {
                     void clearRemoteFlashcardProgress(supabase, remoteUserId)
                   }
                 }}
-                className="rounded-2xl border border-pink-200 bg-pink-50 px-4 py-2 text-sm font-semibold text-pink-600"
+                className="rounded-2xl border border-border bg-secondary px-4 py-2 text-sm font-semibold text-primary"
               >
                 Clear progress
               </button>
             </div>
-            <p className="mt-3 text-sm text-slate-600">
+            <p className="mt-3 text-sm text-muted-foreground">
               This only resets local flashcard confidence and bookmarks for this browser. It does not affect syllabus progress, notes, or assessments.
             </p>
           </div>

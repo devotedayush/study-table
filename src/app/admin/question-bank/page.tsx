@@ -53,12 +53,12 @@ export default function AdminQuestionBankPage() {
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="space-y-6">
       <section className="soft-panel rounded-[2rem] p-4 sm:p-6">
-        <div className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-pink-500">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-primary">
           <ShieldCheck size={14} />
           Admin
         </div>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Question bank upload</h1>
-        <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Question bank upload</h1>
+        <p className="mt-2 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
           Paste a markdown question set. Baby Maan&apos;s parser will extract questions, options, answers, and rationales, then publish the set for users.
         </p>
       </section>
@@ -66,16 +66,16 @@ export default function AdminQuestionBankPage() {
       <form onSubmit={handleSubmit} className="soft-panel rounded-[2rem] p-4 sm:p-6">
         <div className="grid gap-4 lg:grid-cols-3">
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-slate-700">Title</span>
+            <span className="mb-2 block text-sm font-medium text-foreground">Title</span>
             <input
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               placeholder="FSA inventory chapter quiz"
-              className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+              className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none focus:border-ring focus:ring-4 focus:ring-ring/50"
             />
           </label>
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-slate-700">Set type</span>
+            <span className="mb-2 block text-sm font-medium text-foreground">Set type</span>
             <select value={scope} onChange={(event) => setScope(event.target.value as AssessmentScope)} className="app-select">
               {Object.entries(assessmentScopeLabels).map(([value, label]) => (
                 <option key={value} value={value}>{label}</option>
@@ -83,7 +83,7 @@ export default function AdminQuestionBankPage() {
             </select>
           </label>
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-slate-700">Chapter target</span>
+            <span className="mb-2 block text-sm font-medium text-foreground">Chapter target</span>
             <select
               value={targetId}
               onChange={(event) => setTargetId(event.target.value)}
@@ -102,22 +102,22 @@ export default function AdminQuestionBankPage() {
         </div>
 
         <label className="mt-4 block">
-          <span className="mb-2 block text-sm font-medium text-slate-700">Markdown questions</span>
+          <span className="mb-2 block text-sm font-medium text-foreground">Markdown questions</span>
           <textarea
             value={markdown}
             onChange={(event) => setMarkdown(event.target.value)}
             rows={18}
-            className="w-full resize-y rounded-lg border border-pink-100 bg-white px-4 py-3 font-mono text-sm text-slate-900 shadow-sm outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+            className="w-full resize-y rounded-lg border border-border bg-card px-4 py-3 font-mono text-sm text-foreground shadow-sm outline-none focus:border-ring focus:ring-4 focus:ring-ring/50"
           />
         </label>
 
         {error ? <p className="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">{error}</p> : null}
-        {message ? <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{message}</p> : null}
+        {message ? <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-foreground">{message}</p> : null}
 
         <button
           type="submit"
           disabled={isSaving || !markdown.trim()}
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-semibold text-white shadow-sm disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSaving ? <LoaderCircle size={16} className="animate-spin" /> : <FileUp size={16} />}
           Save question bank

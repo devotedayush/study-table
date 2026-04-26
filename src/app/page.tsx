@@ -12,15 +12,15 @@ function LandingPage() {
     <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-start px-4 py-6 sm:items-center sm:py-8">
       <section className="grid w-full gap-6 lg:grid-cols-[1.04fr_0.96fr]">
         <div className="soft-panel rounded-[2rem] p-5 sm:rounded-[2.2rem] sm:p-8 lg:p-10">
-          <span className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-pink-500 shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-primary shadow-sm">
             <Sparkles size={14} />
             Private workspace
           </span>
           <div className="mt-6 space-y-4">
-            <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               CFA prep, kept calm and clear.
             </h1>
-            <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+            <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
               Sign in if you already have an account. Create one if this is your first time. After that, everything opens in one study workspace.
             </p>
           </div>
@@ -36,19 +36,19 @@ function LandingPage() {
             </Link>
           </div>
 
-          <div className="mt-6 rounded-[1.5rem] border border-pink-100 bg-white p-4 text-sm leading-6 text-slate-600">
+          <div className="mt-6 rounded-[1.5rem] border border-border bg-card p-4 text-sm leading-6 text-muted-foreground">
             One private login. One syllabus tracker. One calm place to study.
           </div>
         </div>
 
         <div className="soft-panel rounded-[2rem] p-5 sm:rounded-[2.2rem] sm:p-8">
-          <div className="rounded-[1.75rem] border border-[#d9eef5] bg-white p-4 sm:p-5">
+          <div className="rounded-[1.75rem] border border-border bg-card p-4 sm:p-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">Workspace preview</p>
-                <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-2xl">A softer study cockpit</h2>
+                <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">Workspace preview</p>
+                <h2 className="mt-2 text-xl font-semibold text-foreground sm:text-2xl">A softer study cockpit</h2>
               </div>
-              <span className="rounded-full border border-pink-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-pink-500">
+              <span className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
                 white + pink
               </span>
             </div>
@@ -59,37 +59,37 @@ function LandingPage() {
                 { label: 'Confidence', value: 'Mark what feels shaky' },
                 { label: 'Baby Maan', value: 'Update by chat' },
               ].map((item) => (
-                <div key={item.label} className="rounded-[1.45rem] border border-white/90 bg-white/92 p-4">
-                  <p className="text-[11px] uppercase tracking-[0.24em] text-slate-400">{item.label}</p>
-                  <p className="mt-2 text-sm font-medium text-slate-900">{item.value}</p>
+                <div key={item.label} className="rounded-[1.45rem] border border-white/90 bg-card/92 p-4">
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">{item.label}</p>
+                  <p className="mt-2 text-sm font-medium text-foreground">{item.value}</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="mt-4 space-y-3">
-            <div className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+            <div className="rounded-[1.5rem] border border-border bg-card p-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Today’s focus</p>
-                  <p className="mt-1 text-xs text-slate-500">Suggested, not forced</p>
+                  <p className="text-sm font-semibold text-foreground">Today’s focus</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Suggested, not forced</p>
                 </div>
-                <span className="rounded-full bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-500">45 min</span>
+                <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-primary">45 min</span>
               </div>
-              <p className="mt-3 text-sm text-slate-600">Review a weak area, log progress, and move on.</p>
+              <p className="mt-3 text-sm text-muted-foreground">Review a weak area, log progress, and move on.</p>
             </div>
 
-            <div className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+            <div className="rounded-[1.5rem] border border-border bg-card p-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Progress trend</p>
-                  <p className="mt-1 text-xs text-slate-500">Compact and easy to scan</p>
+                  <p className="text-sm font-semibold text-foreground">Progress trend</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Compact and easy to scan</p>
                 </div>
                 <ArrowRight className="text-pink-400" size={18} />
               </div>
               <div className="mt-4 flex h-16 items-end gap-2">
                 {[36, 54, 48, 66, 72, 68].map((value, index) => (
-                  <div key={index} className="flex-1 rounded-full bg-pink-50">
+                  <div key={index} className="flex-1 rounded-full bg-secondary">
                     <div className="rounded-full bg-pink-400" style={{ height: `${value}%` }} />
                   </div>
                 ))}

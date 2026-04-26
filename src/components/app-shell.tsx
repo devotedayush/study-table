@@ -6,7 +6,6 @@ import { LayoutDashboard, BookText, PenTool, Settings, LogOut, ShieldCheck, Laye
 import { BabyMaanWidget } from '@/components/baby-maan-widget'
 import { FeedbackButton } from '@/components/feedback-button'
 import { SyncBadge } from '@/components/sync-badge'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { createClient } from '@/lib/supabase/browser'
 import { cn } from '@/lib/utils'
 
@@ -40,7 +39,7 @@ function Sidebar() {
   const activeItem = navItems.find((item) => isNavActive(pathname, item)) ?? navItems[0]
 
   return (
-    <aside className="hidden lg:flex w-[284px] shrink-0 flex-col border-r border-border/80 bg-card/78 px-4 py-4 backdrop-blur-2xl">
+    <aside className="hidden lg:flex w-[284px] shrink-0 flex-col border-r border-border/80 bg-card/78 px-4 py-4 backdrop-blur-2xl sticky top-0 h-[100dvh] overflow-y-auto">
       <div className="rounded-[1.75rem] border border-border bg-card/92 px-4 py-4 shadow-[0_18px_40px_-28px_rgba(var(--primary),0.35)]">
         <Link href="/" className="group flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-[1.35rem] border border-primary/20 bg-primary text-primary-foreground shadow-[0_16px_30px_-14px_rgba(var(--primary),0.7)]">
@@ -95,15 +94,10 @@ function Sidebar() {
         })}
       </nav>
 
-      <div className="mt-auto space-y-3 border-t border-border/80 pt-3">
-        <ThemeToggle className="mb-4" />
-
-        <div className="rounded-[1.5rem] border border-border bg-card/90 p-3 shadow-[0_14px_32px_-28px_rgba(var(--primary),0.45)]">
-          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-primary/70">Workspace status</p>
-          <p className="mt-1 text-sm leading-6 text-muted-foreground">Login, onboarding, and study state stay private.</p>
-          <SyncBadge className="mt-3" />
+      <div className="mt-auto flex flex-col gap-3 border-t border-border/80 pt-3">
+        <div className="flex items-center justify-center pb-1">
+          <SyncBadge />
         </div>
-
         <div className="grid gap-2">
           <Link
             href="/settings"
@@ -149,7 +143,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="mx-auto flex min-h-screen max-w-[1600px]">
         <Sidebar />
         <main className="min-w-0 flex-1 px-3 py-4 sm:px-5 lg:px-8 lg:py-6">
-          <div className="mb-6 lg:hidden">
+          <div className="mb-6 lg:hidden sticky top-2 z-40">
             <div className="soft-panel rounded-[1.5rem] p-2.5 sm:p-3">
               <div className="flex flex-col gap-3 rounded-[1.35rem] border border-border bg-card/90 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <Link href="/" className="flex min-w-0 items-center gap-3">
@@ -174,10 +168,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   Sign out
                 </button>
               </div>
-              <div className="mt-3">
-                <ThemeToggle className="mb-3 px-2" />
-              </div>
-              <div className="flex gap-2 overflow-x-auto pb-1">
+              <div className="flex flex-wrap gap-2 pb-1 justify-center sm:justify-start">
                 {navItems.map((item) => {
                   const Icon = item.icon
                   const isActive = isNavActive(pathname, item)

@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useTransition, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
-import { CalendarDays, CloudUpload, Save, Shield, SlidersHorizontal, Sparkles, UserCog } from 'lucide-react'
+import { CalendarDays, CloudUpload, Palette, Save, Shield, SlidersHorizontal, Sparkles, UserCog } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { SyncBadge } from '@/components/sync-badge'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { loadFlashcardProgressMap } from '@/lib/flashcard-progress'
 import { loadAssessments, loadProgressMap } from '@/lib/study-engine'
 import { cn } from '@/lib/utils'
@@ -224,8 +225,8 @@ export default function SettingsPage() {
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Settings</h1>
-          <p className="mt-2 max-w-2xl text-base text-slate-600 sm:text-lg">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Settings</h1>
+          <p className="mt-2 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Update your exam date and study rhythm. The preview on the right updates immediately so you can see the impact.
           </p>
           <div className="mt-3">
@@ -237,7 +238,7 @@ export default function SettingsPage() {
           <button
             type="button"
             onClick={resetPreferences}
-            className="rounded-2xl border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700"
+            className="rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground"
           >
             Reset defaults
           </button>
@@ -245,7 +246,7 @@ export default function SettingsPage() {
             form="settings-form"
             type="submit"
             disabled={isSaving || isPending}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
           >
             <Save size={16} />
             {isSaving || isPending ? 'Saving...' : 'Save settings'}
@@ -254,7 +255,7 @@ export default function SettingsPage() {
             type="button"
             onClick={handleImportLocalData}
             disabled={!hasRemoteSession || isImporting}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-60"
           >
             <CloudUpload size={16} />
             {isImporting ? 'Importing...' : 'Import local data'}
@@ -264,43 +265,43 @@ export default function SettingsPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Days left</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.daysRemaining ?? '—'}</p>
+          <p className="text-sm text-muted-foreground">Days left</p>
+          <p className="mt-2 text-3xl font-semibold text-foreground">{studyContext.daysRemaining ?? '—'}</p>
         </div>
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Urgency</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.urgency}</p>
+          <p className="text-sm text-muted-foreground">Urgency</p>
+          <p className="mt-2 text-3xl font-semibold text-foreground">{studyContext.urgency}</p>
         </div>
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Weekly target</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.targetHours}h</p>
+          <p className="text-sm text-muted-foreground">Weekly target</p>
+          <p className="mt-2 text-3xl font-semibold text-foreground">{studyContext.targetHours}h</p>
         </div>
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <p className="text-sm text-slate-500">Daily load</p>
-          <p className="mt-2 text-3xl font-semibold text-slate-900">{studyContext.dailyLoad} blocks</p>
+          <p className="text-sm text-muted-foreground">Daily load</p>
+          <p className="mt-2 text-3xl font-semibold text-foreground">{studyContext.dailyLoad} blocks</p>
         </div>
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
           <div className="mb-6 flex items-center gap-3">
-            <UserCog className="text-pink-500" size={20} />
+            <UserCog className="text-primary" size={20} />
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">{profileName}</h2>
-              <p className="text-sm text-slate-500">
+              <h2 className="text-lg font-semibold text-foreground">{profileName}</h2>
+              <p className="text-sm text-muted-foreground">
                 {hasRemoteSession ? 'Updates sync to Supabase and this browser.' : 'Updates are stored locally in this browser.'}
               </p>
             </div>
           </div>
 
-          <div className="mb-6 rounded-[1.5rem] border border-pink-100 bg-pink-50/60 p-4 text-sm text-slate-600">
-            Use <span className="font-semibold text-slate-900">Import local data</span> if you want to push this browser&apos;s progress, notes, mocks, and flashcard confidence into Supabase immediately.
+          <div className="mb-6 rounded-[1.5rem] border border-border bg-secondary/60 p-4 text-sm text-muted-foreground">
+            Use <span className="font-semibold text-foreground">Import local data</span> if you want to push this browser&apos;s progress, notes, mocks, and flashcard confidence into Supabase immediately.
           </div>
 
           <form id="settings-form" className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid gap-4 md:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Exam date</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Exam date</span>
                 <input
                   type="date"
                   value={preferences.examDate}
@@ -309,7 +310,7 @@ export default function SettingsPage() {
                 />
               </label>
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Study target hours per week</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Study target hours per week</span>
                 <input
                   type="number"
                   min="1"
@@ -318,14 +319,14 @@ export default function SettingsPage() {
                   onChange={(event) =>
                     setPreferences((current) => ({ ...current, targetStudyHours: Number(event.target.value) || 0 }))
                   }
-                  className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                  className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                 />
               </label>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Preferred session length</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Preferred session length</span>
                 <input
                   type="number"
                   min="30"
@@ -338,11 +339,11 @@ export default function SettingsPage() {
                       preferredSessionMinutes: Number(event.target.value) || 0,
                     }))
                   }
-                  className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                  className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                 />
               </label>
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Planning style</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Planning style</span>
                 <select
                   value={preferences.preferredPacing}
                   onChange={(event) =>
@@ -351,7 +352,7 @@ export default function SettingsPage() {
                       preferredPacing: event.target.value as StudyPreferences['preferredPacing'],
                     }))
                   }
-                  className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                  className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
                 >
                   <option value="gentle">Gentle</option>
                   <option value="balanced">Balanced</option>
@@ -362,8 +363,8 @@ export default function SettingsPage() {
 
             <div>
               <div className="mb-2 flex items-center justify-between gap-3">
-                <span className="block text-sm font-medium text-slate-700">Preferred rest days</span>
-                <span className="text-xs text-slate-500">Tap to toggle</span>
+                <span className="block text-sm font-medium text-foreground">Preferred rest days</span>
+                <span className="text-xs text-muted-foreground">Tap to toggle</span>
               </div>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
                 {restDayOptions.map((day) => {
@@ -376,8 +377,8 @@ export default function SettingsPage() {
                       className={cn(
                         'rounded-2xl border px-2 py-2 text-sm font-medium transition-colors',
                         selected
-                          ? 'border-pink-200 bg-pink-500 text-white'
-                          : 'border-pink-100 bg-white text-slate-600 hover:bg-pink-50',
+                          ? 'border-border bg-primary text-primary-foreground'
+                          : 'border-border bg-card text-muted-foreground hover:bg-secondary',
                       )}
                     >
                       {day.label}
@@ -388,49 +389,60 @@ export default function SettingsPage() {
             </div>
 
             {message ? (
-              <p className="rounded-2xl border border-pink-200 bg-pink-50 px-4 py-3 text-sm text-slate-700">{message}</p>
+              <p className="rounded-2xl border border-border bg-secondary px-4 py-3 text-sm text-foreground">{message}</p>
             ) : null}
           </form>
         </div>
 
         <div className="space-y-6">
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <CalendarDays className="text-pink-500" size={18} />
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <CalendarDays className="text-primary" size={18} />
               Study preview
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+              <div className="rounded-[1.5rem] border border-border bg-card p-4">
                 <p className="text-xs uppercase tracking-[0.25em] text-pink-400">Exam date</p>
-                <p className="mt-2 text-lg font-semibold text-slate-900">{studyContext.examDateLabel}</p>
+                <p className="mt-2 text-lg font-semibold text-foreground">{studyContext.examDateLabel}</p>
               </div>
-              <div className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+              <div className="rounded-[1.5rem] border border-border bg-card p-4">
                 <p className="text-xs uppercase tracking-[0.25em] text-pink-400">Session length</p>
-                <p className="mt-2 text-lg font-semibold text-slate-900">{studyContext.sessionMinutes}m</p>
+                <p className="mt-2 text-lg font-semibold text-foreground">{studyContext.sessionMinutes}m</p>
               </div>
-              <div className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+              <div className="rounded-[1.5rem] border border-border bg-card p-4">
                 <p className="text-xs uppercase tracking-[0.25em] text-pink-400">Rest days</p>
-                <p className="mt-2 text-lg font-semibold text-slate-900">
+                <p className="mt-2 text-lg font-semibold text-foreground">
                   {preferences.preferredRestDays.length > 0 ? preferences.preferredRestDays.join(', ') : 'None selected'}
                 </p>
               </div>
-              <div className="rounded-[1.5rem] border border-pink-100 bg-white p-4">
+              <div className="rounded-[1.5rem] border border-border bg-card p-4">
                 <p className="text-xs uppercase tracking-[0.25em] text-pink-400">Pacing</p>
-                <p className="mt-2 text-lg font-semibold capitalize text-slate-900">{preferences.preferredPacing}</p>
+                <p className="mt-2 text-lg font-semibold capitalize text-foreground">{preferences.preferredPacing}</p>
               </div>
             </div>
 
-            <div className="mt-4 rounded-[1.5rem] border border-pink-100 bg-pink-50/70 p-4 text-sm text-slate-600">
+            <div className="mt-4 rounded-[1.5rem] border border-border bg-secondary/70 p-4 text-sm text-muted-foreground">
               This preview is based on the same study context that powers the dashboard, so changing the exam date updates urgency everywhere.
             </div>
           </div>
 
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <SlidersHorizontal className="text-pink-500" size={18} />
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Palette className="text-primary" size={18} />
+              Appearance
+            </h2>
+            <ThemeToggle />
+            <div className="mt-4 rounded-[1.5rem] border border-border bg-secondary/70 p-4 text-sm text-muted-foreground">
+              Choose a theme that fits your study mood. These changes are saved locally.
+            </div>
+          </div>
+
+          <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <SlidersHorizontal className="text-primary" size={18} />
               What this controls
             </h2>
-            <div className="space-y-3 text-sm leading-6 text-slate-600">
+            <div className="space-y-3 text-sm leading-6 text-muted-foreground">
               <p>Exam date drives urgency, countdowns, and the daily load estimate.</p>
               <p>Study target and session length shape the planner and dashboard recommendations.</p>
               <p>Rest days keep the plan realistic when the week gets crowded.</p>
@@ -438,18 +450,18 @@ export default function SettingsPage() {
           </div>
 
           <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Shield className="text-pink-500" size={18} />
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Shield className="text-primary" size={18} />
               Sync status
             </h2>
-            <p className="text-sm leading-6 text-slate-600">
+            <p className="text-sm leading-6 text-muted-foreground">
               {hasRemoteSession
                 ? 'Saved settings update the remote profile and will flow back into the dashboard.'
                 : 'You are editing local settings only, which is perfect for testing or demo mode.'}
             </p>
             <div className="mt-4 flex items-center gap-3">
-              <Sparkles className="text-pink-500" size={18} />
-              <span className="text-sm font-medium text-slate-700">Changes apply immediately after save.</span>
+              <Sparkles className="text-primary" size={18} />
+              <span className="text-sm font-medium text-foreground">Changes apply immediately after save.</span>
             </div>
           </div>
         </div>

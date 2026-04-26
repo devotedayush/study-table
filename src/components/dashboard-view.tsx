@@ -152,13 +152,13 @@ export function DashboardView({ profile }: DashboardViewProps) {
                 <div
                   key={card.label}
                   className={cn(
-                    'rounded-[1.75rem] border p-4 shadow-[0_10px_30px_-24px_rgba(15,23,42,0.22)]',
+                    'rounded-[1.75rem] border p-4 shadow-[0_10px_30px_-24px_rgba(var(--primary),0.22)]',
                     card.accent === 'sky'
-                      ? 'border-sky-100 bg-sky-50/80'
+                      ? 'border-primary/20 bg-primary/5'
                       : 'border-border bg-card/90',
                   )}
                 >
-                  <p className={cn('text-xs uppercase tracking-[0.32em]', card.accent === 'sky' ? 'text-sky-500' : 'text-primary/70')}>
+                  <p className={cn('text-xs uppercase tracking-[0.32em]', card.accent === 'sky' ? 'text-primary' : 'text-primary/70')}>
                     {card.label}
                   </p>
                   <p className="mt-2 text-3xl font-semibold tracking-tight text-foreground">{card.value}</p>

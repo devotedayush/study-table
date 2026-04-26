@@ -135,18 +135,18 @@ export default function AssistantPage() {
       <section className="soft-panel rounded-[2rem] p-6 sm:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-pink-500">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-primary">
               <Sparkles size={14} />
               Baby Maan
             </div>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Update the app by chatting</h1>
-            <p className="mt-3 text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Update the app by chatting</h1>
+            <p className="mt-3 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
               Keep this simple. Tell Baby Maan what you studied, what felt unclear, ask for a flashcard, share your mock result, or change a setting. If it understands the update, it writes it into your synced study data.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-pink-100 bg-white/90 p-4 text-sm text-slate-600 shadow-sm">
-            <p className="font-semibold text-slate-900">What it can update</p>
+          <div className="rounded-3xl border border-border bg-card/90 p-4 text-sm text-muted-foreground shadow-sm">
+            <p className="font-semibold text-foreground">What it can update</p>
             <p className="mt-2">Progress, notes, flashcards, mock scores, and study settings.</p>
           </div>
         </div>
@@ -155,16 +155,16 @@ export default function AssistantPage() {
       <section className="grid gap-6 xl:grid-cols-[1.6fr_0.8fr]">
         <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
           <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-pink-500 text-white shadow-sm">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-sm">
               <Bot size={22} />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-slate-900">Chat</h2>
-              <p className="text-sm text-slate-500">One update at a time works best.</p>
+              <h2 className="text-xl font-semibold text-foreground">Chat</h2>
+              <p className="text-sm text-muted-foreground">One update at a time works best.</p>
             </div>
           </div>
 
-          <div className="space-y-4 rounded-[1.75rem] border border-pink-100 bg-white/80 p-4">
+          <div className="space-y-4 rounded-[1.75rem] border border-border bg-card/80 p-4">
             {messages.map((message) => {
               const label = previewLabel(message.preview)
               const snapshot =
@@ -200,13 +200,13 @@ export default function AssistantPage() {
                   className={cn(
                     'max-w-3xl rounded-[1.5rem] px-4 py-3 text-sm leading-7',
                     message.role === 'user'
-                      ? 'ml-auto bg-pink-500 text-white shadow-sm'
-                      : 'border border-pink-100 bg-pink-50/70 text-slate-700',
+                      ? 'ml-auto bg-primary text-primary-foreground shadow-sm'
+                      : 'border border-border bg-secondary/70 text-foreground',
                   )}
                 >
                   <p>{message.content}</p>
                   {message.role === 'assistant' && label ? (
-                    <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                    <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-foreground">
                       <CheckCircle2 size={14} />
                       {label}
                     </div>
@@ -214,32 +214,32 @@ export default function AssistantPage() {
                   {message.role === 'assistant' && snapshot ? (
                     <div className="mt-3 space-y-3">
                       {typeof snapshot.receiptSummary === 'string' ? (
-                        <div className="rounded-2xl border border-pink-100 bg-white/80 px-3 py-2 text-xs text-slate-600">
+                        <div className="rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">
                           {snapshot.receiptSummary}
                         </div>
                       ) : null}
                       <div className="grid gap-2 sm:grid-cols-4">
-                      <div className="rounded-2xl border border-pink-100 bg-white/80 px-3 py-2 text-xs text-slate-600">
-                        <span className="block uppercase tracking-[0.2em] text-slate-400">Status</span>
-                        <span className="mt-1 block font-semibold text-slate-900">{String(snapshot.status ?? 'not_started').replaceAll('_', ' ')}</span>
+                      <div className="rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">
+                        <span className="block uppercase tracking-[0.2em] text-muted-foreground">Status</span>
+                        <span className="mt-1 block font-semibold text-foreground">{String(snapshot.status ?? 'not_started').replaceAll('_', ' ')}</span>
                       </div>
-                      <div className="rounded-2xl border border-pink-100 bg-white/80 px-3 py-2 text-xs text-slate-600">
-                        <span className="block uppercase tracking-[0.2em] text-slate-400">Done</span>
-                        <span className="mt-1 block font-semibold text-slate-900">{String(snapshot.completionPercentage ?? 0)}%</span>
+                      <div className="rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">
+                        <span className="block uppercase tracking-[0.2em] text-muted-foreground">Done</span>
+                        <span className="mt-1 block font-semibold text-foreground">{String(snapshot.completionPercentage ?? 0)}%</span>
                       </div>
-                      <div className="rounded-2xl border border-pink-100 bg-white/80 px-3 py-2 text-xs text-slate-600">
-                        <span className="block uppercase tracking-[0.2em] text-slate-400">Confidence</span>
-                        <span className="mt-1 block font-semibold text-slate-900">{confidenceLabel} / 5</span>
+                      <div className="rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">
+                        <span className="block uppercase tracking-[0.2em] text-muted-foreground">Confidence</span>
+                        <span className="mt-1 block font-semibold text-foreground">{confidenceLabel} / 5</span>
                       </div>
-                      <div className="rounded-2xl border border-pink-100 bg-white/80 px-3 py-2 text-xs text-slate-600">
-                        <span className="block uppercase tracking-[0.2em] text-slate-400">Minutes</span>
-                        <span className="mt-1 block font-semibold text-slate-900">{minutesLabel}</span>
+                      <div className="rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">
+                        <span className="block uppercase tracking-[0.2em] text-muted-foreground">Minutes</span>
+                        <span className="mt-1 block font-semibold text-foreground">{minutesLabel}</span>
                       </div>
                       </div>
                       {countLabel ? (
-                        <div className="rounded-2xl border border-pink-100 bg-white/80 px-3 py-2 text-xs text-slate-600">
-                          <span className="block uppercase tracking-[0.2em] text-slate-400">Items fully done</span>
-                          <span className="mt-1 block font-semibold text-slate-900">{countLabel}</span>
+                        <div className="rounded-2xl border border-border bg-card/80 px-3 py-2 text-xs text-muted-foreground">
+                          <span className="block uppercase tracking-[0.2em] text-muted-foreground">Items fully done</span>
+                          <span className="mt-1 block font-semibold text-foreground">{countLabel}</span>
                         </div>
                       ) : null}
                     </div>
@@ -249,7 +249,7 @@ export default function AssistantPage() {
             })}
 
             {isSending ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-pink-100 bg-white px-4 py-2 text-sm text-slate-500">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm text-muted-foreground">
                 <LoaderCircle size={16} className="animate-spin text-pink-400" />
                 Baby Maan is updating things...
               </div>
@@ -263,14 +263,14 @@ export default function AssistantPage() {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Baby Maan, create a flashcard for type I vs type II errors."
-              className="min-h-32 w-full rounded-[1.5rem] border border-pink-100 bg-white px-4 py-4 text-sm text-slate-700 outline-none transition focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+              className="min-h-32 w-full rounded-[1.5rem] border border-border bg-card px-4 py-4 text-sm text-foreground outline-none transition focus:border-ring focus:ring-4 focus:ring-ring/50"
             />
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-slate-500">Tip: mention the reading name and what changed.</p>
+              <p className="text-sm text-muted-foreground">Tip: mention the reading name and what changed.</p>
               <button
                 type="submit"
                 disabled={isSending || !input.trim()}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <SendHorizonal size={16} />
                 Send update
@@ -281,14 +281,14 @@ export default function AssistantPage() {
 
         <div className="space-y-6">
           <div className="soft-panel rounded-[2rem] p-6">
-            <h2 className="text-xl font-semibold text-slate-900">Try one of these</h2>
+            <h2 className="text-xl font-semibold text-foreground">Try one of these</h2>
             <div className="mt-4 space-y-3">
               {starterPrompts.map((prompt) => (
                 <button
                   key={prompt}
                   type="button"
                   onClick={() => void handleSubmit(undefined, prompt)}
-                  className="w-full rounded-[1.5rem] border border-pink-100 bg-white px-4 py-4 text-left text-sm leading-6 text-slate-600 transition hover:border-pink-200 hover:bg-pink-50/60"
+                  className="w-full rounded-[1.5rem] border border-border bg-card px-4 py-4 text-left text-sm leading-6 text-muted-foreground transition hover:border-border hover:bg-secondary/60"
                 >
                   {prompt}
                 </button>
@@ -297,8 +297,8 @@ export default function AssistantPage() {
           </div>
 
           <div className="soft-panel rounded-[2rem] p-6">
-            <h2 className="text-xl font-semibold text-slate-900">Keep it reliable</h2>
-            <div className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+            <h2 className="text-xl font-semibold text-foreground">Keep it reliable</h2>
+            <div className="mt-4 space-y-3 text-sm leading-7 text-muted-foreground">
               <p>Ask for one clear update per message.</p>
               <p>Use the exact reading or subtopic name when you can.</p>
               <p>For mocks, include a score or percent.</p>

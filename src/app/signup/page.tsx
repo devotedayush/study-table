@@ -167,14 +167,14 @@ export default function SignupPage() {
         transition={{ duration: 0.5 }}
         className="space-y-6 lg:pt-8"
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-pink-500 shadow-sm">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-primary shadow-sm">
           <Sparkles size={14} />
           Create account
         </span>
-        <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+        <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Set up the private workspace in one pass.
         </h1>
-        <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+        <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
           Pick a username, add your email and password, and set the exam date. That is enough to open the dashboard.
         </p>
 
@@ -188,12 +188,12 @@ export default function SignupPage() {
             return (
               <div key={item.title} className="soft-panel rounded-3xl p-5">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-2xl bg-pink-50 p-3 text-pink-500">
+                  <div className="rounded-2xl bg-secondary p-3 text-primary">
                     <Icon size={18} />
                   </div>
                   <div>
-                    <p className="font-medium text-slate-900">{item.title}</p>
-                    <p className="text-sm text-slate-600">{item.detail}</p>
+                    <p className="font-medium text-foreground">{item.title}</p>
+                    <p className="text-sm text-muted-foreground">{item.detail}</p>
                   </div>
                 </div>
               </div>
@@ -208,11 +208,11 @@ export default function SignupPage() {
         transition={{ duration: 0.5, delay: 0.08 }}
         className="soft-panel rounded-[1.75rem] p-4 shadow-[0_30px_80px_-35px_rgba(244,114,182,0.35)] sm:rounded-[2rem] sm:p-6"
       >
-        <div className="rounded-[1.6rem] border border-pink-100 bg-white p-5 sm:p-6">
+        <div className="rounded-[1.6rem] border border-border bg-card p-5 sm:p-6">
           <div className="mb-6">
-            <p className="text-sm font-medium text-pink-500">{hasSession ? 'Finish setup' : 'Signup'}</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">{hasSession ? 'Complete your profile' : 'Create account'}</h2>
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="text-sm font-medium text-primary">{hasSession ? 'Finish setup' : 'Signup'}</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">{hasSession ? 'Complete your profile' : 'Create account'}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
               {hasSession
                 ? 'You are already signed in. Set the username and exam date to open the dashboard.'
                 : 'Create the account and open the dashboard immediately.'}
@@ -222,34 +222,34 @@ export default function SignupPage() {
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Username</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Username</span>
                 <input
                   name="username"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                   required
-                  className="w-full rounded-2xl border border-pink-100 bg-pink-50/60 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-400"
+                  className="w-full rounded-2xl border border-border bg-secondary/60 px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </label>
               {hasSession ? (
                 <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-slate-700">Email</span>
+                  <span className="mb-2 block text-sm font-medium text-foreground">Email</span>
                   <input
                     value={email}
                     readOnly
-                    className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-500 outline-none"
+                    className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-muted-foreground outline-none"
                   />
                 </label>
               ) : (
                 <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-slate-700">Email</span>
+                  <span className="mb-2 block text-sm font-medium text-foreground">Email</span>
                   <input
                     name="email"
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     required
-                    className="w-full rounded-2xl border border-pink-100 bg-pink-50/60 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-400"
+                    className="w-full rounded-2xl border border-border bg-secondary/60 px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground"
                   />
                 </label>
               )}
@@ -257,20 +257,20 @@ export default function SignupPage() {
 
             {hasSession ? null : (
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Password</span>
-                <div className="flex items-center gap-3 rounded-2xl border border-pink-100 bg-pink-50/60 px-4 py-3">
+                <span className="mb-2 block text-sm font-medium text-foreground">Password</span>
+                <div className="flex items-center gap-3 rounded-2xl border border-border bg-secondary/60 px-4 py-3">
                   <input
                     name="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     required
-                    className="w-full bg-transparent text-slate-900 outline-none placeholder:text-slate-400"
+                    className="w-full bg-transparent text-foreground outline-none placeholder:text-muted-foreground"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword((value) => !value)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-pink-500 transition-colors hover:bg-pink-100"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-card text-primary transition-colors hover:bg-secondary/80"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -280,14 +280,14 @@ export default function SignupPage() {
             )}
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">Exam date</span>
+              <span className="mb-2 block text-sm font-medium text-foreground">Exam date</span>
               <input
                 name="examDate"
                 type="date"
                 value={examDate}
                 onChange={(event) => setExamDate(event.target.value)}
                 required
-                className="w-full rounded-2xl border border-pink-100 bg-pink-50/60 px-4 py-3 text-slate-900 outline-none"
+                className="w-full rounded-2xl border border-border bg-secondary/60 px-4 py-3 text-foreground outline-none"
               />
             </label>
 
@@ -295,20 +295,20 @@ export default function SignupPage() {
               <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">{error}</p>
             ) : null}
             {message ? (
-              <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">{message}</p>
+              <p className="rounded-2xl border border-border bg-amber-50 px-4 py-3 text-sm text-foreground">{message}</p>
             ) : null}
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isSubmitting ? (hasSession ? 'Finishing setup...' : 'Creating account...') : hasSession ? 'Finish setup' : 'Create account'}
               <ArrowRight size={16} />
             </button>
 
-            <p className="text-center text-sm text-slate-500">
-              Already have an account? <Link href="/login" className="font-semibold text-pink-500">Sign in</Link>.
+            <p className="text-center text-sm text-muted-foreground">
+              Already have an account? <Link href="/login" className="font-semibold text-primary">Sign in</Link>.
             </p>
           </form>
         </div>

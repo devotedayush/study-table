@@ -37,7 +37,7 @@ export function SyncBadge({ className }: SyncBadgeProps) {
 
   if (state === 'checking') {
     return (
-      <span className={cn('inline-flex items-center gap-2 rounded-full border border-pink-100 bg-white px-3 py-1 text-xs font-semibold text-slate-500', className)}>
+      <span className={cn('inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-muted-foreground', className)}>
         <LoaderCircle size={14} className="animate-spin text-pink-400" />
         Checking sync
       </span>
@@ -46,7 +46,7 @@ export function SyncBadge({ className }: SyncBadgeProps) {
 
   if (state === 'cloud') {
     return (
-      <span className={cn('inline-flex items-center gap-2 rounded-full border border-[#d9eef5] bg-[#eef8fb] px-3 py-1 text-xs font-semibold text-slate-700', className)}>
+      <span className={cn('inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-foreground', className)}>
         <Cloud size={14} />
         Cloud synced
       </span>
@@ -54,7 +54,7 @@ export function SyncBadge({ className }: SyncBadgeProps) {
   }
 
   return (
-    <span className={cn('inline-flex items-center gap-2 rounded-full border border-pink-100 bg-white px-3 py-1 text-xs font-semibold text-slate-500', className)}>
+    <span className={cn('inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-muted-foreground', className)}>
       <CloudOff size={14} />
       Local only
     </span>

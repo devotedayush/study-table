@@ -111,22 +111,22 @@ export function BabyMaanWidget() {
   return (
     <div className="fixed bottom-3 left-3 right-3 z-50 sm:bottom-5 sm:right-6 sm:left-auto">
       {open ? (
-        <div className="mb-3 w-full max-w-[24rem] overflow-hidden rounded-lg border border-pink-100 bg-white shadow-[0_24px_70px_-28px_rgba(244,114,182,0.55)] max-h-[calc(100dvh-8rem)]">
-          <div className="flex items-center justify-between gap-3 border-b border-pink-100 bg-pink-50/80 px-4 py-3">
+        <div className="mb-3 w-full max-w-[24rem] overflow-hidden rounded-lg border border-border bg-card shadow-[0_24px_70px_-28px_rgba(244,114,182,0.55)] max-h-[calc(100dvh-8rem)]">
+          <div className="flex items-center justify-between gap-3 border-b border-border bg-secondary/80 px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pink-500 text-white">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Bot size={18} />
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-slate-900">Baby Maan</p>
-                <p className="truncate text-xs text-slate-500">Quick update window</p>
+                <p className="truncate text-sm font-semibold text-foreground">Baby Maan</p>
+                <p className="truncate text-xs text-muted-foreground">Quick update window</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => router.push('/assistant')}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-pink-100 bg-white text-pink-500 transition-colors hover:bg-pink-50"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-primary transition-colors hover:bg-secondary"
                 aria-label="Open Baby Maan full screen"
               >
                 <Maximize2 size={16} />
@@ -134,7 +134,7 @@ export function BabyMaanWidget() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-pink-100 bg-white text-slate-500 transition-colors hover:bg-pink-50"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary"
                 aria-label="Close Baby Maan"
               >
                 <X size={16} />
@@ -152,13 +152,13 @@ export function BabyMaanWidget() {
                   className={cn(
                     'max-w-[92%] rounded-lg px-3 py-2 text-sm leading-6',
                     message.role === 'user'
-                      ? 'ml-auto bg-pink-500 text-white'
-                      : 'border border-pink-100 bg-pink-50/70 text-slate-700',
+                      ? 'ml-auto bg-primary text-primary-foreground'
+                      : 'border border-border bg-secondary/70 text-foreground',
                   )}
                 >
                   <p>{message.content}</p>
                   {label ? (
-                    <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
+                    <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
                       <CheckCircle2 size={12} />
                       {label}
                     </div>
@@ -168,7 +168,7 @@ export function BabyMaanWidget() {
             })}
 
             {isSending ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-pink-100 bg-white px-3 py-2 text-xs text-slate-500">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2 text-xs text-muted-foreground">
                 <LoaderCircle size={14} className="animate-spin text-pink-400" />
                 Updating...
               </div>
@@ -177,19 +177,19 @@ export function BabyMaanWidget() {
             {error ? <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-600">{error}</p> : null}
           </div>
 
-          <form onSubmit={handleSubmit} className="border-t border-pink-100 bg-white px-3 py-3">
+          <form onSubmit={handleSubmit} className="border-t border-border bg-card px-3 py-3">
             <div className="flex items-end gap-2">
               <textarea
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask Baby Maan..."
                 rows={2}
-                className="min-h-12 flex-1 resize-none rounded-lg border border-pink-100 bg-pink-50/50 px-3 py-2 text-sm text-slate-900 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                className="min-h-12 flex-1 resize-none rounded-lg border border-border bg-secondary/50 px-3 py-2 text-sm text-foreground outline-none focus:border-ring focus:ring-4 focus:ring-ring/50"
               />
               <button
                 type="submit"
                 disabled={isSending || !input.trim()}
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-pink-500 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
                 aria-label="Send message to Baby Maan"
               >
                 <SendHorizonal size={17} />
@@ -202,7 +202,7 @@ export function BabyMaanWidget() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="ml-auto flex h-12 sm:h-14 items-center gap-2 sm:gap-3 rounded-lg border border-pink-200 bg-pink-500 px-3 sm:px-4 text-sm font-semibold text-white shadow-[0_18px_45px_-20px_rgba(236,72,153,0.8)] transition-transform hover:-translate-y-0.5"
+        className="ml-auto flex h-12 sm:h-14 items-center gap-2 sm:gap-3 rounded-lg border border-border bg-primary px-3 sm:px-4 text-sm font-semibold text-primary-foreground shadow-[0_18px_45px_-20px_rgba(236,72,153,0.8)] transition-transform hover:-translate-y-0.5"
         aria-expanded={open}
       >
         <MessageCircleHeart size={18} />

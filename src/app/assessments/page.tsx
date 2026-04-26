@@ -434,78 +434,78 @@ export default function AssessmentsPage() {
       <PracticeHubTabs />
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Test Yourself</h1>
-          <p className="mt-2 text-base text-slate-600 sm:text-lg">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Test Yourself</h1>
+          <p className="mt-2 text-base text-muted-foreground sm:text-lg">
             Pick a scope, choose how many questions, then get one clear summary at the end.
           </p>
         </div>
-        <div className="rounded-[1.5rem] border border-pink-100 bg-white/80 px-4 py-4 text-right sm:px-5">
+        <div className="rounded-[1.5rem] border border-border bg-card/80 px-4 py-4 text-right sm:px-5">
           <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Average score</p>
-          <p className="mt-1 text-3xl font-semibold text-slate-900">{averageScore}%</p>
+          <p className="mt-1 text-3xl font-semibold text-foreground">{averageScore}%</p>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <CheckCircle2 className="text-pink-500" size={16} />
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            <CheckCircle2 className="text-primary" size={16} />
             One-stop summary
           </h2>
           {currentResult ? (
             <div className="mt-3 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-pink-100 bg-white p-3">
+              <div className="rounded-2xl border border-border bg-card p-3">
                 <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Latest</p>
-                <p className="mt-1 text-2xl font-semibold text-slate-900">{currentResult.correct}/{currentResult.total}</p>
-                <p className="text-xs text-slate-500">{Math.round((currentResult.correct / currentResult.total) * 100)}% score</p>
+                <p className="mt-1 text-2xl font-semibold text-foreground">{currentResult.correct}/{currentResult.total}</p>
+                <p className="text-xs text-muted-foreground">{Math.round((currentResult.correct / currentResult.total) * 100)}% score</p>
               </div>
-              <div className="rounded-2xl border border-pink-100 bg-white p-3 sm:col-span-2">
+              <div className="rounded-2xl border border-border bg-card p-3 sm:col-span-2">
                 <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">What this means</p>
-                <p className="mt-1 text-xs leading-5 text-slate-600">{latestForTopic?.explanationSummary ?? '—'}</p>
-                <p className="mt-2 text-[11px] font-semibold text-pink-600">Next: {latestForTopic?.recommendedAction ?? 'Take a quiz first.'}</p>
+                <p className="mt-1 text-xs leading-5 text-muted-foreground">{latestForTopic?.explanationSummary ?? '—'}</p>
+                <p className="mt-2 text-[11px] font-semibold text-primary">Next: {latestForTopic?.recommendedAction ?? 'Take a quiz first.'}</p>
               </div>
             </div>
           ) : (
-            <p className="mt-3 rounded-2xl border border-dashed border-pink-200 bg-white/70 p-3 text-xs text-slate-500">
+            <p className="mt-3 rounded-2xl border border-dashed border-border bg-card/70 p-3 text-xs text-muted-foreground">
               Finish a quiz and the score, plain-English summary, and next step will land here.
             </p>
           )}
         </div>
 
         <div className="soft-panel rounded-[1.75rem] p-4 sm:p-5">
-          <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <Target className="text-pink-500" size={16} />
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            <Target className="text-primary" size={16} />
             Current topic snapshot
           </h2>
-          <div className="mt-3 grid gap-2 text-xs text-slate-600 sm:grid-cols-3">
-            <div className="rounded-2xl border border-pink-100 bg-white p-3">
+          <div className="mt-3 grid gap-2 text-xs text-muted-foreground sm:grid-cols-3">
+            <div className="rounded-2xl border border-border bg-card p-3">
               <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Target</p>
-              <p className="mt-1 text-sm font-semibold text-slate-900">{activeTarget.title}</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">{assessmentScopeLabels[scope]}</p>
+              <p className="mt-1 text-sm font-semibold text-foreground">{activeTarget.title}</p>
+              <p className="mt-0.5 text-[11px] text-muted-foreground">{assessmentScopeLabels[scope]}</p>
             </div>
-            <div className="rounded-2xl border border-pink-100 bg-white p-3">
+            <div className="rounded-2xl border border-border bg-card p-3">
               <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Study feeling</p>
-              <p className="mt-1 text-xs leading-5 text-slate-600">
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">
                 {readinessOptions.find((option) => option.value === String(selectedSubtopic?.progress?.selfConfidence ?? 3))?.label ?? 'Somewhat ready'}
               </p>
             </div>
-            <div className="rounded-2xl border border-pink-100 bg-white p-3">
+            <div className="rounded-2xl border border-border bg-card p-3">
               <p className="text-[10px] uppercase tracking-[0.22em] text-pink-400">Mistake bank</p>
-              <p className="mt-1 text-sm font-semibold text-slate-900">{wrongAnswerBank.length}</p>
-              <p className="text-[11px] text-slate-500">wrong answers saved</p>
+              <p className="mt-1 text-sm font-semibold text-foreground">{wrongAnswerBank.length}</p>
+              <p className="text-[11px] text-muted-foreground">wrong answers saved</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="soft-panel rounded-[2rem] p-4 sm:p-6">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <BrainCircuit className="text-pink-500" size={18} />
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+          <BrainCircuit className="text-primary" size={18} />
           Quiz setup
         </h2>
 
           <div className="grid gap-4 md:grid-cols-2">
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">Quiz type</span>
+              <span className="mb-2 block text-sm font-medium text-foreground">Quiz type</span>
               <select
                 value={scope}
                 onChange={(event) => setScope(event.target.value as AssessmentScope)}
@@ -519,7 +519,7 @@ export default function AssessmentsPage() {
 
             {scope === 'topic_quiz' ? (
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">What topic do you want to test?</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">What topic do you want to test?</span>
               <select
                 value={selectedSubtopicId}
                 onChange={(event) => setSelectedSubtopicId(event.target.value)}
@@ -536,7 +536,7 @@ export default function AssessmentsPage() {
 
             {scope === 'chapter_quiz' ? (
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Chapter</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Chapter</span>
                 <select
                   value={chapterTargetId}
                   onChange={(event) => setChapterTargetId(event.target.value)}
@@ -554,13 +554,13 @@ export default function AssessmentsPage() {
             ) : null}
 
             {scope === 'full_mock' ? (
-              <div className="rounded-lg border border-pink-100 bg-pink-50/70 px-4 py-3 text-sm text-slate-600">
+              <div className="rounded-lg border border-border bg-secondary/70 px-4 py-3 text-sm text-muted-foreground">
                 Full mock mode mixes the curriculum and saves the whole generated paper.
               </div>
             ) : null}
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">How ready do you feel before the quiz?</span>
+              <span className="mb-2 block text-sm font-medium text-foreground">How ready do you feel before the quiz?</span>
               <select
                 value={confidence}
                 onChange={(event) => setConfidence(event.target.value)}
@@ -575,20 +575,20 @@ export default function AssessmentsPage() {
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">How many questions?</span>
+              <span className="mb-2 block text-sm font-medium text-foreground">How many questions?</span>
               <input
                 type="number"
                 min={1}
                 max={20}
                 value={questionCount}
                 onChange={(event) => setQuestionCount(Math.min(20, Math.max(1, Number(event.target.value) || 1)))}
-                className="w-full rounded-2xl border border-pink-100 bg-white px-4 py-3 text-slate-900 outline-none"
+                className="w-full rounded-2xl border border-border bg-card px-4 py-3 text-foreground outline-none"
               />
             </label>
           </div>
 
-          <div className="mt-4 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/60 p-4">
-            <label className="flex items-center gap-2 text-xs font-semibold text-emerald-700">
+          <div className="mt-4 rounded-[1.5rem] border border-border bg-secondary/40 p-4">
+            <label className="flex items-center gap-2 text-xs font-semibold text-foreground">
               <Compass size={14} />
               Steer this quiz (optional)
             </label>
@@ -597,7 +597,7 @@ export default function AssessmentsPage() {
               onChange={(event) => setSteer(event.target.value)}
               rows={2}
               placeholder="E.g. focus on duration traps, skip numeric compounding, make questions harder than last time."
-              className="mt-2 w-full rounded-2xl border border-emerald-100 bg-white px-3 py-2 text-xs text-slate-900 outline-none"
+              className="mt-2 w-full rounded-2xl border border-border bg-card px-3 py-2 text-xs text-foreground outline-none"
             />
             <p className="mt-1.5 text-[11px] text-emerald-700/80">
               Before you start, this tells the generator what kind of questions you want. After you finish, use it to regenerate the whole quiz with your feedback.
@@ -609,7 +609,7 @@ export default function AssessmentsPage() {
               type="button"
               onClick={generateQuiz}
               disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-200 transition-transform hover:-translate-y-0.5 disabled:opacity-70"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 disabled:opacity-70"
             >
               {isLoading ? <LoaderCircle size={16} className="animate-spin" /> : <FileCheck2 size={16} />}
               {isLoading ? 'Building quiz...' : 'Start quiz'}
@@ -620,7 +620,7 @@ export default function AssessmentsPage() {
               onClick={startMistakeQuiz}
               disabled={wrongAnswerBank.length === 0 || isLoading}
               title={wrongAnswerBank.length === 0 ? 'No wrong answers saved yet.' : `${wrongAnswerBank.length} wrong answers saved`}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-600 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-rose-500 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <RotateCcw size={16} />
               Retest my mistakes ({wrongAnswerBank.length})
@@ -631,17 +631,17 @@ export default function AssessmentsPage() {
               onClick={generateWeakTopicsQuiz}
               disabled={!weakTarget || isLoading}
               title={weakTarget ? `Weakest: ${weakTarget.title}` : 'No weak topics yet — finish more quizzes first.'}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-700 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-amber-50 px-4 py-3 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Flame size={16} />
               Quiz my weak spot{weakTarget ? `: ${weakTarget.title}` : ''}
             </button>
           </div>
 
-          <div className="mt-4 rounded-[1.5rem] border border-pink-100 bg-white/85 p-4">
+          <div className="mt-4 rounded-[1.5rem] border border-border bg-card/85 p-4">
             <div className="grid gap-3 lg:grid-cols-[1fr_auto] lg:items-end">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-slate-700">Uploaded or saved paper</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Uploaded or saved paper</span>
                 <select
                   value={selectedSetId}
                   onChange={(event) => setSelectedSetId(event.target.value)}
@@ -659,7 +659,7 @@ export default function AssessmentsPage() {
                 type="button"
                 onClick={startUploadedSet}
                 disabled={!selectedSetId || isLoading}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-pink-600 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-primary disabled:cursor-not-allowed disabled:opacity-60"
               >
                 Load saved paper
               </button>
@@ -668,7 +668,7 @@ export default function AssessmentsPage() {
 
               {quiz.length > 0 ? (
             <div className="mt-6 space-y-4">
-              <div className="rounded-[1.5rem] border border-pink-100 bg-pink-50/60 px-4 py-3 text-sm text-slate-600">
+              <div className="rounded-[1.5rem] border border-border bg-secondary/60 px-4 py-3 text-sm text-muted-foreground">
                 {steeredTitle ? `Steered quiz from your note: ${steeredTitle}. ` : ''}
                 Answer all {quiz.length} questions, then submit once. {activeSetId ? 'This paper is stored in the backend.' : 'This quiz is only saved once generated normally.'} {reviewCount > 0 ? `${reviewCount} missed ${reviewCount === 1 ? 'question is' : 'questions are'} back in this quiz.` : 'Missed questions will come back in later quizzes.'}
               </div>
@@ -678,8 +678,8 @@ export default function AssessmentsPage() {
                 const answeredCorrectly = submitted && selectedAnswer === question.correctIndex
 
                 return (
-                  <div key={questionIndex} className="rounded-[1.5rem] border border-pink-100 bg-white p-5">
-                    <p className="font-medium text-slate-900">
+                  <div key={questionIndex} className="rounded-[1.5rem] border border-border bg-card p-5">
+                    <p className="font-medium text-foreground">
                       {questionIndex + 1}. {question.prompt}
                     </p>
                     <div className="mt-3 space-y-2">
@@ -692,10 +692,10 @@ export default function AssessmentsPage() {
                             key={optionIndex}
                             className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm ${
                               isCorrect
-                                ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                                ? 'border-emerald-200 bg-emerald-50 text-foreground'
                                 : isSelected && submitted
-                                  ? 'border-rose-200 bg-rose-50 text-rose-700'
-                                  : 'border-pink-100 bg-pink-50/50 text-slate-700'
+                                  ? 'border-rose-500/30 bg-rose-500/10 text-rose-500'
+                                  : 'border-border bg-secondary/50 text-foreground'
                             }`}
                           >
                             <input
@@ -719,7 +719,7 @@ export default function AssessmentsPage() {
                     </div>
 
                     {submitted ? (
-                      <div className={`mt-3 rounded-2xl border px-4 py-3 text-sm ${answeredCorrectly ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-rose-200 bg-rose-50 text-rose-700'}`}>
+                      <div className={`mt-3 rounded-2xl border px-4 py-3 text-sm ${answeredCorrectly ? 'border-emerald-200 bg-emerald-50 text-foreground' : 'border-rose-200 bg-rose-50 text-rose-700'}`}>
                         <p className="font-semibold">{answeredCorrectly ? 'You got this right.' : `You missed this one. Correct answer: ${question.options[question.correctIndex]}`}</p>
                         <p className="mt-1">{question.rationale}</p>
                       </div>
@@ -734,7 +734,7 @@ export default function AssessmentsPage() {
                   type="button"
                   onClick={submitQuiz}
                   disabled={!canSubmit}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-foreground px-4 py-3 text-sm font-semibold text-background disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <Target size={16} />
                   {canSubmit ? 'Submit answers' : `Answer all questions first (${answeredCount}/${quiz.length})`}
@@ -744,7 +744,7 @@ export default function AssessmentsPage() {
                   onClick={regenerateAll}
                   disabled={!steer.trim() || isRegeneratingAll || quiz.length === 0}
                   title={steer.trim() ? 'Rebuild all questions using your steer text.' : 'Add a steer note above first.'}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700 transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-secondary px-4 py-3 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isRegeneratingAll ? <LoaderCircle size={16} className="animate-spin" /> : <WandSparkles size={16} />}
                   {isRegeneratingAll ? 'Rebuilding…' : submitted ? 'Regenerate with feedback' : 'Apply steer · rebuild all'}
@@ -759,7 +759,7 @@ export default function AssessmentsPage() {
                       setSteer('')
                       setSteeredTitle(null)
                     }}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-pink-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition-transform hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5"
                   >
                     <RotateCcw size={16} />
                     New quiz
@@ -772,3 +772,4 @@ export default function AssessmentsPage() {
     </motion.div>
   )
 }
+

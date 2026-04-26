@@ -58,21 +58,21 @@ export function FeedbackButton() {
   return (
     <div className="fixed bottom-3 left-3 right-3 z-50 sm:bottom-5 sm:left-6 sm:right-auto">
       {open ? (
-        <div className="mb-3 w-full max-w-[24rem] overflow-hidden rounded-lg border border-amber-200 bg-white shadow-[0_24px_70px_-28px_rgba(251,191,36,0.55)] max-h-[calc(100dvh-8rem)]">
-          <div className="flex items-center justify-between gap-3 border-b border-amber-100 bg-amber-50/80 px-4 py-3">
+        <div className="mb-3 w-full max-w-[24rem] overflow-hidden rounded-lg border border-border bg-card shadow-[0_24px_70px_-28px_rgba(251,191,36,0.55)] max-h-[calc(100dvh-8rem)]">
+          <div className="flex items-center justify-between gap-3 border-b border-border bg-amber-50/80 px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-white">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-primary-foreground">
                 <MessageSquarePlus size={18} />
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-slate-900">Feedback</p>
-                <p className="truncate text-xs text-slate-500">What should we improve or add?</p>
+                <p className="truncate text-sm font-semibold text-foreground">Feedback</p>
+                <p className="truncate text-xs text-muted-foreground">What should we improve or add?</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-100 bg-white text-slate-500 transition-colors hover:bg-amber-50"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary"
               aria-label="Close feedback"
             >
               <X size={16} />
@@ -86,15 +86,15 @@ export function FeedbackButton() {
               placeholder="Bugs, feature ideas, missing content, anything…"
               rows={5}
               maxLength={4000}
-              className="w-full resize-none rounded-lg border border-amber-100 bg-amber-50/40 px-3 py-2 text-sm text-slate-900 outline-none focus:border-amber-300 focus:ring-4 focus:ring-amber-100"
+              className="w-full resize-none rounded-lg border border-border bg-amber-50/40 px-3 py-2 text-sm text-foreground outline-none focus:border-amber-300 focus:ring-4 focus:ring-amber-100"
             />
 
             {pathname ? (
-              <p className="text-[11px] text-slate-400">Page: <span className="font-mono">{pathname}</span></p>
+              <p className="text-[11px] text-muted-foreground">Page: <span className="font-mono">{pathname}</span></p>
             ) : null}
 
             {status === 'saved' ? (
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
                 <CheckCircle2 size={12} /> Sent — thank you!
               </div>
             ) : null}
@@ -105,7 +105,7 @@ export function FeedbackButton() {
             <button
               type="submit"
               disabled={sending || !message.trim()}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {sending ? <LoaderCircle size={14} className="animate-spin" /> : null}
               {sending ? 'Sending…' : 'Send feedback'}
@@ -117,7 +117,7 @@ export function FeedbackButton() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="flex h-12 items-center gap-2 rounded-lg border border-amber-200 bg-white px-3 text-sm font-semibold text-amber-700 shadow-[0_18px_45px_-20px_rgba(251,191,36,0.65)] transition-transform hover:-translate-y-0.5"
+        className="flex h-12 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm font-semibold text-foreground shadow-[0_18px_45px_-20px_rgba(251,191,36,0.65)] transition-transform hover:-translate-y-0.5"
         aria-expanded={open}
       >
         <MessageSquarePlus size={16} />

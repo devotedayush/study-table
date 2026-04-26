@@ -56,7 +56,7 @@ function resultStatus(progress: CalculatorDrillProgress, correct: boolean) {
 
 function statusTone(status: CalculatorDrillProgress['status']) {
   if (status === 'mastered') {
-    return 'border-emerald-200 bg-emerald-50 text-emerald-700'
+    return 'border-emerald-200 bg-emerald-50 text-foreground'
   }
 
   if (status === 'weak') {
@@ -67,7 +67,7 @@ function statusTone(status: CalculatorDrillProgress['status']) {
     return 'border-sky-200 bg-sky-50 text-sky-700'
   }
 
-  return 'border-pink-100 bg-white text-slate-600'
+  return 'border-border bg-card text-muted-foreground'
 }
 
 export default function CalculatorDrillsPage() {
@@ -213,35 +213,35 @@ export default function CalculatorDrillsPage() {
       <PracticeHubTabs />
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Calculator Drills</h1>
-          <p className="mt-2 max-w-3xl text-base text-slate-600 sm:text-lg">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Calculator Drills</h1>
+          <p className="mt-2 max-w-3xl text-base text-muted-foreground sm:text-lg">
             BA II Plus practice sums for CFA Level I timing, signs, worksheets, and formula shortcuts.
           </p>
         </div>
-        <div className="rounded-lg border border-pink-100 bg-white px-4 py-4 text-right sm:px-5">
+        <div className="rounded-lg border border-border bg-card px-4 py-4 text-right sm:px-5">
           <p className="text-[10px] uppercase tracking-[0.28em] text-pink-400">Accuracy</p>
-          <p className="mt-1 text-3xl font-semibold text-slate-900">{overallAccuracy}%</p>
+          <p className="mt-1 text-3xl font-semibold text-foreground">{overallAccuracy}%</p>
         </div>
       </div>
 
       <div className="soft-panel rounded-lg p-4 sm:p-5">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-[1.2fr_0.8fr_0.8fr_0.55fr_auto_auto]">
           <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-              <Search size={15} className="text-pink-500" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
+              <Search size={15} className="text-primary" />
               Search
             </span>
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search TVM, bond, NPV, FX, duration"
-              className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+              className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground outline-none focus:border-ring focus:ring-4 focus:ring-ring/50"
             />
           </label>
 
           <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-              <Filter size={15} className="text-pink-500" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
+              <Filter size={15} className="text-primary" />
               Subject
             </span>
             <select value={subject} onChange={(event) => setSubject(event.target.value)} className="app-select">
@@ -255,8 +255,8 @@ export default function CalculatorDrillsPage() {
           </label>
 
           <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-              <Target size={15} className="text-pink-500" />
+            <span className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
+              <Target size={15} className="text-primary" />
               Skill
             </span>
             <select value={skill} onChange={(event) => setSkill(event.target.value)} className="app-select">
@@ -270,7 +270,7 @@ export default function CalculatorDrillsPage() {
           </label>
 
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-slate-700">Level</span>
+            <span className="mb-2 block text-sm font-medium text-foreground">Level</span>
             <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)} className="app-select">
               <option>{allDifficulties}</option>
               <option value="easy">easy</option>
@@ -279,12 +279,12 @@ export default function CalculatorDrillsPage() {
             </select>
           </label>
 
-          <label className="flex items-center gap-3 rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm font-medium text-slate-700">
+          <label className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
             <input type="checkbox" checked={weakOnly} onChange={(event) => setWeakOnly(event.target.checked)} className="accent-pink-500" />
             Weak
           </label>
 
-          <label className="flex items-center gap-3 rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm font-medium text-slate-700">
+          <label className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
             <input type="checkbox" checked={unattemptedOnly} onChange={(event) => setUnattemptedOnly(event.target.checked)} className="accent-pink-500" />
             New
           </label>
@@ -293,7 +293,7 @@ export default function CalculatorDrillsPage() {
 
       <div className="grid gap-5">
         {filteredDrills.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-pink-200 bg-white/70 p-6 text-sm text-slate-600">
+          <div className="rounded-lg border border-dashed border-border bg-card/70 p-6 text-sm text-muted-foreground">
             No calculator drills match those filters.
           </div>
         ) : null}
@@ -308,41 +308,41 @@ export default function CalculatorDrillsPage() {
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-lg border border-pink-100 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
+                    <span className="rounded-lg border border-border bg-card px-3 py-1 text-xs font-semibold text-muted-foreground">
                       {drill.subject}
                     </span>
-                    <span className="rounded-lg border border-pink-100 bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-600">
+                    <span className="rounded-lg border border-border bg-secondary px-3 py-1 text-xs font-semibold text-primary">
                       {drill.skill}
                     </span>
                     <span className={cn('rounded-lg border px-3 py-1 text-xs font-semibold capitalize', statusTone(progress.status))}>
                       {progress.status.replace('_', ' ')}
                     </span>
                   </div>
-                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900">{drill.question}</h2>
-                  <p className="mt-2 text-sm text-slate-500">
+                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-foreground">{drill.question}</h2>
+                  <p className="mt-2 text-sm text-muted-foreground">
                     {drill.module} / {drill.difficulty} / {progress.attemptedCount} attempts / {accuracy(progress)}% accuracy
                   </p>
                 </div>
-                <div className="rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm font-medium text-slate-600">
+                <div className="rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-muted-foreground">
                   Answer format: {drill.expectedAnswer}
                 </div>
               </div>
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto]">
                 <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-slate-700">Your answer</span>
+                  <span className="mb-2 block text-sm font-medium text-foreground">Your answer</span>
                   <input
                     value={answers[drill.id] ?? ''}
                     onChange={(event) => setAnswers((current) => ({ ...current, [drill.id]: event.target.value }))}
                     placeholder="Type number, percent, or multiple"
-                    className="w-full rounded-lg border border-pink-100 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100"
+                    className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground outline-none focus:border-ring focus:ring-4 focus:ring-ring/50"
                   />
                 </label>
                 <button
                   type="button"
                   onClick={() => submitAnswer(drill)}
                   disabled={!answers[drill.id]?.trim()}
-                  className="mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-semibold text-white shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                  className="mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <Calculator size={16} />
                   Check
@@ -351,7 +351,7 @@ export default function CalculatorDrillsPage() {
                   type="button"
                   onClick={() => setRevealed((current) => ({ ...current, [drill.id]: true }))}
                   disabled={progress.attemptedCount === 0}
-                  className="mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-pink-200 bg-pink-50 px-5 py-3 text-sm font-semibold text-pink-600 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="mt-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-border bg-secondary px-5 py-3 text-sm font-semibold text-primary disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Reveal
                 </button>
@@ -359,35 +359,35 @@ export default function CalculatorDrillsPage() {
 
               {isRevealed ? (
                 <div className="mt-5 grid gap-4 xl:grid-cols-[0.7fr_1fr_1fr]">
-                  <section className="rounded-lg border border-pink-100 bg-white p-4">
+                  <section className="rounded-lg border border-border bg-card p-4">
                     <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-pink-400">Result</h3>
                     <div className="mt-3 flex items-center gap-2">
                       {result === null ? (
-                        <Sparkles size={18} className="text-pink-500" />
+                        <Sparkles size={18} className="text-primary" />
                       ) : result ? (
                         <CheckCircle2 size={18} className="text-emerald-600" />
                       ) : (
                         <XCircle size={18} className="text-rose-600" />
                       )}
-                      <p className="text-lg font-semibold text-slate-900">{drill.expectedAnswer}</p>
+                      <p className="text-lg font-semibold text-foreground">{drill.expectedAnswer}</p>
                     </div>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">{drill.explanation}</p>
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">{drill.explanation}</p>
                   </section>
 
-                  <section className="rounded-lg border border-pink-100 bg-white p-4">
+                  <section className="rounded-lg border border-border bg-card p-4">
                     <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-pink-400">BA II Plus</h3>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {drill.baIIPlusKeystrokes.map((step) => (
-                        <span key={step} className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700">
+                        <span key={step} className="rounded-lg border border-border bg-secondary/50 px-3 py-2 text-xs font-semibold text-foreground">
                           {step}
                         </span>
                       ))}
                     </div>
                   </section>
 
-                  <section className="rounded-lg border border-pink-100 bg-white p-4">
+                  <section className="rounded-lg border border-border bg-card p-4">
                     <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-pink-400">Trick</h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-700">{drill.trick}</p>
+                    <p className="mt-3 text-sm leading-6 text-foreground">{drill.trick}</p>
                   </section>
                 </div>
               ) : null}
@@ -399,16 +399,16 @@ export default function CalculatorDrillsPage() {
       <div className="soft-panel rounded-lg p-5">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <RotateCcw className="text-pink-500" size={18} />
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <RotateCcw className="text-primary" size={18} />
               Reset local calculator progress
             </h2>
-            <p className="mt-1 text-sm text-slate-600">Use this when you want a clean practice run on this browser.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Use this when you want a clean practice run on this browser.</p>
           </div>
           <button
             type="button"
             onClick={resetLocalProgress}
-            className="rounded-lg border border-pink-200 bg-pink-50 px-4 py-3 text-sm font-semibold text-pink-600"
+            className="rounded-lg border border-border bg-secondary px-4 py-3 text-sm font-semibold text-primary"
           >
             Clear local progress
           </button>
