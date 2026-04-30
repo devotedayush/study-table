@@ -78,6 +78,7 @@ export default function AssessmentsPage() {
   const [steer, setSteer] = useState('')
   const [isRegeneratingAll, setIsRegeneratingAll] = useState(false)
   const [steeredTitle, setSteeredTitle] = useState<string | null>(null)
+  const [storageNotice, setStorageNotice] = useState<string | null>(null)
 
   const selectedSubtopic = useMemo(
     () => workspace.enrichedSubtopics.find((item) => item.id === selectedSubtopicId) ?? workspace.enrichedSubtopics[0],
@@ -174,6 +175,7 @@ export default function AssessmentsPage() {
 
     setIsLoading(true)
     setSubmitted(false)
+    setStorageNotice(null)
 
     try {
       const localAttempts = loadQuestionAttempts()
@@ -222,13 +224,14 @@ export default function AssessmentsPage() {
         }),
       })
 
-      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string }
+      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string; storageError?: string }
       const questions = data.questions ?? []
       setQuiz(questions)
       setActiveSetId(data.setId ?? null)
       setActiveSource(data.source ?? 'generated')
       setAnswers(new Array(questions.length).fill(-1))
       setSteeredTitle(null)
+      setStorageNotice(data.storageError ? 'Quiz generated, but this paper was not saved to the backend yet.' : null)
     } finally {
       setIsLoading(false)
     }
@@ -240,6 +243,7 @@ export default function AssessmentsPage() {
     }
 
     setIsRegeneratingAll(true)
+    setStorageNotice(null)
 
     try {
       const attemptTargetId =
@@ -269,7 +273,7 @@ export default function AssessmentsPage() {
         }),
       })
 
-      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string }
+      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string; storageError?: string }
       const questions = data.questions ?? []
       if (questions.length === 0) {
         return
@@ -281,6 +285,7 @@ export default function AssessmentsPage() {
       setActiveSource(data.source ?? 'steered')
       setSubmitted(false)
       setReviewCount(0)
+      setStorageNotice(data.storageError ? 'Quiz regenerated, but this paper was not saved to the backend yet.' : null)
     } finally {
       setIsRegeneratingAll(false)
     }
@@ -312,6 +317,7 @@ export default function AssessmentsPage() {
     setSubmitted(false)
     setReviewCount(questions.length)
     setSteeredTitle(null)
+    setStorageNotice(null)
   }
 
   async function generateWeakTopicsQuiz() {
@@ -339,7 +345,7 @@ export default function AssessmentsPage() {
         }),
       })
 
-      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string }
+      const data = (await response.json()) as { questions?: QuizQuestion[]; setId?: string; source?: string; storageError?: string }
       const questions = data.questions ?? []
       setQuiz(questions)
       setActiveSetId(data.setId ?? null)
@@ -347,6 +353,7 @@ export default function AssessmentsPage() {
       setAnswers(new Array(questions.length).fill(-1))
       setReviewCount(0)
       setSteeredTitle(null)
+      setStorageNotice(data.storageError ? 'Quiz generated, but this paper was not saved to the backend yet.' : null)
     } finally {
       setIsLoading(false)
     }
@@ -381,6 +388,7 @@ export default function AssessmentsPage() {
       setActiveSource(selectedSet?.source ?? 'admin_upload')
       setReviewCount(0)
       setAnswers(new Array(questions.length).fill(-1))
+      setStorageNotice(null)
     } finally {
       setIsLoading(false)
     }
@@ -848,6 +856,11 @@ export default function AssessmentsPage() {
                 {steeredTitle ? `Steered quiz from your note: ${steeredTitle}. ` : ''}
                 Answer all {quiz.length} questions, then submit once. {activeSetId ? 'This paper is stored in the backend.' : 'This quiz is only saved once generated normally.'} {reviewCount > 0 ? `${reviewCount} missed ${reviewCount === 1 ? 'question is' : 'questions are'} back in this quiz.` : 'Missed questions will come back in later quizzes.'}
               </div>
+              {storageNotice ? (
+                <div className="rounded-[1.5rem] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+                  {storageNotice} You can still answer it and use Download paper.
+                </div>
+              ) : null}
 
               {quiz.map((question, questionIndex) => {
                 const selectedAnswer = answers[questionIndex]

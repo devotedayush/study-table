@@ -262,12 +262,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ questions, setId: null, source: 'generated', scope })
   }
 
-  const setId = await saveGeneratedSet({
-    userId: user.id,
-    scope,
-    targetId: body.targetId,
-    questions,
-  })
+  try {
+    const setId = await saveGeneratedSet({
+      userId: user.id,
+      scope,
+      targetId: body.targetId,
+      questions,
+    })
 
-  return NextResponse.json({ questions, setId, source: 'generated', scope })
+    return NextResponse.json({ questions, setId, source: 'generated', scope })
+  } catch (error) {
+    const storageError = error instanceof Error ? error.message : 'Could not save generated assessment.'
+    return NextResponse.json({ questions, setId: null, source: 'generated', scope, storageError })
+  }
 }
