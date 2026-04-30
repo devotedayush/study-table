@@ -1,0 +1,435 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - complementary [ref=e4]:
+      - generic [ref=e5]:
+        - link "TA Tutor AI Private study cockpit" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]: TA
+          - generic [ref=e9]:
+            - paragraph [ref=e10]: Tutor AI
+            - generic [ref=e11]:
+              - heading "Private study cockpit" [level=1] [ref=e12]
+              - img [ref=e13]
+        - generic [ref=e16]:
+          - paragraph [ref=e17]: Current section
+          - generic [ref=e18]:
+            - paragraph [ref=e19]: Assessments
+            - img [ref=e20]
+      - navigation [ref=e22]:
+        - link "Dashboard" [ref=e23] [cursor=pointer]:
+          - /url: /
+          - img [ref=e25]
+          - generic [ref=e30]: Dashboard
+        - link "Study" [ref=e31] [cursor=pointer]:
+          - /url: /syllabus
+          - img [ref=e33]
+          - generic [ref=e35]: Study
+        - link "Assessments" [ref=e36] [cursor=pointer]:
+          - /url: /assessments
+          - img [ref=e38]
+          - generic [ref=e41]: Assessments
+        - link "Flashcards" [ref=e43] [cursor=pointer]:
+          - /url: /flashcards
+          - img [ref=e45]
+          - generic [ref=e49]: Flashcards
+        - link "Notebook" [ref=e50] [cursor=pointer]:
+          - /url: /notes
+          - img [ref=e52]
+          - generic [ref=e57]: Notebook
+        - link "Admin Bank" [ref=e58] [cursor=pointer]:
+          - /url: /admin/question-bank
+          - img [ref=e60]
+          - generic [ref=e64]: Admin Bank
+      - generic [ref=e65]:
+        - generic [ref=e67]:
+          - img [ref=e68]
+          - text: Checking sync
+        - generic [ref=e70]:
+          - link "Settings" [ref=e71] [cursor=pointer]:
+            - /url: /settings
+            - generic [ref=e72]:
+              - img [ref=e73]
+              - text: Settings
+            - img [ref=e76]
+          - button "Sign out" [ref=e78]:
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - text: Sign out
+            - img [ref=e83]
+    - main [ref=e85]:
+      - generic [ref=e87]:
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - paragraph [ref=e91]: Practice hub
+            - paragraph [ref=e92]: Graded quizzes and readiness
+          - generic [ref=e93]:
+            - link "Assessments" [ref=e94] [cursor=pointer]:
+              - /url: /assessments
+              - img [ref=e95]
+              - text: Assessments
+            - link "Calculator drills" [ref=e98] [cursor=pointer]:
+              - /url: /calculator-drills
+              - img [ref=e99]
+              - text: Calculator drills
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - heading "Test Yourself" [level=1] [ref=e103]
+            - paragraph [ref=e104]: Pick a scope, choose how many questions, then get one clear summary at the end.
+          - generic [ref=e105]:
+            - paragraph [ref=e106]: Average score
+            - paragraph [ref=e107]: 0%
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - heading "One-stop summary" [level=2] [ref=e110]:
+              - img [ref=e111]
+              - text: One-stop summary
+            - paragraph [ref=e114]: Finish a quiz and the score, plain-English summary, and next step will land here.
+          - generic [ref=e115]:
+            - heading "Current topic snapshot" [level=2] [ref=e116]:
+              - img [ref=e117]
+              - text: Current topic snapshot
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - paragraph [ref=e123]: Target
+                - paragraph [ref=e124]: Read and outline Ethics and Trust in the Investment Profession
+                - paragraph [ref=e125]: Customised topic quiz
+              - generic [ref=e126]:
+                - paragraph [ref=e127]: Study feeling
+                - paragraph [ref=e128]: Somewhat ready
+              - generic [ref=e129]:
+                - paragraph [ref=e130]: Mistake bank
+                - paragraph [ref=e131]: "0"
+                - paragraph [ref=e132]: wrong answers saved
+        - generic [ref=e133]:
+          - heading "Quiz setup" [level=2] [ref=e134]:
+            - img [ref=e135]
+            - text: Quiz setup
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - generic [ref=e149]: Quiz type
+              - combobox "Quiz type" [ref=e150]:
+                - option "Customised topic quiz" [selected]
+                - option "Topic quiz"
+                - option "Chapter quiz"
+                - option "Full mock"
+            - generic [ref=e151]:
+              - generic [ref=e152]: Customised topic focus
+              - combobox "Customised topic focus" [ref=e153]:
+                - option "Ethical and Professional Standards · Read and outline Ethics and Trust in the Investment Profession" [selected]
+                - option "Ethical and Professional Standards · Work scenario applications for Ethics and Trust in the Investment Profession"
+                - option "Ethical and Professional Standards · Review violations, remedies, and traps for Ethics and Trust in the Investment Profession"
+                - option "Ethical and Professional Standards · Read and outline Code of Ethics and Standards of Professional Conduct"
+                - option "Ethical and Professional Standards · Work scenario applications for Code of Ethics and Standards of Professional Conduct"
+                - option "Ethical and Professional Standards · Review violations, remedies, and traps for Code of Ethics and Standards of Professional Conduct"
+                - option "Ethical and Professional Standards · Read and outline Guidance for Standards I-VII"
+                - option "Ethical and Professional Standards · Work scenario applications for Guidance for Standards I-VII"
+                - option "Ethical and Professional Standards · Review violations, remedies, and traps for Guidance for Standards I-VII"
+                - option "Ethical and Professional Standards · Read and annotate Introduction to the Global Investment Performance Standards (GIPS)"
+                - option "Ethical and Professional Standards · Do active recall for Introduction to the Global Investment Performance Standards (GIPS)"
+                - option "Ethical and Professional Standards · Practice questions for Introduction to the Global Investment Performance Standards (GIPS)"
+                - option "Ethical and Professional Standards · Read and outline Ethics Application"
+                - option "Ethical and Professional Standards · Work scenario applications for Ethics Application"
+                - option "Ethical and Professional Standards · Review violations, remedies, and traps for Ethics Application"
+                - option "Quantitative Methods · Learn the core formulas in Rates and Returns"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Rates and Returns"
+                - option "Quantitative Methods · Practice questions and error review for Rates and Returns"
+                - option "Quantitative Methods · Learn the core formulas in Time Value of Money in Finance"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Time Value of Money in Finance"
+                - option "Quantitative Methods · Practice questions and error review for Time Value of Money in Finance"
+                - option "Quantitative Methods · Learn the core formulas in Statistical Measures of Asset Returns"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Statistical Measures of Asset Returns"
+                - option "Quantitative Methods · Practice questions and error review for Statistical Measures of Asset Returns"
+                - option "Quantitative Methods · Learn the core formulas in Probability Trees and Conditional Expectations"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Probability Trees and Conditional Expectations"
+                - option "Quantitative Methods · Practice questions and error review for Probability Trees and Conditional Expectations"
+                - option "Quantitative Methods · Learn the core formulas in Portfolio Mathematics"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Portfolio Mathematics"
+                - option "Quantitative Methods · Practice questions and error review for Portfolio Mathematics"
+                - option "Quantitative Methods · Read and annotate Simulation Methods"
+                - option "Quantitative Methods · Do active recall for Simulation Methods"
+                - option "Quantitative Methods · Practice questions for Simulation Methods"
+                - option "Quantitative Methods · Learn the core formulas in Estimation and Inference"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Estimation and Inference"
+                - option "Quantitative Methods · Practice questions and error review for Estimation and Inference"
+                - option "Quantitative Methods · Learn the core formulas in Hypothesis Testing"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Hypothesis Testing"
+                - option "Quantitative Methods · Practice questions and error review for Hypothesis Testing"
+                - option "Quantitative Methods · Learn the core formulas in Parametric and Non-Parametric Tests of Independence"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Parametric and Non-Parametric Tests of Independence"
+                - option "Quantitative Methods · Practice questions and error review for Parametric and Non-Parametric Tests of Independence"
+                - option "Quantitative Methods · Learn the core formulas in Simple Linear Regression"
+                - option "Quantitative Methods · Run calculator reps and formula drills for Simple Linear Regression"
+                - option "Quantitative Methods · Practice questions and error review for Simple Linear Regression"
+                - option "Quantitative Methods · Read and annotate Introduction to Big Data Techniques"
+                - option "Quantitative Methods · Do active recall for Introduction to Big Data Techniques"
+                - option "Quantitative Methods · Practice questions for Introduction to Big Data Techniques"
+                - option "Economics · Read and annotate The Firm and Market Structures"
+                - option "Economics · Do active recall for The Firm and Market Structures"
+                - option "Economics · Practice questions for The Firm and Market Structures"
+                - option "Economics · Read and annotate Understanding Business Cycles"
+                - option "Economics · Do active recall for Understanding Business Cycles"
+                - option "Economics · Practice questions for Understanding Business Cycles"
+                - option "Economics · Learn the core formulas in Fiscal Policy"
+                - option "Economics · Run calculator reps and formula drills for Fiscal Policy"
+                - option "Economics · Practice questions and error review for Fiscal Policy"
+                - option "Economics · Read and annotate Monetary Policy"
+                - option "Economics · Do active recall for Monetary Policy"
+                - option "Economics · Practice questions for Monetary Policy"
+                - option "Economics · Read and annotate Introduction to Geopolitics"
+                - option "Economics · Do active recall for Introduction to Geopolitics"
+                - option "Economics · Practice questions for Introduction to Geopolitics"
+                - option "Economics · Read and annotate International Trade"
+                - option "Economics · Do active recall for International Trade"
+                - option "Economics · Practice questions for International Trade"
+                - option "Economics · Learn the core formulas in Capital Flows and the FX Market"
+                - option "Economics · Run calculator reps and formula drills for Capital Flows and the FX Market"
+                - option "Economics · Practice questions and error review for Capital Flows and the FX Market"
+                - option "Economics · Learn the core formulas in Exchange Rate Calculations"
+                - option "Economics · Run calculator reps and formula drills for Exchange Rate Calculations"
+                - option "Economics · Practice questions and error review for Exchange Rate Calculations"
+                - option "Corporate Issuers · Read and annotate Organizational Forms, Corporate Issuer Features, and Ownership"
+                - option "Corporate Issuers · Do active recall for Organizational Forms, Corporate Issuer Features, and Ownership"
+                - option "Corporate Issuers · Practice questions for Organizational Forms, Corporate Issuer Features, and Ownership"
+                - option "Corporate Issuers · Read and annotate Investors and Other Stakeholders"
+                - option "Corporate Issuers · Do active recall for Investors and Other Stakeholders"
+                - option "Corporate Issuers · Practice questions for Investors and Other Stakeholders"
+                - 'option "Corporate Issuers · Build the core understanding for Corporate Governance: Conflicts, Mechanisms, Risks, and Benefits"'
+                - 'option "Corporate Issuers · Work applied examples for Corporate Governance: Conflicts, Mechanisms, Risks, and Benefits"'
+                - 'option "Corporate Issuers · Finish question bank and mistake log for Corporate Governance: Conflicts, Mechanisms, Risks, and Benefits"'
+                - option "Corporate Issuers · Learn the core formulas in Working Capital and Liquidity"
+                - option "Corporate Issuers · Run calculator reps and formula drills for Working Capital and Liquidity"
+                - option "Corporate Issuers · Practice questions and error review for Working Capital and Liquidity"
+                - option "Corporate Issuers · Learn the core formulas in Capital Investments and Capital Allocation"
+                - option "Corporate Issuers · Run calculator reps and formula drills for Capital Investments and Capital Allocation"
+                - option "Corporate Issuers · Practice questions and error review for Capital Investments and Capital Allocation"
+                - option "Corporate Issuers · Learn the core formulas in Capital Structure"
+                - option "Corporate Issuers · Run calculator reps and formula drills for Capital Structure"
+                - option "Corporate Issuers · Practice questions and error review for Capital Structure"
+                - option "Corporate Issuers · Read and annotate Business Models"
+                - option "Corporate Issuers · Do active recall for Business Models"
+                - option "Corporate Issuers · Practice questions for Business Models"
+                - option "Financial Statement Analysis · Read and annotate Introduction to Financial Statement Analysis"
+                - option "Financial Statement Analysis · Do active recall for Introduction to Financial Statement Analysis"
+                - option "Financial Statement Analysis · Practice questions for Introduction to Financial Statement Analysis"
+                - option "Financial Statement Analysis · Learn the core formulas in Analyzing Income Statements"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analyzing Income Statements"
+                - option "Financial Statement Analysis · Practice questions and error review for Analyzing Income Statements"
+                - option "Financial Statement Analysis · Learn the core formulas in Analyzing Balance Sheets"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analyzing Balance Sheets"
+                - option "Financial Statement Analysis · Practice questions and error review for Analyzing Balance Sheets"
+                - option "Financial Statement Analysis · Learn the core formulas in Analyzing Statements of Cash Flows I"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analyzing Statements of Cash Flows I"
+                - option "Financial Statement Analysis · Practice questions and error review for Analyzing Statements of Cash Flows I"
+                - option "Financial Statement Analysis · Learn the core formulas in Analyzing Statements of Cash Flows II"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analyzing Statements of Cash Flows II"
+                - option "Financial Statement Analysis · Practice questions and error review for Analyzing Statements of Cash Flows II"
+                - option "Financial Statement Analysis · Learn the core formulas in Analysis of Inventories"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analysis of Inventories"
+                - option "Financial Statement Analysis · Practice questions and error review for Analysis of Inventories"
+                - option "Financial Statement Analysis · Learn the core formulas in Analysis of Long-Term Assets"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analysis of Long-Term Assets"
+                - option "Financial Statement Analysis · Practice questions and error review for Analysis of Long-Term Assets"
+                - option "Financial Statement Analysis · Learn the core formulas in Topics in Long-Term Liabilities and Equity"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Topics in Long-Term Liabilities and Equity"
+                - option "Financial Statement Analysis · Practice questions and error review for Topics in Long-Term Liabilities and Equity"
+                - option "Financial Statement Analysis · Learn the core formulas in Analysis of Income Taxes"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Analysis of Income Taxes"
+                - option "Financial Statement Analysis · Practice questions and error review for Analysis of Income Taxes"
+                - option "Financial Statement Analysis · Build the core understanding for Financial Reporting Quality"
+                - option "Financial Statement Analysis · Work applied examples for Financial Reporting Quality"
+                - option "Financial Statement Analysis · Finish question bank and mistake log for Financial Reporting Quality"
+                - option "Financial Statement Analysis · Learn the core formulas in Financial Analysis Techniques"
+                - option "Financial Statement Analysis · Run calculator reps and formula drills for Financial Analysis Techniques"
+                - option "Financial Statement Analysis · Practice questions and error review for Financial Analysis Techniques"
+                - option "Financial Statement Analysis · Build the core understanding for Introduction to Financial Statement Modeling"
+                - option "Financial Statement Analysis · Work applied examples for Introduction to Financial Statement Modeling"
+                - option "Financial Statement Analysis · Finish question bank and mistake log for Introduction to Financial Statement Modeling"
+                - option "Equity Investments · Read and annotate Market Organization and Structure"
+                - option "Equity Investments · Do active recall for Market Organization and Structure"
+                - option "Equity Investments · Practice questions for Market Organization and Structure"
+                - option "Equity Investments · Learn the core formulas in Security Market Indexes"
+                - option "Equity Investments · Run calculator reps and formula drills for Security Market Indexes"
+                - option "Equity Investments · Practice questions and error review for Security Market Indexes"
+                - option "Equity Investments · Read and annotate Market Efficiency"
+                - option "Equity Investments · Do active recall for Market Efficiency"
+                - option "Equity Investments · Practice questions for Market Efficiency"
+                - option "Equity Investments · Read and annotate Overview of Equity Securities"
+                - option "Equity Investments · Do active recall for Overview of Equity Securities"
+                - option "Equity Investments · Practice questions for Overview of Equity Securities"
+                - 'option "Equity Investments · Build the core understanding for Company Analysis: Past and Present"'
+                - 'option "Equity Investments · Work applied examples for Company Analysis: Past and Present"'
+                - 'option "Equity Investments · Finish question bank and mistake log for Company Analysis: Past and Present"'
+                - option "Equity Investments · Build the core understanding for Industry and Competitive Analysis"
+                - option "Equity Investments · Work applied examples for Industry and Competitive Analysis"
+                - option "Equity Investments · Finish question bank and mistake log for Industry and Competitive Analysis"
+                - 'option "Equity Investments · Learn the core formulas in Company Analysis: Forecasting"'
+                - 'option "Equity Investments · Run calculator reps and formula drills for Company Analysis: Forecasting"'
+                - 'option "Equity Investments · Practice questions and error review for Company Analysis: Forecasting"'
+                - 'option "Equity Investments · Learn the core formulas in Equity Valuation: Concepts and Basic Tools"'
+                - 'option "Equity Investments · Run calculator reps and formula drills for Equity Valuation: Concepts and Basic Tools"'
+                - 'option "Equity Investments · Practice questions and error review for Equity Valuation: Concepts and Basic Tools"'
+                - option "Fixed Income · Read and annotate Fixed-Income Instrument Features"
+                - option "Fixed Income · Do active recall for Fixed-Income Instrument Features"
+                - option "Fixed Income · Practice questions for Fixed-Income Instrument Features"
+                - option "Fixed Income · Read and annotate Fixed-Income Cash Flows and Types"
+                - option "Fixed Income · Do active recall for Fixed-Income Cash Flows and Types"
+                - option "Fixed Income · Practice questions for Fixed-Income Cash Flows and Types"
+                - option "Fixed Income · Read and annotate Fixed-Income Issuance and Trading"
+                - option "Fixed Income · Do active recall for Fixed-Income Issuance and Trading"
+                - option "Fixed Income · Practice questions for Fixed-Income Issuance and Trading"
+                - option "Fixed Income · Read and annotate Fixed-Income Markets for Corporate Issuers"
+                - option "Fixed Income · Do active recall for Fixed-Income Markets for Corporate Issuers"
+                - option "Fixed Income · Practice questions for Fixed-Income Markets for Corporate Issuers"
+                - option "Fixed Income · Read and annotate Fixed-Income Markets for Government Issuers"
+                - option "Fixed Income · Do active recall for Fixed-Income Markets for Government Issuers"
+                - option "Fixed Income · Practice questions for Fixed-Income Markets for Government Issuers"
+                - 'option "Fixed Income · Learn the core formulas in Fixed-Income Bond Valuation: Prices and Yields"'
+                - 'option "Fixed Income · Run calculator reps and formula drills for Fixed-Income Bond Valuation: Prices and Yields"'
+                - 'option "Fixed Income · Practice questions and error review for Fixed-Income Bond Valuation: Prices and Yields"'
+                - option "Fixed Income · Learn the core formulas in Yield and Yield Spread Measures for Fixed-Rate Bonds"
+                - option "Fixed Income · Run calculator reps and formula drills for Yield and Yield Spread Measures for Fixed-Rate Bonds"
+                - option "Fixed Income · Practice questions and error review for Yield and Yield Spread Measures for Fixed-Rate Bonds"
+                - option "Fixed Income · Learn the core formulas in Yield and Yield Spread Measures for Floating-Rate Instruments"
+                - option "Fixed Income · Run calculator reps and formula drills for Yield and Yield Spread Measures for Floating-Rate Instruments"
+                - option "Fixed Income · Practice questions and error review for Yield and Yield Spread Measures for Floating-Rate Instruments"
+                - 'option "Fixed Income · Learn the core formulas in The Term Structure of Interest Rates: Spot, Par, and Forward Curves"'
+                - 'option "Fixed Income · Run calculator reps and formula drills for The Term Structure of Interest Rates: Spot, Par, and Forward Curves"'
+                - 'option "Fixed Income · Practice questions and error review for The Term Structure of Interest Rates: Spot, Par, and Forward Curves"'
+                - option "Fixed Income · Learn the core formulas in Interest Rate Risk and Return"
+                - option "Fixed Income · Run calculator reps and formula drills for Interest Rate Risk and Return"
+                - option "Fixed Income · Practice questions and error review for Interest Rate Risk and Return"
+                - option "Fixed Income · Learn the core formulas in Yield-Based Bond Duration Measures and Properties"
+                - option "Fixed Income · Run calculator reps and formula drills for Yield-Based Bond Duration Measures and Properties"
+                - option "Fixed Income · Practice questions and error review for Yield-Based Bond Duration Measures and Properties"
+                - option "Fixed Income · Learn the core formulas in Yield-Based Bond Convexity and Portfolio Properties"
+                - option "Fixed Income · Run calculator reps and formula drills for Yield-Based Bond Convexity and Portfolio Properties"
+                - option "Fixed Income · Practice questions and error review for Yield-Based Bond Convexity and Portfolio Properties"
+                - option "Fixed Income · Learn the core formulas in Curve-Based and Empirical Fixed-Income Risk Measures"
+                - option "Fixed Income · Run calculator reps and formula drills for Curve-Based and Empirical Fixed-Income Risk Measures"
+                - option "Fixed Income · Practice questions and error review for Curve-Based and Empirical Fixed-Income Risk Measures"
+                - option "Fixed Income · Read and annotate Credit Risk"
+                - option "Fixed Income · Do active recall for Credit Risk"
+                - option "Fixed Income · Practice questions for Credit Risk"
+                - option "Fixed Income · Build the core understanding for Credit Analysis for Government Issuers"
+                - option "Fixed Income · Work applied examples for Credit Analysis for Government Issuers"
+                - option "Fixed Income · Finish question bank and mistake log for Credit Analysis for Government Issuers"
+                - option "Fixed Income · Build the core understanding for Credit Analysis for Corporate Issuers"
+                - option "Fixed Income · Work applied examples for Credit Analysis for Corporate Issuers"
+                - option "Fixed Income · Finish question bank and mistake log for Credit Analysis for Corporate Issuers"
+                - option "Fixed Income · Read and annotate Fixed-Income Securitization"
+                - option "Fixed Income · Do active recall for Fixed-Income Securitization"
+                - option "Fixed Income · Practice questions for Fixed-Income Securitization"
+                - option "Fixed Income · Read and annotate Asset-Backed Security (ABS) Instrument and Market Features"
+                - option "Fixed Income · Do active recall for Asset-Backed Security (ABS) Instrument and Market Features"
+                - option "Fixed Income · Practice questions for Asset-Backed Security (ABS) Instrument and Market Features"
+                - option "Fixed Income · Read and annotate Mortgage-Backed Security (MBS) Instrument and Market Features"
+                - option "Fixed Income · Do active recall for Mortgage-Backed Security (MBS) Instrument and Market Features"
+                - option "Fixed Income · Practice questions for Mortgage-Backed Security (MBS) Instrument and Market Features"
+                - option "Derivatives · Read and annotate Derivative Instrument and Derivative Market Features"
+                - option "Derivatives · Do active recall for Derivative Instrument and Derivative Market Features"
+                - option "Derivatives · Practice questions for Derivative Instrument and Derivative Market Features"
+                - option "Derivatives · Read and annotate Forward Commitment and Contingent Claim Features and Instruments"
+                - option "Derivatives · Do active recall for Forward Commitment and Contingent Claim Features and Instruments"
+                - option "Derivatives · Practice questions for Forward Commitment and Contingent Claim Features and Instruments"
+                - option "Derivatives · Build the core understanding for Derivative Benefits, Risks, and Issuer and Investor Uses"
+                - option "Derivatives · Work applied examples for Derivative Benefits, Risks, and Issuer and Investor Uses"
+                - option "Derivatives · Finish question bank and mistake log for Derivative Benefits, Risks, and Issuer and Investor Uses"
+                - option "Derivatives · Learn the core formulas in Arbitrage, Replication, and the Cost of Carry in Pricing Derivatives"
+                - option "Derivatives · Run calculator reps and formula drills for Arbitrage, Replication, and the Cost of Carry in Pricing Derivatives"
+                - option "Derivatives · Practice questions and error review for Arbitrage, Replication, and the Cost of Carry in Pricing Derivatives"
+                - option "Derivatives · Learn the core formulas in Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities"
+                - option "Derivatives · Run calculator reps and formula drills for Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities"
+                - option "Derivatives · Practice questions and error review for Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities"
+                - option "Derivatives · Learn the core formulas in Pricing and Valuation of Futures Contracts"
+                - option "Derivatives · Run calculator reps and formula drills for Pricing and Valuation of Futures Contracts"
+                - option "Derivatives · Practice questions and error review for Pricing and Valuation of Futures Contracts"
+                - option "Derivatives · Learn the core formulas in Pricing and Valuation of Interest Rates and Other Swaps"
+                - option "Derivatives · Run calculator reps and formula drills for Pricing and Valuation of Interest Rates and Other Swaps"
+                - option "Derivatives · Practice questions and error review for Pricing and Valuation of Interest Rates and Other Swaps"
+                - option "Derivatives · Learn the core formulas in Pricing and Valuation of Options"
+                - option "Derivatives · Run calculator reps and formula drills for Pricing and Valuation of Options"
+                - option "Derivatives · Practice questions and error review for Pricing and Valuation of Options"
+                - option "Derivatives · Learn the core formulas in Option Replication Using Put-Call Parity"
+                - option "Derivatives · Run calculator reps and formula drills for Option Replication Using Put-Call Parity"
+                - option "Derivatives · Practice questions and error review for Option Replication Using Put-Call Parity"
+                - option "Derivatives · Learn the core formulas in Valuing a Derivative Using a One-Period Binomial Model"
+                - option "Derivatives · Run calculator reps and formula drills for Valuing a Derivative Using a One-Period Binomial Model"
+                - option "Derivatives · Practice questions and error review for Valuing a Derivative Using a One-Period Binomial Model"
+                - option "Alternative Investments · Read and annotate Alternative Investment Features, Methods, and Structures"
+                - option "Alternative Investments · Do active recall for Alternative Investment Features, Methods, and Structures"
+                - option "Alternative Investments · Practice questions for Alternative Investment Features, Methods, and Structures"
+                - option "Alternative Investments · Learn the core formulas in Alternative Investment Performance and Returns"
+                - option "Alternative Investments · Run calculator reps and formula drills for Alternative Investment Performance and Returns"
+                - option "Alternative Investments · Practice questions and error review for Alternative Investment Performance and Returns"
+                - 'option "Alternative Investments · Read and annotate Investments in Private Capital: Equity and Debt"'
+                - 'option "Alternative Investments · Do active recall for Investments in Private Capital: Equity and Debt"'
+                - 'option "Alternative Investments · Practice questions for Investments in Private Capital: Equity and Debt"'
+                - option "Alternative Investments · Build the core understanding for Real Estate and Infrastructure"
+                - option "Alternative Investments · Work applied examples for Real Estate and Infrastructure"
+                - option "Alternative Investments · Finish question bank and mistake log for Real Estate and Infrastructure"
+                - option "Alternative Investments · Read and annotate Natural Resources"
+                - option "Alternative Investments · Do active recall for Natural Resources"
+                - option "Alternative Investments · Practice questions for Natural Resources"
+                - option "Alternative Investments · Build the core understanding for Hedge Funds"
+                - option "Alternative Investments · Work applied examples for Hedge Funds"
+                - option "Alternative Investments · Finish question bank and mistake log for Hedge Funds"
+                - option "Alternative Investments · Read and annotate Introduction to Digital Assets"
+                - option "Alternative Investments · Do active recall for Introduction to Digital Assets"
+                - option "Alternative Investments · Practice questions for Introduction to Digital Assets"
+                - 'option "Portfolio Management · Learn the core formulas in Portfolio Risk and Return: Part I"'
+                - 'option "Portfolio Management · Run calculator reps and formula drills for Portfolio Risk and Return: Part I"'
+                - 'option "Portfolio Management · Practice questions and error review for Portfolio Risk and Return: Part I"'
+                - 'option "Portfolio Management · Learn the core formulas in Portfolio Risk and Return: Part II"'
+                - 'option "Portfolio Management · Run calculator reps and formula drills for Portfolio Risk and Return: Part II"'
+                - 'option "Portfolio Management · Practice questions and error review for Portfolio Risk and Return: Part II"'
+                - 'option "Portfolio Management · Read and annotate Portfolio Management: An Overview"'
+                - 'option "Portfolio Management · Do active recall for Portfolio Management: An Overview"'
+                - 'option "Portfolio Management · Practice questions for Portfolio Management: An Overview"'
+                - option "Portfolio Management · Build the core understanding for Basics of Portfolio Planning and Construction"
+                - option "Portfolio Management · Work applied examples for Basics of Portfolio Planning and Construction"
+                - option "Portfolio Management · Finish question bank and mistake log for Basics of Portfolio Planning and Construction"
+                - option "Portfolio Management · Build the core understanding for The Behavioral Biases of Individuals"
+                - option "Portfolio Management · Work applied examples for The Behavioral Biases of Individuals"
+                - option "Portfolio Management · Finish question bank and mistake log for The Behavioral Biases of Individuals"
+                - option "Portfolio Management · Read and annotate Introduction to Risk Management"
+                - option "Portfolio Management · Do active recall for Introduction to Risk Management"
+                - option "Portfolio Management · Practice questions for Introduction to Risk Management"
+            - generic [ref=e154]:
+              - generic [ref=e155]: How ready do you feel before the quiz?
+              - combobox "How ready do you feel before the quiz?" [ref=e156]:
+                - option "Not ready at all"
+                - option "A bit shaky"
+                - option "Somewhat ready" [selected]
+                - option "Pretty ready"
+                - option "Very ready"
+            - generic [ref=e157]:
+              - generic [ref=e158]: How many questions?
+              - spinbutton "How many questions?" [ref=e159]: "4"
+          - generic [ref=e160]:
+            - generic [ref=e161]:
+              - img [ref=e162]
+              - text: Steer this quiz (optional)
+            - textbox "E.g. focus on duration traps, skip numeric compounding, make questions harder than last time." [ref=e165]
+            - paragraph [ref=e166]: Before you start, this tells the generator what kind of questions you want. After you finish, use it to regenerate the whole quiz with your feedback.
+          - generic [ref=e167]:
+            - button "Start quiz" [ref=e168]:
+              - img [ref=e169]
+              - text: Start quiz
+            - button "Retest my mistakes (0)" [disabled] [ref=e173]:
+              - img [ref=e174]
+              - text: Retest my mistakes (0)
+            - 'button "Quiz my weak spot: Read and outline Ethics Application" [ref=e177]':
+              - img [ref=e178]
+              - text: "Quiz my weak spot: Read and outline Ethics Application"
+          - generic [ref=e181]:
+            - generic [ref=e182]:
+              - generic [ref=e183]: Uploaded or saved paper
+              - combobox "Uploaded or saved paper" [ref=e184]:
+                - option "No saved papers yet" [selected]
+            - button "Load saved paper" [disabled] [ref=e185]
+  - button "Baby Maan" [ref=e187]:
+    - img [ref=e188]
+    - generic [ref=e191]: Baby Maan
+  - button "Feedback" [ref=e193]:
+    - img [ref=e194]
+    - generic [ref=e196]: Feedback

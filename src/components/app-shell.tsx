@@ -139,10 +139,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="mx-auto flex min-h-screen max-w-[1600px]">
+    <div className="min-h-screen overflow-x-hidden bg-background">
+      <div className="mx-auto flex min-h-screen w-full max-w-[1600px] overflow-x-hidden">
         <Sidebar />
-        <main className="min-w-0 flex-1 px-3 py-4 sm:px-5 lg:px-8 lg:py-6">
+        <main className="min-w-0 flex-1 overflow-x-hidden px-3 py-4 sm:px-5 lg:px-8 lg:py-6">
           <div className="mb-6 lg:hidden sticky top-2 z-40">
             <div className="soft-panel rounded-[1.5rem] p-2.5 sm:p-3">
               <div className="flex flex-col gap-3 rounded-[1.35rem] border border-border bg-card/90 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
@@ -191,7 +191,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           </div>
-          <div className="mx-auto max-w-[1360px] pb-24 lg:pb-0">{children}</div>
+          <div className="mx-auto w-full max-w-[1360px] min-w-0 pb-24 lg:pb-0">{children}</div>
         </main>
       </div>
       {pathname.startsWith('/assistant') ? null : <BabyMaanWidget />}

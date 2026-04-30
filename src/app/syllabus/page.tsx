@@ -59,9 +59,9 @@ function TopicRow({
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-secondary/70"
+        className="flex w-full min-w-0 items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-secondary/70"
       >
-        <div className="flex min-w-0 flex-row items-center gap-3">
+        <div className="flex min-w-0 flex-1 flex-row items-center gap-3">
           <div className="shrink-0 text-pink-400">{isOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />}</div>
           <div className="min-w-0">
             <h3 className="truncate font-medium text-foreground">{topic.title}</h3>
@@ -83,11 +83,11 @@ function TopicRow({
               }
 
               return (
-                <div key={subtopic.id} className="border-t border-border px-5 py-4">
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-3 sm:items-center sm:justify-start">
-                        <p className="font-medium text-foreground">{subtopic.title}</p>
+                <div key={subtopic.id} className="min-w-0 border-t border-border px-5 py-4">
+                  <div className="flex min-w-0 flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                    <div className="min-w-0 space-y-2">
+                      <div className="flex min-w-0 items-start gap-3 sm:items-center sm:justify-start">
+                        <p className="min-w-0 break-words font-medium text-foreground">{subtopic.title}</p>
                         <span className={cn('shrink-0 rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-wider', statusTone(subtopic.status))}>
                           {draft.status.replaceAll('_', ' ')}
                         </span>
@@ -102,7 +102,7 @@ function TopicRow({
                       </div>
                     </div>
 
-                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid min-w-0 gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       <label className="block">
                         <span className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Status</span>
                         <select
@@ -146,7 +146,7 @@ function TopicRow({
                     </div>
                   </div>
 
-                  <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end">
+                  <div className="mt-3 flex min-w-0 flex-col gap-3 md:flex-row md:items-end">
                     <label className="block flex-1">
                       <span className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Notes</span>
                       <textarea
@@ -225,8 +225,8 @@ export default function SyllabusPage() {
   const topRecommendation = workspace.topRecommendation
   return (
     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: 'easeOut' }} className="w-full min-w-0 space-y-8">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
+      <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="min-w-0">
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Study dashboard</h1>
           <p className="mt-2 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Your revision queue and the full syllabus map, side by side. Clear due items up top, then dig into any module below.
@@ -238,8 +238,8 @@ export default function SyllabusPage() {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
+      <div className="grid min-w-0 grid-cols-1 gap-6 2xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <div className="soft-panel min-w-0 rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
               <Sparkles className="text-primary" size={18} />
@@ -249,12 +249,12 @@ export default function SyllabusPage() {
               {dueNow.length} due · {upcoming.length} upcoming
             </span>
           </div>
-          <div className="mt-5 rounded-[1.5rem] border border-border bg-secondary/70 p-5">
+          <div className="mt-5 min-w-0 rounded-[1.5rem] border border-border bg-secondary/70 p-5">
             {topRecommendation ? (
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-                <div>
+              <div className="flex min-w-0 flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+                <div className="min-w-0">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-pink-400">Start here</p>
-                  <h3 className="mt-2 text-xl font-semibold text-foreground">{topRecommendation.title}</h3>
+                  <h3 className="mt-2 break-words text-xl font-semibold text-foreground">{topRecommendation.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {topRecommendation.subject.title} · {topRecommendation.topic.title} · {formatMastery(topRecommendation.mastery)}/5 mastery
                   </p>
@@ -290,7 +290,7 @@ export default function SyllabusPage() {
               </h3>
               <div className="mt-3 space-y-2">
                 {dueNow.slice(0, 5).map((item) => (
-                  <div key={item.id} className="flex flex-col gap-2 rounded-2xl border border-border bg-card px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div key={item.id} className="flex min-w-0 flex-col gap-2 rounded-2xl border border-border bg-card px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-medium text-foreground">{item.title}</p>
                       <p className="truncate mt-0.5 text-xs text-muted-foreground">{item.subject.title} · {formatRevisionLabel(item.progress?.revisionDueAt ?? null)}</p>
@@ -329,8 +329,8 @@ export default function SyllabusPage() {
           ) : null}
         </div>
 
-        <div className="space-y-6">
-          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
+        <div className="min-w-0 space-y-6">
+          <div className="soft-panel min-w-0 rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Clock3 className="text-primary" size={18} />
               Coming up
@@ -350,14 +350,14 @@ export default function SyllabusPage() {
             </div>
           </div>
 
-          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
+          <div className="soft-panel min-w-0 rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Sparkles className="text-primary" size={18} />
               Subject pressure
             </h2>
             <div className="space-y-2">
               {topSubjects.map((subject) => (
-                <div key={subject.id} className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3">
+                <div key={subject.id} className="flex min-w-0 items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-foreground">{subject.title}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">{subject.dueNowCount} due · {subject.estimatedRemainingModules} modules left</p>
@@ -382,13 +382,13 @@ export default function SyllabusPage() {
       </div>
 
       {/* Search and filter bar */}
-      <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-5">
+      <div className="soft-panel min-w-0 rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-5">
         <div className="flex items-center gap-2 mb-4 text-sm font-medium text-foreground">
           <Filter size={16} className="text-primary" />
           Find modules
         </div>
-        <div className="flex flex-col gap-3 lg:flex-row">
-          <div className="relative flex-1">
+        <div className="flex min-w-0 flex-col gap-3 lg:flex-row">
+          <div className="relative min-w-0 flex-1">
             <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
@@ -441,7 +441,7 @@ export default function SyllabusPage() {
 
       {!isFiltering ? (
         <>
-          <div className="soft-panel rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
+          <div className="soft-panel min-w-0 rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-6">
             <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-foreground">Official curriculum map</h2>
@@ -452,9 +452,9 @@ export default function SyllabusPage() {
               </div>
             </div>
 
-            <div className="grid gap-4 lg:grid-cols-2">
+            <div className="grid min-w-0 gap-4 lg:grid-cols-2">
               {topSubjects.map((subject) => (
-                <div key={subject.id} className="rounded-[1.5rem] border border-border bg-card p-4">
+                <div key={subject.id} className="min-w-0 rounded-[1.5rem] border border-border bg-card p-4">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div className="min-w-0">
                       <p className="font-semibold text-foreground">{subject.title}</p>
@@ -510,7 +510,7 @@ export default function SyllabusPage() {
         ) : null}
 
         {filteredSubjects.map((subject) => (
-          <div key={subject.id} className="soft-panel overflow-hidden rounded-[2rem]">
+          <div key={subject.id} className="soft-panel min-w-0 overflow-hidden rounded-[2rem]">
             <div className="flex flex-col justify-between gap-4 border-b border-border bg-card p-6 sm:flex-row sm:items-center">
               <div className="flex items-start sm:items-center gap-4">
                 <div className="shrink-0 rounded-2xl border border-border bg-secondary p-3 text-primary">

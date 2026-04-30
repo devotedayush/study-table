@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BookOpenCheck, CalendarClock, FileCheck2, Layers, PenTool, Pin, Plus, Search, Sparkles, Trash2, X } from 'lucide-react'
@@ -14,7 +14,7 @@ import {
   upsertRemoteNotes,
 } from '@/lib/study-sync'
 import { cn } from '@/lib/utils'
-import { formulaHeavySubjects, revisionNotes, type RevisionNote } from '@/lib/revision-content'
+import { fetchRevisionLibraryNotes, getRevisionLibrarySubjects, type RevisionNote } from '@/lib/revision-library'
 import {
   createNoteFromDraft,
   formatShortDate,
@@ -81,8 +81,10 @@ export default function NotesPage() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
   const [remoteUserId, setRemoteUserId] = useState<string | null>(null)
+  const [libraryNotes, setLibraryNotes] = useState<RevisionNote[]>([])
+  const [libraryReady, setLibraryReady] = useState(false)
   const [librarySearch, setLibrarySearch] = useState('')
-  const [librarySubject, setLibrarySubject] = useState<'all' | (typeof formulaHeavySubjects)[number]>('all')
+  const [librarySubject, setLibrarySubject] = useState<string>('all')
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [assessOpenId, setAssessOpenId] = useState<string | null>(null)
   const [assessBusyId, setAssessBusyId] = useState<string | null>(null)
@@ -138,6 +140,38 @@ export default function NotesPage() {
     }
   }, [supabase])
 
+  useEffect(() => {
+    let active = true
+
+    async function hydrateLibrary() {
+      try {
+        const notes = await fetchRevisionLibraryNotes(supabase)
+
+        if (!active) {
+          return
+        }
+
+        setLibraryNotes(notes)
+      } catch {
+        if (!active) {
+          return
+        }
+
+        setLibraryNotes([])
+      } finally {
+        if (active) {
+          setLibraryReady(true)
+        }
+      }
+    }
+
+    hydrateLibrary()
+
+    return () => {
+      active = false
+    }
+  }, [supabase])
+
   const filteredNotes = sortNotes(notes).filter((note) => {
     const haystack = [note.title, note.topic, note.body, note.tags.join(' ')].join(' ').toLowerCase()
     return haystack.includes(search.trim().toLowerCase())
@@ -145,7 +179,9 @@ export default function NotesPage() {
 
   const dueQueue = sortNotes(notes).filter((note) => noteReviewLabel(note) === 'Overdue' || noteReviewLabel(note) === 'Due today')
 
-  const filteredLibrary = revisionNotes.filter((note) => {
+  const librarySubjects = useMemo(() => getRevisionLibrarySubjects(libraryNotes), [libraryNotes])
+
+  const filteredLibrary = libraryNotes.filter((note) => {
     if (librarySubject !== 'all' && note.subject !== librarySubject) {
       return false
     }
@@ -273,7 +309,7 @@ export default function NotesPage() {
         }),
       )
 
-      const existing = loadCustomFlashcards()
+    const existing = loadCustomFlashcards()
       const next = [...cards, ...existing]
       saveCustomFlashcards(next)
 
@@ -303,12 +339,12 @@ export default function NotesPage() {
   }
 
   function buildLocalQuizFromNote(note: RevisionNote) {
-    const distractorPool = revisionNotes
+    const distractorPool = libraryNotes
       .filter((other) => other.subject === note.subject && other.id !== note.id)
       .flatMap((other) => other.formulas)
       .filter((formula) => !note.formulas.includes(formula))
 
-    const globalPool = revisionNotes
+    const globalPool = libraryNotes
       .filter((other) => other.id !== note.id)
       .flatMap((other) => other.formulas)
 
@@ -556,7 +592,7 @@ export default function NotesPage() {
             <p className="mt-1 text-xs text-muted-foreground">Short notes across every subject. Save, quiz, or turn into flashcards.</p>
           </div>
           <span className="rounded-full border border-border bg-secondary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
-            {filteredLibrary.length} of {revisionNotes.length}
+            {libraryReady ? `${filteredLibrary.length} of ${libraryNotes.length}` : 'Loading...'}
           </span>
         </div>
 
@@ -572,11 +608,12 @@ export default function NotesPage() {
           </div>
           <select
             value={librarySubject}
-            onChange={(event) => setLibrarySubject(event.target.value as typeof librarySubject)}
+            onChange={(event) => setLibrarySubject(event.target.value)}
             className="rounded-full border border-border bg-card px-3 py-2 text-sm text-foreground outline-none"
+            disabled={!libraryReady}
           >
             <option value="all">All subjects</option>
-            {formulaHeavySubjects.map((subject) => (
+            {librarySubjects.map((subject) => (
               <option key={subject} value={subject}>
                 {subject}
               </option>

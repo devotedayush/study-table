@@ -159,6 +159,21 @@ CREATE TABLE IF NOT EXISTS study_notes (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS revision_library_notes (
+  id TEXT PRIMARY KEY,
+  sort_order INT NOT NULL,
+  subject TEXT NOT NULL,
+  module TEXT NOT NULL,
+  concept TEXT NOT NULL,
+  terms JSONB NOT NULL DEFAULT '[]'::jsonb,
+  formulas JSONB NOT NULL DEFAULT '[]'::jsonb,
+  trap TEXT NOT NULL DEFAULT '',
+  quick_recall TEXT NOT NULL DEFAULT '',
+  tags JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS study_mocks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,

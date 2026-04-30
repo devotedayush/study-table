@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Calculator, CheckCircle2, Filter, RotateCcw, Search, Sparkles, Target, XCircle } from 'lucide-react'
-import { calculatorDrills, calculatorSkills, formulaHeavySubjects, type CalculatorDrill } from '@/lib/revision-content'
+import { calculatorDrills, calculatorSkills, type CalculatorDrill } from '@/lib/revision-content'
 import {
   getCalculatorDrillProgress,
   loadCalculatorDrillProgressMap,
@@ -83,6 +83,7 @@ export default function CalculatorDrillsPage() {
   const [difficulty, setDifficulty] = useState(allDifficulties)
   const [weakOnly, setWeakOnly] = useState(false)
   const [unattemptedOnly, setUnattemptedOnly] = useState(false)
+  const drillSubjects = useMemo(() => Array.from(new Set(calculatorDrills.map((drill) => drill.subject))), [])
 
   useEffect(() => {
     let active = true
@@ -246,7 +247,7 @@ export default function CalculatorDrillsPage() {
             </span>
             <select value={subject} onChange={(event) => setSubject(event.target.value)} className="app-select">
               <option>{allSubjects}</option>
-              {formulaHeavySubjects.map((item) => (
+              {drillSubjects.map((item) => (
                 <option key={item} value={item}>
                   {item}
                 </option>
