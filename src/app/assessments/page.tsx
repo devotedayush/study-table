@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { BrainCircuit, CheckCircle2, Compass, FileCheck2, Flame, LoaderCircle, RotateCcw, Target, WandSparkles } from 'lucide-react'
-import { assessmentScopeLabels, buildTargetFromIds, mapAssessmentSet, type AssessmentScope, type AssessmentSet } from '@/lib/assessment-bank'
+import { BrainCircuit, CheckCircle2, Compass, Download, FileCheck2, Flame, LoaderCircle, RotateCcw, Target, WandSparkles } from 'lucide-react'
+import { assessmentScopeLabels, assessmentScopeOptions, buildTargetFromIds, mapAssessmentSet, type AssessmentScope, type AssessmentSet } from '@/lib/assessment-bank'
 import { cfaLevel1Syllabus } from '@/lib/cfa-data'
 import {
   buildQuestionAttempts,
@@ -26,6 +26,28 @@ type QuizQuestion = {
   rationale: string
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+function toAnswerLetter(index: number) {
+  return String.fromCharCode(65 + index)
+}
+
+function toSafeFilename(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80)
+}
+
 const readinessOptions = [
   { value: '1', label: 'Not ready at all' },
   { value: '2', label: 'A bit shaky' },
@@ -40,6 +62,7 @@ export default function AssessmentsPage() {
   const [selectedSubtopicId, setSelectedSubtopicId] = useState(workspace.enrichedSubtopics[0]?.id ?? '')
   const [scope, setScope] = useState<AssessmentScope>('topic_quiz')
   const [chapterTargetId, setChapterTargetId] = useState(cfaLevel1Syllabus[0]?.topics[0]?.id ?? '')
+  const [subjectTargetId, setSubjectTargetId] = useState(cfaLevel1Syllabus[0]?.id ?? '')
   const [availableSets, setAvailableSets] = useState<AssessmentSet[]>([])
   const [selectedSetId, setSelectedSetId] = useState('')
   const [activeSetId, setActiveSetId] = useState<string | null>(null)
@@ -60,11 +83,8 @@ export default function AssessmentsPage() {
     () => workspace.enrichedSubtopics.find((item) => item.id === selectedSubtopicId) ?? workspace.enrichedSubtopics[0],
     [selectedSubtopicId, workspace.enrichedSubtopics],
   )
-  const selectedChapter = useMemo(
-    () => cfaLevel1Syllabus.flatMap((subject) => subject.topics.map((topic) => ({ ...topic, subject }))).find((topic) => topic.id === chapterTargetId),
-    [chapterTargetId],
-  )
-  const activeTarget = buildTargetFromIds(scope, scope === 'chapter_quiz' ? chapterTargetId : selectedSubtopicId)
+  const activeTargetId = scope === 'subject_quiz' ? subjectTargetId : scope === 'chapter_quiz' ? chapterTargetId : selectedSubtopicId
+  const activeTarget = buildTargetFromIds(scope, activeTargetId)
 
   const latestForTopic = selectedSubtopic
     ? workspace.assessments.find((assessment) => assessment.subtopicId === selectedSubtopic.id) ?? null
@@ -164,7 +184,7 @@ export default function AssessmentsPage() {
 
       if (user) {
         try {
-          const remoteAttempts = await fetchRemoteQuestionAttempts(supabase, user.id, selectedSubtopic.id)
+          const remoteAttempts = await fetchRemoteQuestionAttempts(supabase, user.id, scope === 'topic_quiz' ? selectedSubtopic.id : undefined)
           mergedAttempts = mergeQuestionAttempts(localAttempts, remoteAttempts)
           saveQuestionAttempts(mergedAttempts)
           setQuestionAttempts(mergedAttempts)
@@ -173,7 +193,14 @@ export default function AssessmentsPage() {
         }
       }
 
-      const attemptTargetId = scope === 'topic_quiz' ? selectedSubtopic.id : scope === 'chapter_quiz' ? chapterTargetId : 'full_mock'
+      const attemptTargetId =
+        scope === 'topic_quiz'
+          ? selectedSubtopic.id
+          : scope === 'chapter_quiz'
+            ? chapterTargetId
+            : scope === 'subject_quiz'
+              ? subjectTargetId
+              : 'full_mock'
       const reviewQuestions = getReviewQuestionsForSubtopic(mergedAttempts, attemptTargetId, 2)
       setReviewCount(reviewQuestions.length)
       const target = buildTargetFromIds(scope, attemptTargetId)
@@ -215,7 +242,14 @@ export default function AssessmentsPage() {
     setIsRegeneratingAll(true)
 
     try {
-      const attemptTargetId = scope === 'topic_quiz' ? selectedSubtopicId : scope === 'chapter_quiz' ? chapterTargetId : 'full_mock'
+      const attemptTargetId =
+        scope === 'topic_quiz'
+          ? selectedSubtopicId
+          : scope === 'chapter_quiz'
+            ? chapterTargetId
+            : scope === 'subject_quiz'
+              ? subjectTargetId
+              : 'full_mock'
       const target = buildTargetFromIds(scope, attemptTargetId)
       const avoidPrompts = quiz.map((q) => q.prompt)
 
@@ -352,6 +386,122 @@ export default function AssessmentsPage() {
     }
   }
 
+  function downloadQuizDocument() {
+    if (quiz.length === 0) {
+      return
+    }
+
+    const generatedAt = new Date()
+    const title = `${assessmentScopeLabels[scope]}: ${activeTarget.title}`
+    const questionsHtml = quiz
+      .map(
+        (question, questionIndex) => `
+          <article class="question">
+            <h2>${questionIndex + 1}. ${escapeHtml(question.prompt)}</h2>
+            <ol type="A">
+              ${question.options.map((option) => `<li>${escapeHtml(option)}</li>`).join('')}
+            </ol>
+          </article>
+        `,
+      )
+      .join('')
+    const answersHtml = quiz
+      .map(
+        (question, questionIndex) => `
+          <article class="answer">
+            <h2>${questionIndex + 1}. ${toAnswerLetter(question.correctIndex)}. ${escapeHtml(question.options[question.correctIndex] ?? '')}</h2>
+            <p>${escapeHtml(question.rationale)}</p>
+          </article>
+        `,
+      )
+      .join('')
+
+    const html = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${escapeHtml(title)}</title>
+  <style>
+    @page { margin: 18mm; }
+    * { box-sizing: border-box; }
+    body {
+      color: #111827;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+    }
+    header {
+      border-bottom: 1px solid #d1d5db;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+    }
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+    .meta {
+      color: #4b5563;
+      font-size: 12px;
+      margin: 0;
+    }
+    .question, .answer {
+      break-inside: avoid;
+      margin: 0 0 22px;
+    }
+    h2 {
+      font-size: 15px;
+      line-height: 1.45;
+      margin: 0 0 10px;
+    }
+    ol {
+      margin: 0;
+      padding-left: 24px;
+    }
+    li {
+      margin: 0 0 7px;
+      padding-left: 4px;
+    }
+    .answer-key {
+      break-before: page;
+      page-break-before: always;
+    }
+    .answer p {
+      margin: 6px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>${escapeHtml(title)}</h1>
+    <p class="meta">${quiz.length} questions | Generated ${escapeHtml(generatedAt.toLocaleString())}</p>
+  </header>
+  <main>
+    ${questionsHtml}
+  </main>
+  <section class="answer-key">
+    <header>
+      <h1>Answer key</h1>
+      <p class="meta">${escapeHtml(title)}</p>
+    </header>
+    ${answersHtml}
+  </section>
+</body>
+</html>`
+
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${toSafeFilename(title) || 'cfa-quiz'}-${generatedAt.toISOString().slice(0, 10)}.html`
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    URL.revokeObjectURL(url)
+  }
+
   async function submitQuiz() {
     if (!selectedSubtopic || !canSubmit) {
       return
@@ -371,7 +521,14 @@ export default function AssessmentsPage() {
             ? ['weak retention', 'careless error']
             : ['conceptual misunderstanding', 'weak retention']
 
-    const attemptTargetId = scope === 'topic_quiz' ? selectedSubtopic.id : scope === 'chapter_quiz' ? chapterTargetId : 'full_mock'
+    const attemptTargetId =
+      scope === 'topic_quiz'
+        ? selectedSubtopic.id
+        : scope === 'chapter_quiz'
+          ? chapterTargetId
+          : scope === 'subject_quiz'
+            ? subjectTargetId
+            : 'full_mock'
     const target = buildTargetFromIds(scope, attemptTargetId)
 
     workspace.saveAssessment({
@@ -511,32 +668,34 @@ export default function AssessmentsPage() {
                 onChange={(event) => setScope(event.target.value as AssessmentScope)}
                 className="app-select"
               >
-                <option value="topic_quiz">Topic quiz</option>
-                <option value="chapter_quiz">Chapter quiz</option>
-                <option value="full_mock">Full mock</option>
+                {assessmentScopeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
             </label>
 
             {scope === 'topic_quiz' ? (
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-foreground">What topic do you want to test?</span>
-              <select
-                value={selectedSubtopicId}
-                onChange={(event) => setSelectedSubtopicId(event.target.value)}
-                className="app-select"
-              >
-                {workspace.enrichedSubtopics.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.subject.title} · {item.title}
-                  </option>
-                ))}
-              </select>
+                <span className="mb-2 block text-sm font-medium text-foreground">Customised topic focus</span>
+                <select
+                  value={selectedSubtopicId}
+                  onChange={(event) => setSelectedSubtopicId(event.target.value)}
+                  className="app-select"
+                >
+                  {workspace.enrichedSubtopics.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.subject.title} · {item.title}
+                    </option>
+                  ))}
+                </select>
               </label>
             ) : null}
 
             {scope === 'chapter_quiz' ? (
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-foreground">Chapter</span>
+                <span className="mb-2 block text-sm font-medium text-foreground">Topic</span>
                 <select
                   value={chapterTargetId}
                   onChange={(event) => setChapterTargetId(event.target.value)}
@@ -549,6 +708,23 @@ export default function AssessmentsPage() {
                       </option>
                     )),
                   )}
+                </select>
+              </label>
+            ) : null}
+
+            {scope === 'subject_quiz' ? (
+              <label className="block">
+                <span className="mb-2 block text-sm font-medium text-foreground">Chapter</span>
+                <select
+                  value={subjectTargetId}
+                  onChange={(event) => setSubjectTargetId(event.target.value)}
+                  className="app-select"
+                >
+                  {cfaLevel1Syllabus.map((subject) => (
+                    <option key={subject.id} value={subject.id}>
+                      {subject.title}
+                    </option>
+                  ))}
                 </select>
               </label>
             ) : null}
@@ -732,6 +908,15 @@ export default function AssessmentsPage() {
               <div className="flex flex-wrap gap-3">
                 <button
                   type="button"
+                  onClick={downloadQuizDocument}
+                  disabled={quiz.length === 0}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-primary transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  <Download size={16} />
+                  Download paper
+                </button>
+                <button
+                  type="button"
                   onClick={submitQuiz}
                   disabled={!canSubmit}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl bg-foreground px-4 py-3 text-sm font-semibold text-background disabled:cursor-not-allowed disabled:opacity-60"
@@ -772,4 +957,3 @@ export default function AssessmentsPage() {
     </motion.div>
   )
 }
-

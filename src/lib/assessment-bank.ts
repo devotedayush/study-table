@@ -1,6 +1,6 @@
 import { allSubtopics, cfaLevel1Syllabus } from '@/lib/cfa-data'
 
-export type AssessmentScope = 'topic_quiz' | 'chapter_quiz' | 'full_mock'
+export type AssessmentScope = 'topic_quiz' | 'subject_quiz' | 'chapter_quiz' | 'full_mock'
 
 export type BankQuestion = {
   prompt: string
@@ -25,10 +25,18 @@ export type AssessmentSet = {
 }
 
 export const assessmentScopeLabels: Record<AssessmentScope, string> = {
-  topic_quiz: 'Topic quiz',
-  chapter_quiz: 'Chapter quiz',
+  topic_quiz: 'Customised topic quiz',
+  subject_quiz: 'Chapter quiz',
+  chapter_quiz: 'Topic quiz',
   full_mock: 'Full mock',
 }
+
+export const assessmentScopeOptions = [
+  { value: 'topic_quiz', label: 'Customised topic quiz' },
+  { value: 'chapter_quiz', label: 'Topic quiz' },
+  { value: 'subject_quiz', label: 'Chapter quiz' },
+  { value: 'full_mock', label: 'Full mock' },
+] satisfies Array<{ value: AssessmentScope; label: string }>
 
 export function normalizeQuestion(question: BankQuestion): BankQuestion | null {
   const options = Array.isArray(question.options) ? question.options.map((option) => String(option).trim()).filter(Boolean) : []
@@ -88,6 +96,18 @@ export function getDefaultAssessmentTarget(scope: AssessmentScope) {
     }
   }
 
+  if (scope === 'subject_quiz') {
+    return {
+      subjectId: firstSubject?.id ?? null,
+      subjectTitle: firstSubject?.title ?? null,
+      topicId: null,
+      topicTitle: null,
+      subtopicId: null,
+      subtopicTitle: null,
+      title: firstSubject?.title ?? 'Chapter quiz',
+    }
+  }
+
   if (scope === 'chapter_quiz') {
     return {
       subjectId: firstSubject?.id ?? null,
@@ -114,6 +134,21 @@ export function getDefaultAssessmentTarget(scope: AssessmentScope) {
 export function buildTargetFromIds(scope: AssessmentScope, targetId: string) {
   if (scope === 'full_mock') {
     return getDefaultAssessmentTarget(scope)
+  }
+
+  if (scope === 'subject_quiz') {
+    const subject = cfaLevel1Syllabus.find((item) => item.id === targetId)
+    if (subject) {
+      return {
+        subjectId: subject.id,
+        subjectTitle: subject.title,
+        topicId: null,
+        topicTitle: null,
+        subtopicId: null,
+        subtopicTitle: null,
+        title: subject.title,
+      }
+    }
   }
 
   if (scope === 'chapter_quiz') {

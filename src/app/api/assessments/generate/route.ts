@@ -74,7 +74,7 @@ function fallbackQuestions(topic: string, subtopic: string, reviewQuestions: Que
 }
 
 function defaultCountForScope(scope: AssessmentScope) {
-  return scope === 'full_mock' ? 12 : scope === 'chapter_quiz' ? 8 : 4
+  return scope === 'full_mock' ? 12 : scope === 'subject_quiz' ? 10 : scope === 'chapter_quiz' ? 8 : 4
 }
 
 async function generateWithOpenAI(

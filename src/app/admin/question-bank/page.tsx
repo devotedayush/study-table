@@ -3,8 +3,8 @@
 import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { FileUp, LoaderCircle, ShieldCheck } from 'lucide-react'
-import { assessmentScopeLabels, type AssessmentScope } from '@/lib/assessment-bank'
-import { cfaLevel1Syllabus } from '@/lib/cfa-data'
+import { assessmentScopeOptions, type AssessmentScope } from '@/lib/assessment-bank'
+import { allSubtopics, cfaLevel1Syllabus } from '@/lib/cfa-data'
 
 const exampleMarkdown = `Question 1
 Which inventory method usually reports ending inventory closest to current replacement cost during rising prices?
@@ -22,6 +22,14 @@ export default function AdminQuestionBankPage() {
   const [isSaving, setIsSaving] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const targetOptions =
+    scope === 'subject_quiz'
+      ? cfaLevel1Syllabus.map((subject) => ({ id: subject.id, label: subject.title }))
+      : scope === 'topic_quiz'
+        ? allSubtopics.map((subtopic) => ({ id: subtopic.id, label: `${subtopic.subject.title} · ${subtopic.title}` }))
+        : cfaLevel1Syllabus.flatMap((subject) =>
+            subject.topics.map((topic) => ({ id: topic.id, label: `${subject.title} · ${topic.title}` })),
+          )
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -76,27 +84,39 @@ export default function AdminQuestionBankPage() {
           </label>
           <label className="block">
             <span className="mb-2 block text-sm font-medium text-foreground">Set type</span>
-            <select value={scope} onChange={(event) => setScope(event.target.value as AssessmentScope)} className="app-select">
-              {Object.entries(assessmentScopeLabels).map(([value, label]) => (
+            <select
+              value={scope}
+              onChange={(event) => {
+                const nextScope = event.target.value as AssessmentScope
+                setScope(nextScope)
+                if (nextScope === 'subject_quiz') {
+                  setTargetId(cfaLevel1Syllabus[0]?.id ?? '')
+                } else if (nextScope === 'topic_quiz') {
+                  setTargetId(allSubtopics[0]?.id ?? '')
+                } else {
+                  setTargetId(cfaLevel1Syllabus[0]?.topics[0]?.id ?? '')
+                }
+              }}
+              className="app-select"
+            >
+              {assessmentScopeOptions.map(({ value, label }) => (
                 <option key={value} value={value}>{label}</option>
               ))}
             </select>
           </label>
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-foreground">Chapter target</span>
+            <span className="mb-2 block text-sm font-medium text-foreground">Target</span>
             <select
               value={targetId}
               onChange={(event) => setTargetId(event.target.value)}
               disabled={scope === 'full_mock'}
               className="app-select"
             >
-              {cfaLevel1Syllabus.flatMap((subject) =>
-                subject.topics.map((topic) => (
-                  <option key={topic.id} value={topic.id}>
-                    {subject.title} · {topic.title}
-                  </option>
-                )),
-              )}
+              {targetOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </label>
         </div>

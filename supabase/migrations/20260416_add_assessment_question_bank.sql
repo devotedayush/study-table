@@ -5,7 +5,7 @@ create table if not exists public.assessment_sets (
   id uuid primary key default gen_random_uuid(),
   created_by uuid references auth.users(id) on delete set null,
   source text not null check (source in ('admin_upload', 'generated')),
-  scope text not null check (scope in ('topic_quiz', 'chapter_quiz', 'full_mock')),
+  scope text not null check (scope in ('topic_quiz', 'chapter_quiz', 'subject_quiz', 'full_mock')),
   title text not null,
   subject_id text,
   subject_title text,
