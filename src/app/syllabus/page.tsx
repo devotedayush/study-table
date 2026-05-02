@@ -68,7 +68,7 @@ function TopicRow({
             <p className="text-xs text-muted-foreground">{topic.coverage}% covered</p>
           </div>
         </div>
-        <div className="shrink-0 text-xs text-muted-foreground">{topic.subtopics.length} modules</div>
+        <div className="shrink-0 text-xs text-muted-foreground">{topic.subtopics.length} chapter</div>
       </button>
 
       <AnimatePresence>
@@ -278,7 +278,7 @@ export default function SyllabusPage() {
                 </button>
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">No revisions are due. Keep ticking off modules below and this will populate automatically.</p>
+              <p className="text-sm text-muted-foreground">No revisions are due. Keep ticking off chapters below and this will populate automatically.</p>
             )}
           </div>
 
@@ -337,7 +337,7 @@ export default function SyllabusPage() {
             </h2>
             <div className="space-y-2">
               {upcoming.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Nothing scheduled yet — finish a few modules first.</p>
+                <p className="text-sm text-muted-foreground">Nothing scheduled yet — finish a few chapters first.</p>
               ) : null}
               {upcoming.map((item) => (
                 <div key={item.id} className="rounded-2xl border border-border bg-card px-4 py-3">
@@ -360,7 +360,7 @@ export default function SyllabusPage() {
                 <div key={subject.id} className="flex min-w-0 items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-foreground">{subject.title}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{subject.dueNowCount} due · {subject.estimatedRemainingModules} modules left</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{subject.dueNowCount} due · {subject.estimatedRemainingModules} chapters left</p>
                   </div>
                   <span className="shrink-0 rounded-full border border-border bg-secondary px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-primary">
                     {subject.coverage}%
@@ -376,7 +376,7 @@ export default function SyllabusPage() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">Full syllabus map</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Search, filter, and update progress across all {workspace.totalSubtopics} modules.
+            Search, filter, and update progress across all {workspace.totalSubtopics} chapters.
           </p>
         </div>
       </div>
@@ -385,7 +385,7 @@ export default function SyllabusPage() {
       <div className="soft-panel min-w-0 rounded-[1.75rem] p-4 sm:rounded-[2rem] sm:p-5">
         <div className="flex items-center gap-2 mb-4 text-sm font-medium text-foreground">
           <Filter size={16} className="text-primary" />
-          Find modules
+          Find chapters
         </div>
         <div className="flex min-w-0 flex-col gap-3 lg:flex-row">
           <div className="relative min-w-0 flex-1">
@@ -395,7 +395,7 @@ export default function SyllabusPage() {
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               className="w-full rounded-2xl border border-border bg-card py-3 pl-11 pr-4 text-sm text-foreground outline-none placeholder:text-muted-foreground"
-              placeholder="Search topics, subtopics..."
+              placeholder="Search subjects, chapters..."
             />
             {searchQuery ? (
               <button type="button" onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground">
@@ -426,7 +426,7 @@ export default function SyllabusPage() {
         {isFiltering ? (
           <div className="mt-3 flex items-center justify-between">
             <p className="text-xs text-muted-foreground">
-              Showing {filteredSubtopicCount} of {workspace.totalSubtopics} modules
+              Showing {filteredSubtopicCount} of {workspace.totalSubtopics} chapters
             </p>
             <button
               type="button"
@@ -459,7 +459,7 @@ export default function SyllabusPage() {
                     <div className="min-w-0">
                       <p className="font-semibold text-foreground">{subject.title}</p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {subject.officialModuleCount} modules · {subject.estimatedRemainingModules} estimated modules left
+                        {subject.officialModuleCount} chapters · {subject.estimatedRemainingModules} chapters left
                       </p>
                     </div>
                     <span className="shrink-0 rounded-full border border-border bg-secondary px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-primary">
@@ -505,7 +505,7 @@ export default function SyllabusPage() {
       <div className="space-y-6">
         {filteredSubjects.length === 0 ? (
           <div className="soft-panel rounded-[1.75rem] p-5 text-center sm:rounded-[2rem] sm:p-8">
-            <p className="text-muted-foreground">No modules match your filters. Try broadening your search.</p>
+            <p className="text-muted-foreground">No chapters match your filters. Try broadening your search.</p>
           </div>
         ) : null}
 
@@ -529,7 +529,7 @@ export default function SyllabusPage() {
                     </span>
                     <span className="inline-flex shrink-0 items-center gap-1.5">
                       <Clock3 size={14} className="text-pink-400" />
-                      {workspace.subjectSummaries.find((item) => item.id === subject.id)?.officialModuleCount ?? 0} modules
+                      {workspace.subjectSummaries.find((item) => item.id === subject.id)?.officialModuleCount ?? 0} chapters
                     </span>
                   </div>
                 </div>

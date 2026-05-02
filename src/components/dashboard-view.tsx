@@ -298,7 +298,7 @@ export function DashboardView({ profile }: DashboardViewProps) {
                       <p className="font-medium text-foreground">{subject.title}</p>
                     </div>
                     <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                      {subject.coverage}% done · {subject.estimatedRemainingModules} modules left · {subject.nextFocusTitle ? subject.nextFocusTitle : 'No next pick yet'}
+                      {subject.coverage}% done · {subject.estimatedRemainingModules} chapters left · {subject.nextFocusTitle ? subject.nextFocusTitle : 'No next pick yet'}
                     </p>
                   </div>
                   <span className={cn('rounded-full px-3 py-1 text-xs font-semibold', subject.dueNowCount > 0 ? 'bg-secondary text-primary' : 'bg-card text-muted-foreground')}>

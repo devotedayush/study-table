@@ -48,7 +48,7 @@ export const cfaLevel1Outline: CurriculumSubjectOutline[] = [
     ],
   },
   {
-    id: 'financial-reporting',
+    id: 'financial-statement-analysis',
     title: 'Financial Statement Analysis',
     modules: [
       'Introduction to Financial Statement Analysis',
@@ -159,4 +159,3 @@ export const cfaLevel1Outline: CurriculumSubjectOutline[] = [
     ],
   },
 ]
-

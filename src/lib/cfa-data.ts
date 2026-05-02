@@ -26,6 +26,7 @@ export type SyllabusSubtopic = {
   topicId: string
   title: string
   timeEstimateMinutes: number
+  legacyIds: string[]
 }
 
 type ModuleEmphasis = 'formula' | 'concept' | 'application' | 'ethics'
@@ -46,37 +47,31 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, '')
 }
 
+function getPrimarySubtopicSuffix(emphasis: ModuleEmphasis) {
+  return emphasis === 'formula' || emphasis === 'application' ? 'concepts' : 'reading'
+}
+
+function getLegacySubtopicSuffixes(emphasis: ModuleEmphasis) {
+  return {
+    ethics: ['reading', 'cases', 'review'],
+    formula: ['concepts', 'calculator', 'questions'],
+    application: ['concepts', 'cases', 'questions'],
+    concept: ['reading', 'recall', 'questions'],
+  }[emphasis]
+}
+
 function buildSubtopics(topicId: string, title: string, emphasis: ModuleEmphasis, baseMinutes = 55): SyllabusSubtopic[] {
   const safeTitle = title.replace(/\s+/g, ' ').trim()
-
-  if (emphasis === 'ethics') {
-    return [
-      { id: `${topicId}-reading`, topicId, title: `Read and outline ${safeTitle}`, timeEstimateMinutes: Math.max(40, baseMinutes) },
-      { id: `${topicId}-cases`, topicId, title: `Work scenario applications for ${safeTitle}`, timeEstimateMinutes: Math.max(45, baseMinutes + 10) },
-      { id: `${topicId}-review`, topicId, title: `Review violations, remedies, and traps for ${safeTitle}`, timeEstimateMinutes: Math.max(35, baseMinutes - 5) },
-    ]
-  }
-
-  if (emphasis === 'formula') {
-    return [
-      { id: `${topicId}-concepts`, topicId, title: `Learn the core formulas in ${safeTitle}`, timeEstimateMinutes: Math.max(40, baseMinutes) },
-      { id: `${topicId}-calculator`, topicId, title: `Run calculator reps and formula drills for ${safeTitle}`, timeEstimateMinutes: Math.max(40, baseMinutes) },
-      { id: `${topicId}-questions`, topicId, title: `Practice questions and error review for ${safeTitle}`, timeEstimateMinutes: Math.max(45, baseMinutes + 10) },
-    ]
-  }
-
-  if (emphasis === 'application') {
-    return [
-      { id: `${topicId}-concepts`, topicId, title: `Build the core understanding for ${safeTitle}`, timeEstimateMinutes: Math.max(35, baseMinutes - 5) },
-      { id: `${topicId}-cases`, topicId, title: `Work applied examples for ${safeTitle}`, timeEstimateMinutes: Math.max(45, baseMinutes + 5) },
-      { id: `${topicId}-questions`, topicId, title: `Finish question bank and mistake log for ${safeTitle}`, timeEstimateMinutes: Math.max(40, baseMinutes) },
-    ]
-  }
+  const primarySuffix = getPrimarySubtopicSuffix(emphasis)
 
   return [
-    { id: `${topicId}-reading`, topicId, title: `Read and annotate ${safeTitle}`, timeEstimateMinutes: Math.max(35, baseMinutes - 5) },
-    { id: `${topicId}-recall`, topicId, title: `Do active recall for ${safeTitle}`, timeEstimateMinutes: Math.max(35, baseMinutes - 10) },
-    { id: `${topicId}-questions`, topicId, title: `Practice questions for ${safeTitle}`, timeEstimateMinutes: Math.max(40, baseMinutes + 5) },
+    {
+      id: `${topicId}-${primarySuffix}`,
+      topicId,
+      title: safeTitle,
+      timeEstimateMinutes: Math.max(35, baseMinutes),
+      legacyIds: [topicId, ...getLegacySubtopicSuffixes(emphasis).map((suffix) => `${topicId}-${suffix}`)],
+    },
   ]
 }
 
@@ -271,4 +266,8 @@ export const cfaLevel1Syllabus: SyllabusSubject[] = [
 
 export const allSubtopics = cfaLevel1Syllabus.flatMap((subject) =>
   subject.topics.flatMap((topic) => topic.subtopics.map((subtopic) => ({ ...subtopic, topic, subject }))),
+)
+
+export const syllabusSubtopicIdAliases = Object.fromEntries(
+  allSubtopics.flatMap((subtopic) => subtopic.legacyIds.map((legacyId) => [legacyId, subtopic.id])),
 )

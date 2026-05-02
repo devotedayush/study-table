@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { addDays, differenceInCalendarDays, format, parseISO } from 'date-fns'
-import { allSubtopics, cfaLevel1Syllabus, type ProgressStatus } from '@/lib/cfa-data'
+import { allSubtopics, cfaLevel1Syllabus, syllabusSubtopicIdAliases, type ProgressStatus } from '@/lib/cfa-data'
 import { cfaLevel1Outline } from '@/lib/cfa-outline'
 import { createClient } from '@/lib/supabase/browser'
 import {
@@ -104,11 +104,25 @@ function writeJson<T>(key: string, value: T) {
 }
 
 export function loadProgressMap() {
-  return readJson<Record<string, ProgressEntry>>(PROGRESS_STORAGE_KEY, {})
+  const rawProgress = readJson<Record<string, ProgressEntry>>(PROGRESS_STORAGE_KEY, {})
+  const { progressMap, changed } = normalizeProgressMap(rawProgress)
+
+  if (changed) {
+    saveProgressMap(progressMap)
+  }
+
+  return progressMap
 }
 
 export function loadAssessments() {
-  return readJson<AssessmentEntry[]>(ASSESSMENTS_STORAGE_KEY, [])
+  const rawAssessments = readJson<AssessmentEntry[]>(ASSESSMENTS_STORAGE_KEY, [])
+  const { assessments, changed } = normalizeAssessments(rawAssessments)
+
+  if (changed) {
+    saveAssessments(assessments)
+  }
+
+  return assessments
 }
 
 function saveProgressMap(progress: Record<string, ProgressEntry>) {
@@ -147,6 +161,81 @@ function getCompletionPercentage(entry: Pick<ProgressEntry, 'status' | 'completi
   }
 
   return entry.completionPercentage ?? getDefaultCompletionFromStatus(entry.status)
+}
+
+function latestIso(...values: Array<string | null | undefined>) {
+  return values
+    .filter(Boolean)
+    .sort((a, b) => new Date(b as string).getTime() - new Date(a as string).getTime())[0] ?? null
+}
+
+function earliestIso(...values: Array<string | null | undefined>) {
+  return values
+    .filter(Boolean)
+    .sort((a, b) => new Date(a as string).getTime() - new Date(b as string).getTime())[0] ?? null
+}
+
+function difficultyRank(difficulty: ProgressEntry['difficulty']) {
+  if (!difficulty) {
+    return 0
+  }
+
+  return {
+    hard: 3,
+    medium: 2,
+    easy: 1,
+  }[difficulty]
+}
+
+function mergeNotes(first: string, second: string) {
+  return [...new Set([first, second].map((note) => note.trim()).filter(Boolean))].join('\n\n')
+}
+
+function mergeProgressEntries(first: ProgressEntry, second: ProgressEntry): ProgressEntry {
+  const firstStatusRank = statusRank(first.status)
+  const secondStatusRank = statusRank(second.status)
+
+  return {
+    ...first,
+    subtopicId: first.subtopicId,
+    status: secondStatusRank > firstStatusRank ? second.status : first.status,
+    completionPercentage: Math.max(getCompletionPercentage(first), getCompletionPercentage(second)),
+    minutesSpent: first.minutesSpent + second.minutesSpent,
+    selfConfidence: Math.max(first.selfConfidence ?? 0, second.selfConfidence ?? 0) || null,
+    aiMastery: Math.max(first.aiMastery ?? 0, second.aiMastery ?? 0) || null,
+    notes: mergeNotes(first.notes, second.notes),
+    difficulty: difficultyRank(second.difficulty) > difficultyRank(first.difficulty) ? second.difficulty : first.difficulty,
+    lastStudiedAt: latestIso(first.lastStudiedAt, second.lastStudiedAt),
+    firstCompletedAt: earliestIso(first.firstCompletedAt, second.firstCompletedAt),
+    revisionDueAt: earliestIso(first.revisionDueAt, second.revisionDueAt),
+    revisionCount: Math.max(first.revisionCount, second.revisionCount),
+  }
+}
+
+function normalizeProgressMap(progressMap: Record<string, ProgressEntry>) {
+  let changed = false
+  const normalized: Record<string, ProgressEntry> = {}
+
+  for (const [key, entry] of Object.entries(progressMap)) {
+    const targetId = syllabusSubtopicIdAliases[key] ?? syllabusSubtopicIdAliases[entry.subtopicId] ?? entry.subtopicId
+    const nextEntry = { ...entry, subtopicId: targetId }
+
+    changed ||= targetId !== key || targetId !== entry.subtopicId
+    normalized[targetId] = normalized[targetId] ? mergeProgressEntries(normalized[targetId], nextEntry) : nextEntry
+  }
+
+  return { progressMap: normalized, changed }
+}
+
+function normalizeAssessments(assessments: AssessmentEntry[]) {
+  let changed = false
+  const normalized = assessments.map((assessment) => {
+    const targetId = syllabusSubtopicIdAliases[assessment.subtopicId] ?? assessment.subtopicId
+    changed ||= targetId !== assessment.subtopicId
+    return { ...assessment, subtopicId: targetId }
+  })
+
+  return { assessments: normalized, changed }
 }
 
 function buildRevisionDueDate(entry: ProgressEntry, pacing: StudyPacing) {
@@ -233,8 +322,8 @@ export function useStudyWorkspace(profile?: Partial<Profile> | null) {
           return
         }
 
-        const mergedProgress = mergeProgressMaps(localProgress, remoteProgress) as Record<string, ProgressEntry>
-        const mergedAssessments = mergeAssessments(localAssessments, remoteAssessments) as AssessmentEntry[]
+        const { progressMap: mergedProgress } = normalizeProgressMap(mergeProgressMaps(localProgress, remoteProgress) as Record<string, ProgressEntry>)
+        const { assessments: mergedAssessments } = normalizeAssessments(mergeAssessments(localAssessments, remoteAssessments) as AssessmentEntry[])
 
         setProgressMap(mergedProgress)
         setAssessments(mergedAssessments)
