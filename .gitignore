@@ -54,3 +54,7 @@ next-env.d.ts
 # Private imported exam materials and extraction scratch data
 /data/imported-mocks/
 /tmp/mock-import/
+
+# Python import tooling
+__pycache__/
+*.py[cod]

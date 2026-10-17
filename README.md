@@ -30,23 +30,29 @@ On-demand generation uses the Responses API with `model: gpt-6-luna` and `reason
 
 The bundled bank contains 186 original practice questions with explicit curriculum IDs. Full mocks select 180 questions across all ten subjects, two 90-question sessions at 135 minutes each, and an optional break of up to 30 minutes. Shorter sets remain practice quizzes. The runner supports autosave, flags, option elimination, highlighting, question navigation, submission review and answer explanations. Full-session answers cannot be changed after that session ends.
 
-During an exam, the workspace fills the window and keeps the timer and Previous/Next/Submit controls visible. Scanned papers also have a persistent A/B/C answer strip; long questions and the question navigator scroll independently. The header's Fullscreen button uses the browser fullscreen API, with an exit button and Escape support where available. Exiting fullscreen does not discard answers. This is a practice simulation; the [official Prometric CFA tutorial](https://www.prometric.com/exams/cfa/) is the reference for exam software, whose formatting can vary by test-centre monitor.
+During an exam, the workspace fills the window and keeps the timer and Back/Next/Finish controls visible. The charcoal header/footer, green navigation and white question area follow [CFA Institute's published exam interface reference](https://www.cfainstitute.org/programs/cfa-program/candidate-resources/hardware-software). Questions are native selectable text, semantic tables and rendered mathematics; long questions and the navigator scroll independently. Fullscreen uses the browser fullscreen API, with an exit button and Escape support where available. Exiting fullscreen does not discard answers. This is a practice simulation, not official exam software or a guarantee of identical test-centre rendering.
 
 ## Checks
 
 ```sh
 npm run lint
-node --test src/lib/exam-analysis.test.mjs
+node --test src/lib/exam-analysis.test.mjs src/lib/question-content.test.mjs
 npx tsc --noEmit
 npm run build
 ```
 
 ## Imported mock papers and automatic feedback
 
-The six supplied scans are stored in the private Supabase `study-mocks` bucket: 1,071 available questions, with 1,065 scored from usable printed keys. A full paper keeps its original two sessions and question order. Mock 3 is partial (175 available questions: questions 1–5 are absent/incomplete); Mock 4 is partial (176 questions: questions 69–72 are absent). Four questions with conflicting printed keys (Mock 1 Q54, Mock 2 Q27/Q46, Mock 3 Q64, all session 1) and Mock 3 session 1 Q65 with no printed key remain available but unscored. Mock 4 session 1 Q68 has a cut-off option list and is also unscored. Partial papers and key issues are labeled; missing answers are never guessed. Question crops preserve the source tables, and the full PDF containing keys is linked only in completed review.
+The six supplied scans are stored in the private Supabase `study-mocks` bucket: 1,071 available questions, with 1,065 scored from usable printed keys. A full paper keeps its original two sessions and question order. Mock 3 is partial (175 available questions: questions 1–5 are absent/incomplete); Mock 4 is partial (176 questions: questions 69–72 are absent). Four questions with conflicting printed keys (Mock 1 Q54, Mock 2 Q27/Q46, Mock 3 Q64, all session 1) and Mock 3 session 1 Q65 with no printed key remain available but unscored. Mock 4 session 1 Q68 has a cut-off option list and is also unscored. Partial papers and key issues are labeled; missing answers are never guessed. Source crops remain optional provenance, and the full PDF containing keys is linked only in completed review.
 
 On submission, topic counts, mistakes, unanswered questions and relative timing appear immediately. GPT-6 Luna/max adds evidence-linked concept explanations. Each concept offers a retry of the actual missed questions and a fresh five-question drill. Unanswered questions do not establish misunderstanding; small samples are marked as limited evidence. Completed reports sync with the saved attempt.
 
-Question crops preserve the scanned source; they are not the only analysis input. Extracted question text, verified answer keys, curriculum mappings, selected answers and recorded timings drive the results. OCR can distort formulas or tables, so feedback must avoid unsupported calculations and missing or contradictory keys remain unscored.
+Structured question paragraphs, table headers/rows, LaTeX formulas, verified answer keys, curriculum mappings, selected answers and recorded timings drive the results. Inline formulas use explicit `\\(...\\)` delimiters so currency dollars remain literal. The renderer disables trusted HTML in KaTeX, supplies MathML and retains readable source text if a formula cannot render. Missing or contradictory keys remain unscored; uncertain transcriptions retain a source warning.
+
+`scripts/transcribe-mock-library.py` converts prepared source crops using GPT-6 Luna/high and independently checks every transcription against its images in a second request. It caches responses under ignored `tmp/mock-import/native`, retains original paper backups and preserves question identity, order, curriculum mappings and scoring metadata. Run its `--pilot` first, then the full run; partial runs never replace paper files. No model is allowed to invent missing scan content or repair printed answer keys.
+
+The current conversion has 1,056 checked transcriptions and 15 labeled source issues (clipped text or the missing option). These source warnings are separate from the six existing unscored answer-key issues. Running and completed attempts receive updated content by question ID without changing their order, answers, timing, flags, scores or saved analysis.
+
+Before uploading prepared papers, run `node scripts/verify-native-mock-library.cjs`. It checks source identities and protected metadata against the backups, table structure, KaTeX syntax, choice counts, source references and analysis payload sizes, and reports any transcription flags separately from answer-key issues.
 
 Private source copies and extraction output are ignored by Git (`data/imported-mocks`, `tmp/mock-import`). `scripts/upload-mock-library.cjs` uploads a prepared library with a server-only service key; it publishes the catalog last and skips unchanged content. Source files are readable by signed-in app users, not anonymous Storage requests. `ALLOW_LOCAL_STUDY_GUEST=true` in ignored `.env.local` enables local testing without signing in; leave it unset in hosted environments.
