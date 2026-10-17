@@ -1,0 +1,3164 @@
+[
+  {
+    "id": "practice-ethics-001",
+    "prompt": "A CFA member is preparing a report in a jurisdiction whose law permits a particular research practice but does not require it. The member determines that the practice would violate a more restrictive applicable CFA Standard. What should the member do?",
+    "options": [
+      "Follow the CFA Standard while continuing to comply with all applicable law.",
+      "Use the practice because local law always overrides the CFA Standards, even when it merely permits the conduct.",
+      "Choose whichever rule is less restrictive."
+    ],
+    "correctIndex": 0,
+    "rationale": "Members must comply with applicable law and the Code and Standards. When law permits conduct that a stricter Standard forbids, the member must follow the Standard.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Knowledge of the Law",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-002",
+    "prompt": "A research analyst’s documented valuation supports a Hold rating. The investment-banking team says it may lose an underwriting mandate unless she changes the rating to Buy; no new evidence supports a change. Which action is most consistent with Standard I(B)?",
+    "options": [
+      "Change the rating to Buy to protect the firm’s banking relationship.",
+      "Retain the rating supported by her independent analysis and resist the commercial pressure.",
+      "Keep the Hold rating in her model but issue a Buy recommendation because that is a business decision."
+    ],
+    "correctIndex": 1,
+    "rationale": "Standard I(B) requires members to use reasonable care and judgment to maintain independence and objectivity; commercial pressure is not a valid basis for changing an investment conclusion.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Independence and Objectivity",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-003",
+    "prompt": "An analyst copies a competitor’s proprietary earnings forecast into her own spreadsheet and presents it as independently developed, without attribution. She changes the formatting and uses no verbatim text. Which statement is correct?",
+    "options": [
+      "No violation occurs because the forecast numbers are not copied prose.",
+      "No violation occurs if the analyst believes the forecast is reasonable.",
+      "This is plagiarism under Standard I(C); changing the format does not replace acknowledging the source or developing independent work."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard I(C) prohibits plagiarism. Presenting another person’s work as one’s own is not made acceptable by changing its format or avoiding verbatim wording.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Misrepresentation",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-004",
+    "prompt": "A portfolio manager knowingly uses $3,000 from client reimbursements to pay personal expenses and returns it only after the employer begins an audit. Which Standard is most directly implicated?",
+    "options": [
+      "Standard I(D), Professional Misconduct",
+      "Standard I(E), Competence",
+      "Standard II(A), Material Nonpublic Information"
+    ],
+    "correctIndex": 0,
+    "rationale": "Knowingly misappropriating client funds is dishonest conduct that reflects adversely on professional integrity; later repayment does not undo the misconduct.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Professional Misconduct",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-005",
+    "prompt": "A research firm assigns an analyst to value a complex structured product. The analyst lacks the technical skills to do so reliably but can obtain specialist training and work with a qualified colleague. What is the best course under Standard I(E)?",
+    "options": [
+      "Publish a value based on a simpler equity model and avoid mentioning the limitations.",
+      "Tell the supervisor about the limitation and obtain sufficient training or qualified assistance before taking responsibility for the valuation.",
+      "Refuse any future assignment involving structured products, even after gaining expertise."
+    ],
+    "correctIndex": 1,
+    "rationale": "Standard I(E) requires members to act with and maintain competence. If needed, they should gain the required expertise or seek qualified assistance before providing the service.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Competence",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-006",
+    "prompt": "Before an earnings release, an analyst combines publicly reported shipment totals with nonconfidential supplier comments. The comments are immaterial individually and collectively; only the analyst’s synthesis with public data leads to a material earnings conclusion. Under Standard II(A), may she trade?",
+    "options": [
+      "No; any nonpublic input, however immaterial, bars trading.",
+      "Only if the issuer gives her permission to trade.",
+      "Yes; mosaic theory permits conclusions drawn from public information and immaterial nonpublic inputs, absent material nonpublic information."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard II(A) prohibits trading on material nonpublic information, not on every nonpublic fact. A material conclusion reached from public information and immaterial nonpublic inputs is permitted under mosaic theory.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Material Nonpublic Information",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-007",
+    "prompt": "During a private call, an issuer’s CFO tells an analyst that next week’s earnings will be far below consensus. The information has not been publicly released. What should the analyst do immediately?",
+    "options": [
+      "Do not trade or cause others to trade, alert compliance under firm procedures, and wait until the information is broadly disseminated and a reasonable time has passed before acting.",
+      "Sell client accounts but leave personal accounts unchanged.",
+      "Tell selected clients to sell but omit the exact figures."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard II(A) prohibits acting on material nonpublic information or causing others to act on it. The analyst should follow compliance procedures and wait for public dissemination and a reasonable time before acting.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Material Nonpublic Information",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-008",
+    "prompt": "Two accounts controlled by the same manager repeatedly trade shares back and forth, without changing beneficial ownership, to make trading volume look high and attract outside buyers. This is:",
+    "options": [
+      "Permissible market making as long as each trade settles.",
+      "Transaction-based market manipulation prohibited by Standard II(B).",
+      "Not market manipulation unless the issuer instructs the manager to do it."
+    ],
+    "correctIndex": 1,
+    "rationale": "Standard II(B) prohibits transactions intended to mislead market participants by creating an artificial appearance of trading activity or volume.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Market Manipulation",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-009",
+    "prompt": "An investment manager owns shares of a thinly traded company and knowingly posts a fabricated claim that a regulator will approve its product, hoping to raise the price before selling. For purposes of Standard II(B), how should this conduct be classified?",
+    "options": [
+      "It is acceptable if the claim is labeled as personal opinion.",
+      "It falls under Standard II(A) only; false information is not a market-manipulation concern.",
+      "It is information-based market manipulation; Standard II(B) prohibits spreading false information to affect prices."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard II(B) covers information-based manipulation: knowingly spreading false or misleading information with the intent to affect a security’s price is prohibited.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Market Manipulation",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-010",
+    "prompt": "An issuer whose shares a research analyst covers offers an all-expenses-paid luxury weekend at a resort just before the analyst updates the rating. No rating is explicitly demanded. What should the analyst do under Standard I(B)?",
+    "options": [
+      "Decline the offer because accepting such a benefit could reasonably be expected to compromise independence and objectivity.",
+      "Accept it if she discloses the trip to readers after publishing the report.",
+      "Accept it if the issuer has made the same offer to other analysts."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard I(B) prohibits accepting benefits that could reasonably be expected to compromise independence or objectivity. Later disclosure or common practice does not remove that concern.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Independence and Objectivity",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-011",
+    "prompt": "A $2.0 million portfolio has an IPS cap of 20% on illiquid assets and currently holds $320,000 in them. A proposed $100,000 illiquid-fund purchase would be funded by selling liquid assets, leaving total portfolio value unchanged. What should the adviser do under the current IPS?",
+    "options": [
+      "Proceed because expected returns can justify a temporary one-percentage-point breach.",
+      "Decline the purchase under the current IPS: the allocation would rise from 16% to 21%, above the 20% cap.",
+      "Proceed because the fund's suitability should be judged separately from existing holdings."
+    ],
+    "correctIndex": 1,
+    "rationale": "Under Standard III(C), suitability includes the client's total portfolio and stated constraints. The allocation would be ($320,000 + $100,000) / $2.0 million = 21%, exceeding the cap.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Suitability",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-012",
+    "prompt": "A client will invest $1,000,000 in one of two eligible share classes of the same fund. The classes have identical holdings, services, and access. Class X costs 1.20% per year and produces more revenue for the employer; Class Y costs 0.80%. Which recommendation best reflects the manager's duty to the client?",
+    "options": [
+      "Recommend Class Y: it costs about $8,000 annually versus $12,000 for Class X, with no offsetting client benefit to the higher-cost class.",
+      "Recommend Class X because it produces more employer revenue, then disclose that benefit afterward.",
+      "Recommend either class because identical holdings make the difference in fees irrelevant."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard III(A) requires the manager to put the client's interests ahead of the employer's. Class Y saves the client $4,000 annually, and the stated facts give Class X no offsetting benefit.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Loyalty, Prudence, and Care",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-013",
+    "prompt": "An analyst finalizes a recommendation included in a research service for every client in a given tier. A sales executive asks the analyst to send it 24 hours early only to the largest accounts in that same tier. What is the most appropriate response?",
+    "options": [
+      "Send it first to the largest accounts because they generate more revenue.",
+      "Send it only to clients who request it, without notifying the rest of the tier.",
+      "Use the firm's established, equitable distribution process so all clients in that tier have a fair opportunity to act."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard III(B) requires fair dealing with clients. Account size alone does not justify selective early access among clients receiving the same service.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Fair Dealing",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-014",
+    "prompt": "While employed by an investment adviser, a portfolio manager plans to launch a paid independent advisory service that overlaps with the firm's offerings. She will use personal equipment and work outside her usual hours. What should she do before starting?",
+    "options": [
+      "No notice is needed because she will use no employer resources.",
+      "Begin the service, then disclose it after obtaining the first paying client.",
+      "Notify the employer in advance, describe the proposed practice, and obtain written consent before beginning."
+    ],
+    "correctIndex": 2,
+    "rationale": "Under Standard IV(A), a member must notify the employer and obtain consent before beginning independent compensated practice that may conflict with the employer's interests.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Loyalty to Employer",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-015",
+    "prompt": "A client offers a portfolio manager a personal performance bonus, in addition to the manager's salary, if the client's account beats a benchmark. The employer is not party to the proposed payment. What is required before the manager accepts?",
+    "options": [
+      "Accept once the client provides written consent; the employer need not be involved because the payment comes from a client.",
+      "Obtain written consent from the employer and all parties to the arrangement before accepting.",
+      "Accept and report the bonus on the next annual compliance questionnaire."
+    ],
+    "correctIndex": 1,
+    "rationale": "Standard IV(B) requires written consent from all parties before accepting compensation that competes with, or may conflict with, the employer's interests.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Additional Compensation Arrangements",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-016",
+    "prompt": "An equity analyst preparing a recommendation owns a material beneficial interest in the issuer. What is the appropriate response under conflict-disclosure obligations?",
+    "options": [
+      "Clearly disclose the ownership-related conflict to clients and prospective clients receiving the recommendation, and to the employer as appropriate.",
+      "Keep the holding private unless the analyst trades while the recommendation is active.",
+      "Disclose the holding only if the recommendation is to sell the stock."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard VI(A) requires full and fair disclosure of matters reasonably expected to impair independence or objectivity. Material beneficial ownership is a potential conflict.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Disclosure of Conflicts",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-017",
+    "prompt": "A manager decides to issue a buy recommendation to clients but first places a purchase order in a personal account in which she has beneficial ownership. What is the most appropriate action?",
+    "options": [
+      "Keep the trade, provided it is small relative to client trades.",
+      "Trade before clients because the personal account is held separately.",
+      "Wait until the recommendation is distributed and clients have had an adequate opportunity to act before trading personally."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard VI(B) gives client and employer transactions priority over personal trades. Clients must have an adequate opportunity to act on the recommendation first.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Priority of Transactions",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-018",
+    "prompt": "After an advisory relationship ends, a former client's adult child asks the adviser to provide the client's account holdings. The client gave no authorization, there is no legal requirement to disclose them, and no suspected illegal activity. What should the adviser do?",
+    "options": [
+      "Release the holdings because confidentiality ends with the engagement.",
+      "Keep the information confidential; the duty continues after the relationship ends unless an exception applies.",
+      "Release the holdings if the adult child can verify the family relationship."
+    ],
+    "correctIndex": 1,
+    "rationale": "Standard III(E) applies to former as well as current clients. Without client permission, a legal requirement, or the illegal-activity exception, the information remains confidential.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Preservation of Confidentiality",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-019",
+    "prompt": "An adviser receives a cash payment for each prospect referred to an outside investment platform. Which action is required?",
+    "options": [
+      "Disclose the referral arrangement and related compensation to the employer and to clients or prospective clients, as appropriate, so they can assess possible bias.",
+      "Disclose it only to prospects who ultimately invest through the platform.",
+      "No disclosure is needed if the adviser believes the platform is suitable."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard VI(C) requires disclosure, as appropriate, of referral compensation or benefits to the employer and to clients or prospective clients so they can evaluate the recommendation's impartiality.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Referral Fees",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-020",
+    "prompt": "A manager's five-year marketing record for a strategy excludes two terminated accounts because they lost money, yet describes the result as the strategy's record. Which statement is correct?",
+    "options": [
+      "The exclusion is acceptable because the accounts are no longer managed.",
+      "The exclusion is acceptable if the manager explains it verbally when asked.",
+      "Performance information must be presented fairly, accurately, and completely; selectively omitting losses from a record presented as representative is misleading."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard III(D) requires reasonable efforts to ensure performance information is fair, accurate, and complete. Selectively omitting losing accounts misrepresents the strategy's record.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Performance Presentation",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-021",
+    "prompt": "Before issuing a recommendation on a thinly traded company, an analyst discovers that a proprietary valuation model relies on an undocumented supplier forecast. Which action best meets the analyst’s professional duty?",
+    "options": [
+      "Assess the forecast’s source and reliability, scrutinize key model assumptions, and obtain sufficient supporting research before recommending.",
+      "Use the model as provided because proprietary models need not substantiate their inputs.",
+      "Issue the recommendation if the rating is Hold or Sell; a reasonable basis is required only for Buy recommendations."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard V(A) requires diligence and a reasonable basis supported by appropriate research for every recommendation.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Diligence and Reasonable Basis",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-022",
+    "prompt": "An analyst lawfully receives a nonpublic but nonmaterial comment from a regional distributor about a modest increase in its own orders. Combined with public filings and industry data, the analyst estimates the issuer’s sales above consensus. Under the mosaic theory, what may the analyst do?",
+    "options": [
+      "Refrain from making a recommendation until the comment is public, because all nonpublic information is prohibited.",
+      "Use the combined analysis, provided the comment is genuinely nonmaterial and no other duty is breached.",
+      "Make the recommendation only after the issuer authorizes public release of the distributor’s comment."
+    ],
+    "correctIndex": 1,
+    "rationale": "The mosaic theory permits conclusions based on public information and nonmaterial nonpublic information; material nonpublic information may not be used.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Mosaic Theory",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-023",
+    "prompt": "An analyst publishes a 12-month target price based largely on a major customer renewing an unconfirmed contract. Which treatment is most consistent with professional standards?",
+    "options": [
+      "Describe the target as a verified fact because it is calculated by a quantitative model.",
+      "Omit the renewal assumption unless a client specifically asks for the model.",
+      "Label the target as an estimate, disclose the material renewal assumption and its limitations, and distinguish the forecast from verified facts."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard V(B) requires analysts to distinguish facts from opinions and communicate material assumptions, risks, and limitations.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Communication with Clients and Prospective Clients",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-024",
+    "prompt": "A portfolio reports returns of +8% in Year 1 and +12% in Year 2, with no external cash flows. What is the cumulative two-year return?",
+    "options": [
+      "20.96%",
+      "20.00%",
+      "10.00%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Cumulative returns are geometrically linked: (1.08 × 1.12) − 1 = 0.2096, or 20.96%.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Performance Presentation",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-025",
+    "prompt": "A firm claiming GIPS compliance manages 12 actual, fee-paying, discretionary portfolios under one domestic small-cap value strategy. Three portfolios underperform. Which composite practice is appropriate?",
+    "options": [
+      "Exclude the three underperformers so the composite reflects only accounts meeting expected results.",
+      "Include only portfolios that remain open at the end of the year.",
+      "Include all 12 in the appropriate composite, defined by a similar mandate, strategy, or objective, regardless of individual performance."
+    ],
+    "correctIndex": 2,
+    "rationale": "GIPS requires all actual, fee-paying, discretionary portfolios to be included in at least one appropriate composite; firms cannot selectively omit portfolios based on performance.",
+    "topic": "Introduction to the Global Investment Performance Standards (GIPS)",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "GIPS Composite Construction",
+    "topicId": "ethics-gips"
+  },
+  {
+    "id": "practice-ethics-026",
+    "prompt": "A prospective client interprets a firm’s GIPS verification as proof that every figure in the firm’s small-cap composite report has been independently certified. Which explanation is accurate?",
+    "options": [
+      "Verification certifies every composite return and guarantees the performance can be replicated.",
+      "Verification is a firm-wide assessment of GIPS compliance policies and procedures; by itself, it does not verify a specific composite’s reported results.",
+      "Verification examines only one selected composite and is mandatory for any firm claiming GIPS compliance."
+    ],
+    "correctIndex": 1,
+    "rationale": "GIPS verification is a firm-wide review and is voluntary; a separate performance examination may address a specific composite.",
+    "topic": "Introduction to the Global Investment Performance Standards (GIPS)",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "GIPS Verification",
+    "topicId": "ethics-gips"
+  },
+  {
+    "id": "practice-ethics-027",
+    "prompt": "After sitting for the Level I exam, a candidate wants to post a paraphrase of a remembered vignette and its answer choices in a private group chat. What should the candidate do?",
+    "options": [
+      "Decline to share it; specific exam questions and content may not be disclosed, even paraphrased or privately.",
+      "Share it after the exam window closes, because only verbatim wording is protected.",
+      "Share it only with other candidates who have already completed the exam."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard VII(A) and CFA Institute exam rules prohibit disclosing exam questions or specific content; paraphrasing or using a private channel does not remove the restriction.",
+    "topic": "Code of Ethics and Standards of Professional Conduct",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Conduct as Participants in CFA Institute Programs",
+    "topicId": "ethics-code-and-standards"
+  },
+  {
+    "id": "practice-ethics-028",
+    "prompt": "An individual has passed Level I and is registered to sit for Level II. Which résumé wording accurately reports progress without implying award of the CFA charter?",
+    "options": [
+      "CFA Level I.",
+      "CFA, Level II.",
+      "Passed Level I of the CFA Program; registered for Level II of the CFA Program."
+    ],
+    "correctIndex": 2,
+    "rationale": "Standard VII(B) permits accurate statements about exam progress but prohibits using CFA in a way that implies the charter or a partial designation.",
+    "topic": "Code of Ethics and Standards of Professional Conduct",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "CFA Program References",
+    "topicId": "ethics-code-and-standards"
+  },
+  {
+    "id": "practice-ethics-029",
+    "prompt": "An analyst has prepared a time-sensitive downgrade recommendation. With no service-based or operational reason, the analyst sends it to a few favored clients well before the rest. Which standard is most directly implicated?",
+    "options": [
+      "This is fair so long as those clients pay higher fees.",
+      "Fair dealing: recommendations should be disseminated fairly so clients have a reasonable opportunity to act.",
+      "No client-related standard is implicated unless the analyst also trades personally."
+    ],
+    "correctIndex": 1,
+    "rationale": "Standard III(B) requires fair treatment and fair dissemination of recommendations; unjustifiably giving some clients an earlier opportunity can be unfair.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Fair Dealing",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-ethics-030",
+    "prompt": "A firm is preparing to buy a security for client portfolios, and a candidate employed there also wants to buy it personally. Which action conforms to Standard VI(B)?",
+    "options": [
+      "Give client and employer transactions priority and do not place the personal trade ahead of them.",
+      "Place the personal trade first because the candidate may own securities covered by research.",
+      "Trade personally first if the personal order is small relative to the client orders."
+    ],
+    "correctIndex": 0,
+    "rationale": "Standard VI(B) requires transactions for clients and the employer to take priority over personal transactions in which the candidate has beneficial ownership.",
+    "topic": "Guidance for Standards I-VII",
+    "subjectId": "ethics",
+    "subject": "Ethical and Professional Standards",
+    "source": "Original AI-authored practice",
+    "concept": "Priority of Transactions",
+    "topicId": "ethics-guidance"
+  },
+  {
+    "id": "practice-quant-001",
+    "prompt": "An investor buys a share for $40, receives a $2 dividend, and sells it for $43. What is the holding-period return?",
+    "options": [
+      "7.5%",
+      "12.5%",
+      "15.0%"
+    ],
+    "correctIndex": 1,
+    "rationale": "Holding-period return = ($43 - $40 + $2) / $40 = 12.5%.",
+    "topic": "Rates and Returns",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Holding-period return",
+    "topicId": "quant-rates-and-returns"
+  },
+  {
+    "id": "practice-quant-002",
+    "prompt": "A quoted annual interest rate is 8%, compounded quarterly. What is the effective annual rate, closest to?",
+    "options": [
+      "8.24%",
+      "8.00%",
+      "8.32%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Effective annual rate = (1 + 0.08/4)^4 - 1 = 8.2432%, or about 8.24%.",
+    "topic": "Rates and Returns",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Effective annual rate",
+    "topicId": "quant-rates-and-returns"
+  },
+  {
+    "id": "practice-quant-003",
+    "prompt": "A contract pays $1,000 today, $1,000 in one year, and $1,000 in two years. At a 5% annual discount rate, what is the present value, closest to?",
+    "options": [
+      "$2,723.25",
+      "$3,000.00",
+      "$2,859.41"
+    ],
+    "correctIndex": 2,
+    "rationale": "Present value = $1,000 + $1,000/1.05 + $1,000/(1.05)^2 = $2,859.41.",
+    "topic": "Time Value of Money in Finance",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Annuity due",
+    "topicId": "quant-tvm"
+  },
+  {
+    "id": "practice-quant-004",
+    "prompt": "A project costs $10,000 today and pays $4,000 at the end of each of the next three years. At an 8% discount rate, what is its net present value, closest to?",
+    "options": [
+      "-$308.39",
+      "$308.39",
+      "$10,308.39"
+    ],
+    "correctIndex": 1,
+    "rationale": "NPV = -$10,000 + $4,000(1/1.08 + 1/1.08^2 + 1/1.08^3) = $308.39.",
+    "topic": "Time Value of Money in Finance",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Net present value",
+    "topicId": "quant-tvm"
+  },
+  {
+    "id": "practice-quant-005",
+    "prompt": "An investment earns 30% in year 1 and loses 10% in year 2. What is its annualized geometric mean return, closest to?",
+    "options": [
+      "8.17%",
+      "10.00%",
+      "17.00%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Geometric mean = [(1.30)(0.90)]^(1/2) - 1 = 8.17%.",
+    "topic": "Rates and Returns",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Geometric mean return",
+    "topicId": "quant-rates-and-returns"
+  },
+  {
+    "id": "practice-quant-006",
+    "prompt": "Production line A makes 60% of a firm's units and has a 2% defect rate. Line B makes 40% and has a 5% defect rate. Given that a randomly selected unit is defective, what is the probability it came from line B?",
+    "options": [
+      "37.5%",
+      "40.0%",
+      "62.5%"
+    ],
+    "correctIndex": 2,
+    "rationale": "By Bayes' formula, P(B|defective) = (0.40 x 0.05) / [(0.60 x 0.02) + (0.40 x 0.05)] = 62.5%.",
+    "topic": "Probability Trees and Conditional Expectations",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Bayes' formula",
+    "topicId": "quant-probability"
+  },
+  {
+    "id": "practice-quant-007",
+    "prompt": "An asset's possible one-year returns are 20% with probability 0.30, 10% with probability 0.50, and -10% with probability 0.20. What is its expected return?",
+    "options": [
+      "7.0%",
+      "9.0%",
+      "10.0%"
+    ],
+    "correctIndex": 1,
+    "rationale": "Expected return = 0.30(20%) + 0.50(10%) + 0.20(-10%) = 9.0%.",
+    "topic": "Probability Trees and Conditional Expectations",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Expected return",
+    "topicId": "quant-probability"
+  },
+  {
+    "id": "practice-quant-008",
+    "prompt": "A portfolio invests equally in two assets. Their standard deviations are 10% and 20%, and their correlation is 0.50. What is the portfolio standard deviation, closest to?",
+    "options": [
+      "13.23%",
+      "15.00%",
+      "30.00%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Portfolio variance = 0.25(0.10^2) + 0.25(0.20^2) + 2(0.5)(0.5)(0.5)(0.10)(0.20) = 0.0175; its square root is 13.23%.",
+    "topic": "Portfolio Mathematics",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Portfolio variance",
+    "topicId": "quant-portfolio-math"
+  },
+  {
+    "id": "practice-quant-009",
+    "prompt": "An analyst simulates 2,000 possible one-year portfolio outcomes. In 74 outcomes, the portfolio's loss exceeds 8%. Based on the simulation, what is the estimated probability of a loss exceeding 8%?",
+    "options": [
+      "0.037%",
+      "37.0%",
+      "3.7%"
+    ],
+    "correctIndex": 2,
+    "rationale": "The simulated frequency is 74/2,000 = 0.037, or 3.7%.",
+    "topic": "Simulation Methods",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Monte Carlo simulation",
+    "topicId": "quant-simulation"
+  },
+  {
+    "id": "practice-quant-010",
+    "prompt": "A random sample of 36 observations has a mean of 50. The population standard deviation is known to be 12. Using z* = 1.96, what is the lower endpoint of a two-sided 95% confidence interval for the population mean?",
+    "options": [
+      "42.16",
+      "46.08",
+      "53.92"
+    ],
+    "correctIndex": 1,
+    "rationale": "The standard error is 12/sqrt(36) = 2, so the lower endpoint is 50 - 1.96(2) = 46.08.",
+    "topic": "Estimation and Inference",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Confidence interval",
+    "topicId": "quant-estimation"
+  },
+  {
+    "id": "practice-quant-011",
+    "prompt": "A sample of 9 observations has a mean of 102 and a sample standard deviation of 6. For a test of H0: population mean = 100, what is the t-statistic?",
+    "options": [
+      "1.00",
+      "0.33",
+      "2.00"
+    ],
+    "correctIndex": 0,
+    "rationale": "t = (102 - 100)/(6/sqrt(9)) = 1.00.",
+    "topic": "Hypothesis Testing",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "t-test",
+    "topicId": "quant-hypothesis-testing"
+  },
+  {
+    "id": "practice-quant-012",
+    "prompt": "In hypothesis testing, which outcome is a Type I error?",
+    "options": [
+      "Failing to reject a false null hypothesis",
+      "Rejecting a false null hypothesis",
+      "Rejecting a true null hypothesis"
+    ],
+    "correctIndex": 2,
+    "rationale": "A Type I error occurs when a true null hypothesis is rejected.",
+    "topic": "Hypothesis Testing",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Type I error",
+    "topicId": "quant-hypothesis-testing"
+  },
+  {
+    "id": "practice-quant-013",
+    "prompt": "A 2 x 2 contingency table has these observed counts: Style X has 30 low-fee and 20 high-fee funds; Style Y has 20 low-fee and 30 high-fee funds. What is the chi-square test statistic for independence?",
+    "options": [
+      "2.00",
+      "4.00",
+      "8.00"
+    ],
+    "correctIndex": 1,
+    "rationale": "Each expected count is 25. Each of the four cells contributes (5^2/25) = 1, so the statistic is 4.00.",
+    "topic": "Parametric and Non-Parametric Tests of Independence",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Chi-square test of independence",
+    "topicId": "quant-independence-tests"
+  },
+  {
+    "id": "practice-quant-014",
+    "prompt": "A fitted simple linear regression is y_hat = 1.5 + 0.8x, where y is an annual return measured in percentage points. At x = 10, what is the predicted annual return?",
+    "options": [
+      "9.5 percentage points",
+      "8.0 percentage points",
+      "10.0 percentage points"
+    ],
+    "correctIndex": 0,
+    "rationale": "Substituting x = 10 gives y_hat = 1.5 + 0.8(10) = 9.5 percentage points.",
+    "topic": "Simple Linear Regression",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Simple linear regression",
+    "topicId": "quant-linear-regression"
+  },
+  {
+    "id": "practice-quant-015",
+    "prompt": "In a simple linear regression with an intercept, the sample correlation between the dependent variable and the explanatory variable is -0.60. What is the coefficient of determination?",
+    "options": [
+      "-36%",
+      "60%",
+      "36%"
+    ],
+    "correctIndex": 2,
+    "rationale": "For a simple regression with an intercept, R-squared = r^2 = (-0.60)^2 = 0.36, or 36%.",
+    "topic": "Simple Linear Regression",
+    "subjectId": "quant",
+    "subject": "Quantitative Methods",
+    "source": "Original AI-authored practice",
+    "concept": "Coefficient of determination",
+    "topicId": "quant-linear-regression"
+  },
+  {
+    "id": "practice-econ-001",
+    "prompt": "A product's price rises from $20 to $24, while quantity demanded falls from 100 to 80 units. Using the midpoint method, the absolute price elasticity of demand is closest to:",
+    "options": [
+      "1.22",
+      "0.82",
+      "1.80"
+    ],
+    "correctIndex": 0,
+    "rationale": "The absolute percentage change in quantity is 20/90, or 22.22%; the percentage change in price is 4/22, or 18.18%. Their ratio is approximately 1.22.",
+    "topic": "The Firm and Market Structures",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Price Elasticity of Demand",
+    "topicId": "economics-firm-and-markets"
+  },
+  {
+    "id": "practice-econ-002",
+    "prompt": "A perfectly competitive firm faces a market price of $12. Its rising marginal cost curve crosses price at 40 units, where average variable cost is $9. Which short-run decision maximizes profit?",
+    "options": [
+      "Shut down because price does not cover total cost.",
+      "Produce 40 units because price equals marginal cost and exceeds average variable cost.",
+      "Produce more than 40 units because price exceeds average variable cost."
+    ],
+    "correctIndex": 1,
+    "rationale": "A competitive firm produces where price equals marginal cost on the rising portion of the curve if price covers average variable cost. Here, $12 exceeds $9.",
+    "topic": "The Firm and Market Structures",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Perfect Competition",
+    "topicId": "economics-firm-and-markets"
+  },
+  {
+    "id": "practice-econ-003",
+    "prompt": "A monopolist faces inverse demand P = 100 - 2Q and has constant marginal cost of $20. What price maximizes profit?",
+    "options": [
+      "$40",
+      "$80",
+      "$60"
+    ],
+    "correctIndex": 2,
+    "rationale": "Marginal revenue is 100 - 4Q. Setting MR equal to MC gives Q = 20; substituting into demand gives P = 100 - 2(20) = $60.",
+    "topic": "The Firm and Market Structures",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Monopoly",
+    "topicId": "economics-firm-and-markets"
+  },
+  {
+    "id": "practice-econ-004",
+    "prompt": "An economy has consumption of $520 billion, gross domestic investment of $140 billion, government purchases of $180 billion, exports of $60 billion, and imports of $100 billion. GDP is:",
+    "options": [
+      "$800 billion",
+      "$900 billion",
+      "$1,000 billion"
+    ],
+    "correctIndex": 0,
+    "rationale": "GDP = C + I + G + X - M = 520 + 140 + 180 + 60 - 100 = $800 billion.",
+    "topic": "Understanding Business Cycles",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "GDP: Expenditure Approach",
+    "topicId": "economics-business-cycles"
+  },
+  {
+    "id": "practice-econ-005",
+    "prompt": "A consumer price index rises from 250 to 260 over one year. The annual inflation rate, based on this index, is:",
+    "options": [
+      "2.5%",
+      "4.0%",
+      "10.0%"
+    ],
+    "correctIndex": 1,
+    "rationale": "Inflation is the percentage change in the index: (260 - 250)/250 = 4.0%.",
+    "topic": "Understanding Business Cycles",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Inflation",
+    "topicId": "economics-business-cycles"
+  },
+  {
+    "id": "practice-econ-006",
+    "prompt": "An analyst observes persistent declines in building permits and manufacturers' new orders. What is the most appropriate interpretation in business-cycle analysis?",
+    "options": [
+      "They are typically lagging indicators that confirm a downturn only after output falls.",
+      "They are coincident indicators that measure current output but provide no forward signal.",
+      "They are typically leading indicators, so their decline suggests a greater likelihood of weaker future activity."
+    ],
+    "correctIndex": 2,
+    "rationale": "Building permits and manufacturers' new orders are generally leading indicators; declines can signal weakening future activity but do not guarantee a downturn.",
+    "topic": "Understanding Business Cycles",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Business Cycle Indicators",
+    "topicId": "economics-business-cycles"
+  },
+  {
+    "id": "practice-econ-007",
+    "prompt": "In a simple closed-economy model with no taxes, imports, or crowding out, the marginal propensity to consume is 0.80. If government purchases rise by $20 billion, equilibrium output rises by:",
+    "options": [
+      "$100 billion",
+      "$80 billion",
+      "$25 billion"
+    ],
+    "correctIndex": 0,
+    "rationale": "The government-purchases multiplier is 1/(1 - 0.80) = 5. The output increase is 5 × $20 billion = $100 billion.",
+    "topic": "Fiscal Policy",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Fiscal Policy",
+    "topicId": "economics-fiscal-policy"
+  },
+  {
+    "id": "practice-econ-008",
+    "prompt": "A central bank cuts its nominal policy rate while expected inflation is unchanged. All else equal, which outcome is most likely through the interest-rate channel?",
+    "options": [
+      "The ex ante real rate rises, tending to reduce interest-sensitive spending.",
+      "The ex ante real rate falls, tending to increase interest-sensitive spending.",
+      "The ex ante real rate is unchanged because only expected inflation determines it."
+    ],
+    "correctIndex": 1,
+    "rationale": "With expected inflation unchanged, a lower nominal policy rate lowers the ex ante real rate, which tends to encourage borrowing and spending.",
+    "topic": "Monetary Policy",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Monetary Policy",
+    "topicId": "economics-monetary-policy"
+  },
+  {
+    "id": "practice-econ-009",
+    "prompt": "A worker loses a job because a broad economic downturn reduces demand for the firm's products. The worker is seeking a similar job. This is best classified as:",
+    "options": [
+      "Structural unemployment",
+      "Frictional unemployment",
+      "Cyclical unemployment"
+    ],
+    "correctIndex": 2,
+    "rationale": "Unemployment caused by a downturn in aggregate economic activity is cyclical unemployment.",
+    "topic": "Understanding Business Cycles",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Types of Unemployment",
+    "topicId": "economics-business-cycles"
+  },
+  {
+    "id": "practice-econ-010",
+    "prompt": "An economy has a Cobb-Douglas production function with a capital share of 0.4. Capital grows by 5%, labor grows by 2%, and total factor productivity grows by 1%. Assuming constant returns to scale, output growth is closest to:",
+    "options": [
+      "4.2%",
+      "3.2%",
+      "8.0%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Growth accounting gives 0.4(5%) + 0.6(2%) + 1% = 2.0% + 1.2% + 1.0% = 4.2%.",
+    "topic": "Understanding Business Cycles",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Growth Accounting",
+    "topicId": "economics-business-cycles"
+  },
+  {
+    "id": "practice-econ-011",
+    "prompt": "Country A requires 2 labor-hours to produce one unit of wheat and 6 hours to produce one unit of cloth. Country B requires 4 hours per unit of wheat and 8 hours per unit of cloth. Which specialization follows from comparative advantage?",
+    "options": [
+      "Country A in cloth and Country B in wheat",
+      "Country A in wheat and Country B in cloth",
+      "There are no gains from trade because Country A uses fewer labor-hours for both goods."
+    ],
+    "correctIndex": 1,
+    "rationale": "A's opportunity cost of wheat is 2/6 = 1/3 unit of cloth, versus 4/8 = 1/2 for B. A has comparative advantage in wheat; B has comparative advantage in cloth.",
+    "topic": "International Trade",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Comparative Advantage",
+    "topicId": "economics-international-trade"
+  },
+  {
+    "id": "practice-econ-012",
+    "prompt": "A small country with upward-sloping domestic supply and downward-sloping demand imposes a binding tariff on an imported good. Compared with free trade, which outcome is most likely?",
+    "options": [
+      "The world price rises while the domestic price remains unchanged.",
+      "The domestic price falls and imports increase.",
+      "The domestic price rises, imports decline, and national welfare falls because of deadweight loss."
+    ],
+    "correctIndex": 2,
+    "rationale": "A small country cannot affect the world price. The tariff raises the domestic price and reduces imports, creating production and consumption inefficiencies that lower national welfare.",
+    "topic": "International Trade",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Tariffs",
+    "topicId": "economics-international-trade"
+  },
+  {
+    "id": "practice-econ-013",
+    "prompt": "A country's balance on goods and services is -$18 billion, net primary income is +$5 billion, and net secondary income is -$2 billion. Its current account balance is:",
+    "options": [
+      "-$15 billion",
+      "-$25 billion",
+      "+$15 billion"
+    ],
+    "correctIndex": 0,
+    "rationale": "The current account is the sum of these balances: -18 + 5 - 2 = -$15 billion.",
+    "topic": "Capital Flows and the FX Market",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Balance of Payments",
+    "topicId": "economics-capital-flows-fx"
+  },
+  {
+    "id": "practice-econ-014",
+    "prompt": "Ignoring bid-ask spreads, a dealer quotes 1 EUR = $1.10 and 1 GBP = $1.25. The cross-rate expressed as GBP per EUR is closest to:",
+    "options": [
+      "1.14 GBP per EUR",
+      "0.88 GBP per EUR",
+      "1.375 GBP per EUR"
+    ],
+    "correctIndex": 1,
+    "rationale": "One euro is worth $1.10, and one pound is worth $1.25. Thus, GBP per EUR = 1.10/1.25 = 0.88.",
+    "topic": "Exchange Rate Calculations",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Foreign Exchange Cross Rates",
+    "topicId": "economics-fx-calculations"
+  },
+  {
+    "id": "practice-econ-015",
+    "prompt": "An exchange rate is quoted as units of domestic currency per unit of foreign currency. If domestic inflation is expected to be 5% and foreign inflation 2%, relative purchasing power parity predicts that the quote will:",
+    "options": [
+      "Fall by approximately 3%, indicating domestic currency appreciation.",
+      "Rise by approximately 7%, indicating domestic currency depreciation.",
+      "Rise by approximately 3%, indicating domestic currency depreciation."
+    ],
+    "correctIndex": 2,
+    "rationale": "Relative PPP predicts a change of approximately domestic inflation minus foreign inflation: 5% - 2% = 3%. The domestic-currency-per-foreign-currency quote therefore rises.",
+    "topic": "Exchange Rate Calculations",
+    "subjectId": "economics",
+    "subject": "Economics",
+    "source": "Original AI-authored practice",
+    "concept": "Relative Purchasing Power Parity",
+    "topicId": "economics-fx-calculations"
+  },
+  {
+    "id": "practice-fsa-001",
+    "prompt": "A provider sells a 12-month hosted-software service for $24,000, receives payment on 1 October, and provides service evenly beginning that day. For a calendar-year reporting period, how much revenue from this contract is recognized by 31 December?",
+    "options": [
+      "$18,000",
+      "$6,000",
+      "$24,000"
+    ],
+    "correctIndex": 1,
+    "rationale": "Three of the 12 months of service have been delivered: $24,000 × 3/12 = $6,000.",
+    "topic": "Analyzing Income Statements",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Revenue recognition",
+    "topicId": "financial-statement-analysis-income-statements"
+  },
+  {
+    "id": "practice-fsa-002",
+    "prompt": "A retailer begins with 100 units costing $10 each, purchases 100 units for $14 each, and then sells 150 units. Using FIFO, cost of goods sold is:",
+    "options": [
+      "$1,700",
+      "$1,800",
+      "$1,900"
+    ],
+    "correctIndex": 0,
+    "rationale": "FIFO assigns the first 100 units at $10 and the next 50 at $14: $1,000 + $700 = $1,700.",
+    "topic": "Analysis of Inventories",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Inventory measurement",
+    "topicId": "financial-statement-analysis-inventories"
+  },
+  {
+    "id": "practice-fsa-003",
+    "prompt": "An entity's normal operating cycle is 16 months. At the reporting date, inventory is expected to be sold in 14 months. Under IFRS, the inventory should be classified as a:",
+    "options": [
+      "Noncurrent asset because it will be realized after 12 months",
+      "Current liability because it is expected to be sold",
+      "Current asset because it will be realized within the normal operating cycle"
+    ],
+    "correctIndex": 2,
+    "rationale": "Under IFRS, an asset expected to be realized in the normal operating cycle is current, even when that cycle exceeds 12 months.",
+    "topic": "Analyzing Balance Sheets",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Balance sheet classification",
+    "topicId": "financial-statement-analysis-balance-sheets"
+  },
+  {
+    "id": "practice-fsa-004",
+    "prompt": "Equipment costing $180,000 has a $30,000 residual value and a five-year useful life. Using straight-line depreciation for a full year, depreciation expense is:",
+    "options": [
+      "$25,000",
+      "$30,000",
+      "$36,000"
+    ],
+    "correctIndex": 1,
+    "rationale": "Annual depreciation is (cost − residual value) / useful life = ($180,000 − $30,000) / 5 = $30,000.",
+    "topic": "Analysis of Long-Term Assets",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Depreciation",
+    "topicId": "financial-statement-analysis-long-term-assets"
+  },
+  {
+    "id": "practice-fsa-005",
+    "prompt": "Under US GAAP, a long-lived asset group held and used has a carrying amount of $900,000, estimated undiscounted future net cash flows of $820,000, and a fair value of $760,000. If an impairment is indicated, the impairment loss is:",
+    "options": [
+      "$140,000",
+      "$80,000",
+      "$0"
+    ],
+    "correctIndex": 0,
+    "rationale": "The carrying amount exceeds undiscounted cash flows, so the asset group fails the recoverability test. The loss is $900,000 − $760,000 = $140,000.",
+    "topic": "Analysis of Long-Term Assets",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Long-lived asset impairment",
+    "topicId": "financial-statement-analysis-long-term-assets"
+  },
+  {
+    "id": "practice-fsa-006",
+    "prompt": "An IFRS reporter incurs $120,000 on research before technical feasibility is established and $300,000 on development after technical feasibility, intent and ability to complete, probable future benefits, adequate resources, and reliable measurement are demonstrated. How much of these expenditures is capitalized as an intangible asset?",
+    "options": [
+      "$420,000",
+      "$120,000",
+      "$300,000"
+    ],
+    "correctIndex": 2,
+    "rationale": "Research costs are expensed. Development costs are capitalized once the recognition criteria are met, so $300,000 is capitalized.",
+    "topic": "Analysis of Long-Term Assets",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Intangible assets",
+    "topicId": "financial-statement-analysis-long-term-assets"
+  },
+  {
+    "id": "practice-fsa-007",
+    "prompt": "At commencement, a lessee enters a five-year equipment lease that does not qualify for a short-term or low-value exemption. Under IFRS 16, the lessee generally must:",
+    "options": [
+      "Recognize a right-of-use asset and a lease liability, with the liability initially measured at the present value of lease payments",
+      "Expense all lease payments as incurred and recognize no liability",
+      "Recognize an asset and liability only if legal title transfers at the end of the lease"
+    ],
+    "correctIndex": 0,
+    "rationale": "IFRS 16 generally requires lessees to recognize a right-of-use asset and lease liability for leases that do not qualify for an exemption.",
+    "topic": "Topics in Long-Term Liabilities and Equity",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Leases",
+    "topicId": "financial-statement-analysis-liabilities-equity"
+  },
+  {
+    "id": "practice-fsa-008",
+    "prompt": "An investor acquires 30% of an associate for $400,000 and has significant influence. During the year, the associate earns $100,000 and distributes dividends of $20,000. Assuming no other changes, the investment's year-end carrying amount under the equity method is:",
+    "options": [
+      "$430,000",
+      "$424,000",
+      "$410,000"
+    ],
+    "correctIndex": 1,
+    "rationale": "The investor adds its $30,000 share of profit and subtracts its $6,000 share of dividends: $400,000 + $30,000 − $6,000 = $424,000.",
+    "topic": "Topics in Long-Term Liabilities and Equity",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Equity method",
+    "topicId": "financial-statement-analysis-liabilities-equity"
+  },
+  {
+    "id": "practice-fsa-009",
+    "prompt": "An acquirer purchases 100% of a business for consideration of $780 million. At the acquisition date, the fair value of identifiable net assets acquired is $690 million. Ignoring other consideration, goodwill recognized is:",
+    "options": [
+      "$690 million",
+      "$780 million",
+      "$90 million"
+    ],
+    "correctIndex": 2,
+    "rationale": "Goodwill equals consideration transferred less the fair value of identifiable net assets: $780 million − $690 million = $90 million.",
+    "topic": "Analysis of Long-Term Assets",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Goodwill",
+    "topicId": "financial-statement-analysis-long-term-assets"
+  },
+  {
+    "id": "practice-fsa-010",
+    "prompt": "Equipment has a carrying amount of $600,000 and a tax base of $450,000. The temporary difference will reverse in future taxable periods, when the enacted tax rate is 25%. The resulting deferred tax balance is:",
+    "options": [
+      "A deferred tax liability of $37,500",
+      "A deferred tax asset of $37,500",
+      "A deferred tax liability of $150,000"
+    ],
+    "correctIndex": 0,
+    "rationale": "The carrying amount exceeds the tax base, creating a $150,000 taxable temporary difference. At 25%, the deferred tax liability is $37,500.",
+    "topic": "Analysis of Income Taxes",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Deferred taxes",
+    "topicId": "financial-statement-analysis-income-taxes"
+  },
+  {
+    "id": "practice-fsa-011",
+    "prompt": "A defined benefit pension obligation is $1.20 million, and the fair value of plan assets is $0.95 million. Assuming no other pension balances, the funded status is a:",
+    "options": [
+      "Net pension asset of $250,000",
+      "Net pension liability of $250,000",
+      "Net pension liability of $2.15 million"
+    ],
+    "correctIndex": 1,
+    "rationale": "The obligation exceeds plan assets by $1.20 million − $0.95 million = $250,000, resulting in a net liability.",
+    "topic": "Topics in Long-Term Liabilities and Equity",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Post-employment benefits",
+    "topicId": "financial-statement-analysis-liabilities-equity"
+  },
+  {
+    "id": "practice-fsa-012",
+    "prompt": "During the year, a company reports net income of $120,000, depreciation of $30,000, a gain on sale of equipment of $5,000, an increase in accounts receivable of $10,000, and an increase in accounts payable of $8,000. Under the indirect method, cash flow from operations is:",
+    "options": [
+      "$135,000",
+      "$153,000",
+      "$143,000"
+    ],
+    "correctIndex": 2,
+    "rationale": "CFO = $120,000 + $30,000 − $5,000 − $10,000 + $8,000 = $143,000.",
+    "topic": "Analyzing Statements of Cash Flows I",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Cash flow statement",
+    "topicId": "financial-statement-analysis-cash-flows-1"
+  },
+  {
+    "id": "practice-fsa-013",
+    "prompt": "A nonfinancial entity reporting under IFRS has chosen to present interest paid as a financing cash flow. Which statement is correct?",
+    "options": [
+      "This classification is permitted if applied consistently from period to period",
+      "IFRS requires interest paid to be classified as an operating cash flow",
+      "Interest paid must be classified as an investing cash flow"
+    ],
+    "correctIndex": 0,
+    "rationale": "Under IAS 7, a nonfinancial entity may classify interest paid as operating or financing, provided it applies the policy consistently.",
+    "topic": "Analyzing Statements of Cash Flows I",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Cash flow classification",
+    "topicId": "financial-statement-analysis-cash-flows-1"
+  },
+  {
+    "id": "practice-fsa-014",
+    "prompt": "Before paying $50,000 of accounts payable in cash, a company has current assets of $600,000 and current liabilities of $300,000. Immediately after payment, its current ratio is:",
+    "options": [
+      "2.0",
+      "2.2",
+      "2.4"
+    ],
+    "correctIndex": 1,
+    "rationale": "After payment, current assets are $550,000 and current liabilities are $250,000. The ratio is $550,000 / $250,000 = 2.2.",
+    "topic": "Financial Analysis Techniques",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Liquidity ratios",
+    "topicId": "financial-statement-analysis-analysis-techniques"
+  },
+  {
+    "id": "practice-fsa-015",
+    "prompt": "A company's net profit margin is 5%, total asset turnover is 2.0, and equity multiplier is 1.5. Under the three-step DuPont model, return on equity is:",
+    "options": [
+      "7.5%",
+      "10.0%",
+      "15.0%"
+    ],
+    "correctIndex": 2,
+    "rationale": "DuPont ROE = net profit margin × asset turnover × equity multiplier = 5% × 2.0 × 1.5 = 15%.",
+    "topic": "Financial Analysis Techniques",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "DuPont analysis",
+    "topicId": "financial-statement-analysis-analysis-techniques"
+  },
+  {
+    "id": "practice-fsa-016",
+    "prompt": "A firm has annual credit sales of $1,095,000 and average receivables of $100,000. Using a 365-day year, its average collection period is approximately:",
+    "options": [
+      "33 days",
+      "10.95 days",
+      "36.5 days"
+    ],
+    "correctIndex": 0,
+    "rationale": "Receivables turnover is $1,095,000 / $100,000 = 10.95. Average collection period is 365 / 10.95, or about 33 days.",
+    "topic": "Financial Analysis Techniques",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Receivables analysis",
+    "topicId": "financial-statement-analysis-analysis-techniques"
+  },
+  {
+    "id": "practice-fsa-017",
+    "prompt": "A company reports net income of $1.20 million, preferred dividends of $0.10 million, and weighted-average common shares of 500,000. Basic earnings per share is:",
+    "options": [
+      "$2.40",
+      "$2.20",
+      "$2.00"
+    ],
+    "correctIndex": 1,
+    "rationale": "Basic EPS = (net income − preferred dividends) / weighted-average common shares = $1.10 million / 500,000 = $2.20.",
+    "topic": "Analyzing Income Statements",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Earnings per share",
+    "topicId": "financial-statement-analysis-income-statements"
+  },
+  {
+    "id": "practice-fsa-018",
+    "prompt": "A company issues $1,000,000 face-value annual-pay bonds for $950,000. The coupon rate is 6% and the effective yield is 8%. Under the effective interest method, first-year interest expense and the change in carrying amount are:",
+    "options": [
+      "$60,000 of expense; carrying amount decreases by $16,000",
+      "$76,000 of expense; carrying amount decreases by $16,000",
+      "$76,000 of expense; carrying amount increases by $16,000"
+    ],
+    "correctIndex": 2,
+    "rationale": "Interest expense is $950,000 × 8% = $76,000; the $60,000 coupon leaves $16,000 of discount amortization, increasing the carrying amount.",
+    "topic": "Topics in Long-Term Liabilities and Equity",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Bond accounting",
+    "topicId": "financial-statement-analysis-liabilities-equity"
+  },
+  {
+    "id": "practice-fsa-019",
+    "prompt": "Under the temporal method, foreign-currency inventory carried at historical cost is translated into the parent company's reporting currency using the:",
+    "options": [
+      "Exchange rate in effect when the inventory was acquired",
+      "Current exchange rate at the balance sheet date",
+      "Average exchange rate for the year in all cases"
+    ],
+    "correctIndex": 0,
+    "rationale": "Under the temporal method, nonmonetary items measured at historical cost are translated at the historical exchange rate.",
+    "topic": "Analysis of Inventories",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Foreign currency translation",
+    "topicId": "financial-statement-analysis-inventories"
+  },
+  {
+    "id": "practice-fsa-020",
+    "prompt": "Ignoring tax effects, compare a $100,000 cash payment treated as an operating expense with the same payment capitalized as equipment. Assume the purchase is classified as an investing outflow and no depreciation is recorded in the period. Relative to expensing, capitalization causes:",
+    "options": [
+      "Cash flow from operations to be lower by $100,000, with no change in net cash flow",
+      "Cash flow from operations to be higher by $100,000, with no change in net cash flow",
+      "Net income to be lower by $100,000, with no change in investing cash flow"
+    ],
+    "correctIndex": 1,
+    "rationale": "Capitalization shifts the payment from operating to investing cash flow, raising CFO by $100,000. The total cash outflow is unchanged.",
+    "topic": "Analysis of Long-Term Assets",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Capitalization of costs",
+    "topicId": "financial-statement-analysis-long-term-assets"
+  },
+  {
+    "id": "practice-fsa-021",
+    "prompt": "For the same period, a company reports cash flow from operations of $144,000 and net income of $120,000. Using CFO divided by net income, its cash flow-to-income ratio is:",
+    "options": [
+      "0.83",
+      "1.00",
+      "1.20"
+    ],
+    "correctIndex": 2,
+    "rationale": "The ratio is $144,000 / $120,000 = 1.20.",
+    "topic": "Financial Reporting Quality",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Earnings quality",
+    "topicId": "financial-statement-analysis-reporting-quality"
+  },
+  {
+    "id": "practice-fsa-022",
+    "prompt": "A retailer has days inventory outstanding of 60 days, days sales outstanding of 35 days, and days payables outstanding of 45 days. Its cash conversion cycle is:",
+    "options": [
+      "50 days",
+      "140 days",
+      "80 days"
+    ],
+    "correctIndex": 0,
+    "rationale": "Cash conversion cycle = days inventory outstanding + days sales outstanding − days payables outstanding = 60 + 35 − 45 = 50 days.",
+    "topic": "Financial Analysis Techniques",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Cash conversion cycle",
+    "topicId": "financial-statement-analysis-analysis-techniques"
+  },
+  {
+    "id": "practice-fsa-023",
+    "prompt": "A company reports revenue of $800,000 and cost of goods sold of $520,000. In a common-size income statement, cost of goods sold is what percentage of revenue?",
+    "options": [
+      "35.0%",
+      "65.0%",
+      "153.8%"
+    ],
+    "correctIndex": 1,
+    "rationale": "Common-size cost of goods sold is $520,000 / $800,000 = 65.0% of revenue.",
+    "topic": "Analyzing Income Statements",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Common-size analysis",
+    "topicId": "financial-statement-analysis-income-statements"
+  },
+  {
+    "id": "practice-fsa-024",
+    "prompt": "Under IFRS, a past event has created a present legal obligation. An outflow of resources is probable, and the present value of the obligation can be reliably estimated at $600,000. The entity should:",
+    "options": [
+      "Disclose a contingent liability only",
+      "Wait until cash is paid before recording a liability",
+      "Recognize a provision of $600,000"
+    ],
+    "correctIndex": 2,
+    "rationale": "IAS 37 requires a provision when there is a present obligation, a probable outflow, and a reliable estimate of the amount.",
+    "topic": "Topics in Long-Term Liabilities and Equity",
+    "subjectId": "financial-statement-analysis",
+    "subject": "Financial Statement Analysis",
+    "source": "Original AI-authored practice",
+    "concept": "Provisions and contingencies",
+    "topicId": "financial-statement-analysis-liabilities-equity"
+  },
+  {
+    "id": "practice-corp-001",
+    "prompt": "An individual owns common shares in a publicly traded corporation. If the corporation cannot repay its debt, which statement best describes the shareholder's legal liability?",
+    "options": [
+      "The shareholder's liability is generally limited to the amount invested in the shares.",
+      "The shareholder is personally liable for corporate debt in proportion to ownership.",
+      "The shareholder has unlimited liability unless they manage the corporation."
+    ],
+    "correctIndex": 0,
+    "rationale": "Shareholders of a corporation generally have limited liability; creditors' claims are against corporate assets, not shareholders' personal assets.",
+    "topic": "Organizational Forms, Corporate Issuer Features, and Ownership",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Corporate structures",
+    "topicId": "corporate-issuers-org-forms"
+  },
+  {
+    "id": "practice-corp-002",
+    "prompt": "A CEO sits on the board committee that recommends the CEO's compensation. Which action most directly mitigates the resulting conflict of interest?",
+    "options": [
+      "Keep the CEO in the deliberations but disclose the committee's recommendation.",
+      "Have an independent committee determine or recommend pay, with the CEO recused from deliberations.",
+      "Let the chief financial officer set the CEO's pay based on board guidance."
+    ],
+    "correctIndex": 1,
+    "rationale": "Independent directors overseeing compensation, without the CEO participating, reduce the CEO's influence over their own pay.",
+    "topic": "Corporate Governance: Conflicts, Mechanisms, Risks, and Benefits",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Corporate governance",
+    "topicId": "corporate-issuers-governance"
+  },
+  {
+    "id": "practice-corp-003",
+    "prompt": "A software platform provides free access to users and sells advertisers placements charged per impression. Which business-model component is represented by the per-impression charge?",
+    "options": [
+      "The value proposition to users",
+      "The cost structure for operating the platform",
+      "The revenue model for generating income from advertisers"
+    ],
+    "correctIndex": 2,
+    "rationale": "A revenue model describes how a company generates income; the value proposition describes customer benefits, and the cost structure describes costs.",
+    "topic": "Business Models",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Business models",
+    "topicId": "corporate-issuers-business-models"
+  },
+  {
+    "id": "practice-corp-004",
+    "prompt": "A project costs $100,000 today and generates $60,000 at the end of each of the next two years. If the discount rate is 10%, the project's NPV is closest to:",
+    "options": [
+      "A positive $4,130",
+      "A positive $20,000",
+      "A negative $4,130"
+    ],
+    "correctIndex": 0,
+    "rationale": "NPV = −$100,000 + $60,000/1.10 + $60,000/1.10² = approximately $4,132, or a positive $4,130.",
+    "topic": "Capital Investments and Capital Allocation",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Net present value",
+    "topicId": "corporate-issuers-capital-investments"
+  },
+  {
+    "id": "practice-corp-005",
+    "prompt": "A project requires an initial investment of $90,000 and generates cash flows of $30,000, $40,000, and $50,000 at the ends of years 1, 2, and 3. Assuming cash flows accrue evenly during each year, its simple payback period is:",
+    "options": [
+      "1.8 years",
+      "2.4 years",
+      "3.0 years"
+    ],
+    "correctIndex": 1,
+    "rationale": "After two years, $70,000 has been recovered, leaving $20,000. The remaining amount takes $20,000/$50,000 = 0.4 of year 3, for a 2.4-year payback.",
+    "topic": "Capital Investments and Capital Allocation",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Payback period",
+    "topicId": "corporate-issuers-capital-investments"
+  },
+  {
+    "id": "practice-corp-006",
+    "prompt": "A company has market values of $40 million in debt and $60 million in equity. Its before-tax cost of debt is 6%, cost of equity is 10%, and tax rate is 25%. Its WACC is closest to:",
+    "options": [
+      "8.40%",
+      "6.30%",
+      "7.80%"
+    ],
+    "correctIndex": 2,
+    "rationale": "WACC = 0.40 × 6% × (1 − 0.25) + 0.60 × 10% = 7.80%.",
+    "topic": "Capital Structure",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Cost of capital",
+    "topicId": "corporate-issuers-capital-structure"
+  },
+  {
+    "id": "practice-corp-007",
+    "prompt": "An all-equity firm has 1,000,000 common shares. A comparable levered firm has 600,000 common shares and annual interest expense of $240,000. At what EBIT are their EPS equal if both pay 25% tax and have no preferred shares?",
+    "options": [
+      "$600,000",
+      "$400,000",
+      "$1,000,000"
+    ],
+    "correctIndex": 0,
+    "rationale": "Set 0.75 × EBIT/1,000,000 equal to 0.75 × (EBIT − $240,000)/600,000. Canceling the tax factor and solving gives EBIT = $600,000.",
+    "topic": "Capital Structure",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Financial leverage",
+    "topicId": "corporate-issuers-capital-structure"
+  },
+  {
+    "id": "practice-corp-008",
+    "prompt": "A company plans $10 million of capital expenditures, targets a capital structure of 60% equity and 40% debt, and expects $8 million of earnings available to common shareholders. Under a residual dividend policy, how much can it distribute, assuming earnings fund the required equity portion first?",
+    "options": [
+      "$0 million",
+      "$2 million",
+      "$6 million"
+    ],
+    "correctIndex": 1,
+    "rationale": "The capital budget requires $6 million of equity financing (60% × $10 million). The residual available for dividends is $8 million − $6 million = $2 million.",
+    "topic": "Capital Structure",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Residual dividend policy",
+    "topicId": "corporate-issuers-capital-structure"
+  },
+  {
+    "id": "practice-corp-009",
+    "prompt": "A company has inventory days of 50, receivables days of 35, and payables days of 40. Its cash conversion cycle is:",
+    "options": [
+      "85 days",
+      "125 days",
+      "45 days"
+    ],
+    "correctIndex": 2,
+    "rationale": "Cash conversion cycle = inventory days + receivables days − payables days = 50 + 35 − 40 = 45 days.",
+    "topic": "Working Capital and Liquidity",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Cash conversion cycle",
+    "topicId": "corporate-issuers-working-capital"
+  },
+  {
+    "id": "practice-corp-010",
+    "prompt": "A supplier offers terms of 2/10, net 30. Using a 365-day year and the common simple annualization formula, the approximate annualized cost of not taking the discount is:",
+    "options": [
+      "37.2%",
+      "36.5%",
+      "2.0%"
+    ],
+    "correctIndex": 0,
+    "rationale": "The cost is (0.02/0.98) × [365/(30 − 10)] = 0.3724, or approximately 37.2%.",
+    "topic": "Working Capital and Liquidity",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Trade credit",
+    "topicId": "corporate-issuers-working-capital"
+  },
+  {
+    "id": "practice-corp-011",
+    "prompt": "A firm has a $5 million capital budget and must choose among independent, indivisible projects. Project A costs $4 million and has an NPV of $2.4 million; B costs $3 million and has an NPV of $1.7 million; C costs $2 million and has an NPV of $1.1 million. Which selection maximizes total NPV without exceeding the budget?",
+    "options": [
+      "Project A only",
+      "Projects B and C",
+      "Projects A and C"
+    ],
+    "correctIndex": 1,
+    "rationale": "B and C together cost $5 million and have a combined NPV of $2.8 million, exceeding A's $2.4 million NPV. A and C exceed the budget.",
+    "topic": "Capital Investments and Capital Allocation",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Capital rationing",
+    "topicId": "corporate-issuers-capital-investments"
+  },
+  {
+    "id": "practice-corp-012",
+    "prompt": "A CEO pursues a negative-NPV acquisition solely to expand the company and enhance the CEO's prestige. This is most directly an example of:",
+    "options": [
+      "Asset substitution that transfers wealth from creditors to shareholders",
+      "Tunneling by a controlling shareholder",
+      "Managerial empire building"
+    ],
+    "correctIndex": 2,
+    "rationale": "Pursuing company growth for managers' private benefits at the expense of shareholder value is managerial empire building.",
+    "topic": "Corporate Governance: Conflicts, Mechanisms, Risks, and Benefits",
+    "subjectId": "corporate-issuers",
+    "subject": "Corporate Issuers",
+    "source": "Original AI-authored practice",
+    "concept": "Agency conflicts",
+    "topicId": "corporate-issuers-governance"
+  },
+  {
+    "id": "practice-equity-001",
+    "prompt": "A company elects five directors using cumulative voting, with each share carrying one vote per director seat. Which statement best describes a shareholder's voting power?",
+    "options": [
+      "The shareholder must divide votes equally among all five candidates.",
+      "The shareholder may cast all votes for one candidate, which can improve minority shareholders' ability to elect a director.",
+      "A shareholder owning at least 10% of the shares is guaranteed two board seats."
+    ],
+    "correctIndex": 1,
+    "rationale": "Cumulative voting lets shareholders concentrate the votes attached to their shares on one or more candidates; it does not guarantee seats based on a fixed ownership percentage.",
+    "topic": "Overview of Equity Securities",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Cumulative voting",
+    "topicId": "equity-equity-securities"
+  },
+  {
+    "id": "practice-equity-002",
+    "prompt": "An investor enters a buy limit order for 100 shares at $49.50. The best ask is $50.00, with no ask at or below $49.50. Which outcome is most accurate?",
+    "options": [
+      "The order can execute at $49.50 or less, but may remain unfilled while the best ask is $50.00.",
+      "The order executes immediately at $50.00 because that is the best available ask.",
+      "The order is guaranteed to execute at exactly $49.50."
+    ],
+    "correctIndex": 0,
+    "rationale": "A buy limit sets the maximum price the investor will pay; with no seller at that price or lower, the order does not execute immediately.",
+    "topic": "Market Organization and Structure",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Limit orders",
+    "topicId": "equity-market-organization"
+  },
+  {
+    "id": "practice-equity-003",
+    "prompt": "A price-weighted index contains two stocks priced at $60 and $40, with a divisor of 2. The $60 stock completes a 2-for-1 split, reducing its price to $30 while the other stock remains at $40. What divisor preserves the index's value?",
+    "options": [
+      "1.25",
+      "1.50",
+      "1.40"
+    ],
+    "correctIndex": 2,
+    "rationale": "The initial index value is (60 + 40) / 2 = 50. After the split, the price sum is 70, so the divisor must be 70 / 50 = 1.40.",
+    "topic": "Security Market Indexes",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Price-weighted indexes",
+    "topicId": "equity-indexes"
+  },
+  {
+    "id": "practice-equity-004",
+    "prompt": "A market-cap-weighted index has beginning weights of 60% and 40% in two stocks. Over the period, their total returns are 10% and -5%, respectively. What is the index return, assuming the beginning weights are used?",
+    "options": [
+      "4.0%",
+      "2.5%",
+      "5.0%"
+    ],
+    "correctIndex": 0,
+    "rationale": "The weighted return is 0.60(10%) + 0.40(-5%) = 6% - 2% = 4%.",
+    "topic": "Security Market Indexes",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Market-cap-weighted indexes",
+    "topicId": "equity-indexes"
+  },
+  {
+    "id": "practice-equity-005",
+    "prompt": "A company publicly announces earnings materially above analyst expectations. In a semi-strong-form efficient market, which outcome is most likely?",
+    "options": [
+      "Prices reflect only historical trading data, so the announcement is not incorporated.",
+      "Investors can consistently earn abnormal returns by analyzing the public announcement after it is released.",
+      "The price adjusts rapidly to the public information, so it cannot consistently support abnormal returns once incorporated."
+    ],
+    "correctIndex": 2,
+    "rationale": "Semi-strong-form efficiency means prices incorporate public information; an earnings surprise can move the price when released, but the information is then reflected rapidly.",
+    "topic": "Market Efficiency",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Market efficiency",
+    "topicId": "equity-market-efficiency"
+  },
+  {
+    "id": "practice-equity-006",
+    "prompt": "Which scenario most directly indicates a high threat of substitutes for an industry's product?",
+    "options": [
+      "The industry has many suppliers, each with little bargaining power.",
+      "Customers can meet the same need with an alternative that offers similar performance at a lower total cost.",
+      "A few firms account for most of the industry's sales."
+    ],
+    "correctIndex": 1,
+    "rationale": "Substitutes are alternative products or services that satisfy the same customer need; a lower-cost, similar-performance alternative increases this competitive threat.",
+    "topic": "Industry and Competitive Analysis",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Porter's five forces",
+    "topicId": "equity-industry-analysis"
+  },
+  {
+    "id": "practice-equity-007",
+    "prompt": "An industry has high market penetration, slowing demand growth, and firms competing strongly on cost and incremental product improvements. Which industry life-cycle stage is most consistent with these conditions?",
+    "options": [
+      "Maturity",
+      "Embryonic",
+      "Growth"
+    ],
+    "correctIndex": 0,
+    "rationale": "High penetration and slower growth are characteristic of maturity, when competition often focuses on cost and incremental differentiation.",
+    "topic": "Industry and Competitive Analysis",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Industry life cycle",
+    "topicId": "equity-industry-analysis"
+  },
+  {
+    "id": "practice-equity-008",
+    "prompt": "A company has a net profit margin of 6%, total asset turnover of 1.5, and an assets-to-equity ratio of 2.0. Using DuPont analysis, what is its return on equity?",
+    "options": [
+      "9%",
+      "18%",
+      "22.5%"
+    ],
+    "correctIndex": 1,
+    "rationale": "ROE = net profit margin × asset turnover × equity multiplier = 0.06 × 1.5 × 2.0 = 18%.",
+    "topic": "Company Analysis: Past and Present",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "DuPont analysis",
+    "topicId": "equity-company-analysis-past"
+  },
+  {
+    "id": "practice-equity-009",
+    "prompt": "A company has just paid a dividend of $2.00 per share. Dividends are expected to grow at 4% indefinitely, and the required return is 10%. Using the Gordon growth model, what is the value per share?",
+    "options": [
+      "$33.33",
+      "$32.00",
+      "$34.67"
+    ],
+    "correctIndex": 2,
+    "rationale": "The next dividend is $2.00 × 1.04 = $2.08. Value = $2.08 / (0.10 - 0.04) = $34.67.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Gordon growth model",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-010",
+    "prompt": "A company has just paid a $1.00 dividend. Dividends are expected to grow 10% in each of the next two years and then 5% per year indefinitely. If the required return is 10%, what is the value per share today?",
+    "options": [
+      "$23.00",
+      "$25.41",
+      "$22.00"
+    ],
+    "correctIndex": 0,
+    "rationale": "D1 = $1.10, D2 = $1.21, and the value at year 2 is D3/(r-g) = $1.2705/0.05 = $25.41. Discounting D1, D2, and that terminal value gives $1.00 + $1.00 + $21.00 = $23.00.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Multistage DDM",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-011",
+    "prompt": "A company reports net income of $100 million, depreciation and amortization of $20 million, capital expenditures of $50 million, an increase in working capital of $10 million, and net borrowing of $5 million. What is its free cash flow to equity?",
+    "options": [
+      "$55 million",
+      "$65 million",
+      "$75 million"
+    ],
+    "correctIndex": 1,
+    "rationale": "FCFE = net income + noncash charges - capital expenditures - increase in working capital + net borrowing = 100 + 20 - 50 - 10 + 5 = $65 million.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "FCFE",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-012",
+    "prompt": "A company has a stable payout ratio of 40%, a required return on equity of 10%, and perpetual growth of 4%. Under the constant-growth dividend model, what is its justified leading P/E?",
+    "options": [
+      "4.00",
+      "5.00",
+      "6.67"
+    ],
+    "correctIndex": 2,
+    "rationale": "The justified leading P/E is payout ratio / (required return - growth) = 0.40 / (0.10 - 0.04) = 6.67.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Justified P/E",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-013",
+    "prompt": "A company has a sustainable ROE of 12%, perpetual growth of 4%, and a required return on equity of 10%. Under stable-growth assumptions, what is its justified price-to-book ratio?",
+    "options": [
+      "1.33",
+      "0.75",
+      "2.00"
+    ],
+    "correctIndex": 0,
+    "rationale": "Justified P/B = (ROE - growth) / (required return - growth) = (0.12 - 0.04) / (0.10 - 0.04) = 1.33.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Justified P/B",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-014",
+    "prompt": "A company has 50 million shares outstanding at $20 per share, $300 million of debt, $100 million of cash, and EBITDA of $200 million. What is its EV/EBITDA?",
+    "options": [
+      "5.0",
+      "6.0",
+      "7.0"
+    ],
+    "correctIndex": 1,
+    "rationale": "Market capitalization is $1,000 million, so enterprise value is $1,000 + $300 - $100 = $1,200 million. EV/EBITDA = $1,200 / $200 = 6.0.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Enterprise value multiples",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-015",
+    "prompt": "A company has 10 million shares outstanding, a share price of $30, and annual revenue of $60 million. What is its price-to-sales ratio?",
+    "options": [
+      "2.0",
+      "3.0",
+      "5.0"
+    ],
+    "correctIndex": 2,
+    "rationale": "Market capitalization is 10 million × $30 = $300 million. Price-to-sales = $300 million / $60 million = 5.0.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Price-to-sales",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-016",
+    "prompt": "A nonconvertible preferred share pays a fixed annual dividend of $6 and is expected to pay dividends indefinitely. If the required return is 8%, what is its value?",
+    "options": [
+      "$75",
+      "$48",
+      "$108"
+    ],
+    "correctIndex": 0,
+    "rationale": "The value of a perpetual fixed-dividend share is dividend / required return = $6 / 0.08 = $75.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Preferred stock valuation",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-017",
+    "prompt": "A company has beginning book value per share of $25, expected earnings per share of $4, and a required return on equity of 12%. What is next-period residual income per share?",
+    "options": [
+      "$0",
+      "$1",
+      "$4"
+    ],
+    "correctIndex": 1,
+    "rationale": "Residual income = earnings - equity charge = $4 - (0.12 × $25) = $1 per share.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Residual income",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-018",
+    "prompt": "A company trades at 14 times earnings, compared with a peer-group median of 18 times. The firms appear broadly comparable. Which conclusion is best?",
+    "options": [
+      "The company is necessarily undervalued because its P/E is lower.",
+      "The company is necessarily overvalued because investors pay less per dollar of earnings.",
+      "The company trades at a relative discount, but the lower multiple alone does not establish undervaluation."
+    ],
+    "correctIndex": 2,
+    "rationale": "A lower P/E indicates a relative discount, but differences in growth, risk, accounting, or other fundamentals can explain it; the multiple alone does not prove mispricing.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Comparable company analysis",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-019",
+    "prompt": "A company has two share classes: founders' shares carry 10 votes per share, while public shares carry one vote per share. What is the most direct governance implication?",
+    "options": [
+      "Voting power can be disproportionate to economic ownership, potentially allowing controllers to retain control or become entrenched.",
+      "All shareholders necessarily have equal voting power per share.",
+      "Public shareholders have no economic claim on the company."
+    ],
+    "correctIndex": 0,
+    "rationale": "Dual-class structures can separate voting control from economic ownership, giving founders disproportionate influence and potentially increasing entrenchment risk.",
+    "topic": "Overview of Equity Securities",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Dual-class shares",
+    "topicId": "equity-equity-securities"
+  },
+  {
+    "id": "practice-equity-020",
+    "prompt": "A company sells five million newly issued common shares to the public in a firm-commitment IPO. Which statement is correct?",
+    "options": [
+      "The transaction occurs in the secondary market, and the issuer receives no proceeds.",
+      "The transaction occurs in the primary market, and the issuer receives offering proceeds net of underwriting fees.",
+      "The transaction occurs in the secondary market, and the proceeds go to the issuer."
+    ],
+    "correctIndex": 1,
+    "rationale": "An IPO of newly issued shares is a primary-market transaction; the issuer receives the proceeds, net of applicable fees and expenses.",
+    "topic": "Market Organization and Structure",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Primary markets",
+    "topicId": "equity-market-organization"
+  },
+  {
+    "id": "practice-equity-021",
+    "prompt": "The risk-free rate is 3%, the expected market return is 8%, and a stock's beta is 1.2. According to CAPM, what is the stock's required return?",
+    "options": [
+      "8.0%",
+      "8.5%",
+      "9.0%"
+    ],
+    "correctIndex": 2,
+    "rationale": "CAPM return = risk-free rate + beta × market risk premium = 3% + 1.2 × (8% - 3%) = 9%.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "CAPM",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-022",
+    "prompt": "A company is expected to generate FCFF of $100 million next year, growing at 3% indefinitely. Its WACC is 8%, debt is $300 million, cash is $100 million, and it has 100 million shares outstanding. What is the estimated value per share?",
+    "options": [
+      "$18",
+      "$17",
+      "$20"
+    ],
+    "correctIndex": 0,
+    "rationale": "Enterprise value = $100 / (0.08 - 0.03) = $2,000 million. Equity value is $2,000 - $300 + $100 = $1,800 million, or $18 per share.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "FCFF valuation",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-fixed-001",
+    "prompt": "A bond indenture requires an issuer to maintain minimum insurance, submit audited financial statements, and refrain from selling major assets without trustee consent. Which requirement is a negative covenant?",
+    "options": [
+      "The restriction on selling major assets without consent",
+      "The requirement to maintain insurance",
+      "The requirement to submit audited statements"
+    ],
+    "correctIndex": 0,
+    "rationale": "A negative covenant restricts actions; the insurance and reporting requirements are affirmative covenants.",
+    "topic": "Fixed-Income Instrument Features",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Bond indentures",
+    "topicId": "fixed-income-instrument-features"
+  },
+  {
+    "id": "practice-fixed-002",
+    "prompt": "An investor compares a callable corporate bond with an otherwise identical option-free bond. If market yields decline substantially, the callable bond’s price is most likely to:",
+    "options": [
+      "Rise more because its coupon payments are fixed",
+      "Rise less because the issuer’s call option becomes more valuable",
+      "Remain at par because callable bonds cannot trade above par"
+    ],
+    "correctIndex": 1,
+    "rationale": "As yields fall, the likelihood of a call increases, limiting the callable bond’s price appreciation relative to the option-free bond.",
+    "topic": "Fixed-Income Instrument Features",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Embedded options",
+    "topicId": "fixed-income-instrument-features"
+  },
+  {
+    "id": "practice-fixed-003",
+    "prompt": "A floating-rate note pays the 3-month reference rate plus 120 bps. The reference rate at reset is 4.8%, and the coupon period is 90/360. What coupon is due on $1,000 principal?",
+    "options": [
+      "$12.00",
+      "$18.00",
+      "$15.00"
+    ],
+    "correctIndex": 2,
+    "rationale": "The coupon rate is 4.8% + 1.2% = 6.0%; $1,000 × 6.0% × 90/360 = $15.",
+    "topic": "Yield and Yield Spread Measures for Floating-Rate Instruments",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Floating-rate notes",
+    "topicId": "fixed-income-yield-spreads-floating"
+  },
+  {
+    "id": "practice-fixed-004",
+    "prompt": "An investment bank agrees to buy an entire new bond issue from an issuer at an agreed price and then resell the bonds to investors. Under which underwriting arrangement does the bank bear the risk of not placing the issue?",
+    "options": [
+      "Firm commitment",
+      "Best efforts",
+      "Agency placement"
+    ],
+    "correctIndex": 0,
+    "rationale": "In a firm commitment, the underwriter purchases the issue and bears the risk of reselling it to investors.",
+    "topic": "Fixed-Income Issuance and Trading",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Primary markets",
+    "topicId": "fixed-income-issuance-trading"
+  },
+  {
+    "id": "practice-fixed-005",
+    "prompt": "A dealer pledges securities worth $8.0 million in a repo. The haircut is defined as (collateral value − cash lent) / collateral value and is 2.5%. How much cash does the dealer borrow?",
+    "options": [
+      "$8.00 million",
+      "$7.80 million",
+      "$8.20 million"
+    ],
+    "correctIndex": 1,
+    "rationale": "Cash lent = $8.0 million × (1 − 0.025) = $7.80 million.",
+    "topic": "Fixed-Income Issuance and Trading",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Repurchase agreements",
+    "topicId": "fixed-income-issuance-trading"
+  },
+  {
+    "id": "practice-fixed-006",
+    "prompt": "A bond is quoted at a clean price of 101.20 per $100 face value and has accrued interest of 0.65 per $100. What is the invoice price per $100 face value?",
+    "options": [
+      "101.20",
+      "101.55",
+      "101.85"
+    ],
+    "correctIndex": 2,
+    "rationale": "The invoice, or dirty, price equals clean price plus accrued interest: 101.20 + 0.65 = 101.85.",
+    "topic": "Fixed-Income Bond Valuation: Prices and Yields",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Bond pricing conventions",
+    "topicId": "fixed-income-bond-valuation"
+  },
+  {
+    "id": "practice-fixed-007",
+    "prompt": "A two-year bond with a $100 face value pays an annual 6% coupon. The one-year spot rate is 4% and the two-year spot rate is 5%, both with annual compounding. What is the bond’s value?",
+    "options": [
+      "$101.91",
+      "$100.00",
+      "$103.21"
+    ],
+    "correctIndex": 0,
+    "rationale": "Discount each cash flow at its corresponding spot rate: 6/1.04 + 106/(1.05)² = $101.91.",
+    "topic": "The Term Structure of Interest Rates: Spot, Par, and Forward Curves",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Spot-rate valuation",
+    "topicId": "fixed-income-term-structure"
+  },
+  {
+    "id": "practice-fixed-008",
+    "prompt": "Assuming no default, an investor’s compound annual return over the full life of an option-free bond equals its initial yield to maturity if the investor:",
+    "options": [
+      "Sells the bond before maturity at its purchase price",
+      "Holds the bond to maturity and reinvests coupons at the initial yield to maturity",
+      "Reinvests coupons at any rate, provided market yields do not change before maturity"
+    ],
+    "correctIndex": 1,
+    "rationale": "Holding to maturity and reinvesting coupons at the initial YTM are the conditions needed for the realized compound return to equal that YTM.",
+    "topic": "Fixed-Income Bond Valuation: Prices and Yields",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Yield to maturity",
+    "topicId": "fixed-income-bond-valuation"
+  },
+  {
+    "id": "practice-fixed-009",
+    "prompt": "A bond’s current price is 100.00. Its estimated price is 102.20 if yields fall by 25 bps and 97.90 if yields rise by 25 bps. What is its effective duration?",
+    "options": [
+      "4.3",
+      "17.2",
+      "8.6"
+    ],
+    "correctIndex": 2,
+    "rationale": "Effective duration = (102.20 − 97.90) / (2 × 100.00 × 0.0025) = 8.6.",
+    "topic": "Curve-Based and Empirical Fixed-Income Risk Measures",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Effective duration",
+    "topicId": "fixed-income-curve-risk"
+  },
+  {
+    "id": "practice-fixed-010",
+    "prompt": "A bond has modified duration of 5.5 and convexity of 40. Using the duration-convexity approximation, what is its percentage price change if yield rises by 1.00%?",
+    "options": [
+      "−5.3%",
+      "−5.5%",
+      "−5.7%"
+    ],
+    "correctIndex": 0,
+    "rationale": "The estimate is −5.5(0.01) + 0.5(40)(0.01)² = −0.053, or −5.3%.",
+    "topic": "Yield-Based Bond Convexity and Portfolio Properties",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Convexity",
+    "topicId": "fixed-income-convexity"
+  },
+  {
+    "id": "practice-fixed-011",
+    "prompt": "A portfolio’s 10-year key rate duration is 4.7. If the 10-year key rate rises by 10 bps and all other key rates are unchanged, what is the approximate percentage price change?",
+    "options": [
+      "−0.30%",
+      "−0.47%",
+      "−0.94%"
+    ],
+    "correctIndex": 1,
+    "rationale": "The approximate change is −4.7 × 0.001 = −0.0047, or −0.47%.",
+    "topic": "Curve-Based and Empirical Fixed-Income Risk Measures",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Key rate duration",
+    "topicId": "fixed-income-curve-risk"
+  },
+  {
+    "id": "practice-fixed-012",
+    "prompt": "When market rates rise, homeowners with fixed-rate mortgages generally refinance less often, extending the expected life of mortgage-backed securities. This is an example of:",
+    "options": [
+      "Contraction risk",
+      "Reinvestment risk",
+      "Extension risk"
+    ],
+    "correctIndex": 2,
+    "rationale": "Slower prepayments when rates rise extend the security’s expected life, creating extension risk.",
+    "topic": "Mortgage-Backed Security (MBS) Instrument and Market Features",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Mortgage-backed securities",
+    "topicId": "fixed-income-mbs"
+  },
+  {
+    "id": "practice-fixed-013",
+    "prompt": "In an asset-backed security, junior tranches absorb credit losses before senior tranches. This form of credit enhancement is called:",
+    "options": [
+      "Subordination",
+      "Overcollateralization",
+      "Excess spread"
+    ],
+    "correctIndex": 0,
+    "rationale": "Subordination protects senior tranches by allocating losses first to junior tranches.",
+    "topic": "Asset-Backed Security (ABS) Instrument and Market Features",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Asset-backed securities",
+    "topicId": "fixed-income-abs"
+  },
+  {
+    "id": "practice-fixed-014",
+    "prompt": "A loan has a one-year probability of default of 2%, an exposure at default of $5 million, and a recovery rate of 40%. What is its one-year expected credit loss?",
+    "options": [
+      "$40,000",
+      "$60,000",
+      "$100,000"
+    ],
+    "correctIndex": 1,
+    "rationale": "Expected loss = PD × EAD × LGD = 0.02 × $5 million × (1 − 0.40) = $60,000.",
+    "topic": "Credit Risk",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Expected credit loss",
+    "topicId": "fixed-income-credit-risk"
+  },
+  {
+    "id": "practice-fixed-015",
+    "prompt": "A callable bond has a Z-spread of 175 bps. A valuation model estimates the embedded call option’s spread-equivalent cost at 55 bps. What is the bond’s option-adjusted spread?",
+    "options": [
+      "230 bps",
+      "175 bps",
+      "120 bps"
+    ],
+    "correctIndex": 2,
+    "rationale": "For a callable bond, OAS equals Z-spread minus the option cost: 175 − 55 = 120 bps.",
+    "topic": "Curve-Based and Empirical Fixed-Income Risk Measures",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Option-adjusted spread",
+    "topicId": "fixed-income-curve-risk"
+  },
+  {
+    "id": "practice-fixed-016",
+    "prompt": "Immediately after a coupon reset, a floating-rate note has a quoted margin of 90 bps, while investors require a 110-bp discount margin. Assuming other relevant factors are unchanged, the note should trade:",
+    "options": [
+      "Below par",
+      "At par",
+      "Above par"
+    ],
+    "correctIndex": 0,
+    "rationale": "The note’s quoted margin is below the required discount margin, so its coupon spread is insufficient to support a par price.",
+    "topic": "Yield and Yield Spread Measures for Floating-Rate Instruments",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Floating-rate valuation",
+    "topicId": "fixed-income-yield-spreads-floating"
+  },
+  {
+    "id": "practice-fixed-017",
+    "prompt": "A corporate bond’s G-spread is measured relative to:",
+    "options": [
+      "The issuer’s credit default swap spread",
+      "An interpolated government bond yield of matching maturity",
+      "A swap rate of matching maturity"
+    ],
+    "correctIndex": 1,
+    "rationale": "The G-spread is the difference between the bond’s yield to maturity and the interpolated government benchmark yield at a matching maturity.",
+    "topic": "Yield and Yield Spread Measures for Fixed-Rate Bonds",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Yield spreads",
+    "topicId": "fixed-income-yield-spreads-fixed"
+  },
+  {
+    "id": "practice-fixed-018",
+    "prompt": "With annual compounding, the one-year spot rate is 4% and the two-year spot rate is 5%. What is the implied one-year forward rate for the second year?",
+    "options": [
+      "5.00%",
+      "5.50%",
+      "6.01%"
+    ],
+    "correctIndex": 2,
+    "rationale": "The forward rate is (1.05)²/1.04 − 1 = 6.01%.",
+    "topic": "The Term Structure of Interest Rates: Spot, Par, and Forward Curves",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Forward rates",
+    "topicId": "fixed-income-term-structure"
+  },
+  {
+    "id": "practice-fixed-019",
+    "prompt": "A two-year, $100 par bond pays annual coupons of 8% and has a yield to maturity of 8%. What is its Macaulay duration?",
+    "options": [
+      "1.93 years",
+      "1.85 years",
+      "2.00 years"
+    ],
+    "correctIndex": 0,
+    "rationale": "The bond is priced at par; the present-value weights are 8/108 in year 1 and 100/108 in year 2, giving duration 1(8/108) + 2(100/108) = 1.93 years.",
+    "topic": "Yield-Based Bond Duration Measures and Properties",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Macaulay duration",
+    "topicId": "fixed-income-duration"
+  },
+  {
+    "id": "practice-fixed-020",
+    "prompt": "A rating agency downgrades a corporate bond issuer. The bond’s spread widens and its price falls, although the issuer makes all payments on time. This price impact most directly reflects:",
+    "options": [
+      "Default risk",
+      "Credit migration risk",
+      "Reinvestment risk"
+    ],
+    "correctIndex": 1,
+    "rationale": "A change in perceived credit quality that alters the bond’s spread, without a missed payment, is credit migration risk.",
+    "topic": "Credit Risk",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Credit migration risk",
+    "topicId": "fixed-income-credit-risk"
+  },
+  {
+    "id": "practice-fixed-021",
+    "prompt": "All else equal, how does a lower expected recovery rate generally affect a corporate bond’s credit spread?",
+    "options": [
+      "It narrows the spread because expected losses are lower",
+      "It leaves the spread unchanged because recovery matters only after default",
+      "It widens the spread because loss given default is higher"
+    ],
+    "correctIndex": 2,
+    "rationale": "A lower recovery rate raises loss given default and expected credit loss, generally requiring a wider spread.",
+    "topic": "Credit Risk",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Credit spreads",
+    "topicId": "fixed-income-credit-risk"
+  },
+  {
+    "id": "practice-fixed-022",
+    "prompt": "An asset portfolio and a fixed pension liability have equal present values. The asset portfolio’s Macaulay duration is 6.5 years, while the liability’s is 8.0 years. To reduce first-order sensitivity to small parallel yield changes, the manager should:",
+    "options": [
+      "Increase the asset portfolio’s duration to about 8.0 years",
+      "Reduce the asset portfolio’s duration to about 6.0 years",
+      "Make no change because equal present values alone immunize the liability"
+    ],
+    "correctIndex": 0,
+    "rationale": "With present values matched, matching asset and liability durations reduces their first-order sensitivity to small parallel yield changes.",
+    "topic": "Interest Rate Risk and Return",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Immunization",
+    "topicId": "fixed-income-interest-rate-risk"
+  },
+  {
+    "id": "practice-derivatives-001",
+    "prompt": "An investor enters a long forward contract on 100 shares at $40 per share. Assuming no default, which statement best describes the investor's position at maturity?",
+    "options": [
+      "The investor has the right, but not the obligation, to buy the shares for $4,000.",
+      "The investor may choose whether to buy the shares after paying an option premium.",
+      "The investor is obligated to buy the shares for $4,000."
+    ],
+    "correctIndex": 2,
+    "rationale": "A long forward is a binding commitment to purchase the underlying at the delivery price; the right not to exercise is a feature of an option.",
+    "topic": "Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Forward contracts",
+    "topicId": "derivatives-forwards"
+  },
+  {
+    "id": "practice-derivatives-002",
+    "prompt": "A stock has a spot price of $100. The present value of its known cash dividends over the next year is $4. If the annual risk-free rate is 5% with annual compounding, the no-arbitrage price of a one-year forward is closest to:",
+    "options": [
+      "$100.80",
+      "$101.00",
+      "$105.00"
+    ],
+    "correctIndex": 0,
+    "rationale": "The forward price is (spot price − present value of income) × (1 + risk-free rate): ($100 − $4) × 1.05 = $100.80.",
+    "topic": "Arbitrage, Replication, and the Cost of Carry in Pricing Derivatives",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Forward pricing with income",
+    "topicId": "derivatives-cost-of-carry"
+  },
+  {
+    "id": "practice-derivatives-003",
+    "prompt": "A trader is long four futures contracts, each for 500 bushels. The settlement price falls from $6.20 to $6.14 per bushel in one day. The trader's variation-margin cash flow for the day is:",
+    "options": [
+      "A receipt of $120.",
+      "A payment of $120.",
+      "A payment of $24."
+    ],
+    "correctIndex": 1,
+    "rationale": "The long position loses $0.06 × 4 × 500 = $120, which is debited from the margin account.",
+    "topic": "Pricing and Valuation of Futures Contracts",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Futures marking to market",
+    "topicId": "derivatives-futures"
+  },
+  {
+    "id": "practice-derivatives-004",
+    "prompt": "A European put has a strike price of $60 and a premium of $5. If the underlying price at expiration is $48, the put buyer's profit, excluding transaction costs, is:",
+    "options": [
+      "$7.",
+      "$12.",
+      "−$7."
+    ],
+    "correctIndex": 0,
+    "rationale": "The payoff is $60 − $48 = $12; subtracting the $5 premium gives a profit of $7.",
+    "topic": "Pricing and Valuation of Options",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Option payoffs and profits",
+    "topicId": "derivatives-options"
+  },
+  {
+    "id": "practice-derivatives-005",
+    "prompt": "A non-dividend-paying stock is priced at $100. A European call and put have the same strike price and maturity; the present value of the strike price is $94, and the call price is $11. Under put–call parity, the put price is:",
+    "options": [
+      "$17.",
+      "$5.",
+      "$11."
+    ],
+    "correctIndex": 1,
+    "rationale": "Put–call parity gives put = call + present value of strike − spot = $11 + $94 − $100 = $5.",
+    "topic": "Option Replication Using Put-Call Parity",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Put–call parity",
+    "topicId": "derivatives-put-call-parity"
+  },
+  {
+    "id": "practice-derivatives-006",
+    "prompt": "A non-dividend-paying stock is $100 today and will be either $120 or $80 in one year. A one-year European call has a strike price of $100, and the annual risk-free rate is 5%. In a one-period binomial model, the call's value today is closest to:",
+    "options": [
+      "$10.00.",
+      "$12.50.",
+      "$11.90."
+    ],
+    "correctIndex": 2,
+    "rationale": "The risk-neutral probability of an up move is (1.05 − 0.80)/(1.20 − 0.80) = 0.625. Discounting the expected payoff gives 0.625 × $20 / 1.05 = $11.90.",
+    "topic": "Valuing a Derivative Using a One-Period Binomial Model",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Binomial option valuation",
+    "topicId": "derivatives-binomial-model"
+  },
+  {
+    "id": "practice-derivatives-007",
+    "prompt": "The spot exchange rate is USD 1.08 per EUR. One-year risk-free rates are 4% in USD and 2% in EUR, with annual compounding. Under covered interest rate parity, the one-year forward quote in USD per EUR is closest to:",
+    "options": [
+      "USD 1.101 per EUR.",
+      "USD 1.059 per EUR.",
+      "USD 1.123 per EUR."
+    ],
+    "correctIndex": 0,
+    "rationale": "For a quote in domestic currency per unit of foreign currency, the forward rate is spot × (1 + domestic rate)/(1 + foreign rate): 1.08 × 1.04/1.02 = 1.101.",
+    "topic": "Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Currency forward pricing",
+    "topicId": "derivatives-forwards"
+  },
+  {
+    "id": "practice-derivatives-008",
+    "prompt": "At the start of a six-month reference period, the buyer of a 3×9 FRA has a notional of $5 million, a contractual rate of 4%, and a reference rate of 6%. The FRA is cash-settled at the period's start. Using a 0.5-year accrual fraction and simple interest, the buyer receives approximately:",
+    "options": [
+      "$48,544.",
+      "$50,000.",
+      "$48,544 is paid by the buyer."
+    ],
+    "correctIndex": 1,
+    "rationale": "Because the reference rate exceeds the contract rate, the buyer receives the discounted interest difference: $5,000,000 × (0.06 − 0.04) × 0.5 / (1 + 0.06 × 0.5) = $48,544.",
+    "topic": "Pricing and Valuation of Forward Contracts and for an Underlying with Varying Maturities",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Forward rate agreements",
+    "topicId": "derivatives-forwards"
+  },
+  {
+    "id": "practice-derivatives-009",
+    "prompt": "A firm is the fixed-rate payer on a plain-vanilla interest rate swap with a $25 million notional. For the next quarterly period, the fixed rate is 4.2% and the floating rate is 4.8%; both apply to 90/360. The firm's net settlement is:",
+    "options": [
+      "A receipt of $37,500.",
+      "A payment of $37,500.",
+      "A receipt of $150,000."
+    ],
+    "correctIndex": 0,
+    "rationale": "The firm receives floating and pays fixed, so it receives $25,000,000 × (0.048 − 0.042) × 0.25 = $37,500.",
+    "topic": "Pricing and Valuation of Interest Rates and Other Swaps",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Interest rate swaps",
+    "topicId": "derivatives-swaps"
+  },
+  {
+    "id": "practice-derivatives-010",
+    "prompt": "A credit default swap has a $10 million notional. After a credit event, the reference obligation's recovery rate is 35%. Under cash settlement, the protection buyer's payment, ignoring accrued premium, is:",
+    "options": [
+      "$3.5 million.",
+      "$6.5 million.",
+      "$10 million."
+    ],
+    "correctIndex": 1,
+    "rationale": "The cash settlement payment is notional × (1 − recovery rate) = $10 million × 0.65 = $6.5 million.",
+    "topic": "Forward Commitment and Contingent Claim Features and Instruments",
+    "subjectId": "derivatives",
+    "subject": "Derivatives",
+    "source": "Original AI-authored practice",
+    "concept": "Credit default swaps",
+    "topicId": "derivatives-instruments"
+  },
+  {
+    "id": "practice-alternatives-001",
+    "prompt": "A pension plan adds a private real estate fund whose quarterly net asset values are based on appraisals rather than recent transactions. Compared with the underlying economic returns, the fund's reported volatility and correlation with public equities are most likely:",
+    "options": [
+      "Lower, because appraisal marks tend to adjust with a lag.",
+      "Higher, because appraisal-based NAVs amplify short-term market moves.",
+      "Unchanged, because independent appraisals eliminate stale-pricing effects."
+    ],
+    "correctIndex": 0,
+    "rationale": "Appraisal values adjust with a lag, smoothing reported returns and generally understating measured volatility and contemporaneous correlation.",
+    "topic": "Alternative Investment Performance and Returns",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Appraisal smoothing",
+    "topicId": "alternative-investments-performance-returns"
+  },
+  {
+    "id": "practice-alternatives-002",
+    "prompt": "An individual buys shares of a publicly traded REIT that owns apartment buildings. The investor's exposure is best classified as:",
+    "options": [
+      "Direct ownership of the buildings.",
+      "An indirect equity investment in real estate.",
+      "An indirect mortgage debt investment."
+    ],
+    "correctIndex": 1,
+    "rationale": "REIT shares provide an indirect equity claim on a property-owning entity, not direct title to buildings or a mortgage loan.",
+    "topic": "Real Estate and Infrastructure",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Real estate investment vehicles",
+    "topicId": "alternative-investments-real-estate"
+  },
+  {
+    "id": "practice-alternatives-003",
+    "prompt": "An LBO acquires a company for $100 million using $60 million of debt and $40 million of sponsor equity. Five years later, the company is sold for $150 million; $40 million of debt remains, and there have been no interim distributions. The sponsor's annualized equity return is closest to:",
+    "options": [
+      "8.4%.",
+      "20.1%.",
+      "22.4%."
+    ],
+    "correctIndex": 2,
+    "rationale": "Exit equity proceeds are $150 million minus $40 million, or $110 million: 2.75 times the initial equity. The annualized return is 2.75^(1/5) - 1, or about 22.4%.",
+    "topic": "Investments in Private Capital: Equity and Debt",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Leveraged buyouts",
+    "topicId": "alternative-investments-private-capital"
+  },
+  {
+    "id": "practice-alternatives-004",
+    "prompt": "Before a financing round, a startup is valued at $18 million. A new investor contributes $6 million at the round's price. Immediately after the investment, the investor owns:",
+    "options": [
+      "20%.",
+      "25%.",
+      "33.3%."
+    ],
+    "correctIndex": 1,
+    "rationale": "Post-money value is $18 million + $6 million = $24 million, so the investor owns $6 million / $24 million = 25%.",
+    "topic": "Investments in Private Capital: Equity and Debt",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Venture capital",
+    "topicId": "alternative-investments-private-capital"
+  },
+  {
+    "id": "practice-alternatives-005",
+    "prompt": "At year-end, a hedge fund's NAV before fees is $120 million. Its beginning-of-year NAV was $100 million. Management fees are 2% of beginning NAV; incentive fees are 20% of NAV above a $110 million high-water mark, calculated after management fees. Total fees for the year are closest to:",
+    "options": [
+      "$3.2 million.",
+      "$4.0 million.",
+      "$3.6 million."
+    ],
+    "correctIndex": 2,
+    "rationale": "The management fee is $2 million, leaving NAV of $118 million. The incentive fee is 20% of $118 million - $110 million, or $1.6 million; total fees are $3.6 million.",
+    "topic": "Hedge Funds",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Hedge fund fees",
+    "topicId": "alternative-investments-hedge-funds"
+  },
+  {
+    "id": "practice-alternatives-006",
+    "prompt": "A fully collateralized investor maintains a long position in commodity futures. The futures curve remains in contango while spot prices remain unchanged. Over time, the investor's roll yield is most likely:",
+    "options": [
+      "Negative, because the higher-priced deferred contract tends to converge downward toward unchanged spot.",
+      "Positive, because the deferred contract is more expensive than the near-dated contract.",
+      "Zero, because the spot price does not change."
+    ],
+    "correctIndex": 0,
+    "rationale": "In contango, a long investor rolls from a cheaper near-dated contract into a more expensive deferred one. With unchanged spot and convergence, this creates negative roll yield.",
+    "topic": "Natural Resources",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Commodity futures",
+    "topicId": "alternative-investments-natural-resources"
+  },
+  {
+    "id": "practice-alternatives-007",
+    "prompt": "A property produces stabilized annual net operating income of $640,000. If comparable properties trade at an 8.0% capitalization rate, estimated value using direct capitalization is closest to:",
+    "options": [
+      "$7.2 million.",
+      "$8.64 million.",
+      "$8.0 million."
+    ],
+    "correctIndex": 2,
+    "rationale": "Value = annual NOI / capitalization rate = $640,000 / 0.08 = $8.0 million.",
+    "topic": "Real Estate and Infrastructure",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Direct real estate valuation",
+    "topicId": "alternative-investments-real-estate"
+  },
+  {
+    "id": "practice-alternatives-008",
+    "prompt": "A REIT reports net income of $12 million, including $5 million of real estate depreciation and a $2 million gain on a property sale. It has no preferred dividends. Its funds from operations (FFO) are:",
+    "options": [
+      "$15 million.",
+      "$9 million.",
+      "$19 million."
+    ],
+    "correctIndex": 0,
+    "rationale": "FFO adds back real estate depreciation and removes the property-sale gain: $12 million + $5 million - $2 million = $15 million.",
+    "topic": "Real Estate and Infrastructure",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "REIT measures",
+    "topicId": "alternative-investments-real-estate"
+  },
+  {
+    "id": "practice-alternatives-009",
+    "prompt": "A timberland owner can delay harvesting when timber prices are low, allowing trees to keep growing while waiting for prices to improve. This flexibility is best described as:",
+    "options": [
+      "A biological-growth return.",
+      "A real option to defer harvest.",
+      "A roll yield from a futures curve."
+    ],
+    "correctIndex": 1,
+    "rationale": "The owner's discretion over when to harvest is a real option, specifically an option to defer.",
+    "topic": "Natural Resources",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Timberland",
+    "topicId": "alternative-investments-natural-resources"
+  },
+  {
+    "id": "practice-alternatives-010",
+    "prompt": "An infrastructure fund invests in a new toll road before construction begins, bearing construction and initial traffic-ramp-up risk. The investment is best classified as:",
+    "options": [
+      "Greenfield infrastructure.",
+      "Brownfield infrastructure.",
+      "Listed infrastructure equity."
+    ],
+    "correctIndex": 0,
+    "rationale": "Greenfield investing funds a new asset before construction; brownfield investing generally involves existing infrastructure.",
+    "topic": "Real Estate and Infrastructure",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Infrastructure investment",
+    "topicId": "alternative-investments-real-estate"
+  },
+  {
+    "id": "practice-alternatives-011",
+    "prompt": "A private company already has senior secured debt. A private lender provides a contractually subordinated loan with warrants. The financing is most likely:",
+    "options": [
+      "Senior secured debt.",
+      "Common equity.",
+      "Mezzanine financing."
+    ],
+    "correctIndex": 2,
+    "rationale": "Mezzanine financing is subordinated to senior debt and may include warrants that provide equity upside.",
+    "topic": "Investments in Private Capital: Equity and Debt",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Mezzanine financing",
+    "topicId": "alternative-investments-private-capital"
+  },
+  {
+    "id": "practice-alternatives-012",
+    "prompt": "A hedge fund takes directional positions in currencies, sovereign bonds, and equity-index futures based on expected changes in inflation and monetary policy across countries. The strategy is best classified as:",
+    "options": [
+      "Equity market neutral.",
+      "Global macro.",
+      "Event-driven."
+    ],
+    "correctIndex": 1,
+    "rationale": "Global macro strategies take top-down positions across asset classes based on economic and policy developments.",
+    "topic": "Hedge Funds",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Hedge fund strategies",
+    "topicId": "alternative-investments-hedge-funds"
+  },
+  {
+    "id": "practice-alternatives-013",
+    "prompt": "A fully collateralized commodity futures index earns a 4% spot return, a -2% roll return, and a 3% collateral return over a year. Ignoring compounding and other costs, its total return is closest to:",
+    "options": [
+      "5%.",
+      "1%.",
+      "9%."
+    ],
+    "correctIndex": 0,
+    "rationale": "Total return is approximately spot return plus roll return plus collateral return: 4% - 2% + 3% = 5%.",
+    "topic": "Natural Resources",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Commodity index returns",
+    "topicId": "alternative-investments-natural-resources"
+  },
+  {
+    "id": "practice-alternatives-014",
+    "prompt": "A digital-asset network uses a proof-of-stake protocol with slashing. Which feature most directly discourages validators from approving invalid transactions?",
+    "options": [
+      "Validators expend energy solving computational puzzles.",
+      "Validators risk losing staked tokens for protocol violations.",
+      "Token holders have a contractual claim on an issuer's profits."
+    ],
+    "correctIndex": 1,
+    "rationale": "In a proof-of-stake protocol with slashing, validators risk losing staked tokens for specified misconduct, creating an economic deterrent.",
+    "topic": "Introduction to Digital Assets",
+    "subjectId": "alternative-investments",
+    "subject": "Alternative Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Digital assets",
+    "topicId": "alternative-investments-digital-assets"
+  },
+  {
+    "id": "practice-portfolio-001",
+    "prompt": "At the beginning of a period, a portfolio is allocated 40% to Fund X, 35% to Fund Y, and 25% to Fund Z. Their returns over the period are 8%, -4%, and 12%, respectively. The portfolio return is closest to:",
+    "options": [
+      "4.8%",
+      "5.3%",
+      "6.0%"
+    ],
+    "correctIndex": 0,
+    "rationale": "The weighted return is 0.40(8%) + 0.35(-4%) + 0.25(12%) = 4.8%.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Portfolio Return",
+    "topicId": "portfolio-risk-return-1"
+  },
+  {
+    "id": "practice-portfolio-002",
+    "prompt": "An investment returns 20% in Year 1 and loses 10% in Year 2. Its annualized geometric mean return over the two years is closest to:",
+    "options": [
+      "5.0%",
+      "3.9%",
+      "8.0%"
+    ],
+    "correctIndex": 1,
+    "rationale": "The cumulative growth factor is 1.20 × 0.90 = 1.08, so the annualized return is √1.08 − 1 ≈ 3.9%.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Geometric Mean Return",
+    "topicId": "portfolio-risk-return-1"
+  },
+  {
+    "id": "practice-portfolio-003",
+    "prompt": "A portfolio invests 60% in Asset A and 40% in Asset B. Their standard deviations are 10% and 20%, respectively, and their return correlation is 0.25. The portfolio standard deviation is closest to:",
+    "options": [
+      "10.0%",
+      "14.0%",
+      "11.1%"
+    ],
+    "correctIndex": 2,
+    "rationale": "Portfolio variance is 0.60²(0.10²) + 0.40²(0.20²) + 2(0.60)(0.40)(0.25)(0.10)(0.20) = 0.0124; its square root is about 11.1%.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Portfolio Standard Deviation",
+    "topicId": "portfolio-risk-return-1"
+  },
+  {
+    "id": "practice-portfolio-004",
+    "prompt": "An investor holds two risky assets in positive weights. Holding the weights and asset volatilities fixed, which correlation between their returns yields the lowest portfolio variance?",
+    "options": [
+      "-1",
+      "0",
+      "+1"
+    ],
+    "correctIndex": 0,
+    "rationale": "The covariance contribution to portfolio variance is lowest when the correlation is -1.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Diversification",
+    "topicId": "portfolio-risk-return-1"
+  },
+  {
+    "id": "practice-portfolio-005",
+    "prompt": "The risk-free rate is 2%. A risky portfolio has an expected return of 10% and a standard deviation of 16%. A complete portfolio places 75% of its value in the risky portfolio and 25% in the risk-free asset. The complete portfolio's expected return and standard deviation are, respectively:",
+    "options": [
+      "10.0% and 12.0%",
+      "8.0% and 12.0%",
+      "8.0% and 16.0%"
+    ],
+    "correctIndex": 1,
+    "rationale": "Expected return is 0.75(10%) + 0.25(2%) = 8%; standard deviation is 0.75(16%) = 12%.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Capital Allocation Line",
+    "topicId": "portfolio-risk-return-1"
+  },
+  {
+    "id": "practice-portfolio-006",
+    "prompt": "Under CAPM, a share has a beta of 1.2. If the risk-free rate is 3% and the expected market return is 9%, the share's required return is closest to:",
+    "options": [
+      "9.0%",
+      "10.2%",
+      "11.4%"
+    ],
+    "correctIndex": 1,
+    "rationale": "CAPM gives 3% + 1.2(9% − 3%) = 10.2%.",
+    "topic": "Portfolio Risk and Return: Part II",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "CAPM",
+    "topicId": "portfolio-risk-return-2"
+  },
+  {
+    "id": "practice-portfolio-007",
+    "prompt": "The estimated covariance of a stock's returns with market returns is 0.012, and the variance of market returns is 0.010. The stock's beta is closest to:",
+    "options": [
+      "0.83",
+      "1.50",
+      "1.20"
+    ],
+    "correctIndex": 2,
+    "rationale": "Beta equals covariance with the market divided by market variance: 0.012 / 0.010 = 1.20.",
+    "topic": "Portfolio Risk and Return: Part II",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Beta",
+    "topicId": "portfolio-risk-return-2"
+  },
+  {
+    "id": "practice-portfolio-008",
+    "prompt": "According to CAPM, which pair of variables is represented on the vertical and horizontal axes of the security market line (SML)?",
+    "options": [
+      "Expected return and beta",
+      "Expected return and standard deviation for efficient portfolios",
+      "Risk premium and standard deviation for portfolios on a capital allocation line"
+    ],
+    "correctIndex": 0,
+    "rationale": "The SML relates expected return to beta, the measure of systematic risk; the capital market line uses standard deviation.",
+    "topic": "Portfolio Risk and Return: Part II",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Security Market Line",
+    "topicId": "portfolio-risk-return-2"
+  },
+  {
+    "id": "practice-portfolio-009",
+    "prompt": "A university endowment must make a $12 million payment for a building project in 18 months. In its IPS, the need to hold enough readily marketable assets for this payment is most directly a:",
+    "options": [
+      "Time-horizon constraint",
+      "Legal/regulatory constraint",
+      "Liquidity constraint"
+    ],
+    "correctIndex": 2,
+    "rationale": "A planned cash outflow creates a need for assets that can be converted to cash when the payment is due.",
+    "topic": "Basics of Portfolio Planning and Construction",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "IPS Constraints",
+    "topicId": "portfolio-planning-construction"
+  },
+  {
+    "id": "practice-portfolio-010",
+    "prompt": "An investor has a high net worth, stable income, and no near-term spending needs, yet reports being unable to tolerate even modest portfolio declines. The investor's primary limitation is low:",
+    "options": [
+      "Willingness to take risk",
+      "Ability to take risk",
+      "Liquidity"
+    ],
+    "correctIndex": 0,
+    "rationale": "The investor's financial circumstances support risk-taking, while the stated discomfort indicates low willingness to take risk.",
+    "topic": "Basics of Portfolio Planning and Construction",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Risk Tolerance",
+    "topicId": "portfolio-planning-construction"
+  },
+  {
+    "id": "practice-portfolio-011",
+    "prompt": "A manager sells stocks after small gains but continues holding stocks with substantial losses, hoping they will recover. This pattern most directly illustrates:",
+    "options": [
+      "Confirmation bias",
+      "Overconfidence",
+      "Disposition effect"
+    ],
+    "correctIndex": 2,
+    "rationale": "The disposition effect is the tendency to realize gains too early while holding losing investments too long.",
+    "topic": "The Behavioral Biases of Individuals",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Disposition Effect",
+    "topicId": "portfolio-behavioral-biases"
+  },
+  {
+    "id": "practice-portfolio-012",
+    "prompt": "A pension fund has long-run target weights of 60% equities and 40% bonds. Expecting a short-lived equity decline, its committee temporarily shifts to 55% equities and plans to restore 60% after the view passes. This departure is best described as:",
+    "options": [
+      "Strategic asset allocation",
+      "Tactical asset allocation",
+      "Security selection"
+    ],
+    "correctIndex": 1,
+    "rationale": "A temporary shift away from long-run asset-class targets based on a market view is tactical asset allocation.",
+    "topic": "Basics of Portfolio Planning and Construction",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Tactical Asset Allocation",
+    "topicId": "portfolio-planning-construction"
+  },
+  {
+    "id": "practice-portfolio-013",
+    "prompt": "An IPS sets a 60% equity target and calls for rebalancing whenever the actual weight deviates by more than 5 percentage points from the target. After a rally, equities are 66% of the portfolio. Which response follows this policy?",
+    "options": [
+      "Make no trade because the weight is within the band",
+      "Sell equities and buy bonds to return to the 60% target",
+      "Raise the equity target to 66%"
+    ],
+    "correctIndex": 1,
+    "rationale": "The upper band is 65%; at 66%, the portfolio has breached it and should be rebalanced toward the 60% target.",
+    "topic": "Basics of Portfolio Planning and Construction",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Rebalancing",
+    "topicId": "portfolio-planning-construction"
+  },
+  {
+    "id": "practice-portfolio-014",
+    "prompt": "A portfolio returns 11% over an evaluation period and has a beta of 1.25. The risk-free rate and market return over that same period are 2% and 8%, respectively. Jensen's alpha is closest to:",
+    "options": [
+      "7.5%",
+      "1.25%",
+      "1.5%"
+    ],
+    "correctIndex": 2,
+    "rationale": "The CAPM return is 2% + 1.25(8% − 2%) = 9.5%; alpha is 11% − 9.5% = 1.5%.",
+    "topic": "Portfolio Risk and Return: Part II",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Jensen's Alpha",
+    "topicId": "portfolio-risk-return-2"
+  },
+  {
+    "id": "practice-portfolio-015",
+    "prompt": "A firm promises employees retirement benefits based on salary and years of service. If the plan's investments underperform, who generally bears the investment shortfall risk?",
+    "options": [
+      "The sponsoring employer",
+      "Each participant individually",
+      "The external asset manager"
+    ],
+    "correctIndex": 0,
+    "rationale": "In a defined-benefit plan, the sponsor remains responsible for funding the promised benefits; participants generally bear investment risk in defined-contribution plans.",
+    "topic": "Portfolio Management: An Overview",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Pension Plans",
+    "topicId": "portfolio-overview"
+  },
+  {
+    "id": "practice-portfolio-016",
+    "prompt": "An equity fund aims to track a broad market index, using representative holdings and accepting the index's return rather than seeking outperformance. This approach is best described as:",
+    "options": [
+      "Active security selection",
+      "Market timing",
+      "Passive management"
+    ],
+    "correctIndex": 2,
+    "rationale": "A strategy designed to track an index without seeking to outperform it is passive management.",
+    "topic": "Portfolio Management: An Overview",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Passive Management",
+    "topicId": "portfolio-overview"
+  },
+  {
+    "id": "practice-equity-extra-001",
+    "prompt": "A company has just paid a dividend of $2.00 per share. Dividends are expected to grow at a constant 5% annually, and the required return is 10%. Using the Gordon growth model, what is the estimated value per share?",
+    "options": [
+      "$42.00",
+      "$40.00",
+      "$20.00"
+    ],
+    "correctIndex": 0,
+    "rationale": "Next year’s dividend is $2.00 × 1.05 = $2.10. Value = $2.10 ÷ (0.10 − 0.05) = $42.00.",
+    "topic": "Equity Valuation: Concepts and Basic Tools",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Gordon Growth Model",
+    "topicId": "equity-equity-valuation"
+  },
+  {
+    "id": "practice-equity-extra-002",
+    "prompt": "A two-stock market-capitalization-weighted price index has Stock X at $40 per share with 2 million shares outstanding and Stock Y at $20 per share with 6 million shares outstanding at the start of a period. During the period, X’s share price rises 10% and Y’s falls 5%; shares outstanding do not change. What is the index’s return?",
+    "options": [
+      "1.0%",
+      "2.5%",
+      "4.0%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Initial market capitalizations are $80 million for X and $120 million for Y, giving weights of 40% and 60%. The index return is (0.40 × 10%) + (0.60 × −5%) = 1.0%.",
+    "topic": "Security Market Indexes",
+    "subjectId": "equity",
+    "subject": "Equity Investments",
+    "source": "Original AI-authored practice",
+    "concept": "Market-Capitalization-Weighted Indexes",
+    "topicId": "equity-indexes"
+  },
+  {
+    "id": "practice-fixed-extra-001",
+    "prompt": "On a default-free curve with annual compounding, the 1-year spot rate is 4.0% and the 2-year spot rate is 5.0%. The implied 1-year forward rate beginning one year from today is closest to:",
+    "options": [
+      "6.01%",
+      "5.00%",
+      "6.50%"
+    ],
+    "correctIndex": 0,
+    "rationale": "Using annual compounding, (1.05)^2 = (1.04)(1 + f), so f = (1.05^2 / 1.04) − 1 = 6.01%.",
+    "topic": "The Term Structure of Interest Rates: Spot, Par, and Forward Curves",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Spot Rates and Forward Rates",
+    "topicId": "fixed-income-term-structure"
+  },
+  {
+    "id": "practice-fixed-extra-002",
+    "prompt": "A fixed-rate bond has a Macaulay duration of 4.80 years and an annual yield to maturity of 5.0%. Using duration only and ignoring convexity, the approximate percentage price change if its yield rises by 50 basis points is:",
+    "options": [
+      "−2.40%",
+      "+2.29%",
+      "−2.29%"
+    ],
+    "correctIndex": 2,
+    "rationale": "Modified duration is 4.80 / 1.05 = 4.5714. The estimated price change is −4.5714 × 0.005 = −2.29%.",
+    "topic": "Yield-Based Bond Duration Measures and Properties",
+    "subjectId": "fixed-income",
+    "subject": "Fixed Income",
+    "source": "Original AI-authored practice",
+    "concept": "Bond Duration",
+    "topicId": "fixed-income-duration"
+  },
+  {
+    "id": "practice-portfolio-extra-001",
+    "prompt": "An investor has mean-variance utility U = E(Rc) − 0.5Aσc² and can allocate funds between a risk-free asset and a risky portfolio. The risky portfolio has an expected return of 11% and a standard deviation of 20%; the risk-free rate is 3%. If the investor’s risk-aversion coefficient A is 5, what fraction of the investor’s funds should be allocated to the risky portfolio?",
+    "options": [
+      "40%",
+      "60%",
+      "80%"
+    ],
+    "correctIndex": 0,
+    "rationale": "The optimal risky-portfolio weight is (0.11 − 0.03)/(5 × 0.20²) = 0.08/0.20 = 40%.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Capital Allocation",
+    "topicId": "portfolio-risk-return-1"
+  },
+  {
+    "id": "practice-portfolio-extra-002",
+    "prompt": "A portfolio invests 60% in Asset X and 40% in Asset Y. Their annual standard deviations are 20% and 10%, respectively, and their correlation is 0.25. The portfolio’s annual standard deviation is closest to:",
+    "options": [
+      "16.0%",
+      "12.6%",
+      "13.6%"
+    ],
+    "correctIndex": 2,
+    "rationale": "Portfolio variance = 0.6²(0.20²) + 0.4²(0.10²) + 2(0.6)(0.4)(0.20)(0.10)(0.25) = 0.0184. Its standard deviation is √0.0184 ≈ 13.6%.",
+    "topic": "Portfolio Risk and Return: Part I",
+    "subjectId": "portfolio",
+    "subject": "Portfolio Management",
+    "source": "Original AI-authored practice",
+    "concept": "Portfolio Risk",
+    "topicId": "portfolio-risk-return-1"
+  }
+]

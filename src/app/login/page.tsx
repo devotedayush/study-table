@@ -6,7 +6,6 @@ import { ArrowRight, Eye, EyeOff, LockKeyhole, Sparkles, UserRound } from 'lucid
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { formatAuthError } from '@/lib/auth-error'
-import { ensureProfileForUser } from '@/lib/profile-sync'
 import { createClient } from '@/lib/supabase/browser'
 
 export default function LoginPage() {
@@ -25,40 +24,8 @@ export default function LoginPage() {
 
     try {
       const normalizedIdentifier = identifier.trim().toLowerCase()
-      const demoResponse = await fetch('/api/demo-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          identifier: normalizedIdentifier,
-          password,
-        }),
-      })
-
-      if (demoResponse.ok) {
-        router.replace('/')
-        router.refresh()
-        return
-      }
-
-      let email = normalizedIdentifier
-
-      if (!normalizedIdentifier.includes('@')) {
-        const { data: lookupEmail, error: lookupError } = await supabase.rpc('get_email_by_username', {
-          lookup_username: normalizedIdentifier,
-        })
-
-        if (lookupError || !lookupEmail) {
-          setError('No account matches that username. If you just confirmed your email, sign in with your email once.')
-          return
-        }
-
-        email = lookupEmail
-      }
-
       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
+        email: normalizedIdentifier,
         password,
       })
 
@@ -72,18 +39,10 @@ export default function LoginPage() {
         return
       }
 
-      const profileSync = await ensureProfileForUser({
-        supabase,
-        user: signInData.user,
-      })
-
-      if (profileSync.error) {
-        setError(profileSync.error.message)
-        return
-      }
-
-      router.replace(profileSync.onboardingCompleted ? '/' : '/signup')
+      router.replace('/')
       router.refresh()
+    } catch (error) {
+      setError(error instanceof Error ? formatAuthError(error.message) : 'Could not sign in. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -103,44 +62,43 @@ export default function LoginPage() {
         </span>
         <div className="space-y-4">
           <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Sign in and go straight to the dashboard.
+            Your study table, wherever you are.
           </h1>
           <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            Use your username and password. If you do not have an account yet, create one first.
+            Sign in to sync your notes activity, flashcards and exam attempts.
           </p>
         </div>
 
         <div className="rounded-[1.5rem] border border-border bg-card/75 p-5 text-sm text-muted-foreground">
-          Sign in is only for returning users. New users should choose create account on the landing page.
+          You can also explore without an account. Activity stays on this device.
         </div>
-        <div className="rounded-[1.5rem] border border-border bg-secondary/80 p-5 text-sm text-foreground">
-          Demo login: <span className="font-semibold text-foreground">demo</span> / <span className="font-semibold text-foreground">demo123</span>
-        </div>
+
       </motion.section>
 
       <motion.section
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.08 }}
-        className="soft-panel rounded-[1.75rem] p-4 shadow-[0_30px_80px_-35px_rgba(244,114,182,0.35)] sm:rounded-[2rem] sm:p-6"
+        className="soft-panel rounded-[1.75rem] p-4 shadow-[0_30px_80px_-35px_rgba(24,61,83,0.15)] sm:rounded-[2rem] sm:p-6"
       >
         <div className="rounded-[1.6rem] border border-border bg-card p-5 sm:p-6">
           <div className="mb-6">
             <p className="text-sm font-medium text-primary">Returning user</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">Sign in</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Enter your username or email and password.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Enter your email and password.</p>
           </div>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-foreground">Username or email</span>
+              <span className="mb-2 block text-sm font-medium text-foreground">Email</span>
               <div className="flex items-center gap-3 rounded-2xl border border-border bg-secondary/60 px-4 py-3">
-                <UserRound size={16} className="text-pink-400" />
+                <UserRound size={16} className="text-primary/60" />
                 <input
                   value={identifier}
                   onChange={(event) => setIdentifier(event.target.value)}
                   className="w-full bg-transparent text-foreground outline-none placeholder:text-muted-foreground"
-                  autoComplete="username"
+                  type="email"
+                  autoComplete="email"
                   required
                 />
               </div>
@@ -149,7 +107,7 @@ export default function LoginPage() {
             <label className="block">
               <span className="mb-2 block text-sm font-medium text-foreground">Password</span>
               <div className="flex items-center gap-3 rounded-2xl border border-border bg-secondary/60 px-4 py-3">
-                <LockKeyhole size={16} className="text-pink-400" />
+                <LockKeyhole size={16} className="text-primary/60" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}

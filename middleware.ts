@@ -27,14 +27,14 @@ export async function middleware(request: NextRequest) {
     : null
 
   const {
-    data: { session },
-  } = supabase ? await supabase.auth.getSession() : { data: { session: null } }
+    data: { user },
+  } = supabase ? await supabase.auth.getUser() : { data: { user: null } }
   const demoCredentials = getDemoCredentials()
   const hasDemoSession = Boolean(demoCredentials && request.cookies.get(DEMO_AUTH_COOKIE)?.value === '1')
-  const isAuthenticated = Boolean(session || hasDemoSession)
+  const isAuthenticated = Boolean(user || hasDemoSession)
 
   const { pathname } = request.nextUrl
-  const publicRoutes = new Set(['/', '/login', '/signup', '/onboarding'])
+  const publicRoutes = new Set(['/', '/notes', '/mocks', '/login', '/signup'])
   const publicAssets =
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||
@@ -60,17 +60,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  if (session && supabase && (pathname === '/signup' || pathname === '/onboarding')) {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('onboarding_completed')
-      .eq('id', session.user.id)
-      .maybeSingle()
-
-    if (profile?.onboarding_completed) {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-  }
 
   return response
 }

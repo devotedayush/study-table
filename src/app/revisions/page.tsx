@@ -1,5 +1,2 @@
 import { redirect } from 'next/navigation'
-
-export default function RevisionsPage() {
-  redirect('/syllabus')
-}
+export default function Page() { redirect('/') }

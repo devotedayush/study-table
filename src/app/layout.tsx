@@ -11,8 +11,8 @@ const bodyFont = IBM_Plex_Sans({ subsets: ['latin'], variable: '--font-body', we
 const displayFont = Cormorant_Garamond({ subsets: ['latin'], variable: '--font-display', weight: ['500', '600', '700'] })
 
 export const metadata: Metadata = {
-  title: 'Tutor AI',
-  description: 'Private CFA Level 1 preparation cockpit with a simple sign in and signup flow.',
+  title: 'Study Table — CFA practice, without the admin',
+  description: 'Track your practice automatically. Subject notes, flashcards, and an exam-style CFA Level I workspace.',
 }
 
 export default function RootLayout({
@@ -21,19 +21,21 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className={`${bodyFont.variable} ${displayFont.variable} antialiased text-foreground min-h-screen bg-background font-sans transition-colors duration-300 overflow-x-hidden`}>
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="pink"
+          defaultTheme="neutral"
           enableSystem={false}
           disableTransitionOnChange
         >
           <AppShell>{children}</AppShell>
-          <Analytics />
-          <Suspense fallback={null}>
-            <AnalyticsEvents />
-          </Suspense>
+          {process.env.VERCEL === '1' && <>
+            <Analytics />
+            <Suspense fallback={null}>
+              <AnalyticsEvents />
+            </Suspense>
+          </>}
         </ThemeProvider>
       </body>
     </html>

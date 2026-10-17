@@ -47,3 +47,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# A credential-free setup example can be committed.
+!.env.example
+
+# Private imported exam materials and extraction scratch data
+/data/imported-mocks/
+/tmp/mock-import/

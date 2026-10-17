@@ -1,5 +1,2 @@
 import { redirect } from 'next/navigation'
-
-export default function ShortNotesPage() {
-  redirect('/notes')
-}
+export default function Page() { redirect('/notes') }

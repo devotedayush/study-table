@@ -2,200 +2,45 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, BookText, PenTool, Settings, LogOut, ShieldCheck, Layers3, Sparkles, ChevronRight, FileUp } from 'lucide-react'
-import { BabyMaanWidget } from '@/components/baby-maan-widget'
-import { FeedbackButton } from '@/components/feedback-button'
-import { SyncBadge } from '@/components/sync-badge'
+import { Activity, ArrowUpRight, BookOpen, Check, Cloud, LogOut, PanelsTopLeft } from 'lucide-react'
 import { createClient } from '@/lib/supabase/browser'
-import { cn } from '@/lib/utils'
+import { useLearningData } from '@/lib/learning-store'
 
-const navItems = [
-  { name: 'Dashboard', href: '/', icon: LayoutDashboard, match: ['/'] as string[] },
-  { name: 'Study', href: '/syllabus', icon: BookText, match: ['/syllabus', '/revisions'] },
-  { name: 'Assessments', href: '/assessments', icon: ShieldCheck, match: ['/assessments', '/calculator-drills'] },
-  { name: 'Flashcards', href: '/flashcards', icon: Layers3, match: ['/flashcards'] },
-  { name: 'Notebook', href: '/notes', icon: PenTool, match: ['/notes', '/short-notes'] },
-  { name: 'Admin Bank', href: '/admin/question-bank', icon: FileUp, match: ['/admin/question-bank'] },
+const navigation = [
+  { name: 'Track', href: '/', icon: Activity },
+  { name: 'Notes & Flashcards', href: '/notes', icon: BookOpen },
+  { name: 'Mocks & Assessments', href: '/mocks', icon: PanelsTopLeft },
 ]
-
-function isNavActive(pathname: string, item: (typeof navItems)[number]) {
-  return item.match.some((prefix) => (prefix === '/' ? pathname === '/' : pathname === prefix || pathname.startsWith(`${prefix}/`)))
-}
-
-const authRoutes = new Set(['/login', '/signup'])
-
-function Sidebar() {
-  const pathname = usePathname()
-  const router = useRouter()
-
-  async function handleSignOut() {
-    await fetch('/api/demo-logout', { method: 'POST' })
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/login')
-    router.refresh()
-  }
-
-  const activeItem = navItems.find((item) => isNavActive(pathname, item)) ?? navItems[0]
-
-  return (
-    <aside className="hidden lg:flex w-[284px] shrink-0 flex-col border-r border-border/80 bg-card/78 px-4 py-4 backdrop-blur-2xl sticky top-0 h-[100dvh] overflow-y-auto">
-      <div className="rounded-[1.75rem] border border-border bg-card/92 px-4 py-4 shadow-[0_18px_40px_-28px_rgba(var(--primary),0.35)]">
-        <Link href="/" className="group flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-[1.35rem] border border-primary/20 bg-primary text-primary-foreground shadow-[0_16px_30px_-14px_rgba(var(--primary),0.7)]">
-            <span className="text-[0.65rem] font-bold tracking-[0.3em]">TA</span>
-          </div>
-          <div className="min-w-0">
-            <p className="text-[0.68rem] uppercase tracking-[0.32em] text-primary/70">Tutor AI</p>
-            <div className="mt-1 flex items-center gap-2">
-              <h1 className="truncate text-[1.02rem] font-semibold tracking-tight text-foreground">Private study cockpit</h1>
-              <Sparkles size={14} className="shrink-0 text-primary/50 transition-transform group-hover:rotate-12" />
-            </div>
-          </div>
-        </Link>
-
-        <div className="mt-4 rounded-2xl border border-border bg-secondary/70 px-3 py-2">
-          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-primary/70">Current section</p>
-          <div className="mt-1 flex items-center justify-between gap-2">
-            <p className="truncate text-sm font-medium text-foreground">{activeItem.name}</p>
-            <ChevronRight size={14} className="text-primary/40" />
-          </div>
-        </div>
-      </div>
-
-      <nav className="mt-4 flex flex-1 flex-col gap-1.5 overflow-y-auto">
-        {navItems.map((item) => {
-          const Icon = item.icon
-          const isActive = isNavActive(pathname, item)
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              aria-current={isActive ? 'page' : undefined}
-              className={cn(
-                'group flex items-center gap-3 rounded-2xl px-3.5 py-3 text-sm font-medium transition-all',
-                isActive
-                  ? 'border border-primary/20 bg-secondary/80 text-foreground shadow-[0_12px_28px_-20px_rgba(var(--primary),0.6)]'
-                  : 'text-muted-foreground hover:bg-card hover:text-foreground',
-              )}
-            >
-              <span
-                className={cn(
-                  'flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border transition-colors',
-                  isActive ? 'border-primary/20 bg-card text-primary' : 'border-transparent bg-secondary/70 text-primary/70 group-hover:bg-card',
-                )}
-              >
-                <Icon size={17} />
-              </span>
-              <span className="min-w-0 flex-1 truncate">{item.name}</span>
-              {isActive ? <span className="h-2 w-2 rounded-full bg-primary" /> : null}
-            </Link>
-          )
-        })}
-      </nav>
-
-      <div className="mt-auto flex flex-col gap-3 border-t border-border/80 pt-3">
-        <div className="flex items-center justify-center pb-1">
-          <SyncBadge />
-        </div>
-        <div className="grid gap-2">
-          <Link
-            href="/settings"
-            className="flex items-center justify-between rounded-2xl border border-border bg-card/90 px-3.5 py-3 text-sm font-medium text-muted-foreground transition hover:border-primary/30 hover:bg-secondary/70 hover:text-foreground"
-          >
-            <span className="flex items-center gap-3">
-              <Settings size={17} className="text-primary/70" />
-              Settings
-            </span>
-            <ChevronRight size={14} className="text-primary/30" />
-          </Link>
-          <button
-            type="button"
-            onClick={handleSignOut}
-            className="flex items-center justify-between rounded-2xl border border-border bg-card/90 px-3.5 py-3 text-left text-sm font-medium text-muted-foreground transition hover:border-primary/30 hover:bg-secondary/70 hover:text-foreground"
-          >
-            <span className="flex items-center gap-3">
-              <LogOut size={17} className="text-primary/70" />
-              Sign out
-            </span>
-            <ChevronRight size={14} className="text-primary/30" />
-          </button>
-        </div>
-      </div>
-    </aside>
-  )
-}
-
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const authMode = authRoutes.has(pathname) || pathname.startsWith('/login') || pathname.startsWith('/signup')
-
-  if (authMode) {
-    return (
-      <div className="min-h-screen bg-background px-4 py-8 sm:px-6 lg:px-8">
-        {children}
-      </div>
-    )
+  const path = usePathname()
+  const router = useRouter()
+  const { syncStatus, scopeKey } = useLearningData()
+  const authPage = path === '/login' || path === '/signup'
+  async function signOut() {
+    await fetch('/api/demo-logout', { method: 'POST' })
+    await createClient().auth.signOut()
+    router.replace('/login'); router.refresh()
   }
-
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background">
-      <div className="mx-auto flex min-h-screen w-full max-w-[1600px] overflow-x-hidden">
-        <Sidebar />
-        <main className="min-w-0 flex-1 overflow-x-hidden px-3 py-4 sm:px-5 lg:px-8 lg:py-6">
-          <div className="mb-6 lg:hidden sticky top-2 z-40">
-            <div className="soft-panel rounded-[1.5rem] p-2.5 sm:p-3">
-              <div className="flex flex-col gap-3 rounded-[1.35rem] border border-border bg-card/90 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
-                <Link href="/" className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-[1.15rem] border border-primary/20 bg-primary text-primary-foreground shadow-[0_14px_24px_-14px_rgba(var(--primary),0.7)]">
-                    <span className="text-[0.62rem] font-bold tracking-[0.25em]">TA</span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[0.65rem] uppercase tracking-[0.3em] text-primary/70">Tutor AI</p>
-                    <p className="truncate text-sm font-semibold text-foreground">Private study cockpit</p>
-                  </div>
-                </Link>
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await fetch('/api/demo-logout', { method: 'POST' })
-                    const supabase = createClient()
-                    await supabase.auth.signOut()
-                    window.location.href = '/login'
-                  }}
-                  className="self-start rounded-full border border-primary/30 bg-secondary px-3 py-2 text-xs font-semibold text-primary sm:self-auto"
-                >
-                  Sign out
-                </button>
-              </div>
-              <div className="flex flex-wrap gap-2 pb-1 justify-center sm:justify-start">
-                {navItems.map((item) => {
-                  const Icon = item.icon
-                  const isActive = isNavActive(pathname, item)
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={cn(
-                        'flex shrink-0 items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium transition-colors',
-                        isActive
-                          ? 'border-primary/30 bg-secondary text-foreground'
-                          : 'border-border bg-card text-muted-foreground hover:bg-secondary/70 hover:text-foreground',
-                      )}
-                    >
-                      <Icon size={14} className={isActive ? 'text-primary' : 'text-primary/70'} />
-                      {item.name}
-                    </Link>
-                  )
-                })}
-              </div>
-            </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 max-w-[1500px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
+          <Link href="/" className="flex min-w-0 shrink-0 items-center gap-3" aria-label="Study Table home">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#183d53] text-white"><BookOpen size={19} strokeWidth={1.6} /></span>
+            <span><span className="block text-lg font-semibold tracking-tight">study table<span className="text-[#d77a62]">.</span></span><span className="hidden text-[10px] uppercase sm:block tracking-[.22em] text-muted-foreground">CFA Level I · Your workspace</span></span>
+          </Link>
+          {!authPage && <nav aria-label="Main navigation" className="hidden h-full items-center gap-2 lg:flex">
+            {navigation.map(({ name, href, icon: Icon }) => <Link key={href} href={href} aria-current={path === href ? 'page' : undefined} className={`flex h-full items-center gap-2.5 border-b-2 px-5 text-sm font-medium transition ${path === href ? 'border-[#183d53] text-[#183d53]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}><Icon size={17} strokeWidth={1.7} />{name}</Link>)}
+          </nav>}
+          <div className="flex items-center gap-4">
+            {!authPage && <span className="hidden items-center gap-1.5 text-xs text-muted-foreground xl:flex">{syncStatus === 'Synced' ? <Check size={13} /> : <Cloud size={13} />}{syncStatus}</span>}
+            {scopeKey !== 'guest' ? <button onClick={signOut} aria-label="Sign out" className="rounded-full border border-border p-2.5 hover:bg-secondary"><LogOut size={16} /></button> : <Link href={authPage ? '/' : '/login'} className="flex items-center gap-2 text-sm font-medium"><span className="hidden sm:inline">{authPage ? 'Explore workspace' : 'Sign in to sync'}</span><span className="sm:hidden">{authPage ? 'Explore' : 'Sign in'}</span><ArrowUpRight size={14} /></Link>}
           </div>
-          <div className="mx-auto w-full max-w-[1360px] min-w-0 pb-24 lg:pb-0">{children}</div>
-        </main>
-      </div>
-      {pathname.startsWith('/assistant') ? null : <BabyMaanWidget />}
-      <FeedbackButton />
+        </div>
+        {!authPage && <nav aria-label="Mobile navigation" className="flex border-t border-border lg:hidden">{navigation.map(({name,href,icon:Icon}) => <Link key={href} href={href} aria-current={path===href?'page':undefined} className={`flex min-h-14 flex-1 items-center justify-center gap-2 border-b-2 px-2 py-3 text-center text-xs font-medium ${path===href?'border-primary text-primary':'border-transparent text-muted-foreground'}`}><Icon size={15}/>{name}</Link>)}</nav>}
+      </header>
+      <main className="mx-auto max-w-[1500px] px-5 py-8 sm:px-8 lg:px-12 lg:py-11">{children}</main>
+      <footer className="mx-auto flex max-w-[1500px] flex-wrap justify-between gap-2 px-5 py-7 text-[11px] text-muted-foreground sm:px-8 lg:px-12"><span>Study Table · A little less admin. More room to learn.</span><span>Independent practice tool. Not affiliated with CFA Institute.</span></footer>
     </div>
   )
 }
