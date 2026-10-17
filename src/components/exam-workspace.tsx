@@ -5,7 +5,6 @@ import Image from 'next/image'
 import {
   AlertCircle,
   ArrowLeft,
-  ArrowRight,
   BookOpen,
   Check,
   CheckCircle2,
@@ -18,6 +17,8 @@ import {
   Highlighter,
   LoaderCircle,
   LogOut,
+  Maximize,
+  Minimize,
   ExternalLink,
   Play,
   RotateCcw,
@@ -35,6 +36,7 @@ import { cfaLevel1Syllabus } from '@/lib/cfa-data'
 import { mapAssessmentSet, type AssessmentSet } from '@/lib/assessment-bank'
 import { buildExamDiagnostic, type ExamAIAnalysis, type ExamDiagnostic, type TopicDiagnostic } from '@/lib/exam-analysis'
 import { ExamDiagnosticPanel } from '@/components/exam-diagnostic'
+import { useExamFocus } from '@/components/app-shell'
 import { createClient } from '@/lib/supabase/browser'
 import { cn } from '@/lib/utils'
 
@@ -510,20 +512,39 @@ function ExamModal({
   onClose: () => void
   secondaryLabel: string
 }) {
+  const dialogRef = useRef<HTMLElement | null>(null)
+  const onCloseRef = useRef(onClose)
+  useEffect(() => { onCloseRef.current = onClose }, [onClose])
+  useEffect(() => {
+    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const buttons = () => dialogRef.current?.querySelectorAll<HTMLButtonElement>('button:not([disabled])')
+    buttons()?.[0]?.focus()
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); onCloseRef.current() }
+      if (event.key !== 'Tab') return
+      const items = buttons()
+      if (!items?.length) return
+      const first = items[0], last = items[items.length - 1]
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => { document.removeEventListener('keydown', onKeyDown); previous?.focus() }
+  }, [])
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm" role="presentation">
-      <section role="dialog" aria-modal="true" aria-labelledby="exam-modal-title" className="w-full max-w-md rounded-3xl border border-white/70 bg-white p-6 shadow-2xl">
-        <div className="flex items-start justify-between gap-4">
+      <section ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="exam-modal-title" className="flex max-h-[calc(100dvh-2rem)] w-full max-w-md flex-col rounded-3xl border border-white/70 bg-white p-5 shadow-2xl sm:p-6">
+        <div className="flex shrink-0 items-start justify-between gap-4">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-700">Exam workspace</p>
             <h2 id="exam-modal-title" className="mt-2 text-xl font-semibold text-slate-950">{title}</h2>
           </div>
           <button type="button" aria-label="Close dialog" onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"><X size={18} /></button>
         </div>
-        <div className="mt-4 text-sm leading-6 text-slate-600">{body}</div>
-        <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <button type="button" onClick={onClose} className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">{secondaryLabel}</button>
-          <button type="button" onClick={onPrimary} className="rounded-xl bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-900">{primaryLabel}</button>
+        <div className="mt-4 min-h-0 overflow-y-auto text-sm leading-6 text-slate-600">{body}</div>
+        <div className="mt-4 flex shrink-0 flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <button type="button" onClick={onClose} className="min-h-11 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">{secondaryLabel}</button>
+          <button type="button" onClick={onPrimary} className="min-h-11 rounded-xl bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-900">{primaryLabel}</button>
         </div>
       </section>
     </div>
@@ -555,6 +576,82 @@ export function ExamWorkspace() {
   const sessionRef = useRef<ExamSession | null>(null)
   const [loadedScopeKey, setLoadedScopeKey] = useState<string | null>(null)
   const [view, setView] = useState<ExamView>('setup')
+  const [navigatorOpen, setNavigatorOpen] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [fullscreenError, setFullscreenError] = useState<string | null>(null)
+  const ownsFullscreen = useRef(false)
+  const questionPaneRef = useRef<HTMLElement | null>(null)
+  const navigatorToggleRef = useRef<HTMLButtonElement | null>(null)
+  const navigatorCloseRef = useRef<HTMLButtonElement | null>(null)
+  const navigatorRef = useRef<HTMLElement | null>(null)
+  const examActive = ready && loadedScopeKey === scopeKey && view === 'exam' && Boolean(session)
+  useExamFocus(examActive)
+
+  useEffect(() => {
+    const update = () => setIsFullscreen(Boolean(document.fullscreenElement))
+    const exitOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && ownsFullscreen.current && document.fullscreenElement && !document.querySelector('[role="dialog"]')) {
+        event.preventDefault()
+        void document.exitFullscreen().then(() => { ownsFullscreen.current = false }).catch(() => {})
+      }
+    }
+    document.addEventListener('fullscreenchange', update)
+    document.addEventListener('keydown', exitOnEscape)
+    update()
+    return () => {
+      document.removeEventListener('fullscreenchange', update)
+      document.removeEventListener('keydown', exitOnEscape)
+      if (ownsFullscreen.current && document.fullscreenElement) void document.exitFullscreen().catch(() => {})
+    }
+  }, [])
+  useEffect(() => {
+    if (!examActive && ownsFullscreen.current && document.fullscreenElement) {
+      ownsFullscreen.current = false
+      void document.exitFullscreen().catch(() => {})
+    }
+  }, [examActive])
+  useEffect(() => {
+    questionPaneRef.current?.scrollTo({ top: 0 })
+  }, [session?.currentIndex, view])
+  useEffect(() => {
+    if (!navigatorOpen) return
+    navigatorCloseRef.current?.focus()
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setNavigatorOpen(false); navigatorToggleRef.current?.focus() }
+      if (event.key === 'Tab') {
+        const buttons = navigatorRef.current?.querySelectorAll<HTMLButtonElement>('button:not([disabled])')
+        if (!buttons?.length) return
+        const first = buttons[0], last = buttons[buttons.length - 1]
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
+      }
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [navigatorOpen])
+  useEffect(() => {
+    const wideScreen = window.matchMedia('(min-width: 768px)')
+    const closeOnDesktop = () => { if (wideScreen.matches) setNavigatorOpen(false) }
+    wideScreen.addEventListener('change', closeOnDesktop)
+    return () => wideScreen.removeEventListener('change', closeOnDesktop)
+  }, [])
+
+  const toggleFullscreen = async () => {
+    setFullscreenError(null)
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen()
+        ownsFullscreen.current = false
+      } else if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen()
+        ownsFullscreen.current = true
+      } else {
+        setFullscreenError('Fullscreen is unavailable in this browser. Exam controls still stay on screen; use your browser’s fullscreen command if available.')
+      }
+    } catch {
+      setFullscreenError('The browser could not enter fullscreen. Try its fullscreen command; your exam is still saved.')
+    }
+  }
   const [nowMs, setNowMs] = useState(Date.now())
   const [isStarting, setIsStarting] = useState(false)
   const [setupError, setSetupError] = useState<string | null>(null)
@@ -1389,7 +1486,7 @@ export function ExamWorkspace() {
 
   if (view === 'exam' && session && session.phase === 'break') {
     return (
-      <main className="mx-auto max-w-5xl space-y-5">
+      <main className="h-dvh overflow-y-auto bg-slate-50 p-4 sm:p-8"><div className="mx-auto max-w-5xl space-y-5">
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <div className="flex items-center justify-between bg-slate-950 px-5 py-4 text-white sm:px-7">
             <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-700"><Clock3 size={19} /></div><div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">Session 1 complete</p><p className="mt-0.5 text-sm font-medium">{session.title}</p></div></div>
@@ -1410,7 +1507,7 @@ export function ExamWorkspace() {
           </div>
         </div>
         {confirmExit ? <ExamModal title="Leave this exam?" body="Your current session and answers stay saved on this device. Leaving does not submit your exam." primaryLabel="Save and leave" secondaryLabel="Stay here" onPrimary={closeExam} onClose={() => setConfirmExit(false)} /> : null}
-      </main>
+      </div></main>
     )
   }
 
@@ -1424,89 +1521,85 @@ export function ExamWorkspace() {
     const originalSession = (currentQuestion as ImportedMockQuestion).sourceSession
     const sessionLabel = session.mode === 'full_mock' ? `Session ${session.sessionIndex + 1} of 2` : originalSession ? `Original session ${originalSession} · Practice` : session.mode === 'retry' ? 'Retry set' : 'Practice session'
     const unansweredOutsideCurrent = session.answers.filter((answer) => answer === null).length
-
-    return (
-      <main className="mx-auto max-w-[1360px] space-y-4">
-        <div className="overflow-hidden rounded-2xl border border-slate-300 bg-white shadow-sm">
-          <header className="flex flex-col gap-4 bg-[#10284b] px-4 py-4 text-white sm:flex-row sm:items-center sm:justify-between sm:px-6">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/20 text-blue-100"><ShieldCheck size={20} /></div>
-              <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">Computer based practice</p><p className="mt-1 max-w-[60vw] truncate text-sm font-semibold sm:max-w-xl">{session.title}</p></div>
-            </div>
-            <div className="flex items-center justify-between gap-3 sm:justify-end">
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-blue-100">{sessionLabel}</span>
-              <div className={cn('flex min-w-[122px] items-center justify-center gap-2 rounded-xl px-3 py-2 font-mono text-lg font-bold tabular-nums', remaining <= 300 ? 'bg-rose-600 text-white' : 'bg-white text-slate-950')} aria-live="polite">
-                <Timer size={17} />{formatTime(remaining)}
-              </div>
-              <button type="button" onClick={() => setConfirmExit(true)} aria-label="Exit exam" className="rounded-lg p-2 text-blue-100 hover:bg-white/10"><LogOut size={17} /></button>
-            </div>
-          </header>
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6">
-            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-600"><span className="font-semibold text-slate-900">Question {session.currentIndex + 1}</span><span className="text-slate-300">/</span><span>{session.questions.length}</span>{importedQuestion.sourceQuestionNumber ? <span className="rounded-md bg-white px-2 py-1 text-[11px] font-medium text-slate-500">{importedQuestion.sourceSession ? `Session ${importedQuestion.sourceSession} · ` : ''}Paper question {importedQuestion.sourceQuestionNumber}{importedQuestion.sourcePage ? ` · PDF page ${importedQuestion.sourcePage}` : ''}</span> : null}<span className="ml-1 rounded-md bg-white px-2 py-1 text-[11px] font-medium text-slate-500">{currentQuestion.subject}{currentQuestion.topic ? ` · ${currentQuestion.topic}` : ''}</span></div>
-            <div className="flex items-center gap-2">
-              <button type="button" onClick={toggleHighlight} aria-pressed={isHighlighted} className={cn('inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition', isHighlighted ? 'border-amber-300 bg-amber-100 text-amber-900' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100')}><Highlighter size={15} /> {isHighlighted ? 'Highlight on' : sourceImages.length > 0 ? 'Highlight page' : 'Highlight prompt'}</button>
-              <button type="button" onClick={toggleFlag} aria-pressed={isFlagged} className={cn('inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition', isFlagged ? 'border-amber-300 bg-amber-50 text-amber-800' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100')}><Flag size={14} className={isFlagged ? 'fill-current' : ''} /> {isFlagged ? 'Flagged' : 'Flag for review'}</button>
-            </div>
-          </div>
-
-          <div className="grid min-h-[570px] md:grid-cols-[minmax(0,1fr)_280px]">
-            <section className="flex min-w-0 flex-col border-b border-slate-200 p-5 sm:p-8 md:border-b-0 md:border-r">
-              <div className="mb-6 flex items-center justify-between gap-4">
-                <div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">Select one answer</p><p className="mt-1 text-xs text-slate-500">Use the navigation panel to move between questions.</p></div>
-                <span className="shrink-0 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600">{currentAnswered ? 'Answer selected' : 'Not answered'}</span>
-              </div>
-              {sourceImages.length > 0 ? <div className="mb-5 space-y-3" aria-label="Question from the original exam paper">{sourceImages.map((src, imageIndex) => <figure key={`${currentQuestion.id}-source-${imageIndex}`} className={cn('overflow-hidden rounded-xl border bg-white', isHighlighted ? 'border-amber-300 ring-2 ring-amber-200' : 'border-slate-200')}><Image src={src} alt={`Original paper image for question ${importedQuestion.sourceQuestionNumber ?? session.currentIndex + 1}${sourceImages.length > 1 ? `, part ${imageIndex + 1}` : ''}`} width={1000} height={1400} unoptimized className="mx-auto h-auto max-h-[72vh] w-auto max-w-full object-contain" /><figcaption className="border-t border-slate-100 px-3 py-2 text-right"><a href={src} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-blue-800 hover:underline"><ExternalLink size={12} />Open crop full size to zoom</a></figcaption></figure>)}</div> : null}
-              {sourceImages.length > 0 ? <details className="mb-5 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3"><summary className="cursor-pointer text-xs font-semibold text-slate-700">Text version <span className="font-normal text-slate-500">(searchable; use the image for tables)</span></summary><p className="mt-3 text-sm leading-6 text-slate-700">{currentQuestion.prompt}</p></details> : <div className={cn('rounded-2xl p-4 text-lg font-medium leading-8 text-slate-900 sm:p-5 sm:text-xl', isHighlighted ? 'bg-amber-100 ring-1 ring-amber-200' : 'bg-transparent')}>{currentQuestion.prompt}</div>}
-              <div className="mt-7 space-y-3">
+    const answerChoices = (
+              <div className={sourceImages.length ? 'grid grid-cols-3 gap-2' : 'mt-4 space-y-2'}>
                 {currentQuestion.options.map((option, optionIndex) => {
                   const selected = session.answers[session.currentIndex] === optionIndex
                   const crossedOut = eliminated.includes(optionIndex)
                   return (
                     <div key={`${currentQuestion.id}-${optionIndex}`} className={cn('group flex items-stretch gap-2 rounded-xl border transition', selected ? 'border-blue-700 bg-blue-50 shadow-[0_0_0_2px_rgba(29,78,216,0.08)]' : 'border-slate-200 bg-white hover:border-slate-300')}>
-                      <button type="button" aria-pressed={selected} onClick={() => changeAnswer(optionIndex)} className="flex min-w-0 flex-1 items-center gap-3 px-3 py-3.5 text-left sm:px-4">
+                      <button type="button" aria-pressed={selected} onClick={() => changeAnswer(optionIndex)} aria-label={`${String.fromCharCode(65 + optionIndex)}. ${option}`} title={option} className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2.5 text-left sm:px-4">
                         <span className={cn('flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-sm font-bold', selected ? 'border-blue-800 bg-blue-800 text-white' : 'border-slate-300 bg-white text-slate-600')}>{String.fromCharCode(65 + optionIndex)}</span>
-                        <span className={cn('min-w-0 text-sm leading-6 text-slate-800 sm:text-base', crossedOut && 'text-slate-400 line-through')}>{option}</span>
+                        <span className={cn(sourceImages.length ? 'sr-only' : 'min-w-0 text-sm leading-6 text-slate-800 sm:text-base', crossedOut && 'text-slate-400 line-through')}>{option}</span>
                         {selected ? <Check size={17} className="ml-auto shrink-0 text-blue-800" /> : null}
                       </button>
-                      <button type="button" aria-pressed={crossedOut} aria-label={`${crossedOut ? 'Restore' : 'Strike out'} option ${String.fromCharCode(65 + optionIndex)}`} onClick={() => toggleEliminated(optionIndex)} className={cn('mr-2 self-center rounded-lg p-2 text-slate-300 opacity-100 transition hover:bg-slate-100 hover:text-slate-600 sm:opacity-0 sm:group-hover:opacity-100', crossedOut && 'bg-slate-100 text-slate-600 opacity-100')}><X size={15} /></button>
+                      <button type="button" aria-pressed={crossedOut} aria-label={`${crossedOut ? 'Restore' : 'Strike out'} option ${String.fromCharCode(65 + optionIndex)}`} onClick={() => toggleEliminated(optionIndex)} className={cn('mr-2 self-center rounded-lg p-2 text-slate-300 transition hover:bg-slate-100 hover:text-slate-600', sourceImages.length ? 'opacity-100' : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100', crossedOut && 'bg-slate-100 text-slate-600 opacity-100')}><X size={15} /></button>
                     </div>
                   )
                 })}
               </div>
-              <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-6">
-                <button type="button" onClick={() => goRelative(-1)} disabled={session.currentIndex <= currentRange.start} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"><ChevronLeft size={17} /> Previous</button>
-                <span className="text-xs text-slate-500">{answeredInCurrentSession} of {currentRange.end - currentRange.start} answered in this session</span>
-                {isSessionLastQuestion ? (
-                  <button type="button" onClick={() => setConfirmSubmit(true)} className="inline-flex items-center gap-2 rounded-xl bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-900">{session.mode === 'full_mock' && session.sessionIndex === 0 ? 'End session 1' : 'Submit exam'} <ArrowRight size={16} /></button>
-                ) : (
-                  <button type="button" onClick={() => goRelative(1)} className="inline-flex items-center gap-2 rounded-xl bg-blue-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-900">Next <ChevronDown size={16} className="-rotate-90" /></button>
-                )}
+    )
+
+    return (
+      <main className="flex h-dvh min-h-0 flex-col overflow-hidden bg-white" data-exam-stage>
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-white">
+          <header className="flex shrink-0 items-center justify-between gap-2 bg-[#10284b] px-3 py-2 text-white sm:px-5">
+            <div className="flex min-w-0 items-center gap-2">
+              <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/20 text-blue-100 sm:flex"><ShieldCheck size={20} /></div>
+              <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">Computer based practice</p><p className="max-w-[38vw] truncate text-sm font-semibold sm:max-w-[42vw]">{session.title}</p><p className="mt-0.5 text-[10px] text-blue-200 sm:hidden">{sessionLabel}</p></div>
+            </div>
+            <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
+              <span className="hidden rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-blue-100 lg:inline">{sessionLabel}</span>
+              <div className={cn('flex min-w-[88px] items-center justify-center gap-1.5 rounded-lg px-2 py-2 font-mono text-sm font-bold tabular-nums sm:min-w-[110px] sm:text-lg', remaining <= 300 ? 'bg-rose-600 text-white' : 'bg-white text-slate-950')} aria-live="polite">
+                <Timer size={17} />{formatTime(remaining)}
               </div>
-              {!isSessionLastQuestion ? <button type="button" onClick={() => setConfirmSubmit(true)} className="mt-3 self-end text-xs font-semibold text-slate-500 underline decoration-slate-300 underline-offset-4 hover:text-slate-800">End this session early</button> : null}
+              <button type="button" onClick={() => void toggleFullscreen()} aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} title={isFullscreen ? 'Exit fullscreen (Esc)' : 'Enter fullscreen'} className="inline-flex h-10 min-w-10 items-center justify-center gap-1.5 rounded-lg p-2 text-blue-100 hover:bg-white/10">{isFullscreen ? <Minimize size={17} /> : <Maximize size={17} />}<span className="hidden text-xs font-semibold xl:inline">{isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}</span></button>
+              <button type="button" onClick={() => setConfirmExit(true)} aria-label="Exit exam" className="flex h-10 w-10 items-center justify-center rounded-lg p-2 text-blue-100 hover:bg-white/10"><LogOut size={17} /></button>
+            </div>
+          </header>
+          {fullscreenError ? <p role="status" className="shrink-0 border-b border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-900">{fullscreenError}</p> : null}
+          <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-slate-50 px-3 py-2 sm:px-5">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-600"><span className="font-semibold text-slate-900">Question {session.currentIndex + 1}</span><span className="text-slate-300">/</span><span>{session.questions.length}</span>{importedQuestion.sourceQuestionNumber ? <span className="hidden rounded-md bg-white px-2 py-1 text-[11px] font-medium text-slate-500 lg:inline">{importedQuestion.sourceSession ? `Session ${importedQuestion.sourceSession} · ` : ''}Paper question {importedQuestion.sourceQuestionNumber}{importedQuestion.sourcePage ? ` · PDF page ${importedQuestion.sourcePage}` : ''}</span> : null}<span className="ml-1 hidden max-w-[32vw] truncate rounded-md bg-white px-2 py-1 text-[11px] font-medium text-slate-500 md:inline">{currentQuestion.subject}{currentQuestion.topic ? ` · ${currentQuestion.topic}` : ''}</span></div>
+            <div className="flex items-center gap-2">
+              <button type="button" onClick={toggleHighlight} aria-pressed={isHighlighted} className={cn('inline-flex items-center gap-1.5 rounded-lg border px-2 py-2 text-[11px] sm:px-3 sm:text-xs font-semibold transition', isHighlighted ? 'border-amber-300 bg-amber-100 text-amber-900' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100')}><Highlighter size={15} /> {isHighlighted ? 'Highlight on' : sourceImages.length > 0 ? 'Highlight page' : 'Highlight prompt'}</button>
+              <button type="button" onClick={toggleFlag} aria-pressed={isFlagged} className={cn('inline-flex items-center gap-1.5 rounded-lg border px-2 py-2 text-[11px] sm:px-3 sm:text-xs font-semibold transition', isFlagged ? 'border-amber-300 bg-amber-50 text-amber-800' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100')}><Flag size={14} className={isFlagged ? 'fill-current' : ''} /> {isFlagged ? 'Flagged' : 'Flag'}</button>
+            </div>
+          </div>
+
+          <div className="relative grid min-h-0 flex-1 overflow-hidden md:grid-cols-[minmax(0,1fr)_240px] lg:grid-cols-[minmax(0,1fr)_260px]">
+            <section ref={questionPaneRef} aria-label="Exam question" tabIndex={0} className="min-h-0 min-w-0 overflow-y-auto overscroll-contain border-slate-200 p-4 outline-offset-[-2px] sm:px-6 sm:py-4 md:border-r" data-question-pane>
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">Select one answer</p></div>
+                <span className="shrink-0 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600">{currentAnswered ? 'Answer selected' : 'Not answered'}</span>
+              </div>
+              {sourceImages.length > 0 ? <div className="mb-3 space-y-3" aria-label="Question from the original exam paper">{sourceImages.map((src, imageIndex) => <figure key={`${currentQuestion.id}-source-${imageIndex}`} className={cn('overflow-hidden rounded-xl border bg-white', isHighlighted ? 'border-amber-300 ring-2 ring-amber-200' : 'border-slate-200')}><Image src={src} alt={`Original paper image for question ${importedQuestion.sourceQuestionNumber ?? session.currentIndex + 1}${sourceImages.length > 1 ? `, part ${imageIndex + 1}` : ''}`} width={1000} height={1400} unoptimized className="mx-auto h-auto w-full max-w-[1000px] object-contain" /><figcaption className="border-t border-slate-100 px-3 py-2 text-right"><a href={src} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-blue-800 hover:underline"><ExternalLink size={12} />Open crop full size to zoom</a></figcaption></figure>)}</div> : null}
+              {sourceImages.length > 0 ? <details className="mb-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3"><summary className="cursor-pointer text-xs font-semibold text-slate-700">Text version <span className="font-normal text-slate-500">(searchable; use the image for tables)</span></summary><p className="mt-3 text-sm leading-6 text-slate-700">{currentQuestion.prompt}</p></details> : <div className={cn('rounded-2xl p-4 text-lg font-medium leading-8 text-slate-900 sm:p-5 sm:text-xl', isHighlighted ? 'bg-amber-100 ring-1 ring-amber-200' : 'bg-transparent')}>{currentQuestion.prompt}</div>}
+              {sourceImages.length === 0 ? answerChoices : null}
             </section>
 
-            <aside className="flex flex-col bg-slate-50/80 p-4 sm:p-5">
-              <div className="flex items-center justify-between gap-2"><div><h2 className="text-sm font-semibold text-slate-900">Question navigator</h2><p className="mt-1 text-xs text-slate-500">{session.mode === 'full_mock' ? `Session ${session.sessionIndex + 1} · Questions ${currentRange.start + 1}–${currentRange.end}` : 'All questions'}</p></div><span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-bold text-blue-900">{session.questions.length}</span></div>
-              <div className="mt-4 grid grid-cols-6 gap-2 sm:grid-cols-8 md:grid-cols-5 lg:grid-cols-6">
+            {navigatorOpen ? <button type="button" aria-label="Close question navigator" onClick={() => { setNavigatorOpen(false); navigatorToggleRef.current?.focus() }} className="fixed inset-0 z-50 bg-slate-950/40 md:hidden" /> : null}
+            <aside ref={navigatorRef} id="exam-question-navigator" aria-label="Question navigator" role={navigatorOpen ? 'dialog' : undefined} aria-modal={navigatorOpen || undefined} className={cn('min-h-0 flex-col bg-slate-50 p-4', navigatorOpen ? 'fixed inset-y-0 right-0 z-[60] flex w-[min(340px,100vw)] shadow-xl md:static md:z-auto md:w-auto md:shadow-none' : 'hidden md:flex')}>
+              <div className="flex shrink-0 items-center justify-between gap-2"><div><h2 className="text-sm font-semibold text-slate-900">Question navigator</h2><p className="mt-1 text-xs text-slate-500">{session.mode === 'full_mock' ? `Session ${session.sessionIndex + 1} · Questions ${currentRange.start + 1}–${currentRange.end}` : 'All questions'}</p></div><button ref={navigatorCloseRef} type="button" aria-label="Close question navigator" onClick={() => { setNavigatorOpen(false); navigatorToggleRef.current?.focus() }} className="rounded-lg p-2 text-slate-600 md:hidden"><X size={18} /></button></div>
+              <div className="mt-4 grid min-h-0 flex-1 auto-rows-min grid-cols-6 gap-2 overflow-y-auto overscroll-contain pr-1 md:grid-cols-5 lg:grid-cols-6" data-navigator-grid>
                 {Array.from({ length: currentRange.end - currentRange.start }, (_, offset) => currentRange.start + offset).map((index) => {
                   const isCurrent = index === session.currentIndex
                   const answered = session.answers[index] !== null
                   const flagged = session.flagged.includes(index)
                   return (
-                    <button key={index} type="button" onClick={() => jumpToQuestion(index)} aria-current={isCurrent ? 'step' : undefined} aria-label={`Question ${index + 1}${answered ? ', answered' : ', unanswered'}${flagged ? ', flagged' : ''}`} className={cn('relative flex h-9 items-center justify-center rounded-lg border text-xs font-bold transition', isCurrent ? 'border-blue-800 bg-blue-800 text-white shadow-sm' : answered ? 'border-blue-200 bg-blue-100 text-blue-900 hover:border-blue-400' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-400', flagged && !isCurrent && 'border-amber-300 bg-amber-50 text-amber-900')}>
+                    <button key={index} type="button" onClick={() => { jumpToQuestion(index); setNavigatorOpen(false); navigatorToggleRef.current?.focus() }} aria-current={isCurrent ? 'step' : undefined} aria-label={`Question ${index + 1}${answered ? ', answered' : ', unanswered'}${flagged ? ', flagged' : ''}`} className={cn('relative flex h-9 items-center justify-center rounded-lg border text-xs font-bold transition', isCurrent ? 'border-blue-800 bg-blue-800 text-white shadow-sm' : answered ? 'border-blue-200 bg-blue-100 text-blue-900 hover:border-blue-400' : 'border-slate-200 bg-white text-slate-600 hover:border-slate-400', flagged && !isCurrent && 'border-amber-300 bg-amber-50 text-amber-900')}>
                       {index + 1}
                       {flagged ? <span className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-white"><Flag size={8} className="fill-current" /></span> : null}
                     </button>
                   )
                 })}
               </div>
-              <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 text-[11px] text-slate-500">
+              <div className="mt-3 grid shrink-0 grid-cols-2 gap-x-3 gap-y-2 text-[11px] text-slate-500">
                 <span className="flex items-center gap-2"><span className="h-3 w-3 rounded border border-blue-200 bg-blue-100" /> Answered</span>
                 <span className="flex items-center gap-2"><span className="h-3 w-3 rounded border border-slate-200 bg-white" /> Unanswered</span>
                 <span className="flex items-center gap-2"><span className="h-3 w-3 rounded border border-amber-300 bg-amber-50" /> Flagged</span>
                 <span className="flex items-center gap-2"><span className="h-3 w-3 rounded border border-blue-800 bg-blue-800" /> Current</span>
               </div>
-              <div className="mt-auto space-y-3 pt-8">
+              <div className="shrink-0 space-y-3 pt-3">
                 <div className="rounded-xl border border-slate-200 bg-white p-3.5">
                   <div className="flex items-center justify-between text-xs"><span className="text-slate-500">Flagged</span><span className="font-semibold text-slate-900">{session.flagged.filter((index) => index >= currentRange.start && index < currentRange.end).length}</span></div>
                   <div className="mt-2 flex items-center justify-between text-xs"><span className="text-slate-500">Unanswered total</span><span className="font-semibold text-slate-900">{unansweredOutsideCurrent}</span></div>
@@ -1515,6 +1608,21 @@ export function ExamWorkspace() {
               </div>
             </aside>
           </div>
+          {sourceImages.length > 0 ? <div className="shrink-0 border-t border-slate-200 bg-slate-50 px-3 py-2 sm:px-5 md:pr-[260px] lg:pr-[280px]" aria-label="Paper answer choices">
+            <p className="mb-1.5 text-[10px] font-semibold text-slate-500">Choose A, B or C from the paper</p>
+            {answerChoices}
+          </div> : null}
+          <footer className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-slate-300 bg-white px-3 py-2 sm:px-5" style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }} aria-label="Exam controls" data-exam-controls>
+            <div className="flex w-full items-center justify-between gap-2 text-xs text-slate-500 md:w-auto">
+              <span>{answeredInCurrentSession} / {currentRange.end - currentRange.start} answered<span className="hidden lg:inline"> in this session</span></span>
+              <button ref={navigatorToggleRef} type="button" onClick={() => setNavigatorOpen(true)} aria-expanded={navigatorOpen} aria-controls="exam-question-navigator" className="rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-semibold text-slate-700 md:hidden">Questions · {session.currentIndex + 1}/{session.questions.length}</button>
+            </div>
+            <div className="flex w-full items-center justify-between gap-2 md:w-auto md:gap-3">
+              <button type="button" onClick={() => goRelative(-1)} disabled={session.currentIndex <= currentRange.start} className="inline-flex min-h-11 items-center justify-center gap-1 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 sm:text-sm"><ChevronLeft size={16} />Previous</button>
+              <button type="button" onClick={() => setConfirmSubmit(true)} className="inline-flex min-h-11 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-900 hover:bg-blue-100 sm:text-sm">{session.mode === 'full_mock' && session.sessionIndex === 0 ? 'End session 1' : 'Submit exam'}</button>
+              <button type="button" onClick={() => goRelative(1)} disabled={isSessionLastQuestion} className="inline-flex min-h-11 items-center justify-center gap-1 rounded-lg bg-blue-800 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-40 sm:text-sm">Next<ChevronDown size={16} className="-rotate-90" /></button>
+            </div>
+          </footer>
         </div>
         {confirmSubmit ? (
           <ExamModal
