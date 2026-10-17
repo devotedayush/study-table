@@ -15,12 +15,14 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { KatexFormula, MathText } from '@/components/katex-formula'
+import { InlineQuestionText } from '@/components/question-content'
 import { createClient } from '@/lib/supabase/browser'
 import { cfaLevel1Syllabus, type SyllabusSubject, type SyllabusTopic } from '@/lib/cfa-data'
 import { flashcardCatalogue, formulaFlashcards, type FlashcardCard } from '@/lib/flashcards-data'
 import { fetchRevisionLibraryNotes, type RevisionNote } from '@/lib/revision-library'
 import { recordLearningEvent, useLearningData } from '@/lib/learning-store'
 import { cn } from '@/lib/utils'
+import type { RecallFlashcard } from '@/lib/recall-flashcards'
 
 type StudyCard = {
   id: string
@@ -34,6 +36,7 @@ type StudyCard = {
   back: string
   hint: string
   tags: string[]
+  source?: RecallFlashcard['source']
 }
 
 type LibraryTopic = {
@@ -168,6 +171,10 @@ export function NotesWorkspace() {
   const [search, setSearch] = useState('')
   const [libraryNotes, setLibraryNotes] = useState<RevisionNote[]>([])
   const [libraryReady, setLibraryReady] = useState(false)
+  const [recallCards, setRecallCards] = useState<RecallFlashcard[]>([])
+  const [recallStatus, setRecallStatus] = useState<'loading' | 'ready' | 'sign-in' | 'error'>('loading')
+  const [recallRetry, setRecallRetry] = useState(0)
+  const [deckSource, setDeckSource] = useState('all')
   const [isFlipped, setIsFlipped] = useState(false)
   const [cursorState, setCursorState] = useState<{ scopeKey: string; cursors: Record<string, string> }>({
     scopeKey: '',
@@ -193,6 +200,26 @@ export function NotesWorkspace() {
       active = false
     }
   }, [])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    async function loadRecallCards() {
+      setRecallCards([])
+      setRecallStatus('loading')
+      try {
+        const response = await fetch('/api/flashcards', { signal: controller.signal, cache: 'no-store' })
+        if (controller.signal.aborted) return
+        if (response.status === 401) { setRecallStatus('sign-in'); return }
+        if (!response.ok) throw new Error('Recall cards unavailable')
+        const data = await response.json() as RecallFlashcard[]
+        if (!controller.signal.aborted) { setRecallCards(data); setRecallStatus('ready') }
+      } catch {
+        if (!controller.signal.aborted) setRecallStatus('error')
+      }
+    }
+    void loadRecallCards()
+    return () => controller.abort()
+  }, [scopeKey, recallRetry])
 
   useEffect(() => {
     if (!scopeKey) {
@@ -223,9 +250,14 @@ export function NotesWorkspace() {
   )
 
   const subjectCards = useMemo(
-    () => selectedSubject ? getCardsForSubject(selectedSubject) : [],
-    [selectedSubject],
+    () => selectedSubject ? [...recallCards.filter(card => card.subjectId === selectedSubject.id), ...getCardsForSubject(selectedSubject)] : [],
+    [selectedSubject, recallCards],
   )
+
+  const cardCounts = useMemo(() => new Map(cfaLevel1Syllabus.map(subject => [
+    subject.id,
+    getCardsForSubject(subject).length + recallCards.filter(card => card.subjectId === subject.id).length,
+  ])), [recallCards])
 
   const subjectNotes = useMemo(
     () => libraryNotes.filter((note) => note.subject === selectedSubject?.title),
@@ -250,7 +282,10 @@ export function NotesWorkspace() {
 
   const selectedTopicResource = visibleTopicResources.find((resource) => resource.topic.id === selectedTopicId)
     ?? visibleTopicResources[0]
-  const visibleCards = subjectCards.filter((card) => !query || normalize(cardSearchText(card)).includes(query))
+  const visibleCards = subjectCards.filter((card) => (
+    (deckSource === 'all' || (deckSource === 'recall' ? Boolean(card.source) : !card.source)) &&
+    (!query || normalize(cardSearchText(card)).includes(query))
+  ))
   const cursors = cursorState.scopeKey === scopeKey ? cursorState.cursors : {}
   const rememberedCardId = selectedSubject ? cursors[selectedSubject.id] : undefined
   const rememberedIndex = rememberedCardId ? visibleCards.findIndex((card) => card.id === rememberedCardId) : -1
@@ -405,7 +440,7 @@ export function NotesWorkspace() {
           >
             {cfaLevel1Syllabus.map((subject) => (
               <option key={subject.id} value={subject.id}>
-                {subject.title} · {subject.topics.length} topics · {getCardsForSubject(subject).length} cards
+                {subject.title} · {subject.topics.length} topics · {cardCounts.get(subject.id) ?? 0} cards
               </option>
             ))}
           </select>
@@ -424,7 +459,7 @@ export function NotesWorkspace() {
           <nav className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-1" aria-label="Subjects">
             {cfaLevel1Syllabus.map((subject) => {
               const isSelected = selectedSubject.id === subject.id
-              const cardCount = getCardsForSubject(subject).length
+              const cardCount = cardCounts.get(subject.id) ?? 0
               return (
                 <button
                   type="button"
@@ -621,20 +656,23 @@ export function NotesWorkspace() {
                       ) : selectedTopicResource.cards.length > 0 ? (
                         <div className="mt-5 space-y-3">
                           <p className="text-sm leading-6 text-muted-foreground">
-                            Key ideas from the built-in {selectedSubject.title} study cards.
+                            Key ideas from the available {selectedSubject.title} study cards.
                           </p>
                           {selectedTopicResource.cards.map((card) => (
                             <article key={card.id} className="rounded-2xl border border-border/75 bg-background/75 p-4 sm:p-5">
                               <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">{card.kind === 'formula' ? 'Formula' : 'Key idea'}</p>
                               <h4 className="mt-2 text-base font-semibold text-foreground">{card.front}</h4>
-                              <MathText text={card.back} className="mt-2 text-sm leading-6 text-muted-foreground" />
+                              {card.source
+                                ? <InlineQuestionText text={card.back} className="mt-2 block whitespace-pre-wrap break-words text-sm leading-6 text-muted-foreground" />
+                                : <MathText text={card.back} className="mt-2 text-sm leading-6 text-muted-foreground" />}
                               {card.hint ? <p className="mt-3 text-sm leading-6 text-foreground"><span className="font-semibold">Memory cue · </span>{card.hint}</p> : null}
+                              {card.source ? <a href={`/api/materials/${card.source.id}#page=${card.source.page}`} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs text-primary underline">AI recall source PDF, page {card.source.page}</a> : null}
                             </article>
                           ))}
                         </div>
                       ) : (
                         <div className="mt-5 rounded-2xl border border-dashed border-border bg-background px-5 py-6">
-                          <p className="text-sm font-semibold text-foreground">No built-in note for this topic yet</p>
+                  <p className="text-sm font-semibold text-foreground">No study note for this topic yet</p>
                           <p className="mt-1.5 max-w-xl text-sm leading-6 text-muted-foreground">
                             This topic is in your CFA syllabus. Switch to the subject flashcards to study the available concepts, or download the subject notes PDF.
                           </p>
@@ -667,6 +705,18 @@ export function NotesWorkspace() {
             </section>
           ) : (
             <section role="tabpanel" className="rounded-[1.75rem] border border-border/80 bg-card p-4 sm:p-6">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <label className="flex items-center gap-2 text-sm font-medium">Card collection
+                  <select value={deckSource} onChange={event => { setDeckSource(event.target.value); setIsFlipped(false) }} className="max-w-full rounded-xl border border-border bg-background px-3 py-2 text-sm">
+                    <option value="all">All cards</option>
+                    <option value="recall">From recall PDFs</option>
+                    <option value="built-in">Built-in cards</option>
+                  </select>
+                </label>
+                <p role="status" className="text-xs text-muted-foreground">
+                  {recallStatus === 'loading' ? 'Loading recall cards…' : recallStatus === 'ready' ? `${subjectCards.filter(card => card.source).length} recall PDF cards in this subject` : recallStatus === 'sign-in' ? <Link href="/login" className="text-primary underline">Sign in for the recall PDF collection</Link> : <button onClick={() => setRecallRetry(value => value + 1)} className="text-primary underline">Recall cards unavailable · Try again</button>}
+                </p>
+              </div>
               {activeCard ? (
                 <>
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -688,10 +738,12 @@ export function NotesWorkspace() {
                       <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">{isFlipped ? 'Answer' : 'Question'}</span>
                       <span className="text-xs font-medium text-muted-foreground">Click, Enter, or Space to {isFlipped ? 'see question' : 'flip'}</span>
                     </div>
-                    <div className="my-8 max-w-3xl">
+                    <div className="my-8 w-full min-w-0 max-w-3xl">
                       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{isFlipped ? activeCard.front : activeCard.topic}</p>
                       {isFlipped ? (
-                        <MathText text={activeCard.back} className="mt-3 whitespace-pre-wrap text-lg font-medium leading-7 text-foreground sm:text-xl sm:leading-8" />
+                        activeCard.source
+                          ? <InlineQuestionText text={activeCard.back} className="mt-3 block whitespace-pre-wrap break-words text-lg font-medium leading-7 text-foreground sm:text-xl sm:leading-8" />
+                          : <MathText text={activeCard.back} className="mt-3 whitespace-pre-wrap text-lg font-medium leading-7 text-foreground sm:text-xl sm:leading-8" />
                       ) : (
                         <p className="mt-3 font-heading text-2xl font-semibold leading-snug text-foreground sm:text-4xl">{activeCard.front}</p>
                       )}
@@ -701,6 +753,8 @@ export function NotesWorkspace() {
                       {activeCard.tags.map((tag) => <span key={tag} className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] text-muted-foreground">{tag}</span>)}
                     </div>
                   </button>
+
+                  {activeCard.source ? <p className="mt-3 text-xs leading-5 text-muted-foreground">AI recall study aid · Cross-reviewed by AI agents · <a href={`/api/materials/${activeCard.source.id}#page=${activeCard.source.page}`} target="_blank" rel="noreferrer" className="text-primary underline">Source PDF, page {activeCard.source.page}</a></p> : null}
 
                   <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex gap-2">
@@ -732,9 +786,7 @@ export function NotesWorkspace() {
           )}
 
           <p className="px-1 text-xs leading-5 text-muted-foreground">
-            {libraryReady && subjectNotes.length > 0
-              ? 'Notes combine the subject library with built-in formula and concept cards.'
-              : 'Notes use the built-in CFA Level I formula and concept cards available in this workspace.'}
+            Notes combine available library entries with formula and concept cards. Recall PDF cards are AI study aids with source-page links.
           </p>
         </main>
       </div>

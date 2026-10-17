@@ -61,3 +61,6 @@ __pycache__/
 
 # Private uploaded study PDFs
 /data/study-materials/
+
+# Source text, agent batches, and validated private recall flashcards
+/data/recall-flashcards/
