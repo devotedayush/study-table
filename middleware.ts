@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
   const isAuthenticated = Boolean(user || hasDemoSession)
 
   const { pathname } = request.nextUrl
-  const publicRoutes = new Set(['/', '/notes', '/mocks', '/login', '/signup'])
+  const publicRoutes = new Set(['/', '/notes', '/materials', '/mocks', '/login', '/signup'])
   const publicAssets =
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||

@@ -58,3 +58,6 @@ next-env.d.ts
 # Python import tooling
 __pycache__/
 *.py[cod]
+
+# Private uploaded study PDFs
+/data/study-materials/

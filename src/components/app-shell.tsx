@@ -49,7 +49,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <span><span className="block text-lg font-semibold tracking-tight">study table<span className="text-[#d77a62]">.</span></span><span className="hidden text-[10px] uppercase sm:block tracking-[.22em] text-muted-foreground">CFA Level I · Your workspace</span></span>
           </Link>
           {!authPage && <nav aria-label="Main navigation" className="hidden h-full items-center gap-2 lg:flex">
-            {navigation.map(({ name, href, icon: Icon }) => <Link key={href} href={href} aria-current={path === href ? 'page' : undefined} className={`flex h-full items-center gap-2.5 border-b-2 px-5 text-sm font-medium transition ${path === href ? 'border-[#183d53] text-[#183d53]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}><Icon size={17} strokeWidth={1.7} />{name}</Link>)}
+            {navigation.map(({ name, href, icon: Icon }) => <Link key={href} href={href} aria-current={path === href || (href === '/notes' && path === '/materials') ? 'page' : undefined} className={`flex h-full items-center gap-2.5 border-b-2 px-5 text-sm font-medium transition ${path === href || (href === '/notes' && path === '/materials') ? 'border-[#183d53] text-[#183d53]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}><Icon size={17} strokeWidth={1.7} />{name}</Link>)}
           </nav>}
           <div className="flex items-center gap-4">
             {!authPage && <span className="hidden items-center gap-1.5 text-xs text-muted-foreground xl:flex">{syncStatus === 'Synced' ? <Check size={13} /> : <Cloud size={13} />}{syncStatus}</span>}

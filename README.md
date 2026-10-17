@@ -16,6 +16,8 @@ npm run dev
 
 Open http://localhost:3000. The bundled library and practice bank work without an account. An account syncs activity and completed attempts to Supabase.
 
+The **Study materials** link in Notes & Flashcards opens `/materials`: 26 supplied PDFs grouped into official 2026 curriculum, AI summaries and recall notes, practice packs, and 2024 revision resources. Search and category filters help find a document; each card offers Open PDF and Download. PDFs live in the private `study-materials` Supabase bucket and require sign-in on hosted sites, following the mock-library access model. Five-minute signed links support browser PDF viewing; downloads retain the organized filenames. Local testing may use ignored `data/study-materials` when `ALLOW_LOCAL_STUDY_GUEST=true`. Catalog metadata is in `src/lib/study-material-catalog.json`; `scripts/upload-study-materials.cjs` uploads and verifies every PDF against its SHA-256 using a server-only service key. Three exact duplicates from the 29 supplied originals were consolidated.
+
 The intended Supabase project is `sacqjhcvnmnialtizdvz`. Keep credentials in ignored `.env.local`; the service-role key is not needed by this app. Never expose privileged keys as `NEXT_PUBLIC_` variables.
 
 ## Persistence

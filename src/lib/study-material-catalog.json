@@ -1,0 +1,236 @@
+[
+  {
+    "id": "e294b2466b4112bc9e42",
+    "title": "2026 Curriculum - Volume 01 - Quantitative Methods",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 01 - Quantitative Methods.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 358,
+    "bytes": 8044804,
+    "sha256": "e294b2466b4112bc9e42d99c708458822b75d7f302e2f4a84f1a6e37b08ca702"
+  },
+  {
+    "id": "44a529c208a50bbd339d",
+    "title": "2026 Curriculum - Volume 02 - Economics",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 02 - Economics.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 280,
+    "bytes": 3288323,
+    "sha256": "44a529c208a50bbd339d33ef750f10339f715cfc56180757177f279c2c7d7d55"
+  },
+  {
+    "id": "7d0fe2e6f481e41297e7",
+    "title": "2026 Curriculum - Volume 03 - Corporate Issuers",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 03 - Corporate Issuers.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 250,
+    "bytes": 5613666,
+    "sha256": "7d0fe2e6f481e41297e7301fe7acd619f2292c1b112697e385591383cbd138fe"
+  },
+  {
+    "id": "554a7a04d98d1d5e071c",
+    "title": "2026 Curriculum - Volume 04 - Financial Statement Analysis",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 04 - Financial Statement Analysis.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 516,
+    "bytes": 3464626,
+    "sha256": "554a7a04d98d1d5e071c84116c6c51bcbb82a037a3ac5c065e944072d2c8fdee"
+  },
+  {
+    "id": "fb720a4c182ace73a2f3",
+    "title": "2026 Curriculum - Volume 05 - Equity Investments",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 05 - Equity Investments.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 398,
+    "bytes": 4171176,
+    "sha256": "fb720a4c182ace73a2f31fb9c02cbbc90632557ba225158caa7d9b8dd8a416a9"
+  },
+  {
+    "id": "601bbb8d133839bec836",
+    "title": "2026 Curriculum - Volume 06 - Fixed Income",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 06 - Fixed Income.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 546,
+    "bytes": 8598522,
+    "sha256": "601bbb8d133839bec83601fd664f54cb1c83b0d7be0269803a04486a7c5f004c"
+  },
+  {
+    "id": "a3b27309a63ecb9746b9",
+    "title": "2026 Curriculum - Volume 07 - Derivatives",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 07 - Derivatives.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 246,
+    "bytes": 4385058,
+    "sha256": "a3b27309a63ecb9746b9b691ee4bb163e0180a33a89107a1fc8796ef0b44666c"
+  },
+  {
+    "id": "f7f165d9f7385ca8e33e",
+    "title": "2026 Curriculum - Volume 08 - Alternative Investments",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 08 - Alternative Investments.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 220,
+    "bytes": 3197619,
+    "sha256": "f7f165d9f7385ca8e33eb88d8524f3d4d811e2a72240d43ef4a79e5c65c9d890"
+  },
+  {
+    "id": "ac0c68fd8686cbae7f1d",
+    "title": "2026 Curriculum - Volume 09 - Portfolio Management",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 09 - Portfolio Management.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 300,
+    "bytes": 3664233,
+    "sha256": "ac0c68fd8686cbae7f1d6ef3a04bd05bb0aed153fc38ebc35e9a89c0a78dc083"
+  },
+  {
+    "id": "e19017e082a17d1b6e8b",
+    "title": "2026 Curriculum - Volume 10 - Ethical and Professional Standards",
+    "filename": "CFA Level 1 - 2026 Curriculum - Volume 10 - Ethical and Professional Standards.pdf",
+    "category": "Official curriculum - 2026",
+    "pages": 302,
+    "bytes": 1929514,
+    "sha256": "e19017e082a17d1b6e8b74216970783aa654878a5a7a94c9fc30739c46429bb3"
+  },
+  {
+    "id": "e674c08e0bdd67ce45dd",
+    "title": "All Subjects - Last-Minute Meta Active Recall Notes",
+    "filename": "CFA Level 1 - All Subjects - Last-Minute Meta Active Recall Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 21,
+    "bytes": 144533,
+    "sha256": "e674c08e0bdd67ce45dd8e7ca000020103372e9776923f7f17f84af98951f034"
+  },
+  {
+    "id": "1065008f824d33ea1f13",
+    "title": "Quantitative Methods - Active Recall and Intuitive Notes",
+    "filename": "CFA Level 1 - Quantitative Methods - Active Recall and Intuitive Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 27,
+    "bytes": 159746,
+    "sha256": "1065008f824d33ea1f13569f6a5971f0b5bcd1ad2d952b30558fba3f1b998b96"
+  },
+  {
+    "id": "1897ad0825a929ac5f14",
+    "title": "Quantitative Methods - Hypothesis Testing - Intuitive Notes",
+    "filename": "CFA Level 1 - Quantitative Methods - Hypothesis Testing - Intuitive Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 11,
+    "bytes": 201305,
+    "sha256": "1897ad0825a929ac5f142ffc1fab5ca556afb364f07a6cc628d99cd94e7ab156"
+  },
+  {
+    "id": "7ba187027eb547fb6008",
+    "title": "Economics - Active Recall Notes",
+    "filename": "CFA Level 1 - Economics - Active Recall Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 20,
+    "bytes": 125667,
+    "sha256": "7ba187027eb547fb6008d526bbbeecbf092875dbb99c08e261903df1b36dbf05"
+  },
+  {
+    "id": "d53f9757b1bfa2e84853",
+    "title": "Corporate Issuers - Active Recall Shortnotes",
+    "filename": "CFA Level 1 - Corporate Issuers - Active Recall Shortnotes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 11,
+    "bytes": 460938,
+    "sha256": "d53f9757b1bfa2e84853f4cf3bf3e653771bdc1c5141b081fa55f2191d618d66"
+  },
+  {
+    "id": "556cef9e50db99a09b94",
+    "title": "Financial Statement Analysis - Intuitive Shortnotes",
+    "filename": "CFA Level 1 - Financial Statement Analysis - Intuitive Shortnotes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 26,
+    "bytes": 266781,
+    "sha256": "556cef9e50db99a09b94500b46735e817156c61df19095a8c1a93173be693ff3"
+  },
+  {
+    "id": "cb007f496aed2b067d43",
+    "title": "Equity Investments - Active Recall Notes",
+    "filename": "CFA Level 1 - Equity Investments - Active Recall Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 24,
+    "bytes": 327573,
+    "sha256": "cb007f496aed2b067d434ca1a3b1223efed581ab276e70c89170096d7ec05569"
+  },
+  {
+    "id": "6869bcceae96595f221d",
+    "title": "Fixed Income - Active Recall Shortnotes",
+    "filename": "CFA Level 1 - Fixed Income - Active Recall Shortnotes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 20,
+    "bytes": 250992,
+    "sha256": "6869bcceae96595f221dc56635b7dd04eb7d25ccd9efc20144285f134bcfbe51"
+  },
+  {
+    "id": "d46c40fe8871a4674726",
+    "title": "Derivatives - Active Recall Shortnotes",
+    "filename": "CFA Level 1 - Derivatives - Active Recall Shortnotes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 27,
+    "bytes": 311763,
+    "sha256": "d46c40fe8871a467472670924598116d1b7979371ff8c072a17c94c41947927d"
+  },
+  {
+    "id": "b946c5734b261ae0ea71",
+    "title": "Alternative Investments - Active Recall Notes",
+    "filename": "CFA Level 1 - Alternative Investments - Active Recall Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 19,
+    "bytes": 282621,
+    "sha256": "b946c5734b261ae0ea71b8d38a55cb17cc86561021835619a9c399823a479f5d"
+  },
+  {
+    "id": "797a1894b00d27de7b09",
+    "title": "Portfolio Management - Active Recall Notes",
+    "filename": "CFA Level 1 - Portfolio Management - Active Recall Notes.pdf",
+    "category": "AI summaries and recall notes",
+    "pages": 18,
+    "bytes": 116735,
+    "sha256": "797a1894b00d27de7b0939b7f7db1a1a649767312e20a57d40a486a5f5e1eb45"
+  },
+  {
+    "id": "010ce6c14d6e63c7fce2",
+    "title": "2026 Premium Practice Pack - Book 02 - Derivatives and Economics",
+    "filename": "CFA Level 1 - 2026 Premium Practice Pack - Book 02 - Derivatives and Economics.pdf",
+    "category": "Practice packs and question banks",
+    "pages": 68,
+    "bytes": 3076905,
+    "sha256": "010ce6c14d6e63c7fce2a30ed5c0b052479aa2e1a904e0d346f289350a6fc075"
+  },
+  {
+    "id": "eb8c17814c59a8d6a61b",
+    "title": "2026 Premium Practice Pack - Book 04 - Fixed Income and Financial Statement Analysis",
+    "filename": "CFA Level 1 - 2026 Premium Practice Pack - Book 04 - Fixed Income and Financial Statement Analysis.pdf",
+    "category": "Practice packs and question banks",
+    "pages": 140,
+    "bytes": 6570587,
+    "sha256": "eb8c17814c59a8d6a61b78ba8f2a4cb6beadaa58e2034c93a5669a9d57796107"
+  },
+  {
+    "id": "4619b0eecabd995c3b2a",
+    "title": "Fixed Income - 117 Practice Questions - AI Study Aid",
+    "filename": "CFA Level 1 - Fixed Income - 117 Practice Questions - AI Study Aid.pdf",
+    "category": "Practice packs and question banks",
+    "pages": 20,
+    "bytes": 114583,
+    "sha256": "4619b0eecabd995c3b2aa382ef089cc3929a03dfb1302042cf0941c85b8046d3"
+  },
+  {
+    "id": "5b6805690fa2bf3c2a50",
+    "title": "2024 - Schweser Secret Sauce",
+    "filename": "CFA Level 1 - 2024 - Schweser Secret Sauce.pdf",
+    "category": "Revision guides and formulas - 2024",
+    "pages": 258,
+    "bytes": 3243536,
+    "sha256": "5b6805690fa2bf3c2a509054ac35e8538f26631722d057e72cdda787c8cb42b4"
+  },
+  {
+    "id": "e8a0db4982bb0404e8ff",
+    "title": "2024 - Exam Formula Sheet",
+    "filename": "CFA Level 1 - 2024 - Exam Formula Sheet.pdf",
+    "category": "Revision guides and formulas - 2024",
+    "pages": 25,
+    "bytes": 1073301,
+    "sha256": "e8a0db4982bb0404e8ff1a92c45636f64a1954064e2d63bb35fc3c62e7cb1a29"
+  }
+]

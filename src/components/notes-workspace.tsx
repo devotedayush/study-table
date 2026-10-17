@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
+import Link from 'next/link'
 import {
   ArrowLeft,
   ArrowRight,
@@ -363,6 +364,7 @@ export function NotesWorkspace() {
           <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
             Find a syllabus topic, read the key ideas, then flip through the cards when you are ready.
           </p>
+          <Link href="/materials" className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary"><BookOpenText size={16} />Study materials · 26 PDFs<ChevronRight size={15} /></Link>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row lg:min-w-[420px] lg:justify-end">
           <label className="relative min-w-0 flex-1">
