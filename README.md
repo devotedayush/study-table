@@ -22,6 +22,8 @@ The flashcard tab also loads the signed-in **From recall PDFs** collection from 
 
 `node scripts/import-recall-flashcards.cjs --prepare` requires all three reviewed batches and validates source quotations against physical PDF pages, topic IDs, field limits, and duplicate prompts. `--import` additionally requires a server-only service key; it stages drafts, compares every saved field to the validated batch, and publishes the batch only after verification. Browser roles cannot write to this shared library. `node --test scripts/recall-card-validation.test.cjs` checks the import safeguards.
 
+The imported collection contains 530 cards across 10 subjects and 90 syllabus topics. Formulas use explicit `\\(...\\)` / `\\[...\\]` LaTeX, with prose and currency kept separate. `scripts/format-recall-flashcards.cjs` validates formatting-only agent batches with strict KaTeX, rejects changes to prompts, mappings and sources, and preserves every published card ID. Its `--import` option updates the full formatting set in one database request and verifies the saved answers before updating the local preview copy.
+
 The intended Supabase project is `sacqjhcvnmnialtizdvz`. Keep credentials in ignored `.env.local`; the service-role key is not needed by this app. Never expose privileged keys as `NEXT_PUBLIC_` variables.
 
 ## Persistence

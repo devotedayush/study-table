@@ -665,7 +665,7 @@ export function NotesWorkspace() {
                               {card.source
                                 ? <InlineQuestionText text={card.back} className="mt-2 block whitespace-pre-wrap break-words text-sm leading-6 text-muted-foreground" />
                                 : <MathText text={card.back} className="mt-2 text-sm leading-6 text-muted-foreground" />}
-                              {card.hint ? <p className="mt-3 text-sm leading-6 text-foreground"><span className="font-semibold">Memory cue · </span>{card.hint}</p> : null}
+                              {card.hint ? <p className="mt-3 text-sm leading-6 text-foreground"><span className="font-semibold">Memory cue · </span>{card.source ? <InlineQuestionText text={card.hint} /> : card.hint}</p> : null}
                               {card.source ? <a href={`/api/materials/${card.source.id}#page=${card.source.page}`} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs text-primary underline">AI recall source PDF, page {card.source.page}</a> : null}
                             </article>
                           ))}
@@ -747,7 +747,7 @@ export function NotesWorkspace() {
                       ) : (
                         <p className="mt-3 font-heading text-2xl font-semibold leading-snug text-foreground sm:text-4xl">{activeCard.front}</p>
                       )}
-                      {isFlipped && activeCard.hint ? <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground"><span className="font-semibold text-foreground">Memory cue · </span>{activeCard.hint}</p> : null}
+                      {isFlipped && activeCard.hint ? <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground"><span className="font-semibold text-foreground">Memory cue · </span>{activeCard.source ? <InlineQuestionText text={activeCard.hint} /> : activeCard.hint}</p> : null}
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {activeCard.tags.map((tag) => <span key={tag} className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] text-muted-foreground">{tag}</span>)}
