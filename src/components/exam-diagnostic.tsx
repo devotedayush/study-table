@@ -8,7 +8,7 @@ import { cfaLevel1Syllabus } from '@/lib/cfa-data'
 import { cn } from '@/lib/utils'
 
 type AnalysisUiState = {
-  status: 'loading' | 'ready' | 'error'
+  status: 'loading' | 'ready' | 'error' | 'paused'
   analysis?: ExamAIAnalysis
   model?: string
   reasoning?: string
@@ -30,6 +30,7 @@ export function ExamDiagnosticPanel({
   diagnostic,
   analysisState,
   onRetryAnalysis,
+  onCheckAnalysis,
   onTopicPractice,
   onFreshPractice,
   isGeneratingPractice,
@@ -39,12 +40,14 @@ export function ExamDiagnosticPanel({
   diagnostic: ExamDiagnostic
   analysisState?: AnalysisUiState
   onRetryAnalysis: () => void
+  onCheckAnalysis: () => void
   onTopicPractice: (topic: TopicDiagnostic) => void
   onFreshPractice: (focus: ExamAIAnalysis['focusAreas'][number]) => void
   isGeneratingPractice: boolean
   freshPracticeError?: string | null
 }) {
-  const rulesSummary = analysisState?.status === 'ready' && analysisState.analysis?.generatedBy === 'rules'
+  const savedAnalysis = analysisState?.analysis ?? attempt.analysis
+  const rulesSummary = savedAnalysis?.generatedBy === 'rules'
   const [expandedTopics, setExpandedTopics] = useState(false)
   const topics = expandedTopics ? diagnostic.weakTopics : diagnostic.weakTopics.slice(0, 4)
   const topicMap = new Map(diagnostic.topicPerformance.map((topic) => [`${topic.subjectId}:${topic.topicId}`, topic]))
@@ -102,13 +105,14 @@ export function ExamDiagnosticPanel({
       <div className="px-4 py-4 sm:px-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex items-start gap-2.5"><span className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-lg bg-violet-100 text-violet-800"><Sparkles size={15} /></span><div><h3 className="text-sm font-semibold text-slate-950">{rulesSummary ? 'Result summary' : 'AI explanation'}</h3><p className="mt-0.5 text-[11px] text-slate-500">{rulesSummary ? 'This summary is based on your verified answers and time in this attempt.' : 'The topic and answer counts above are calculated locally from this attempt.'}</p></div></div>
-          {analysisState?.status === 'ready' && rulesSummary ? <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-500">Result summary</span> : analysisState?.status === 'ready' && analysisState.model ? <span className="text-[10px] text-slate-400">{analysisState.model}{analysisState.reasoning ? ` · ${analysisState.reasoning}` : ''}</span> : null}
+          <button type="button" onClick={onRetryAnalysis} disabled={analysisState?.status === 'loading'} className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-[11px] font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"><RotateCcw size={12} />Refresh analysis</button>
         </div>
-        {analysisState?.status === 'loading' ? <p className="mt-3 flex items-center gap-2 text-xs text-slate-600"><LoaderCircle size={15} className="animate-spin text-blue-700" />Reviewing your attempt… You can leave and reopen these results to continue.</p> : null}
-        {analysisState?.status === 'error' ? <div role="status" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-3"><p className="flex items-start gap-2 text-xs leading-5 text-amber-900"><AlertCircle size={15} className="mt-0.5 shrink-0" />{analysisState.error || 'AI analysis could not be completed. Your answer-based analysis is available above.'}</p><button type="button" onClick={onRetryAnalysis} className="rounded-lg bg-white px-3 py-2 text-[11px] font-semibold text-slate-800 ring-1 ring-amber-200 hover:bg-amber-100">Retry AI analysis</button></div> : null}
-        {analysisState?.status === 'ready' && analysisState.analysis ? <div className="mt-3 space-y-3">
-          <p className="rounded-xl border border-violet-100 bg-violet-50/60 px-3.5 py-3 text-sm leading-6 text-slate-700">{analysisState.analysis.summary}</p>
-          {analysisState.analysis.focusAreas.slice(0, 5).map((focus, index) => {
+        {savedAnalysis ? <p className="mt-2 text-[11px] text-slate-500">Saved analysis. A new report is generated only when you click Refresh analysis.</p> : null}
+        {analysisState?.status === 'loading' ? <p role="status" className="mt-3 flex items-center gap-2 text-xs text-slate-600"><LoaderCircle size={15} className="animate-spin text-blue-700" />{savedAnalysis ? 'Refreshing analysis… Your saved report remains below.' : 'Preparing analysis… The report will be saved when complete.'}</p> : null}
+        {analysisState?.status === 'error' || analysisState?.status === 'paused' ? <div role="status" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-3"><p className="flex items-start gap-2 text-xs leading-5 text-amber-900"><AlertCircle size={15} className="mt-0.5 shrink-0" />{analysisState.error || 'AI analysis could not be completed. Your answer-based analysis is available above.'}</p><button type="button" onClick={onCheckAnalysis} className="rounded-lg bg-white px-3 py-2 text-[11px] font-semibold text-slate-800 ring-1 ring-amber-200 hover:bg-amber-100">Check status</button></div> : null}
+        {savedAnalysis ? <div className="mt-3 space-y-3">
+          <p className="rounded-xl border border-violet-100 bg-violet-50/60 px-3.5 py-3 text-sm leading-6 text-slate-700">{savedAnalysis.summary}</p>
+          {savedAnalysis.focusAreas.slice(0, 5).map((focus, index) => {
             const topic = topicMap.get(`${focus.subjectId}:${focus.topicId}`)
             const cited = focus.evidenceQuestionIds.slice(0, 4).map((id) => questionReferences.get(id)).filter((reference): reference is { number: number; session: number | undefined } => reference !== undefined)
             return <article key={`${focus.subjectId}-${focus.topicId}-${index}`} className="rounded-xl border border-slate-200 p-3.5">

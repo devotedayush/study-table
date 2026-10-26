@@ -1,15 +1,15 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import type { FeedbackContext } from './exam-feedback'
 
-type FeedbackJob = { responseId: string; owner: string; expiresAt: number; context: FeedbackContext; cacheKey?: string }
+type FeedbackJob = { responseId: string; owner: string; expiresAt: number; context: FeedbackContext; cacheKey?: string; attemptId?: string }
 const LIFETIME_MS = 9 * 60 * 1000
 
 function signature(body: string, secret: string) {
   return createHmac('sha256', secret).update(`exam-feedback:${body}`).digest('base64url')
 }
 
-export function signFeedbackJob(responseId: string, owner: string, context: FeedbackContext, secret: string, cacheKey?: string) {
-  const body = Buffer.from(JSON.stringify({ responseId, owner, context, cacheKey, expiresAt: Date.now() + LIFETIME_MS })).toString('base64url')
+export function signFeedbackJob(responseId: string, owner: string, context: FeedbackContext, secret: string, cacheKey?: string, attemptId?: string) {
+  const body = Buffer.from(JSON.stringify({ responseId, owner, context, cacheKey, attemptId, expiresAt: Date.now() + LIFETIME_MS })).toString('base64url')
   return `${body}.${signature(body, secret)}`
 }
 

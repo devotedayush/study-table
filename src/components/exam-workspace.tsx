@@ -135,7 +135,7 @@ type ImportedPaperResponse = {
 }
 
 type AnalysisUiState = {
-  status: 'loading' | 'ready' | 'error'
+  status: 'loading' | 'ready' | 'error' | 'paused'
   analysis?: ExamAIAnalysis
   model?: string
   reasoning?: string
@@ -1027,34 +1027,29 @@ export function ExamWorkspace() {
     return () => { active = false }
   }, [attempts, loadedScopeKey, ready, scopeKey, session?.id, session?.questions, updateSession])
 
-  const requestAttemptAnalysis = useCallback(async (attempt: ExamAttempt) => {
-    if (requestedAnalysisIds.current.has(attempt.id)) return
+  const requestAttemptAnalysis = useCallback(async (attempt: ExamAttempt, refresh = false, checkOnly = false) => {
+    if (analysisControllers.current.has(attempt.id)) return
     requestedAnalysisIds.current.add(attempt.id)
-    setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'loading' } }))
+    setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'loading', analysis: attempt.analysis } }))
     const controller = new AbortController()
     analysisControllers.current.set(attempt.id, controller)
     try {
-      const data = await requestExamFeedback(attempt, { signal: controller.signal, scope: scopeKey })
+      const data = await requestExamFeedback(attempt, { signal: controller.signal, scope: scopeKey, refresh, checkOnly })
       if (controller.signal.aborted) return
-      const updatedAttempt: ExamAttempt = { ...attempt, analysis: data.analysis }
+      const latest = latestAttemptsRef.current.find((saved) => saved.id === attempt.id) ?? attempt
+      const updatedAttempt: ExamAttempt = { ...latest, analysis: data.analysis }
       saveExamAttempt(updatedAttempt)
       setReviewOverride((current) => current?.id === attempt.id ? updatedAttempt : current)
       setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'ready', analysis: data.analysis, model: data.model, reasoning: typeof data.reasoning === 'string' ? data.reasoning : undefined } }))
     } catch (error) {
       if (controller.signal.aborted) return
-      requestedAnalysisIds.current.delete(attempt.id)
-      setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'error', error: error instanceof Error ? error.message : 'AI topic analysis is temporarily unavailable.' } }))
+      setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: error instanceof Error && error.name === 'FeedbackPendingError' ? 'paused' : 'error', analysis: attempt.analysis, error: error instanceof Error ? error.message : 'AI topic analysis is temporarily unavailable.' } }))
     } finally { if (analysisControllers.current.get(attempt.id) === controller) analysisControllers.current.delete(attempt.id) }
   }, [scopeKey])
 
   useEffect(() => {
     if (view !== 'review' || !activeReview) return
-    if (activeReview.analysis) {
-      setAnalysisStates((current) => current[activeReview.id]?.status === 'ready'
-        ? current
-        : { ...current, [activeReview.id]: { status: 'ready', analysis: activeReview.analysis } })
-      return
-    }
+    if (activeReview.analysis || requestedAnalysisIds.current.has(activeReview.id)) return
     void requestAttemptAnalysis(activeReview)
   }, [view, activeReview, requestAttemptAnalysis])
 
@@ -1560,7 +1555,7 @@ export function ExamWorkspace() {
   const attemptCorrectCount = activeReview ? countCorrectAnswers(activeReview) : 0
   const scoredQuestionCount = activeReview ? countScoredQuestions(activeReview) : 0
   const deterministicDiagnostic = useMemo<ExamDiagnostic | null>(() => activeReview ? buildExamDiagnostic(activeReview) : null, [activeReview])
-  const activeAnalysisState = activeReview ? analysisStates[activeReview.id] : undefined
+  const activeAnalysisState = activeReview ? analysisStates[activeReview.id] ?? (activeReview.analysis ? { status: 'ready' as const, analysis: activeReview.analysis } : undefined) : undefined
   const reviewIndices = useMemo(() => {
     if (!activeReview) return [] as number[]
     const query = searchReview.trim().toLowerCase()
@@ -1752,9 +1747,9 @@ export function ExamWorkspace() {
           diagnostic={deterministicDiagnostic}
           analysisState={activeAnalysisState}
           onRetryAnalysis={() => {
-            requestedAnalysisIds.current.delete(activeReview.id)
-            void requestAttemptAnalysis(activeReview)
+            void requestAttemptAnalysis(activeReview, true)
           }}
+          onCheckAnalysis={() => void requestAttemptAnalysis(activeReview, false, true)}
           onTopicPractice={startTopicDrill}
           onFreshPractice={(focus) => void generateAndStart('chapter', 5, {
             subjectId: focus.subjectId,
