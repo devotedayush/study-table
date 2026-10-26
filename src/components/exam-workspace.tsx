@@ -36,6 +36,7 @@ import { cfaLevel1Syllabus } from '@/lib/cfa-data'
 import { mapAssessmentSet, type AssessmentSet } from '@/lib/assessment-bank'
 import { buildExamDiagnostic, type ExamAIAnalysis, type ExamDiagnostic, type TopicDiagnostic } from '@/lib/exam-analysis'
 import { ExamDiagnosticPanel } from '@/components/exam-diagnostic'
+import { requestExamFeedback } from '@/lib/ai/feedback-client'
 import { useExamFocus } from '@/components/app-shell'
 import { createClient } from '@/lib/supabase/browser'
 import { cn } from '@/lib/utils'
@@ -707,6 +708,13 @@ export function ExamWorkspace() {
   const [nativeLoadErrors, setNativeLoadErrors] = useState<string[]>([])
   const [analysisStates, setAnalysisStates] = useState<Record<string, AnalysisUiState>>({})
   const requestedAnalysisIds = useRef(new Set<string>())
+  const analysisControllers = useRef(new Map<string, AbortController>())
+  useEffect(() => {
+    const controllers = analysisControllers.current
+    requestedAnalysisIds.current.clear()
+    setAnalysisStates({})
+    return () => { controllers.forEach(controller => controller.abort()); controllers.clear() }
+  }, [scopeKey])
   const [confirmSubmit, setConfirmSubmit] = useState(false)
   const [confirmExit, setConfirmExit] = useState(false)
   const [loadedQuestionOpen, setLoadedQuestionOpen] = useState<number | null>(null)
@@ -1023,25 +1031,21 @@ export function ExamWorkspace() {
     if (requestedAnalysisIds.current.has(attempt.id)) return
     requestedAnalysisIds.current.add(attempt.id)
     setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'loading' } }))
+    const controller = new AbortController()
+    analysisControllers.current.set(attempt.id, controller)
     try {
-      const response = await fetch('/api/exam/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ attempt }),
-      })
-      const data = await response.json() as { analysis?: ExamAIAnalysis; model?: string; reasoning?: string; error?: string }
-      if (!response.ok || !data.analysis || typeof data.analysis.summary !== 'string' || !Array.isArray(data.analysis.focusAreas)) {
-        throw new Error(data.error ?? 'AI topic analysis is temporarily unavailable.')
-      }
+      const data = await requestExamFeedback(attempt, { signal: controller.signal, scope: scopeKey })
+      if (controller.signal.aborted) return
       const updatedAttempt: ExamAttempt = { ...attempt, analysis: data.analysis }
       saveExamAttempt(updatedAttempt)
       setReviewOverride((current) => current?.id === attempt.id ? updatedAttempt : current)
       setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'ready', analysis: data.analysis, model: data.model, reasoning: typeof data.reasoning === 'string' ? data.reasoning : undefined } }))
     } catch (error) {
+      if (controller.signal.aborted) return
       requestedAnalysisIds.current.delete(attempt.id)
       setAnalysisStates((current) => ({ ...current, [attempt.id]: { status: 'error', error: error instanceof Error ? error.message : 'AI topic analysis is temporarily unavailable.' } }))
-    }
-  }, [])
+    } finally { if (analysisControllers.current.get(attempt.id) === controller) analysisControllers.current.delete(attempt.id) }
+  }, [scopeKey])
 
   useEffect(() => {
     if (view !== 'review' || !activeReview) return
