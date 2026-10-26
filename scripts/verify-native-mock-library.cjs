@@ -122,6 +122,19 @@ function hasNumericMismatch(left, right) {
   return !left.some((value) => rightSet.has(value))
 }
 
+function validateDisplayText(text, label) {
+  if (typeof text !== 'string') return
+  if (/\[\s*text cut off in supplied scan\s*\]/i.test(text)) {
+    issues.push(`${label}: learner-facing text contains an unresolved scan cutoff`)
+  }
+  if (/^\s*Question\s+\d+\b/i.test(text)) {
+    issues.push(`${label}: printed question heading duplicates the exam navigator`)
+  }
+  if (/Mahakali\s+Book\s+Centre/i.test(text)) {
+    issues.push(`${label}: scan imprint appears in learner-facing text`)
+  }
+}
+
 function validateQuestion(question, mockId, seenIds) {
   const label = `${mockId} ${question.id ?? '(missing id)'}`
   if (typeof question.id !== 'string' || seenIds.has(question.id)) issues.push(`${label}: missing or duplicate question id`)
@@ -131,6 +144,10 @@ function validateQuestion(question, mockId, seenIds) {
   }
   if (typeof question.prompt === 'string' && question.prompt.length > 10_000) issues.push(`${label}: prompt exceeds the analysis API limit`)
   if (typeof question.rationale === 'string' && question.rationale.length > 10_000) issues.push(`${label}: rationale exceeds the analysis API limit`)
+  validateDisplayText(question.prompt, `${label} prompt`)
+  for (const [index, option] of (Array.isArray(question.options) ? question.options : []).entries()) {
+    validateDisplayText(option, `${label} option ${index + 1}`)
+  }
 
   if (!Array.isArray(question.options) || question.options.length !== 3 || question.options.some((item) => typeof item !== 'string' || !item.trim())) {
     issues.push(`${label}: expected exactly three nonempty answer choices`)
@@ -171,6 +188,8 @@ function validateQuestion(question, mockId, seenIds) {
     blocks.forEach((block, index) => {
       if (!block || typeof block !== 'object') return
       const blockLabel = `${label} block ${index + 1}`
+      // Inspect the actual rendered blocks as well as the plain-text prompt.
+      for (const text of textFields(block)) validateDisplayText(text, blockLabel)
       const isEmptyArray = (value) => Array.isArray(value) && value.length === 0
       if (block.type === 'paragraph' || block.type === 'math') {
         if (!isEmptyArray(block.headers) || !isEmptyArray(block.rows) || !isEmptyArray(block.items)) issues.push(`${blockLabel}: unused block fields must be empty`)
@@ -181,6 +200,9 @@ function validateQuestion(question, mockId, seenIds) {
       }
       if (typeof block.text === 'string' && block.text.length > 10_000) issues.push(`${blockLabel}: text exceeds the analysis API limit`)
       if (block.type === 'table') {
+        if (Array.isArray(block.rows) && block.rows.some((row) => Array.isArray(row) && row.length > 0 && row.every((cell) => typeof cell === 'string' && !cell.trim()))) {
+          issues.push(`${blockLabel}: empty table spacer row should be removed`)
+        }
         if (Array.isArray(block.headers) && (block.headers.length > 32 || block.headers.some((cell) => typeof cell === 'string' && cell.length > 1_500))) issues.push(`${blockLabel}: table headers exceed the analysis API limits`)
         if (Array.isArray(block.rows) && (block.rows.length > 200 || block.rows.some((row) => Array.isArray(row) && (row.length > 32 || row.some((cell) => typeof cell === 'string' && cell.length > 1_500))))) issues.push(`${blockLabel}: table cells exceed the analysis API limits`)
       }
