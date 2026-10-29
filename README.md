@@ -6,6 +6,8 @@ A low-friction CFA Level I practice workspace with three screens:
 - **Notes & Flashcards** (`/notes`): subject notes, downloadable study PDFs and flashcards. Opening, flipping and practising records activity automatically.
 - **Mocks & Assessments** (`/mocks`): named question banks, quick practice, two-session Level I mocks, uploaded sets, on-demand AI questions, saved attempts and mistakes retrieval.
 
+Completed attempt reviews have a **Download transcript** button. It generates an A4 PDF on the device with the full question paper in attempt order, all choices, the submitted and verified correct options, per-question results, explanations, flags and a score summary. Review search/category filters do not limit the export. Unanswered and unverified-key questions remain distinct; unverified keys are never marked correct. Native tables, lists and vector LaTeX are preserved. Source crops are included for incomplete/source-check questions when available, with explicit warnings if a crop cannot be fetched. The lazy-loaded PDF engine uses embedded fonts and does not upload the attempt or wait for AI analysis. Regression checks: `node --test src/lib/exam-transcript.test.mjs`.
+
 ## Local development
 
 ```sh

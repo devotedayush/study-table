@@ -64,3 +64,6 @@ __pycache__/
 
 # Source text, agent batches, and validated private recall flashcards
 /data/recall-flashcards/
+
+# Private PDF export verification files
+/tmp/transcript-qa/
