@@ -10,6 +10,8 @@ Completed attempt reviews have a **Download transcript** button. It generates an
 
 ## Local development
 
+Imported mocks also support shared, source-bound **intuitive explanations** in completed reviews: the governing idea, worked reasoning, why every option works or fails, and memory aids. Saved attempts can receive these explanations without changing their answers or scores. The same sections appear in transcript downloads. See [mock explanation authoring and publishing](docs/mock-explanations.md).
+
 ```sh
 npm ci
 cp .env.example .env.local

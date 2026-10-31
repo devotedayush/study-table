@@ -10,6 +10,7 @@ import 'mathjax-full/js/input/tex/boldsymbol/BoldsymbolConfiguration.js'
 import { normalizeQuestionBlocks } from './question-content'
 import { buildExamTranscript, transcriptFilename, type TranscriptStatus } from './exam-transcript'
 import type { ExamAttempt } from './learning-store'
+import { normalizeMockExplanation } from './mock-explanation'
 
 const adaptor = liteAdaptor()
 RegisterHTMLHandler(adaptor)
@@ -116,6 +117,7 @@ export function buildTranscriptPdfDefinition(attempt: ExamAttempt, sourceImages:
   for (const item of transcript.questions) {
     const questionStart = content.length
     const { question } = item
+    const explanation = normalizeMockExplanation(question.explanation, question)
     const theme = palette[item.status]
     const original = question.sourceQuestionNumber ? ` | Original Q${question.sourceQuestionNumber}` : ''
     const session = question.sourceSession ? ` | Session ${question.sourceSession}` : ''
@@ -131,18 +133,27 @@ export function buildTranscriptPdfDefinition(attempt: ExamAttempt, sourceImages:
     const optionRows: TableCell[][] = question.options.map((option, index) => {
       const selected = item.submittedIndex === index
       const correct = item.correctIndex === index
-      const color = correct ? palette.Correct.color : selected && item.status === 'Incorrect' ? palette.Incorrect.color : '#263b49'
-      const fillColor = correct ? palette.Correct.fill : selected ? theme.fill : '#ffffff'
+      const keyTheme = explanation?.caution ? palette['Not scored'] : palette.Correct
+      const color = correct ? keyTheme.color : selected && item.status === 'Incorrect' ? palette.Incorrect.color : '#263b49'
+      const fillColor = correct ? keyTheme.fill : selected ? theme.fill : '#ffffff'
       return [
         { text: `${String.fromCharCode(65 + index)}.`, bold: true, color, fillColor, margin: [4, 6, 0, 6] },
-        { stack: [...(selected || correct ? [{ text: [selected && 'YOUR ANSWER', correct && 'CORRECT ANSWER'].filter(Boolean).join(' / '), bold: true, color, fontSize: 8, margin: [0, 0, 0, 4] } as Content] : []), ...rich(option, WIDTH - 56)], fillColor, margin: [4, 6, 4, 6] },
+        { stack: [...(selected || correct ? [{ text: [selected && 'YOUR ANSWER', correct && (explanation?.caution ? 'SOURCE-KEY ANSWER (SEE CAUTION)' : 'CORRECT ANSWER')].filter(Boolean).join(' / '), bold: true, color, fontSize: 8, margin: [0, 0, 0, 4] } as Content] : []), ...rich(option, WIDTH - 56)], fillColor, margin: [4, 6, 4, 6] },
       ]
     })
     content.push(
       { table: { widths: [24, '*'], body: optionRows }, layout: { hLineColor: () => '#d9e0e7', vLineWidth: () => 0, hLineWidth: () => 0.5 }, margin: [0, 5, 0, 7] },
-      { text: `Your answer: ${item.submittedIndex === null ? 'No answer submitted' : String.fromCharCode(65 + item.submittedIndex)}  |  Correct answer: ${item.correctIndex === null ? 'Unverified / not available' : String.fromCharCode(65 + item.correctIndex)}${item.flagged ? '  |  Flagged for review' : ''}`, fontSize: 9, bold: true, color: theme.color, margin: [0, 0, 0, 7] },
+      { text: `Your answer: ${item.submittedIndex === null ? 'No answer submitted' : String.fromCharCode(65 + item.submittedIndex)}  |  ${explanation?.caution ? 'Source-key answer (see caution)' : 'Correct answer'}: ${item.correctIndex === null ? 'Unverified / not available' : String.fromCharCode(65 + item.correctIndex)}${item.flagged ? '  |  Flagged for review' : ''}`, fontSize: 9, bold: true, color: theme.color, margin: [0, 0, 0, 7] },
     )
-    if (item.correctIndex !== null && question.rationale) content.push({ text: 'EXPLANATION', bold: true, fontSize: 8, color: '#416176', margin: [0, 1, 0, 4] }, ...rich(question.rationale))
+    if (explanation) {
+      const section = (title: string, text: string) => content.push({ text: title, bold: true, fontSize: 9, color: '#416176', margin: [0, 8, 0, 4] }, ...rich(text))
+      if (explanation.caution) section('SOURCE / ANSWER-KEY CAUTION', explanation.caution)
+      section('THE INTUITION', explanation.intuition)
+      section('WORK IT THROUGH', explanation.reasoning)
+      for (const option of explanation.options) section(`OPTION ${String.fromCharCode(65 + option.index)}${item.correctIndex === option.index ? ' (SOURCE-KEY ANSWER)' : ''}`, option.explanation)
+      if (explanation.learningHack) section('REMEMBER IT', explanation.learningHack)
+      content.push({ text: 'AI-authored study explanation; source cautions apply where shown.', fontSize: 8, color: '#687786', margin: [0, 5, 0, 4] })
+    } else if (item.correctIndex !== null && question.rationale) content.push({ text: 'EXPLANATION', bold: true, fontSize: 8, color: '#416176', margin: [0, 1, 0, 4] }, ...rich(question.rationale))
     if (item.correctIndex === null) content.push({ text: question.unscoredReason || 'The answer key is unavailable or unverified; this question is excluded from the score.', color: '#79571c', fontSize: 9, margin: [0, 0, 0, 6] })
     content.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: WIDTH, y2: 0, lineWidth: 0.6, lineColor: '#d9e0e7' }], margin: [0, 8, 0, 5] })
     const textLength = [question.prompt, ...question.options, question.rationale, ...normalizeQuestionBlocks(question.content).map(block => block.text)].join(' ').length
@@ -157,7 +168,7 @@ export function buildTranscriptPdfDefinition(attempt: ExamAttempt, sourceImages:
     const nodes = content.slice(questionStart)
     // Keep short questions with their complete option list. Long questions and
     // tables remain breakable so no content can be clipped by an oversized block.
-    if (textLength <= 650 && !question.content?.some(block => block.type === 'table') && !images.length && formulaHeight(nodes) <= 120) {
+    if (!explanation && textLength <= 650 && !question.content?.some(block => block.type === 'table') && !images.length && formulaHeight(nodes) <= 120) {
       content.splice(questionStart, nodes.length, { stack: nodes, unbreakable: true })
     }
   }

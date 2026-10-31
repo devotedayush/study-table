@@ -67,3 +67,7 @@ __pycache__/
 
 # Private PDF export verification files
 /tmp/transcript-qa/
+
+# Private question-by-question explanations and publication checks
+/data/mock-explanations/
+/tmp/explanation-qa/

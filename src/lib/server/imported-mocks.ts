@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { createClient } from '@/lib/supabase/server'
 import type { ExamQuestion } from '@/lib/learning-store'
+import { attachMockExplanations } from './mock-explanations'
 
 export type ImportedMock = {
   id: string; title: string; questionCount: number; scoredQuestionCount?: number; unverifiedQuestionCount?: number; sessionCounts: [number, number]
@@ -40,7 +41,9 @@ export async function readMockFile(request: Request, objectPath: string) {
 }
 export async function readImportedPaper(request: Request, id: string): Promise<ImportedPaper> {
   if (!/^mock-[1-6]$/.test(id)) throw new MockLibraryError('Paper not found.', 404)
-  return JSON.parse((await readMockFile(request, `${id}/paper.json`)).toString('utf8')) as ImportedPaper
+  const paper = JSON.parse((await readMockFile(request, `${id}/paper.json`)).toString('utf8')) as ImportedPaper
+  paper.questions = await attachMockExplanations(paper.questions, id, isLocalStudyRequest(request))
+  return paper
 }
 export function mockError(error: unknown) {
   return Response.json({ error: error instanceof MockLibraryError ? error.message : 'Could not open this paper.' }, { status: error instanceof MockLibraryError ? error.status : 500 })

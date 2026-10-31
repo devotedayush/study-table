@@ -37,6 +37,8 @@ import { mapAssessmentSet, type AssessmentSet } from '@/lib/assessment-bank'
 import { buildExamDiagnostic, type ExamAIAnalysis, type ExamDiagnostic, type TopicDiagnostic } from '@/lib/exam-analysis'
 import { ExamDiagnosticPanel } from '@/components/exam-diagnostic'
 import { ExamTranscriptDownload } from '@/components/exam-transcript-download'
+import { MockQuestionExplanation } from '@/components/mock-question-explanation'
+import { mergeMockExplanation } from '@/lib/mock-explanation'
 import { requestExamFeedback } from '@/lib/ai/feedback-client'
 import { useExamFocus } from '@/components/app-shell'
 import { createClient } from '@/lib/supabase/browser'
@@ -153,7 +155,7 @@ function isAvailableNativeQuestion(question: ExamQuestion) {
     && validateQuestionBlocks(question.content).length === 0
 }
 
-function mergeNativeQuestion(question: ExamQuestion, latest: unknown): ExamQuestion {
+function mergeNativeQuestionContent(question: ExamQuestion, latest: unknown): ExamQuestion {
   if (!latest || typeof latest !== 'object') return question
   const candidate = latest as ExamQuestion
   if (candidate.id !== question.id || !isAvailableNativeQuestion(candidate)) return question
@@ -176,6 +178,14 @@ function mergeNativeQuestion(question: ExamQuestion, latest: unknown): ExamQuest
     && JSON.stringify(question.nativeTranscription?.notes ?? []) === JSON.stringify(next.nativeTranscription?.notes ?? [])
   ) return question
   return next
+}
+
+function mergeNativeQuestion(question: ExamQuestion, latest: unknown): ExamQuestion {
+  const native = mergeNativeQuestionContent(question, latest)
+  if (!latest || typeof latest !== 'object') return native
+  // A source-text refresh must not leave commentary tied to an older question.
+  const next = native === question ? native : { ...native, explanation: undefined }
+  return mergeMockExplanation(next, latest as ExamQuestion)
 }
 
 function countCorrectAnswers(attempt: ExamAttempt) {
@@ -1566,7 +1576,7 @@ export function ExamWorkspace() {
       if (reviewFilter === 'incorrect' && (!isAnswerVerified(question) || answer === question.correctIndex)) return false
       if (reviewFilter === 'unanswered' && answer !== null) return false
       if (!query) return true
-      const searchText = [question.prompt, question.subject, question.topic, question.rationale, ...question.options].filter(Boolean).join(' ').toLowerCase()
+      const searchText = [question.prompt, question.subject, question.topic, question.rationale, question.explanation?.intuition, question.explanation?.reasoning, question.explanation?.learningHack, ...(question.explanation?.options.map(option => option.explanation) ?? []), ...question.options].filter(Boolean).join(' ').toLowerCase()
       return searchText.includes(query)
     })
   }, [activeReview, searchReview, reviewFilter])
@@ -1764,7 +1774,7 @@ export function ExamWorkspace() {
 
         <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
           <div className="flex flex-col gap-3 border-b border-slate-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
-            <div><h2 className="text-lg font-semibold text-slate-950">Answer review</h2><p className="mt-1 text-xs text-slate-500">Correct answers and rationales are shown after submission.</p></div>
+            <div><h2 className="text-lg font-semibold text-slate-950">Answer review</h2><p className="mt-1 text-xs text-slate-500">Learn the intuition, work through the answer, and understand every option after submission.</p></div>
             <div className="flex flex-col gap-2 sm:flex-row">
               <label className="relative"><Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" /><input value={searchReview} onChange={(event) => setSearchReview(event.target.value)} placeholder="Search questions or rationale" className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm outline-none focus:border-blue-600 sm:w-64" /></label>
               <select value={reviewFilter} onChange={(event) => setReviewFilter(event.target.value as typeof reviewFilter)} className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none focus:border-blue-600"><option value="all">All questions</option><option value="incorrect">Incorrect or unanswered</option><option value="unanswered">Unanswered</option></select>
@@ -1792,8 +1802,8 @@ export function ExamWorkspace() {
                         {question.nativeTranscription?.status === 'needs_review' ? <details className="mb-3 text-xs text-amber-800"><summary className="cursor-pointer font-semibold">Question text needs a source check</summary>{question.nativeTranscription.notes.length ? <ul className="mt-2 list-disc space-y-1 pl-5">{question.nativeTranscription.notes.map((note, noteIndex) => <li key={noteIndex}>{note}</li>)}</ul> : <p className="mt-2">No transcription notes were included.</p>}</details> : null}
                         {Array.isArray(question.content) && question.content.length > 0 ? <QuestionContent blocks={question.content} /> : null}
                         {sourceAssets.length > 0 ? <details className="my-3 rounded border border-slate-200 bg-white px-3 py-2"><summary className="cursor-pointer text-xs font-semibold text-slate-700">View source crop</summary><div className="mt-2 flex flex-wrap gap-3">{sourceAssets.map((src, imageIndex) => <a key={src} href={src} target="_blank" rel="noreferrer" className="text-xs font-semibold text-[#456d22] underline">Source crop {imageIndex + 1} <ExternalLink size={12} className="inline" /></a>)}</div></details> : null}
-                        <div className="space-y-2">{question.options.map((option, optionIndex) => <div key={optionIndex} className={cn('flex items-start gap-2 rounded border px-3 py-2.5 text-sm leading-6', verified && optionIndex === question.correctIndex ? 'border-emerald-200 bg-emerald-50 text-emerald-900' : verified && optionIndex === answer ? 'border-rose-200 bg-rose-50 text-rose-900' : 'border-slate-200 bg-white text-slate-600')}><span className="font-bold">{String.fromCharCode(65 + optionIndex)}.</span><span className="flex-1"><InlineQuestionText text={option} /></span>{verified && optionIndex === question.correctIndex ? <Check size={15} className="mt-1 shrink-0" /> : verified && optionIndex === answer ? <X size={15} className="mt-1 shrink-0" /> : null}</div>)}</div>
-                        {verified ? <><div className="mt-4 rounded border border-blue-100 bg-blue-50 px-4 py-3"><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-800">Rationale</p><p className="mt-1.5 text-sm leading-6 text-slate-700"><InlineQuestionText text={question.rationale || 'No rationale was included with this question.'} /></p></div><p className="mt-3 text-xs text-slate-500">Your answer: <span className="font-semibold text-slate-700">{answer === null ? 'No answer' : <><InlineQuestionText text={`${String.fromCharCode(65 + answer)}. ${question.options[answer]}`} /></>}</span> · Correct: <span className="font-semibold text-slate-700"><InlineQuestionText text={`${String.fromCharCode(65 + question.correctIndex)}. ${question.options[question.correctIndex]}`} /></span></p></> : <p className="mt-3 rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-700">{question.unscoredReason ?? 'Answer key unavailable or inconsistent; excluded from score.'}</p>}
+                        {question.explanation?.caution ? <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900">The source answer key or wording has a caution. Read the explanation below.</p> : null}<div className="space-y-2">{question.options.map((option, optionIndex) => <div key={optionIndex} className={cn('flex items-start gap-2 rounded border px-3 py-2.5 text-sm leading-6', verified && optionIndex === question.correctIndex ? question.explanation?.caution ? 'border-amber-200 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900' : verified && optionIndex === answer ? 'border-rose-200 bg-rose-50 text-rose-900' : 'border-slate-200 bg-white text-slate-600')}><span className="font-bold">{String.fromCharCode(65 + optionIndex)}.</span><span className="flex-1"><InlineQuestionText text={option} /></span>{verified && optionIndex === question.correctIndex ? <Check size={15} className="mt-1 shrink-0" /> : verified && optionIndex === answer ? <X size={15} className="mt-1 shrink-0" /> : null}</div>)}</div>
+                        {verified ? <><MockQuestionExplanation question={question} submittedIndex={answer} /><p className="mt-3 text-xs text-slate-500">Your answer: <span className="font-semibold text-slate-700">{answer === null ? 'No answer' : <><InlineQuestionText text={`${String.fromCharCode(65 + answer)}. ${question.options[answer]}`} /></>}</span> · {question.explanation?.caution ? 'Source key' : 'Correct'}: <span className="font-semibold text-slate-700"><InlineQuestionText text={`${String.fromCharCode(65 + question.correctIndex)}. ${question.options[question.correctIndex]}`} /></span></p></> : <p className="mt-3 rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-700">{question.unscoredReason ?? 'Answer key unavailable or inconsistent; excluded from score.'}</p>}{!verified ? <MockQuestionExplanation question={question} submittedIndex={answer} /> : null}
                       </div>
                     ) : null}
                   </article>

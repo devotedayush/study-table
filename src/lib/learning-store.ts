@@ -16,6 +16,7 @@ export type LearningEvent = {
   correct?: boolean
 }
 export type ExamQuestion = {
+  explanation?: import('./mock-explanation').MockExplanation
   content?: import('./question-content').QuestionBlock[]
   nativeTranscription?: import('./question-content').NativeTranscription
   id: string; prompt: string; options: string[]; correctIndex: number; rationale: string

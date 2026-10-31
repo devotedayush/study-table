@@ -17,6 +17,15 @@ function load(name) {
 }
 const { buildExamTranscript, transcriptFilename } = load('exam-transcript')
 const { buildTranscriptPdfDefinition } = load('exam-transcript-pdf')
+test('PDF includes intuition, worked reasoning, every option and learning hacks', () => {
+  const q = { id: 'mock-1-s1-q001', prompt: 'Return?', options: ['10%', '0%', '110%'], correctIndex: 0, answerVerified: true, subjectId: 'quant', subject: 'Quant', rationale: 'Source key A' }
+  q.explanation = { questionId: q.id, intuition: 'Compare the gain with the original amount.', reasoning: String.raw`\(R=\frac{110-100}{100}=10\%\).`, options: [{ index: 0, explanation: 'Ten earned on one hundred is ten percent.' }, { index: 1, explanation: 'Zero ignores the gain.' }, { index: 2, explanation: '110 percent confuses wealth with return.' }], learningHack: 'Change divided by starting value.', caution: 'Example source caution.' }
+  const definition = buildTranscriptPdfDefinition({ ...fixture, questions: [q], answers: [0], questionSeconds: [30] })
+  const json = JSON.stringify(definition)
+  for (const text of ['THE INTUITION', 'WORK IT THROUGH', 'OPTION A', 'OPTION B', 'OPTION C', 'REMEMBER IT', 'Example source caution.', 'SOURCE-KEY ANSWER (SEE CAUTION)']) assert.ok(json.includes(text), text)
+  assert.ok(json.includes('<svg'))
+  assert.ok(!json.includes('unbreakable'))
+})
 const question = (id, extra = {}) => ({ id, prompt: `Full question ${id}: what is the holding-period return on an asset bought for $100 and sold for $108 with a $2 dividend?`, options: ['8%', '10%', '12%'], correctIndex: 1, rationale: 'Include income: \\(\\mathrm{HPR}=\\frac{108-100+2}{100}=10\\%\\).', subjectId: 'quant', subject: 'Quantitative Methods', topicId: 'quant-rates-and-returns', topic: 'Rates and Returns', ...extra })
 export const fixture = {
   id: '01234567-0000-4000-8000-000000000000', title: 'Practice transcript / mixed results', mode: 'chapter',
